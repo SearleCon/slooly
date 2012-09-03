@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title><%= content_for?(:title) ? yield(:title) : "Slooly" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Slooly Invoice Chaser" %></title>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -28,9 +28,8 @@
               <%= yield %>
             </div>
           </div>
-          <footer>
-          </footer>
         </div>
+		<%= render 'layouts/footer' %>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
   </body>

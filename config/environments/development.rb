@@ -32,6 +32,21 @@ Slooly::Application.configure do
   }
 
 
+  # config.action_mailer.smtp_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => 587,
+  #   :domain               => "https://blooming-galaxy-6415.herokuapp.com/",
+  #   :user_name            => "searlecon@gmail.com",
+  #   :password             => "argitdyzrctfidai",
+  #   :authentication       => :plain,
+  #   :enable_starttls_auto => true
+  # }
+  # 
+  # config.action_mailer.default_url_options = {
+  #   :host => "https://blooming-galaxy-6415.herokuapp.com/"
+  # }
+
+
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
