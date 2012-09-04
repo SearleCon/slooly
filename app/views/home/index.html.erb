@@ -51,16 +51,36 @@
     <%= link_to 'Login here', new_user_session_path %>  
     </p>		  	
 	<p>
-	<h3>Watch the Tutorial Video here</h3>
-    <%= link_to 'How it works', new_user_session_path %>  
+	<h3>Watch the Tutorial Video</h3>
+	<a href="#myModal" data-toggle="modal">View Video</a>
+
     </p>		  	
 	<h3>Need more information?</h3>
     <%= link_to 'Click here', new_user_session_path %>  
-    </p>		  	
-
+    </p>
+    <p align="right"><br><br><br><br>
+	<%= render 'layouts/share' %>
+	</p>
   </div>
 </div>
+
+ 
+<!-- Modal Video for the Tutorial / How it works -->
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Quick overview of how Slooly works</h3>
+  </div>
+  <div class="modal-body">
+    <iframe width="530" height="315" src="http://www.youtube.com/embed/6_hJ3R8jEZM" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
 
 <!-- <% @users.each do |user| %>
   <p>User: <%=link_to user.name, user %></p>
 <% end %> -->
+
