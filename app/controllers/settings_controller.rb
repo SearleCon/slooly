@@ -4,7 +4,8 @@ class SettingsController < ApplicationController
   # GET /settings
   # GET /settings.json
   def index
-    @settings = Setting.all
+    # @settings = Setting.all
+      @settings = Setting.for_user(current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,6 +44,7 @@ class SettingsController < ApplicationController
   # POST /settings.json
   def create
     @setting = Setting.new(params[:setting])
+    @setting.user_id = current_user.id        
 
     respond_to do |format|
       if @setting.save

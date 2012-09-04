@@ -24,7 +24,7 @@
 	  <li><%= link_to 'Add Invoice', new_invoice_path %></li>
 	  <li id="fat-menu" class="dropdown">
 	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	      Account <b class="caret"></b>
+	      Account <%= "("+current_user.name+")" %> <b class="caret"></b>
 	    </a>
 	    <ul class="dropdown-menu">
 	      <li><%= link_to "Settings", settings_path %></li>
@@ -33,16 +33,13 @@
 	      <li><%= link_to "Tutorials", "#" %></li>
 	      <li><%= link_to "Share with Friends", "#" %></li>
 	      <li class="divider"></li>
-	      <li>
+	      <li>		
 		    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
 	      </li>
 	    </ul>
 	  </li>
 
   <% else %>
-    <li>
-    <%= link_to 'Login', new_user_session_path %>  
-    </li>
 	<li>
       <%= link_to 'News', new_user_registration_path %>	
     </li>
@@ -51,6 +48,9 @@
     </li>
     <li>
       <%= link_to 'Contact', new_user_registration_path %>	
+    </li>
+    <li>
+    <%= link_to 'Login', new_user_session_path %>  
     </li>
   <% end %>
 </ul>
