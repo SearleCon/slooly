@@ -1,0 +1,97 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :send_from_name %><br />
+    <%= f.text_field :send_from_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email_copy_to %><br />
+    <%= f.text_field :email_copy_to %>
+  </div>
+  <div class="field">
+    <%= f.label :days_between_chase %><br />
+    <%= f.number_field :days_between_chase %>
+  </div>
+  <div class="field">
+    <%= f.label :days_before_pre_due %><br />
+    <%= f.number_field :days_before_pre_due %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_method_message %><br />
+    <%= f.text_area :payment_method_message %>
+  </div>
+  <div class="field">
+    <%= f.label :pre_due_reminder %><br />
+    <%= f.check_box :pre_due_reminder %>
+  </div>
+  <div class="field">
+    <%= f.label :pre_due_subject %><br />
+    <%= f.text_field :pre_due_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :pre_due_message %><br />
+    <%= f.text_area :pre_due_message %>
+  </div>
+  <div class="field">
+    <%= f.label :due_reminder %><br />
+    <%= f.check_box :due_reminder %>
+  </div>
+  <div class="field">
+    <%= f.label :due_subject %><br />
+    <%= f.text_field :due_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :due_message %><br />
+    <%= f.text_area :due_message %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue1_subject %><br />
+    <%= f.text_field :overdue1_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue1_message %><br />
+    <%= f.text_area :overdue1_message %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue2_subject %><br />
+    <%= f.text_field :overdue2_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue2_message %><br />
+    <%= f.text_area :overdue2_message %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue3_subject %><br />
+    <%= f.text_field :overdue3_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :overdue3_message %><br />
+    <%= f.text_area :overdue3_message %>
+  </div>
+  <div class="field">
+    <%= f.label :final_demand_subject %><br />
+    <%= f.text_field :final_demand_subject %>
+  </div>
+  <div class="field">
+    <%= f.label :final_demand_message %><br />
+    <%= f.text_area :final_demand_message %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -11,7 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903065357) do
+ActiveRecord::Schema.define(:version => 20120904115511) do
+
+  create_table "clients", :force => true do |t|
+    t.string   "business_name"
+    t.string   "contact_person"
+    t.string   "address"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "telephone"
+    t.string   "fax"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "logo_path"
+    t.string   "address"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "telephone"
+    t.string   "fax"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "invoices", :force => true do |t|
+    t.string   "invoice_number"
+    t.date     "due_date"
+    t.decimal  "amount"
+    t.text     "description"
+    t.integer  "status_id"
+    t.integer  "client_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -23,6 +62,37 @@ ActiveRecord::Schema.define(:version => 20120903065357) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "settings", :force => true do |t|
+    t.string   "send_from_name"
+    t.string   "email_copy_to"
+    t.integer  "days_between_chase"
+    t.integer  "days_before_pre_due"
+    t.text     "payment_method_message"
+    t.boolean  "pre_due_reminder"
+    t.string   "pre_due_subject"
+    t.text     "pre_due_message"
+    t.boolean  "due_reminder"
+    t.string   "due_subject"
+    t.text     "due_message"
+    t.string   "overdue1_subject"
+    t.text     "overdue1_message"
+    t.string   "overdue2_subject"
+    t.text     "overdue2_message"
+    t.string   "overdue3_subject"
+    t.text     "overdue3_message"
+    t.string   "final_demand_subject"
+    t.text     "final_demand_message"
+    t.integer  "user_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

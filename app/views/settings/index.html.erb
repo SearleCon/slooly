@@ -1,0 +1,61 @@
+<h1>Listing settings</h1>
+
+<table>
+  <tr>
+    <th>Send from name</th>
+    <th>Email copy to</th>
+    <th>Days between chase</th>
+    <th>Days before pre due</th>
+    <th>Payment method message</th>
+    <th>Pre due reminder</th>
+    <th>Pre due subject</th>
+    <th>Pre due message</th>
+    <th>Due reminder</th>
+    <th>Due subject</th>
+    <th>Due message</th>
+    <th>Overdue1 subject</th>
+    <th>Overdue1 message</th>
+    <th>Overdue2 subject</th>
+    <th>Overdue2 message</th>
+    <th>Overdue3 subject</th>
+    <th>Overdue3 message</th>
+    <th>Final demand subject</th>
+    <th>Final demand message</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @settings.each do |setting| %>
+  <tr>
+    <td><%= setting.send_from_name %></td>
+    <td><%= setting.email_copy_to %></td>
+    <td><%= setting.days_between_chase %></td>
+    <td><%= setting.days_before_pre_due %></td>
+    <td><%= setting.payment_method_message %></td>
+    <td><%= setting.pre_due_reminder %></td>
+    <td><%= setting.pre_due_subject %></td>
+    <td><%= setting.pre_due_message %></td>
+    <td><%= setting.due_reminder %></td>
+    <td><%= setting.due_subject %></td>
+    <td><%= setting.due_message %></td>
+    <td><%= setting.overdue1_subject %></td>
+    <td><%= setting.overdue1_message %></td>
+    <td><%= setting.overdue2_subject %></td>
+    <td><%= setting.overdue2_message %></td>
+    <td><%= setting.overdue3_subject %></td>
+    <td><%= setting.overdue3_message %></td>
+    <td><%= setting.final_demand_subject %></td>
+    <td><%= setting.final_demand_message %></td>
+    <td><%= setting.user_id %></td>
+    <td><%= link_to 'Show', setting %></td>
+    <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+    <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Setting', new_setting_path %>
