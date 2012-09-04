@@ -5,6 +5,6 @@ class Client < ActiveRecord::Base
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  
   def self.for_user(user) 
-      where("user_id == ?", user)
+      where("user_id = ?", user)
   end
 end

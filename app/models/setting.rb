@@ -3,6 +3,6 @@ class Setting < ActiveRecord::Base
   belongs_to      :user
   
   def self.for_user(user) 
-      where("user_id == ?", user)
+      where("user_id = ?", user)
   end  
 end

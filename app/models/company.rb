@@ -3,6 +3,6 @@ class Company < ActiveRecord::Base
   belongs_to      :user
   
   def self.by_user(user)
-    where("user_id == ?", user)    
+    where("user_id = ?", user)    
   end
 end
