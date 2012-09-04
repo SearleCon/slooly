@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /settings
   # GET /settings.json
   def index
