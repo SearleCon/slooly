@@ -1,4 +1,6 @@
 Slooly::Application.routes.draw do
+  resources :suggestions
+
   resources :settings
 
   resources :clients

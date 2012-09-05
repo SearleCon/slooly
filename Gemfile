@@ -17,6 +17,7 @@ gem "bootstrap-sass", ">= 2.0.4.0"
 gem "devise", ">= 2.1.2"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
+gem "best_in_place"
 
 group :production do
   gem 'pg'

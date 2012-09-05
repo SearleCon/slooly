@@ -1,6 +1,7 @@
-<h1>Editing setting</h1>
+<h1 align="right">Settings</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @setting %> |
-<%= link_to 'Back', settings_path %>
+<hr class="bs-docs-separator">
+
+<%= link_to "Back", :back %> | <%= link_to "User Profile", edit_user_registration_path %> | <%= link_to "Company Profile", companies_path %>

@@ -1,39 +1,62 @@
-<h1>Listing companies</h1>
+<h2>Company Profile</h2><br>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Logo path</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Post code</th>
-    <th>Telephone</th>
-    <th>Fax</th>
-    <th>Email</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @companies.each do |company| %>
-  <tr>
-    <td><%= company.name %></td>
-    <td><%= company.logo_path %></td>
-    <td><%= company.address %></td>
-    <td><%= company.city %></td>
-    <td><%= company.post_code %></td>
-    <td><%= company.telephone %></td>
-    <td><%= company.fax %></td>
-    <td><%= company.email %></td>
-    <td><%= company.user_id %></td>
-    <td><%= link_to 'Show', company %></td>
-    <td><%= link_to 'Edit', edit_company_path(company) %></td>
-    <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+	<%= company.logo_path %><br><br>
+
+    <!-- <h4><%= best_in_place company, :name %></h4><br> -->
+	
+	<table>
+	  <tr>
+	    <td>Name:</td>
+	    <td><h4>	<%= best_in_place company, :name %></h4></td>
+	  </tr>
+	  <tr>
+	    <td>Address:</td>
+	    <td>	<%= best_in_place company, :address %></td>
+	  </tr>
+	  <tr>
+	    <td>City:</td>
+	    <td><%= best_in_place company, :city %></td>
+	  </tr>
+	  <tr>
+	    <td>Postal Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
+	    <td><%= best_in_place company, :post_code %></td>
+	  </tr>
+	  <tr>
+	    <td>Telephone:</td>
+	    <td><%= best_in_place company, :telephone %></td>
+	  </tr>
+	  <tr>
+	    <td>Fax:</td>
+	    <td><%= best_in_place company, :fax %></td>
+	  </tr>
+	  <tr>
+	    <td>Email:</td>
+	    <td><%= best_in_place company, :email %></td>
+	  </tr>
+
+	</table>
+	
+    <!-- <h4><%= best_in_place company, :name %></h4><br>
+    <%= best_in_place company, :address %><br>
+    <%= best_in_place company, :city %><br>
+    <%= best_in_place company, :post_code %><br><br>
+    <%= best_in_place company, :telephone %><br>
+    <%= best_in_place company, :fax %><br>
+    <%= best_in_place company, :email %><br><br> -->
+
+    <hr class="bs-docs-separator">
+
+    <h6>Click on any of the above details to edit them directly,<br>
+	Or if you want to edit ALL the details at once, <%= link_to 'Click Here', edit_company_path(company) %></h6><br>
+	
+	<h6>(Above is how the profile will appear on your reminder emails)</h6>
+
+
 <% end %>
-</table>
 
-<br />
+<hr class="bs-docs-separator">
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to "Back", :back %> | <%= link_to "User Profile", edit_user_registration_path %> | <%= link_to "Settings", settings_path %>

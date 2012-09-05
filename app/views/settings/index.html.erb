@@ -1,61 +1,108 @@
-<h1>Listing settings</h1>
+<h1 align="right">Settings</h1><br>
 
 <table>
-  <tr>
-    <th>Send from name</th>
-    <th>Email copy to</th>
-    <th>Days between chase</th>
-    <th>Days before pre due</th>
-    <th>Payment method message</th>
-    <th>Pre due reminder</th>
-    <th>Pre due subject</th>
-    <th>Pre due message</th>
-    <th>Due reminder</th>
-    <th>Due subject</th>
-    <th>Due message</th>
-    <th>Overdue1 subject</th>
-    <th>Overdue1 message</th>
-    <th>Overdue2 subject</th>
-    <th>Overdue2 message</th>
-    <th>Overdue3 subject</th>
-    <th>Overdue3 message</th>
-    <th>Final demand subject</th>
-    <th>Final demand message</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @settings.each do |setting| %>
-  <tr>
-    <td><%= setting.send_from_name %></td>
-    <td><%= setting.email_copy_to %></td>
-    <td><%= setting.days_between_chase %></td>
-    <td><%= setting.days_before_pre_due %></td>
-    <td><%= setting.payment_method_message %></td>
-    <td><%= setting.pre_due_reminder %></td>
-    <td><%= setting.pre_due_subject %></td>
-    <td><%= setting.pre_due_message %></td>
-    <td><%= setting.due_reminder %></td>
-    <td><%= setting.due_subject %></td>
-    <td><%= setting.due_message %></td>
-    <td><%= setting.overdue1_subject %></td>
-    <td><%= setting.overdue1_message %></td>
-    <td><%= setting.overdue2_subject %></td>
-    <td><%= setting.overdue2_message %></td>
-    <td><%= setting.overdue3_subject %></td>
-    <td><%= setting.overdue3_message %></td>
-    <td><%= setting.final_demand_subject %></td>
-    <td><%= setting.final_demand_message %></td>
-    <td><%= setting.user_id %></td>
-    <td><%= link_to 'Show', setting %></td>
-    <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
-    <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+
+
+
+
+
+<div class="tabbable tabs-left">
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+    <li><a href="#predue" data-toggle="tab">Pre-Due Reminder</a></li>
+    <li><a href="#due" data-toggle="tab">Due Reminder</a></li>
+    <li><a href="#od1" data-toggle="tab">Overdue Reminder 1</a></li>
+    <li><a href="#od2" data-toggle="tab">Overdue Reminder 2</a></li>
+    <li><a href="#od3" data-toggle="tab">Overdue Reminder 3</a></li>
+    <li><a href="#fd" data-toggle="tab">Final Demand</a></li>
+  </ul>
+
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="general">
+	<h3>General Settings</h3><br>
+      <p>	
+	    <%= setting.send_from_name %><br>
+	    <%= setting.email_copy_to %><br>
+	    <%= setting.days_between_chase %><br>
+	    <%= setting.days_before_pre_due %><br>
+	    <%= simple_format(setting.payment_method_message) %>
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="predue">
+	  <h3>Pre-Due Reminder</h3><br>
+      <p>
+		<% if setting.pre_due_reminder %>
+	    	Send Pre-Due reminder: <b>YES</b>
+		<% else %>
+    		Send Pre-Due reminder: <b>NO</b>
+		<% end %><br><br>
+	    <%= setting.pre_due_subject %><br>
+	    <%= simple_format(setting.pre_due_message) %>	
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="due">
+	  <h3>Due Reminder</h3><br>
+      <p>
+		<% if setting.due_reminder %>
+	    	Send Due reminder: <b>YES</b>
+		<% else %>
+    		Send Due reminder: <b>NO</b>
+		<% end %><br><br>
+
+	    <%= setting.due_subject %><br>
+	    <%= simple_format(setting.due_message) %>	
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="od1">
+	  <h3>First Overdue Reminder</h3><br>
+      <p>
+	    <%= setting.overdue1_subject %><br>
+	    <%= simple_format(setting.overdue1_message) %>	
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="od2">
+	  <h3>Second Overdue Reminder</h3><br>
+      <p>
+	    <%= setting.overdue2_subject %><br>
+	    <%= simple_format(setting.overdue2_message) %>	
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="od3">
+	  <h3>Third Overdue Reminder</h3><br>
+      <p>
+	    <%= setting.overdue3_subject %><br>
+	    <%= simple_format(setting.overdue3_message) %>	
+	  </p>
+    </div>
+    <div class="tab-pane fade" id="fd">
+	  <h3>Final Demand</h3><br>
+      <p>
+	    <%= setting.final_demand_subject %><br>
+	    <%= simple_format(setting.final_demand_message) %>
+	  </p>
+    </div>
+
+  </div>
+</div>
+
+
+<hr class="bs-docs-separator">
+
+<h6>Click here to <%= link_to 'Edit your settings', edit_setting_path(setting) %></h6>
+
+<h6>(Above is how the messages will appear on your reminder emails)</h6>
+
+<hr class="bs-docs-separator">
+
+<%= link_to "Back", :back %> | <%= link_to "User Profile", edit_user_registration_path %> | <%= link_to "Company Profile", companies_path %>
+
+
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New Setting', new_setting_path %>
+
+<!-- <%= link_to 'New Setting', new_setting_path %> -->

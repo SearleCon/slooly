@@ -9,5 +9,9 @@ class ApplicationController < ActionController::Base
     user_path(resource)
     # '/an/example/path'
   end
+  
+  def after_sign_out_path_for(resource)
+    new_suggestion_path #SS This is for the logout redirect after Logout for the suggestion screen
+  end
 
 end
