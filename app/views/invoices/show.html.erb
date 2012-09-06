@@ -1,35 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Invoice number:</b>
-  <%= @invoice.invoice_number %>
-</p>
+<h3>Invoice Details</h3><br>
+<table>
+  <tr>
+    <td>Invoice for:</td>
+    <td><b><%= @invoice.client.business_name %></b></td>
+  </tr>
+  <tr>
+    <td>Invoice Number:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><%= @invoice.invoice_number %></td>
+  </tr>
+  <tr>
+    <td>Due Date:</td>
+    <td><%= @invoice.due_date %></td>
+  </tr>
+  <tr>
+    <td>Amount:</td>
+    <td><%= @invoice.amount %></td>
+  </tr>
+  <tr>
+    <td>Status:</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
+    <td><%= @invoice.status_id %></td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td><%= simple_format(@invoice.description) %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Due date:</b>
-  <%= @invoice.due_date %>
-</p>
-
-<p>
-  <b>Amount:</b>
-  <%= @invoice.amount %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @invoice.description %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @invoice.status_id %>
-</p>
-
-<p>
-  <b>Client Name:</b>
-  <%= @invoice.client.business_name %>
-</p>
-
+<hr class="bs-docs-separator">
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>

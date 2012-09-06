@@ -1,48 +1,45 @@
 <p id="notice"><%= notice %></p>
+<h2>Client Details</h2><br>
 
-<p>
-  <b>Business name:</b>
-  <%= @client.business_name %>
-</p>
+<table>
+  <tr>
+    <td>Business Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><h4><%= @client.business_name %></h4></td>
+  </tr>
+  <tr>
+    <td>Contact Person:</td>
+    <td><%= @client.contact_person %></td>
+  </tr>
+  <tr>
+    <td>Address:</td>
+    <td><%= @client.address %></td>
+  </tr>
+  <tr>
+    <td>City:</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
+    <td><%= @client.city %></td>
+  </tr>
+  <tr>
+    <td>Post Code:</td>
+    <td><%= @client.post_code %></td>
+  </tr>
+  <tr>
+    <td>Telephone:</td>
+    <td><%= @client.telephone %></td>
+  </tr>
+  <tr>
+    <td>Fax:</td>
+    <td><%= @client.fax %></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><%= @client.email %></td>
+  </tr>
 
-<p>
-  <b>Contact person:</b>
-  <%= @client.contact_person %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @client.address %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @client.city %>
-</p>
-
-<p>
-  <b>Post code:</b>
-  <%= @client.post_code %>
-</p>
-
-<p>
-  <b>Telephone:</b>
-  <%= @client.telephone %>
-</p>
-
-<p>
-  <b>Fax:</b>
-  <%= @client.fax %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @client.email %>
-</p>
+</table>
 
 <hr class="bs-docs-separator">
 
-<div><a data-toggle="modal" href="#myModal" >Add invoice for this client</a><br>
+<div><a data-toggle="modal" href="#myModal" >Add invoice for this client</a></div>
 
 <hr class="bs-docs-separator">
 
