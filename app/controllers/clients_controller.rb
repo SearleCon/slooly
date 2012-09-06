@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
   # GET /clients/new
   # GET /clients/new.json
   def new
-    @client = Client.new
+    @client = Client.new 
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,8 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
-    @client.user_id = current_user.id    
+    @client.user_id = current_user.id   
+    # 3.times { @client.invoices.build } # SS Creates 3 Invoices with the automatic foreign key of the Client
     
 
     respond_to do |format|

@@ -1,16 +1,11 @@
-<h1>Listing clients</h1>
+<h1>Clients</h1><h4 align="right">( <%= @clients.size %> in total )</h4>
 
-<table>
+<table class="table">
   <tr>
     <th>Business name</th>
     <th>Contact person</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Post code</th>
     <th>Telephone</th>
-    <th>Fax</th>
     <th>Email</th>
-    <th>User</th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,16 +15,11 @@
   <tr>
     <td><%= client.business_name %></td>
     <td><%= client.contact_person %></td>
-    <td><%= client.address %></td>
-    <td><%= client.city %></td>
-    <td><%= client.post_code %></td>
     <td><%= client.telephone %></td>
-    <td><%= client.fax %></td>
     <td><%= client.email %></td>
-    <td><%= client.user_id %></td>
     <td><%= link_to 'Show', client %></td>
     <td><%= link_to 'Edit', edit_client_path(client) %></td>
-    <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

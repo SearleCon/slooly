@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.for_user(current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,6 +43,7 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
+    @invoice.user_id = current_user.id        
 
     respond_to do |format|
       if @invoice.save

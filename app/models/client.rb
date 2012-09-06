@@ -1,7 +1,8 @@
 class Client < ActiveRecord::Base
   attr_accessible :address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone, :user_id
-  has_many        :invoices
+  has_many        :invoices, :dependent => :destroy
   belongs_to      :user
+  accepts_nested_attributes_for :invoices #SS - To allow managing of invoices through clients
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  
   def self.for_user(user) 
