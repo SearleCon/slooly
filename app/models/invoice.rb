@@ -4,6 +4,10 @@ class Invoice < ActiveRecord::Base
   
 #  delegate :business_name, :to => :client, :prefix => true
   
+  def self.status_description(status_id)
+    Status.find(:all, :conditions => ["where id = ?", status_id]) 
+  end
+  
   def self.for_user(user) 
       where("user_id = ?", user)
   end  

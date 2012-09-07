@@ -1,0 +1,27 @@
+	<h3>Invoices for <%= @client.business_name %></h3><h4 align="right">( <%= @client.invoices.size %> in total )</h4>
+
+	<table class="table">
+	  <tr>
+	    <th>Invoice number</th>
+	    <th>Due date</th>
+	    <th>Amount</th>
+	    <th>Description</th>
+	    <th>Status</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @client.invoices.each do |invoice| %>
+	  <tr>
+	    <td><%= invoice.invoice_number %></td>
+	    <td><%= invoice.due_date %></td>
+	    <td><%= invoice.amount %></td>
+	    <td><%= invoice.description %></td>
+	    <td><%= invoice.status_id %></td>
+	    <td><%= link_to 'Show', invoice %></td>
+	    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>	
+	    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	<% end %>
+	</table>

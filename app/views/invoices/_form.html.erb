@@ -15,7 +15,6 @@
   <div class="field">
     <%= f.label "Client" %>
     <%= f.collection_select(:client_id, Client.for_user(current_user.id), :id, :business_name ) %> <a href="<%= new_client_path %>">&nbsp;Add New Client</a>	
-	
   </div>
   <div class="field">
     <%= f.label :due_date %>
@@ -34,14 +33,10 @@
     <%= f.text_field :invoice_number %>
   </div>
 
-  <div class="field hidden">
-    <%= f.label :status_id %>
-    <%= f.number_field :status_id %>
+  <div class="field">
+    <%= f.label "Status" %>
+    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
   </div>
-  <!--   <div class="field hidden">
-      <%= f.label :client_id %>
-      <%= f.number_field :client_id %>
-    </div> -->
 
   <hr class="bs-docs-separator">
 
@@ -49,3 +44,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+

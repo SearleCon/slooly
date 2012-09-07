@@ -15,11 +15,16 @@
 
 <% @invoices.each do |invoice| %>
   <tr>
-    <td><%= invoice.invoice_number %></td>
+    <td><%= link_to invoice.invoice_number, invoice %></td>
     <td><%= invoice.due_date %></td>
     <td><%= invoice.amount %></td>
     <td><%= invoice.description %></td>
-    <td><%= invoice.status_id %></td>
+	<% if invoice.status_id != nil %>
+		<% @status = Status.all :conditions => ["id = ?", invoice.status_id] %> 
+	    <td><%= @status[0].description %></td>
+	<% else %>
+		<td></td>
+	<% end %>
     <td><%= invoice.client.business_name %></td>
     <td><%= link_to 'Show', invoice %></td>
     <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>

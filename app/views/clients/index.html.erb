@@ -13,7 +13,7 @@
 
 <% @clients.each do |client| %>
   <tr>
-    <td><%= client.business_name %></td>
+    <td><%= link_to client.business_name, client %></td>
     <td><%= client.contact_person %></td>
     <td><%= client.telephone %></td>
     <td><%= client.email %></td>
