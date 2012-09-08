@@ -2,10 +2,11 @@
 
 <table class="table">
   <tr>
-    <th>Business name</th>
-    <th>Contact person</th>
-    <th>Telephone</th>
-    <th>Email</th>
+    <th><%= sortable "business_name", "Business Name" %></th>
+    <th><%= sortable "contact_person", "Contact Person" %></th>
+    <th><%= sortable "telephone", "Telephone" %></th>
+    <th><%= sortable "email", "Email" %></th>
+    <th><%= sortable "created_at", "Created" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= client.contact_person %></td>
     <td><%= client.telephone %></td>
     <td><%= client.email %></td>
+	<td><%= time_ago_in_words(client.created_at) %> ago</td>
     <td><%= link_to 'Show', client %></td>
     <td><%= link_to 'Edit', edit_client_path(client) %></td>
     <td><%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>

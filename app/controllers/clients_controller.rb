@@ -1,11 +1,14 @@
 class ClientsController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
+  
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.for_user(current_user.id)    
-
+#    @clients = Client.for_user(current_user.id)   
+    @clients = Client.for_user(current_user.id).order(sort_column + ' ' + sort_direction)
+        
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @clients }
@@ -84,5 +87,15 @@ class ClientsController < ApplicationController
       format.html { redirect_to clients_url }
       format.json { head :no_content }
     end
+  end
+  
+  
+  private
+  def sort_column
+    Client.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"    
   end
 end

@@ -10,7 +10,7 @@ To do so now, <%= link_to 'click here', new_company_path %>
 	<% if @companies[0].image_url != nil %>
    		<%= image_tag @companies[0].image_url.to_s %><br><br>
 	<% else %>
-	  <%= link_to image_tag("your_logo_here.gif"), edit_company_path(company)%><br><br>
+	  <%= link_to image_tag("/images/your_logo_here.gif"), edit_company_path(company)%><br><br>
 	<% end %>
 	
 	<table>

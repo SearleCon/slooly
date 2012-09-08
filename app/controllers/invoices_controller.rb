@@ -1,10 +1,12 @@
 class InvoicesController < ApplicationController
   before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
+  
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.for_user(current_user.id)
+    @invoices = Invoice.for_user(current_user.id).order(sort_column + ' ' + sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,4 +85,15 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def sort_column
+    Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"    
+  end
+  
+  
 end

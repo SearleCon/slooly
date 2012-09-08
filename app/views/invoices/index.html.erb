@@ -2,12 +2,13 @@
 
 <table class="table">
   <tr>
-    <th>Invoice number</th>
-    <th>Due date</th>
-    <th>Amount</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Client</th>
+    <th><%= sortable "invoice_number", "Invoice Number" %></th>
+    <th><%= sortable "due_date", "Due Date" %></th>
+    <th><%= sortable "amount", "Amount" %></th>
+    <th><%= sortable "description", "Description" %></th>
+    <th><%= sortable "status_id", "Status" %></th>
+    <th><%= sortable "client_id", "Client" %></th>
+    <th><%= sortable "created_at", "Loaded" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -26,6 +27,7 @@
 		<td></td>
 	<% end %>
     <td><%= invoice.client.business_name %></td>
+	<td><%= time_ago_in_words(invoice.created_at) %> ago</td>
     <td><%= link_to 'Show', invoice %></td>
     <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
     <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
