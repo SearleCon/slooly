@@ -16,7 +16,11 @@
 	    <%= f.label :invoice_number %>
 	    <%= f.text_field :invoice_number %>
 	  </div>
-		  
+	  <div class="field">
+	    <%= f.label "Status" %>
+	    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
+	  </div>		  
+	
 	  <div class="field" hidden="true">
 	    <%= f.text_field :client_id %>
 	  </div>	
