@@ -1,4 +1,5 @@
-<%= form_for(@company) do |f| %>
+<%= form_for(@company, :html => {:multipart => true}) do |f| %>
+
   <% if @company.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
@@ -43,6 +44,19 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
+
+  <hr class="bs-docs-separator">
+  <h3>Upload or Change your Logo (Optional)</h3>
+  <h6>(This logo will appear on your emails. If you do not select a logo, the Company Name will be used instead)</h6><br><br>
+  <p>
+	<%= f.label :image, "Select an image by clicking this button (Formats accepted: .jpg, .jpeg, .png)"%>
+    <%= f.file_field :image %><br><br>
+    <%= f.label :remote_image_url, "or paste an image URL from the web into this box:" %>
+    <%= f.text_field :remote_image_url %><br>
+	Once your logo is selected, click the Update Company button below to save it<br> 
+	(Note: Image might be resized automatically, but the aspect ratio will be preserved).
+  </p>
+
 
 
   <hr class="bs-docs-separator">

@@ -19,7 +19,7 @@
     </li>
   <% end %>
   <% if user_signed_in? %>
-  	  <li><%= link_to 'Home', clients_path %></li>
+  	  <li><%= link_to 'Home', '/pages/home' %></li>
 	  <li><%= link_to 'Clients', clients_path %></li>
 	  <li><%= link_to 'Invoices', invoices_path %></li>
 	  <li><%= link_to 'Add Client', new_client_path %></li>	

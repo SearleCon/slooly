@@ -19,6 +19,7 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "best_in_place"
 gem "bootstrap-datepicker-rails"
+gem "carrierwave"
 
 group :production do
   gem 'pg'
