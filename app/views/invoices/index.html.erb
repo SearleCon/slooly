@@ -1,4 +1,4 @@
-<h1>Invoices</h1><h4 align="right">( <%= @invoices.count %> in total )</h4>
+<img src="/images/invoices.png" class="header"> <h1>Invoices</h1><h4 align="right">( <%= @invoices.count %> in total )</h4>
 
 <table class="table">
   <tr>
@@ -8,7 +8,7 @@
     <th><%= sortable "description", "Description" %></th>
     <th><%= sortable "status_id", "Status" %></th>
     <th><%= sortable "client_id", "Client" %></th>
-    <th><%= sortable "created_at", "Loaded" %></th>
+    <th><%= sortable "created_at", "Created" %></th>
     <th></th>
     <th></th>
     <th></th>
