@@ -20,6 +20,7 @@ gem "rolify", ">= 3.2.0"
 gem "best_in_place"
 gem "bootstrap-datepicker-rails"
 gem "carrierwave"
+gem 'will_paginate', '3.0.3'
 
 group :production do
   gem 'pg'

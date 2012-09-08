@@ -1,4 +1,4 @@
-<h1>Clients</h1><h4 align="right">( <%= @clients.size %> in total )</h4>
+<h1>Clients</h1><h4 align="right">( <%= @clients.count %> in total )</h4>
 
 <table class="table">
   <tr>
@@ -26,7 +26,13 @@
 <% end %>
 </table>
 
-<br />
+<div class="flickr_pagination">
+<div class="page_info">
+</div>
+  <%= will_paginate @clients, :container => false %>
+</div>
+
 <hr class="bs-docs-separator">
 
 <%= link_to 'New Client', new_client_path %>
+

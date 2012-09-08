@@ -1,4 +1,4 @@
-<h1>Invoices</h1><h4 align="right">( <%= @invoices.size %> in total )</h4>
+<h1>Invoices</h1><h4 align="right">( <%= @invoices.count %> in total )</h4>
 
 <table class="table">
   <tr>
@@ -35,6 +35,13 @@
 <% end %>
 </table>
 
-<br />
+
+<div class="flickr_pagination">
+<div class="page_info">
+</div>
+  <%= will_paginate @invoices, :container => false %>
+</div>
+
+<hr class="bs-docs-separator">
 
 <%= link_to 'Add Invoice', new_invoice_path %>
