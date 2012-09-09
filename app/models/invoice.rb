@@ -15,4 +15,12 @@ class Invoice < ActiveRecord::Base
   def self.for_client(client) 
       where("client_id = ?", client)
   end
+  
+  def self.search(search)
+    if search
+      where('invoice_number LIKE ? or description LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      scoped
+    end
+  end
 end

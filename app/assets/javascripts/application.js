@@ -21,6 +21,8 @@
 
 $(document).ready(function() {
 	$('.carousel').carousel()
+    $("[rel=tooltip]").tooltip(); // this will trigger a tooltip on all that have rel="tooltip" elements
+    $("[rel=popover]").popover(); // this will trigger a POPOVER on all that have rel="popover" elements	
 });
 
 $(document).on("focus", "[databehaviour~='datepicker']", function(e){

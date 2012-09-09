@@ -1,4 +1,32 @@
-<img src="/images/invoices.png" class="header"> <h1>Invoices</h1><h4 align="right">( <%= @invoices.count %> in total )</h4>
+
+<!-- SS Search box -->
+<div class="header form-search" align="right">
+<%= form_tag invoices_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>	
+	
+    <%= text_field_tag :search, params[:search], :class => "input-medium search-query", :placeholder => "Search invoices", :method => 'get' %>
+	<% if params[:search] %>
+		<% if params[:search] != '' %>
+			<span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), invoices_path %></span>
+		<% end %>
+	<% end %>
+  </p>
+<% end %>
+</div>
+
+<img src="/images/invoices.png" class="header"> <h1>Invoices</h1>
+
+<% if params[:search] %>
+	<% if params[:search] != '' %>
+		<%= render "search_invoice_results" %>
+	<% end %>
+<% end %>
+
+<h4 align="right">( <%= @invoices.count %> in total )</h4>
+
+
 
 <table class="table">
   <tr>
@@ -19,7 +47,13 @@
     <td><%= link_to invoice.invoice_number, invoice %></td>
     <td><%= invoice.due_date %></td>
     <td><%= invoice.amount %></td>
-    <td><%= invoice.description %></td>
+	<% if invoice.description.size > 50 %> 
+		<td><a rel="popover" title='Invoice Description' 
+							   data-content='<%= truncate(invoice.description, 
+										:length => 500) %>'><%= truncate(invoice.description, :length => 50)%></span></a></td>
+	<% else %>
+	    <td><%= invoice.description %></td>
+	<% end %>
 	<% if invoice.status_id != nil %>
 		<% @status = Status.all :conditions => ["id = ?", invoice.status_id] %> 
 	    <td><%= @status[0].description %></td>

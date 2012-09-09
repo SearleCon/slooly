@@ -7,7 +7,7 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
 #    @clients = Client.for_user(current_user.id)   
-    @clients = Client.for_user(current_user.id).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)    
+    @clients = Client.for_user(current_user.id).search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)
         
     respond_to do |format|
       format.html # index.html.erb

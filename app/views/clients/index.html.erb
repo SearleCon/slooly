@@ -1,4 +1,29 @@
-<img src="images/clients.png" class="header"> <h1>Clients</h1><h4 align="right">( <%= @clients.count %> in total )</h4>
+<!-- SS Search box -->
+<div class="header form-search" align="right">
+<%= form_tag clients_path, :method => 'get' do %>
+  <p>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>	
+	
+    <%= text_field_tag :search, params[:search], :class => "input-medium search-query", :placeholder => "Search clients", :method => 'get' %>
+	<% if params[:search] %>
+		<% if params[:search] != '' %>
+			<span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), clients_path %></span>
+		<% end %>
+	<% end %>
+  </p>
+<% end %>
+</div>
+
+<img src="images/clients.png" class="header"> <h1>Clients</h1>
+
+<% if params[:search] %>
+	<% if params[:search] != '' %>
+		<%= render "search_client_results" %>
+	<% end %>
+<% end %>
+
+<h4 align="right">( <%= @clients.count %> in total )</h4>
 
 <table class="table">
   <tr>
@@ -35,4 +60,3 @@
 <hr class="bs-docs-separator">
 
 <%= link_to 'New Client', new_client_path %>
-

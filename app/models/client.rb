@@ -8,4 +8,13 @@ class Client < ActiveRecord::Base
   def self.for_user(user) 
       where("user_id = ?", user)
   end
+  
+  def self.search(search)
+    if search
+      where('business_name LIKE ? or contact_person LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      scoped
+    end
+  end
+  
 end
