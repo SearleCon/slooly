@@ -23,4 +23,13 @@ class Invoice < ActiveRecord::Base
       scoped
     end
   end
+  
+  def self.invoice_for_user_with_status(user_id, status_id)
+    Invoice.find(:all, :conditions => ["user_id = ? and status_id = ?", user_id, status_id]) 
+  end
+  
+  def self.status_description(status_id)
+    status_descriptions = Status.all :conditions => ["id = ?", status_id]
+    status_descriptions[0].description
+  end
 end

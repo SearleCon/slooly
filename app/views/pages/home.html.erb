@@ -1,2 +1,53 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% @chasing_invoices = Invoice.invoice_for_user_with_status(current_user.id, 2)%>
+
+<img src="/images/home.png" class="header"> <br><br><h1>Home</h1>
+
+<h2>Chasing Overview</h2>
+You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br>
+
+<hr class="bs-docs-separator">
+
+
+  <table class="table">
+    <thead>
+      <tr>
+		<th>Age</th>
+        <th>Invoice Number</th>
+        <th>Due Date</th>
+        <th>Amount</th>
+        <th>Description</th>
+		<th>Status</th>
+		<th>Client</th>
+		<th>Created</th>
+      </tr>
+
+    </thead>
+    <tbody>
+		<% @chasing_invoices.each do |invoice| %>
+		  <tr>
+			<td></td> <!-- SS Age -->
+		    <td><%= link_to invoice.invoice_number, invoice %></td>
+		    <td><%= invoice.due_date %></td>
+		    <td><%= invoice.amount %></td>
+			<% if invoice.description.size > 50 %> 
+				<td><a rel="popover" title='Invoice Description' 
+									   data-content='<%= truncate(simple_format(invoice.description), 
+												:length => 500) %>'><%= truncate(invoice.description, :length => 50)%></span></a></td>
+			<% else %>
+			    <td><%= invoice.description %></td>
+			<% end %>
+			<% if invoice.status_id != nil %>
+				<% @status = Status.all :conditions => ["id = ?", invoice.status_id] %> 
+			    <td><span class="label label-success"><%= @status[0].description %></span></td>
+			<% else %>
+				<td></td>
+			<% end %>
+		    <td><%= invoice.client.business_name %></td>
+			<td><%= time_ago_in_words(invoice.created_at) %> ago</td>
+		    <td><%= link_to 'Show', invoice %></td>
+		    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+		    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		  </tr>
+		<% end %>
+    </tbody>
+  </table>

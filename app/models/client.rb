@@ -17,4 +17,13 @@ class Client < ActiveRecord::Base
     end
   end
   
+  def self.total_chasing_outstanding(client_id)
+    @clients_chasing = Invoice.all :conditions => ["client_id = ? and status_id = ?", client_id, 2]
+    @total_chasing = 0
+    @clients_chasing.each do |c|
+      @total_chasing = @total_chasing + c.amount
+    end
+    return @total_chasing
+  end
+  
 end

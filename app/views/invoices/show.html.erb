@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <td>Status:</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
-    <td><%= @invoice.status_id %></td>
+    <td><%= Invoice.status_description(@invoice.status_id) %></td>
   </tr>
   <tr>
     <td>Description:</td>
@@ -31,4 +31,4 @@
 <hr class="bs-docs-separator">
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<%= link_to 'Back', :back %>
