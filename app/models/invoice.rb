@@ -32,4 +32,8 @@ class Invoice < ActiveRecord::Base
     status_descriptions = Status.all :conditions => ["id = ?", status_id]
     status_descriptions[0].description
   end
+  
+  def self.age(due_date)
+    age = (Date.today - due_date.to_date).to_i
+  end
 end
