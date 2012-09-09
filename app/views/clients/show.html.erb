@@ -32,7 +32,7 @@
   </tr>
   <tr>
     <td>Email:</td>
-    <td><%= @client.email %></td>
+    <td><%= link_to @client.email, "mailto:"+@client.email %></td>
   </tr>
 
 </table>
@@ -64,7 +64,7 @@
 <hr class="bs-docs-separator">
 
 <% if @client.invoices.count > 0 %>
-  You are currently chasing <%= link_to @client.invoices.count.to_s+" invoices", clients_path %> for <%= @client.business_name %> with a total CHASING outstanding amount of <%= Client.total_chasing_outstanding(@client.id) %>.
+  You are currently chasing <%= link_to @client.invoices.count.to_s+" invoice(s)", clients_path %> for <%= @client.business_name %> with a total CHASING outstanding amount of <%= Client.total_chasing_outstanding(@client.id) %>.
 <% else %>
   You are not currently chasing any invoices for <%= @client.business_name %>.
 <% end %>
