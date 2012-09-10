@@ -9,6 +9,8 @@ Slooly::Application.routes.draw do
 
   get "pages/news"
 
+  get "pages/reports"
+
   resources :suggestions
 
   resources :settings

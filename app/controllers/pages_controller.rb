@@ -18,6 +18,10 @@ class PagesController < ApplicationController
   def help
   end
   
+  def reports
+    @summary = Invoice.all :conditions => ["user_id = ? and status_id = ?", current_user.id, 2]
+  end
+  
   private
   def sort_column
     Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
