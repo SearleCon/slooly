@@ -1,0 +1,62 @@
+<!-- SS Create the initial Setting Record -->
+<%
+if Setting.for_user(current_user.id).empty?
+	@new_setting = Setting.new
+	@new_setting.send_from_name = "First Setting"
+	@new_setting.days_between_chase = 7
+	@new_setting.days_before_pre_due = 2
+	@new_setting.payment_method_message = "Pmt Msg"
+	@new_setting.days_between_chase = 7
+	@new_setting.pre_due_reminder = "t"
+	@new_setting.pre_due_subject = "Pre-Due Subject Line"
+	@new_setting.pre_due_message = "Pre-Due Message"
+	@new_setting.due_reminder = "f"
+	@new_setting.due_subject = "Due Subject Line"
+	@new_setting.due_message = "Due Message"
+	@new_setting.overdue1_subject = "Overdue 1 Subject Line"
+	@new_setting.overdue1_message = "Overdue 1 Message"
+	@new_setting.overdue2_subject = "Overdue 2 Subject Line"
+	@new_setting.overdue2_message = "Overdue 2 Message"
+	@new_setting.overdue3_subject = "Overdue 3 Subject Line"
+	@new_setting.overdue3_message = "Overdue 3 Message"
+	@new_setting.final_demand_subject = "Final Demand Subject Line"
+	@new_setting.final_demand_message = "Final Demand Message"
+	@new_setting.user_id = current_user.id
+	@new_setting.save
+end 
+
+if Company.by_user(current_user.id).empty?
+	@new_company = Company.new
+	@new_company.name = "Your Company Name"
+	@new_company.address = "44 Street Name, Suburb"
+	@new_company.city = "Best City"
+	@new_company.post_code = "1234"
+	@new_company.telephone = "555 345 6789"
+	@new_company.fax = "People still fax?"
+	@new_company.email = "44 Street Name"
+	@new_company.user_id = current_user.id
+	@new_company.save
+end 
+%>
+
+
+<!-- SS Welcome Initial Form -->
+
+<%= image_tag("/images/welcome.png")%>	
+<h3>We are so pleased that you have signed up with us!</h3><br><br>
+
+<hr class="bs-docs-separator">
+
+<h4>For the best results, you should complete the below 2 steps:</h4><br>
+
+<h2>1. Setup your Company</h2>
+<h2>2. Review and customize your Settings</h2><br><br>
+
+<h4>Click the button below to continue:</h4><br><br>
+<a href="<%= companies_path %>" class="btn btn-large btn-primary">Setup my Company Details now</a>
+
+<hr class="bs-docs-separator">
+
+<b>Note:</b> After setting up your Company Details, you can customize your settings by clicking <b>Settings</b> in the <b>Account</b> menu.<br>
+(Default Company and Setting records have already been created for you, so you are ready to go once you customize them to suit your business)<br><br>
+If you need any help, you can click on the <b>Account</b> drop down menu, and then select <b>Tutorials</b>.

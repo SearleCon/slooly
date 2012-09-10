@@ -49,7 +49,8 @@
   <h3>Upload or Change your Logo (Optional)</h3>
   <h6>(This logo will appear on your emails. If you do not select a logo, the Company Name will be used instead)</h6><br><br>
   <p>
-	<%= f.label :image, "Select an image by clicking this button (Formats accepted: .jpg, .jpeg, .png)"%>
+	<%= f.label :image, "Select an image by clicking this button (Formats accepted: .jpg, .jpeg, .png)"%><a rel="popover" title='Upload Tips' 
+							   data-content='For best results, use a .png file with the dimensions of 50 pixels high x 200 pixels wide'><i 					    class="icon-question-sign"></i></span></a>
     <%= f.file_field :image %><br><br>
     <%= f.label :remote_image_url, "or paste an image URL from the web into this box:" %>
     <%= f.text_field :remote_image_url %><br>

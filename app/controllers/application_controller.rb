@@ -7,7 +7,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource) #SS This is the redirect after login
      # user_path(resource) 
-     '/pages/home'
+     if (Setting.for_user(current_user.id).empty?) or (Company.by_user(current_user.id).empty?)
+       # new_setting_path
+       '/pages/initial_setup'
+     else
+       '/pages/home'
+     end
   end
   
   def after_sign_out_path_for(resource)
