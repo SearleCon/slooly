@@ -1,4 +1,6 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
+  cattr_accessor :current_user
+  
   rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -13,13 +15,13 @@ class User < ActiveRecord::Base
   has_one         :company, :dependent => :destroy
   has_one         :setting, :dependent => :destroy
   
-# SS Added for Welcome email
-  after_create :send_welcome_email 
+# SS Added for Welcome email WAS HERE WORKING
+  after_create :send_welcome_email
   
   private
   
     def send_welcome_email
-      UserMailer.registration_confirmation(@user).deliver
+      UserMailer.registration_confirmation(self).deliver
     end
 
 end
