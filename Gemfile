@@ -21,6 +21,7 @@ gem "best_in_place"
 gem "bootstrap-datepicker-rails"
 gem "carrierwave"
 gem 'will_paginate', '3.0.3'
+gem 'delayed_job_active_record'
 
 group :production do
   gem 'pg'
