@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    @client = Client.new(params[:client])
+    @client = Client.new(params[:client])    
     @client.user_id = current_user.id   
     # 3.times { @client.invoices.build } # SS Creates 3 Invoices with the automatic foreign key of the Client
     

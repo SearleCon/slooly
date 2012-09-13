@@ -3,6 +3,9 @@ class Client < ActiveRecord::Base
   has_many        :invoices, :dependent => :destroy
   belongs_to      :user
   accepts_nested_attributes_for :invoices #SS - To allow managing of invoices through clients
+  validates       :business_name, :email, :presence => true
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  
   def self.for_user(user) 
@@ -24,6 +27,6 @@ class Client < ActiveRecord::Base
       @total_chasing = @total_chasing + c.amount
     end
     return @total_chasing
-  end
+  end  
   
 end
