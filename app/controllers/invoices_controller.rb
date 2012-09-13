@@ -17,7 +17,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.for_user(current_user.id).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +38,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.for_user(current_user.id).find(params[:id])
   end
 
   # POST /invoices
@@ -61,7 +61,7 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1
   # PUT /invoices/1.json
   def update
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.for_user(current_user.id).find(params[:id])
 
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
@@ -77,7 +77,7 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   # DELETE /invoices/1.json
   def destroy
-    @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.for_user(current_user.id).find(params[:id])
     @invoice.destroy
 
     respond_to do |format|

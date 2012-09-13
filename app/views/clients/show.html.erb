@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-<h2>Client Details</h2><br>
+
+<img src="/images/clients.png" class="header"> <h2>Client Details</h2><br>
+
 
 <table>
   <tr>
@@ -35,18 +37,69 @@
     <td><%= link_to @client.email, "mailto:"+@client.email %></td>
   </tr>
 
-</table>
+</table><br>
 
-<hr class="bs-docs-separator">
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Edit Client', edit_client_path(@client) %> |
 <%= link_to 'Back', :back %>
 
 <hr class="bs-docs-separator">
 
 
-<div><a data-toggle="modal" href="#myModal" >Add invoice for this client</a></div>
 
+
+
+
+
+
+
+
+
+<div class="tabbable tabs-top">
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#chasing" data-toggle="tab">Currently Chasing</a></li>
+    <li><a href="#history" data-toggle="tab">Chasing History</a></li>
+  </ul>
+
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="chasing">
+		<% if @client.invoices.count > 0 %>
+		  You are currently chasing the following <b><%= @client.invoices.count.to_s+" invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= Client.total_chasing_outstanding(@client.id) %></b> (total chasing amount). <br>
+
+
+		<%= render 'invoices_for_client' %>
+
+		<% else %>
+		  You are <b>not</b> chasing any invoices for <%= @client.business_name %>.
+		<% end %>
+		
+
+		
+    </div>
+    <div class="tab-pane fade in" id="history">
+		<% if @client.invoices.count > 0 %>
+		  Here are the emails you have already sent to <%= @client.business_name %>.
+		<% else %>
+		  You have <b>no</b> chase history for <%= @client.business_name %>.
+		<% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<hr class="bs-docs-separator">
+
+
+
+
+
+
+
+<div><a data-toggle="modal" href="#myModal" >Add invoice for this client</a></div>
 
 <div class="modal hide fade" id="myModal">
   <div class="modal-header">
@@ -60,12 +113,3 @@
     <a href="#" class="btn" data-dismiss="modal">Close</a>
   </div>
 </div>
-
-<hr class="bs-docs-separator">
-
-<% if @client.invoices.count > 0 %>
-  You are currently chasing <%= link_to @client.invoices.count.to_s+" invoice(s)", clients_path %> for <%= @client.business_name %> with a total CHASING outstanding amount of <%= Client.total_chasing_outstanding(@client.id) %>.
-<% else %>
-  You are not currently chasing any invoices for <%= @client.business_name %>.
-<% end %>
-

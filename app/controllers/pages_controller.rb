@@ -4,7 +4,6 @@ class PagesController < ApplicationController
   
   
   def home
-#    @chasing_invoices = Invoice.invoice_for_user_with_status(current_user.id, 2)
     @chasing_invoices = Invoice.paginate :conditions => ["user_id = ? and status_id = ?", current_user.id, 2],
     :order => (sort_column + ' ' + sort_direction), :page => params[:page], :per_page => 10
   end
@@ -21,7 +20,7 @@ class PagesController < ApplicationController
   def reports
     @summary = Invoice.all :conditions => ["user_id = ? and status_id = ?", current_user.id, 2]
   end
-  
+    
   private
   def sort_column
     Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"

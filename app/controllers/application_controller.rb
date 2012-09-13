@@ -18,5 +18,19 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource)
     new_suggestion_path #SS This is for the logout redirect after Logout for the suggestion screen
   end
+  
+  
+# SS Not found and Routing error redirects
+  rescue_from ActionController::RoutingError, :with => :render_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+
+  def routing_error
+    raise ActionController::RoutingError.new(params[:path])
+  end
+
+  def render_not_found
+    render "/pages/not_found"
+  end
+  
 
 end

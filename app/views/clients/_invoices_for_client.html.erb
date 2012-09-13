@@ -1,6 +1,5 @@
-	<h3>Invoices for <%= @client.business_name %></h3><h4 align="right">( <%= @client.invoices.size %> in total )</h4>
-
-	<table class="table">
+<br>
+	<table class="table table-condensed">
 	  <tr>
 	    <th>Invoice number</th>
 	    <th>Due date</th>
@@ -17,7 +16,7 @@
 	    <td><%= invoice.invoice_number %></td>
 	    <td><%= invoice.due_date %></td>
 	    <td><%= invoice.amount %></td>
-	    <td><%= invoice.description %></td>
+	    <td><%= truncate(invoice.description, :length => 50) %></td>
 	    <td><%= invoice.status_id %></td>
 	    <td><%= link_to 'Show', invoice %></td>
 	    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>	

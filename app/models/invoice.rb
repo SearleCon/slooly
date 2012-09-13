@@ -40,4 +40,5 @@ class Invoice < ActiveRecord::Base
   def self.age(due_date)
     age = (Date.today - due_date.to_date).to_i
   end
+  
 end

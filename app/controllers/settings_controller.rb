@@ -16,7 +16,7 @@ class SettingsController < ApplicationController
   # GET /settings/1
   # GET /settings/1.json
   def show
-    @setting = Setting.find(params[:id])
+    @setting = Setting.for_user(current_user.id).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class SettingsController < ApplicationController
 
   # GET /settings/1/edit
   def edit
-    @setting = Setting.find(params[:id])
+    @setting = Setting.for_user(current_user.id).find(params[:id])
   end
 
   # POST /settings
@@ -60,7 +60,7 @@ class SettingsController < ApplicationController
   # PUT /settings/1
   # PUT /settings/1.json
   def update
-    @setting = Setting.find(params[:id])
+    @setting = Setting.for_user(current_user.id).find(params[:id])
 
     respond_to do |format|
       if @setting.update_attributes(params[:setting])
@@ -78,7 +78,7 @@ class SettingsController < ApplicationController
   # DELETE /settings/1
   # DELETE /settings/1.json
   def destroy
-    @setting = Setting.find(params[:id])
+    @setting = Setting.for_user(current_user.id).find(params[:id])
     @setting.destroy
 
     respond_to do |format|
