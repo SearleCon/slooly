@@ -14,7 +14,7 @@
 <br>
   <div class="field">
     <%= f.label :client_id %>
-    <%= f.collection_select(:client_id, Client.for_user(current_user.id), :id, :business_name, {:prompt => 'Select a Client'}) %> <a href="<%= new_client_path %>">&nbsp;(or Add Client)</a>	
+    <%= f.collection_select(:client_id, Client.for_user(current_user.id).order("business_name asc"), :id, :business_name, {:prompt => 'Select a Client'}) %> <a href="<%= new_client_path %>">&nbsp;(or Add Client)</a>	
   </div>
   <div class="field">
     <%= f.label :due_date %>

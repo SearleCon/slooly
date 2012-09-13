@@ -19,6 +19,7 @@ class ClientsController < ApplicationController
   # GET /clients/1.json
   def show
     @client = Client.for_user(current_user.id).find(params[:id]) 
+    @client_invoices_chasing = Invoice.for_user_and_status(@client.id, 2)
 
     respond_to do |format|
       format.html # show.html.erb

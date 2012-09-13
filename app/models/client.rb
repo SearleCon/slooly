@@ -27,6 +27,6 @@ class Client < ActiveRecord::Base
       @total_chasing = @total_chasing + c.amount
     end
     return @total_chasing
-  end  
+  end    
   
 end

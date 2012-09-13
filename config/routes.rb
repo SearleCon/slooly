@@ -12,6 +12,9 @@ Slooly::Application.routes.draw do
   get "pages/reports"
   
   get "pages/initial_setup"
+  
+  get "pages/pricing"
+  
 
   resources :suggestions
 

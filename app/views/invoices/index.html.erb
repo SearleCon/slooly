@@ -30,6 +30,7 @@
 
 <table class="table">
   <tr>
+	<th><%= sortable "due_date", "Age" %></th>
     <th><%= sortable "invoice_number", "Invoice Number" %></th>
     <th><%= sortable "due_date", "Due Date" %></th>
     <th><%= sortable "amount", "Amount" %></th>
@@ -44,13 +45,25 @@
 
 <% @invoices.each do |invoice| %>
   <tr>
+		<% if Invoice.age(invoice.due_date) > 0 %>
+			<td><span class="badge badge-important"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
+		<% else %>
+			<% if Invoice.age(invoice.due_date) == 0 %>
+				<td><span class="badge badge-info"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
+			<% else %>
+				<% if Invoice.age(invoice.due_date) < 0 %>
+					<td><span class="badge badge-success"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
+				<% end %>
+			<% end %>
+		<% end %>
+	
     <td><%= link_to invoice.invoice_number, invoice %></td>
     <td><%= invoice.due_date %></td>
     <td><%= invoice.amount %></td>
 	<% if invoice.description.size > 50 %> 
 		<td><a rel="popover" title='Invoice Description' 
 							   data-content='<%= truncate(simple_format(invoice.description), 
-										:length => 500) %>'><%= truncate(invoice.description, :length => 50)%></span></a></td>
+										:length => 500) %>'><%= truncate(invoice.description, :length => 45)%></span></a></td>
 	<% else %>
 	    <td><%= invoice.description %></td>
 	<% end %>

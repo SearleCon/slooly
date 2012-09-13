@@ -95,5 +95,4 @@ class InvoicesController < ApplicationController
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"    
   end
   
-  
 end

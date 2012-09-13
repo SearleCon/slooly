@@ -63,8 +63,8 @@
 
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="chasing">
-		<% if @client.invoices.count > 0 %>
-		  You are currently chasing the following <b><%= @client.invoices.count.to_s+" invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= Client.total_chasing_outstanding(@client.id) %></b> (total chasing amount). <br>
+		<% if @client_invoices_chasing.count > 0 %>
+		  You are currently chasing the following <b><%= @client_invoices_chasing.count.to_s+" invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= Client.total_chasing_outstanding(@client.id) %></b> (total chasing amount). <br>
 
 
 		<%= render 'invoices_for_client' %>

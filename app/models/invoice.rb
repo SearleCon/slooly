@@ -2,7 +2,7 @@ class Invoice < ActiveRecord::Base
   attr_accessible :amount, :client_id, :description, :due_date, :invoice_number, :status_id
   belongs_to      :client
   validates       :client_id, :due_date, :description, :invoice_number, :presence => true
-  validates_numericality_of :amount
+  validates_numericality_of :amount  
   
 
   
@@ -39,6 +39,12 @@ class Invoice < ActiveRecord::Base
   
   def self.age(due_date)
     age = (Date.today - due_date.to_date).to_i
+  end
+  
+  def self.for_user_and_status(client_id, status_id) 
+    @clients_invoices_chasing = Invoice.all :conditions => ["client_id = ? and status_id = ?", client_id, status_id], :order => "due_date asc"
+#    @clients_invoices_chasing = Invoice.find(:all, :conditions => ["client_id = ? and status_id = ?", client_id, status_id]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10) 
+
   end
   
 end
