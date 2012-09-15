@@ -43,9 +43,9 @@ class InvoicesController < ApplicationController
 
   # POST /invoices
   # POST /invoices.json
-  def create
+  def create    
     @invoice = Invoice.new(params[:invoice])
-    @invoice.user_id = current_user.id        
+    setup_chase_dates
 
     respond_to do |format|
       if @invoice.save
@@ -84,6 +84,34 @@ class InvoicesController < ApplicationController
       format.html { redirect_to invoices_url }
       format.json { head :no_content }
     end
+  end
+  
+  
+  def setup_chase_dates
+    # Setup the chase dates
+    @current_setting = Setting.for_user(current_user.id)
+
+    @invoice.user_id = current_user.id
+    @invoice.pd_date = calculate_predue_date(@invoice.due_date, @current_setting[0].days_before_pre_due)        
+    @invoice.od1_date = calculate_od1_date(@invoice.due_date, @current_setting[0].days_between_chase)        
+    @invoice.od2_date = calculate_od2_date(@invoice.due_date, @current_setting[0].days_between_chase)        
+    @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)    
+  end
+
+  def calculate_predue_date(due_date, days_before)
+    due_date-days_before.days
+  end
+  
+  def calculate_od1_date(due_date, chase_days)
+    due_date+chase_days.days
+  end
+  
+  def calculate_od2_date(due_date, chase_days)
+    due_date+(chase_days*2).days
+  end
+  
+  def calculate_od3_date(due_date, chase_days)
+    due_date+(chase_days*3).days
   end
   
   private

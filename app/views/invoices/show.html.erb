@@ -21,13 +21,69 @@
   </tr>
   <tr>
     <td>Status:</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
-    <td><%= Invoice.status_description(@invoice.status_id) %></td>
+
+	<% if @invoice.status_id != nil %>
+		<% @status = Status.all :conditions => ["id = ?", @invoice.status_id] %> 
+	
+		<% if @invoice.status_id == 2 %>
+		  <td><span class="label label-success"><%= @status[0].description %></span></td>
+		<% else %>		
+			<% if @invoice.status_id == 3 %>
+			  <td><span class="label label-warning"><%= @status[0].description %></span></td>
+			<% else %>
+				<% if @invoice.status_id == 4 %>
+				  <td><span class="label label-info"><%= @status[0].description %></span></td>
+				<% else %>
+					<% if @invoice.status_id == 5 %>
+					  <td><span class="label label-important"><%= @status[0].description %></span></td>
+					<% else %>
+						<% if @invoice.status_id == 6 %>
+						  <td><span class="label label-inverse"><%= @status[0].description %></span></td>
+						<% else %>
+							<% if @invoice.status_id == 7 %>
+							  <td><span class="label label-default"><%= @status[0].description %></span></td>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+
   </tr>
   <tr>
     <td>Description:</td>
     <td><%= simple_format(@invoice.description) %></td>
   </tr>
 </table>
+<% if @invoice.status_id == 2 %>
+<hr class="bs-docs-separator">
+<!-- <i class="icon-calendar header"></i><h4>Reminder Email Dates:</h4><br> -->
+<img src="/images/calendarbig.png" class="header"> <h4>Reminder Email Dates for Invoice <%= @invoice.invoice_number %>:</h4><br>
+
+<table>
+  <tr>
+    <td>1. Pre-Due Reminder (if applicable):&nbsp;&nbsp;</td>
+    <td><b><%= @invoice.pd_date %></b></td>
+	<td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td>
+  </tr>
+  <tr>
+    <td>2. First Overdue Reminder:</td>
+    <td><b><%= @invoice.od1_date %></b></td>
+	<td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td>
+  </tr>
+  <tr>
+    <td>3. Second Overdue Reminder:</td>
+    <td><b><%= @invoice.od2_date %></b></td>
+	<td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td>
+  </tr>
+  <tr>
+    <td>4. Third Overdue Reminder:</td>
+    <td><b><%= @invoice.od3_date %></b></td>
+	<td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td>
+  </tr>
+</table>
+<% end %>
 
 <hr class="bs-docs-separator">
 
