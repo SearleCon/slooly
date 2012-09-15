@@ -3,6 +3,6 @@ class UserMailer < ActionMailer::Base
 
   def registration_confirmation(user)
     @user = user
-    mail(:to => @user.email, :subject => "Slooly Registration Details") #SS Needs to change
+    mail(:to => @user.email, :subject => "Slooly Registration Details") 
   end
 end

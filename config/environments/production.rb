@@ -68,16 +68,16 @@ Slooly::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default :from => "slooly@example.com"
+#  config.action_mailer.default :from => "slooly@example.com"
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.mandrillapp.com",
     port: 587,
     domain: "glacial-taiga-1918.herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "searlecon@gmail.com",
-    password: "argitdyzrctfidai"
+    user_name: "searlecon",
+    password: "fd16abfe-3edb-4094-9e70-2de906656549"
   }
 
 
