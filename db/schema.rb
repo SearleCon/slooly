@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914074058) do
+ActiveRecord::Schema.define(:version => 20120917093804) do
 
   create_table "clients", :force => true do |t|
     t.string   "business_name"
@@ -57,6 +57,23 @@ ActiveRecord::Schema.define(:version => 20120914074058) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "histories", :force => true do |t|
+    t.date     "date_sent"
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.string   "subject"
+    t.text     "message"
+    t.string   "reminder_type"
+    t.boolean  "sent"
+    t.string   "email_return_code"
+    t.string   "email_sent_from"
+    t.string   "copy_email"
+    t.string   "email_sent_to"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "invoice_number"
+  end
 
   create_table "invoices", :force => true do |t|
     t.string   "invoice_number"

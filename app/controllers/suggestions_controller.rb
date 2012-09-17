@@ -2,22 +2,30 @@ class SuggestionsController < ApplicationController
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = Suggestion.all
+    if current_user.has_role? :admin
+      @suggestions = Suggestion.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @suggestions }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @suggestions }
+      end
+    else
+      redirect_to("/pages/not_found")
     end
   end
 
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
-    @suggestion = Suggestion.find(params[:id])
+    if current_user.has_role? :admin
+      @suggestion = Suggestion.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @suggestion }
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @suggestion }
+      end
+    else
+      redirect_to("/pages/not_found")      
     end
   end
 
@@ -34,7 +42,11 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
-    @suggestion = Suggestion.find(params[:id])
+    if current_user.has_role? :admin
+      @suggestion = Suggestion.find(params[:id])
+    else
+      redirect_to("/pages/not_found")            
+    end
   end
 
   # POST /suggestions
@@ -56,28 +68,37 @@ class SuggestionsController < ApplicationController
   # PUT /suggestions/1
   # PUT /suggestions/1.json
   def update
-    @suggestion = Suggestion.find(params[:id])
+    if current_user.has_role? :admin    
+      @suggestion = Suggestion.find(params[:id])
 
-    respond_to do |format|
-      if @suggestion.update_attributes(params[:suggestion])
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @suggestion.update_attributes(params[:suggestion])
+          format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @suggestion.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to("/pages/not_found")            
     end
   end
 
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
   def destroy
-    @suggestion = Suggestion.find(params[:id])
-    @suggestion.destroy
+    if current_user.has_role? :admin      
+      @suggestion = Suggestion.find(params[:id])
+      @suggestion.destroy
 
-    respond_to do |format|
-      format.html { redirect_to suggestions_url }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to suggestions_url }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to("/pages/not_found")            
     end
   end
+  
 end

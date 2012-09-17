@@ -1,0 +1,43 @@
+<h1>Listing histories</h1>
+
+<table>
+  <tr>
+    <th>Date sent</th>
+    <th>Client</th>
+    <th>User</th>
+    <th>Subject</th>
+    <th>Message</th>
+    <th>Reminder type</th>
+    <th>Sent</th>
+    <th>Email return code</th>
+    <th>Email sent from</th>
+    <th>Copy email</th>
+    <th>Email sent to</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @histories.each do |history| %>
+  <tr>
+    <td><%= history.date_sent %></td>
+    <td><%= history.client_id %></td>
+    <td><%= history.user_id %></td>
+    <td><%= history.subject %></td>
+    <td><%= history.message %></td>
+    <td><%= history.reminder_type %></td>
+    <td><%= history.sent %></td>
+    <td><%= history.email_return_code %></td>
+    <td><%= history.email_sent_from %></td>
+    <td><%= history.copy_email %></td>
+    <td><%= history.email_sent_to %></td>
+    <td><%= link_to 'Show', history %></td>
+    <td><%= link_to 'Edit', edit_history_path(history) %></td>
+    <td><%= link_to 'Destroy', history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New History', new_history_path %>

@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   
     def send_welcome_email #SS These are the changes to the Delayed Job!
  #     UserMailer.registration_confirmation(self).deliver # WORKING without delayed-job, but slow (user must wait)
-      UserMailer.delay.registration_confirmation(self) # working with delayedJob using Mandrill (Don't forget to run: "rake tasks:run" in terminal to process the delayed jobs, or "heroku rake jobs:run" on production)
+      UserMailer.delay.registration_confirmation(self) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
     end
     handle_asynchronously :send_welcome_email, :run_at => Proc.new { 2.seconds.from_now }
 

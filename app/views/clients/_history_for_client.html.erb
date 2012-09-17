@@ -1,0 +1,29 @@
+
+<br>
+	<table class="table table-condensed">
+	  <tr>
+	    <th>Date Sent</th>	
+		<th>Sent To</th>
+	    <th>Reference</th>
+	    <th>Subject</th>
+	    <th>Message</th>
+		<th><span rel="tooltip" title="Quick View"><i class="icon-eye-open"></i></span></th>
+	  </tr>
+
+	<% @client_invoices_history.each do |history| %>
+	  <tr>
+		<!-- <td><%= link_to '<i class="icon-search"></i>', history %></td> -->
+		<!-- <td><a href="<%= history_path(history) %>"<i class="icon-eye-open"></i></a></td> -->
+		
+		
+		
+	    <td><%= link_to history.date_sent, history %></td>
+		<td><%= history.email_sent_to %></td>
+	    <td><%= history.invoice_number %></td>
+	    <td><%= history.subject %></td>
+	    <td><%= truncate(history.message, :length => 100) %></td>
+		<td><a href="#element" rel="popover" title="Email Message (Ref: <%= history.invoice_number %>)" 
+							   data-content="<%= simple_format(history.message) %>"><i class="icon-eye-open"></i></a></td>	
+	  </tr>
+	<% end %>
+	</table>

@@ -77,8 +77,11 @@
 		
     </div>
     <div class="tab-pane fade in" id="history">
-		<% if @client.invoices.count > 0 %>
-		  Here are the emails you have already sent to <%= @client.business_name %>.
+		<% if @client_invoices_history.count > 0 %>
+		  Here are the emails you have <b>already sent</b> to <b><%= @client.business_name %></b> (Newest to Oldest).<br>
+		
+		  <%= render 'history_for_client' %>
+		
 		<% else %>
 		  You have <b>no</b> chase history for <%= @client.business_name %>.
 		<% end %>

@@ -1,4 +1,6 @@
 Slooly::Application.routes.draw do
+  resources :histories
+
   get "pages/home"
 
   get "pages/about"
@@ -33,7 +35,7 @@ Slooly::Application.routes.draw do
   end
   root :to => "home#index"
   devise_for :users
-  resources :users, :only => [:show, :index]  
+  resources :users, :only => [:show, :index]
   
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action).
   match "*path", :to => "application#routing_error"

@@ -20,6 +20,7 @@ class ClientsController < ApplicationController
   def show
     @client = Client.for_user(current_user.id).find(params[:id]) 
     @client_invoices_chasing = Invoice.for_user_and_status(@client.id, 2)
+    @client_invoices_history = History.for_client(@client.id) # SS .order("date_sent desc") # SS - add .first(10) to only get the first 10 records - Decide if you want to do this
 
     respond_to do |format|
       format.html # show.html.erb

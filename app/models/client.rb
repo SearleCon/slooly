@@ -11,6 +11,7 @@ class Client < ActiveRecord::Base
   def self.for_user(user) 
       where("user_id = ?", user)
   end
+
     
   def self.search(search)
     if search
