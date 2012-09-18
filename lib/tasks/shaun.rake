@@ -45,17 +45,33 @@ task :send_reminders => :environment do
 
   puts "Sending Emails"
   
-  @to_send = History.all 
+  @to_send = History.all :conditions => ["sent = ?", "f"]
   @to_send.each do |historysend|
     puts "Sending..."    
     #send_to_mandrill(historysend)
     UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+    update_sent_flag(historysend)
     puts "Sent!"
     puts "---------"
   end
+  update_all_for_today_as_queued # SS See below
   puts "Sending Emails completed"
   
   
+end
+
+def update_all_for_today_as_queued
+  Invoice.update_all({:status_id => 7}, ["pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?", Date.today, Date.today, "2012-10-07", Date.today, Date.today])
+  # SS Update all invoices in the main query as already queued and change the main query above to ignore already queued items
+  # SS Change the status ID above to the Queued boolean (you must create it)
+  # This will stop multiple sendings
+  # Maybe have a resend all for today task that ignores this flag, in case we have issues.
+end
+
+def update_sent_flag(historysend)
+  @historyupdate = History.first :conditions => ["id = ?", historysend.id]
+  @historyupdate.sent = "t"
+  @historyupdate.save
 end
 
 def build_reminder_email(client, company, invoice, setting)
