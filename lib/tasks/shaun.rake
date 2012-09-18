@@ -7,12 +7,13 @@
 # rake tasks:run
 # rake jobs:work
 
-# desc "This task is called by the Heroku scheduler add-on"
-# task :update_feed => :environment do
-#     puts "Updating feed..."
-#     puts "Shauns Test Running!"
-#     puts "done."
-# end
+
+# SS NOTE:
+# These are the three things that need to run in order to get the emails sending:
+# 1. "rake send_reminders" - This is your rake task in the actual rake file (lib directory - i.e. THIS file (See the task below))
+# 2. "rake jobs:work" - On heroku can be run too. Needs to be running to process delayed jobs
+# 3. Your server must be running
+
 
 task :send_reminders => :environment do
   puts "Running reminders now..."
@@ -41,6 +42,20 @@ task :send_reminders => :environment do
   end
   puts "Completed the entire process. "+@invoices.count.to_s+" invoices successfully processed"
   puts "------------------------------------------------"
+
+  puts "Sending Emails"
+  
+  @to_send = History.all 
+  @to_send.each do |historysend|
+    puts "Sending..."    
+    #send_to_mandrill(historysend)
+    UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+    puts "Sent!"
+    puts "---------"
+  end
+  puts "Sending Emails completed"
+  
+  
 end
 
 def build_reminder_email(client, company, invoice, setting)
@@ -78,8 +93,8 @@ def build_reminder_email(client, company, invoice, setting)
   save_to_history(@client, @company, invoice, @setting, @email_message)
 end
 
-def send_to_mandrill
-
+def send_to_mandrill(historysend)
+#  UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
 end
 
 def save_to_history(client, company, invoice, setting, actual_email_message)
@@ -95,8 +110,8 @@ def save_to_history(client, company, invoice, setting, actual_email_message)
   @history.email_return_code  = "Not yet sent" # Change on send of Mandrill
   @history.email_sent_from    = setting.send_from_name
   @history.copy_email         = setting.email_copy_to
-  @history.email_sent_to	    = client.email
+  @history.email_sent_to	    = "shaun.searle@gmail.com" # SS Change this back! to client.email
   @history.user_id            = client.user_id
-	
+  	
 	@history.save
 end
