@@ -15,6 +15,34 @@
 # 3. Your server must be running
 
 
+task :resend_todays_reminders => :environment do # This task ignores the last_date_send in the main query, thereby resending all the emails for today
+    @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
+
+    if @invoices.count > 0
+      @invoices.each do |invoice|
+        @client = Client.first :conditions => ["id = ?", invoice.client_id]
+        @company = Company.first :conditions => ["user_id = ?", invoice.user_id]
+        @setting = Setting.first :conditions => ["user_id = ?", invoice.user_id]
+        build_reminder_email(@client, @company, invoice, @setting)
+      end
+    else
+    end
+    puts "Completed the entire process. "+@invoices.count.to_s+" invoices processed"
+    @to_send = History.all :conditions => ["sent = ?", "f"]
+    @to_send.each do |historysend|
+
+      UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+
+      update_sent_flag(historysend)
+    end
+    puts "Sending Emails completed"
+end  
+
+
+
+
+
+
 task :send_reminders => :environment do
   puts "Running reminders now..."
   puts "Selecting all invoices with PD, D, OD1, OD2 or OD3 dates of TODAY..."
@@ -40,7 +68,7 @@ task :send_reminders => :environment do
   else
     puts "No Invoices found. Not sending any reminders today. Job Completed!"
   end
-  puts "Completed the entire process. "+@invoices.count.to_s+" invoices successfully processed"
+  puts "Completed the entire process. "+@invoices.count.to_s+" invoices processed"
   puts "------------------------------------------------"
 
   puts "Sending Emails"
@@ -49,10 +77,12 @@ task :send_reminders => :environment do
   @to_send.each do |historysend|
     puts "Sending..."    
     #send_to_mandrill(historysend)
-
+puts historysend.email_sent_from
+puts historysend.email_sent_to
+puts historysend.copy_email
 
 # SHAUN PUT BACK!!!!! JUST REMOVED FOR TESTING AND NO SENDING OF EMAILS!
-#    UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+    UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
 
 
 
@@ -208,10 +238,11 @@ def save_to_history(client, company, invoice, setting, actual_email_message)
   @history.reminder_type      = work_out_reminder_type(invoice)
   @history.sent               = "f" # Will be false and changed as soon as sent to Mandrill
   @history.email_return_code  = "Not yet sent" # Change on send of Mandrill - This is actually similar to the above flag, but can be used to save return codes from Mandrill instead
-  @history.email_sent_from    = setting.send_from_name
+  @history.email_sent_from    = company.email
   @history.copy_email         = setting.email_copy_to
-  @history.email_sent_to	    = "shaun.searle@gmail.com" # SS Change this back! to client.email
+  @history.email_sent_to	    = client.email # "shaun.searle@gmail.com" # SS Change this back! to client.email
   @history.user_id            = client.user_id
+  @history.email_from_name    = setting.send_from_name
   	
 	@history.save
 end
