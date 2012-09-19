@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917093804) do
+ActiveRecord::Schema.define(:version => 20120919093715) do
 
   create_table "clients", :force => true do |t|
     t.string   "business_name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120917093804) do
     t.date     "od1_date"
     t.date     "od2_date"
     t.date     "od3_date"
+    t.date     "last_date_sent"
   end
 
   create_table "roles", :force => true do |t|

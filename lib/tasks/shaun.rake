@@ -18,7 +18,7 @@
 task :send_reminders => :environment do
   puts "Running reminders now..."
   puts "Selecting all invoices with PD, D, OD1, OD2 or OD3 dates of TODAY..."
-  @invoices = Invoice.all :conditions => ["pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?", Date.today, Date.today, "2012-10-07", Date.today, Date.today]
+  @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?) and (last_date_sent != ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
   
   if @invoices.count > 0
     puts "------------------------------------------------"
@@ -49,19 +49,29 @@ task :send_reminders => :environment do
   @to_send.each do |historysend|
     puts "Sending..."    
     #send_to_mandrill(historysend)
-    UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+
+
+# SHAUN PUT BACK!!!!! JUST REMOVED FOR TESTING AND NO SENDING OF EMAILS!
+#    UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
+
+
+
     update_sent_flag(historysend)
     puts "Sent!"
     puts "---------"
   end
-  update_all_for_today_as_queued # SS See below
+#  update_all_for_today_as_sent # SS See below
   puts "Sending Emails completed"
   
   
 end
 
-def update_all_for_today_as_queued
-  Invoice.update_all({:status_id => 7}, ["pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?", Date.today, Date.today, "2012-10-07", Date.today, Date.today])
+def update_last_date_sent(invoice)
+  @invoiceupdate = Invoice.first :conditions => ["id = ?", invoice.id]
+  @invoiceupdate.last_date_sent = DateTime.now.to_date
+  @invoiceupdate.save
+
+#  Invoice.update_all({:status_id => 7}, ["pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?", Date.today, Date.today, "2012-10-07", Date.today, Date.today])
   # SS Update all invoices in the main query as already queued and change the main query above to ignore already queued items
   # SS Change the status ID above to the Queued boolean (you must create it)
   # This will stop multiple sendings
@@ -99,7 +109,7 @@ def build_reminder_email(client, company, invoice, setting)
   @email_message += "Due Date  : "+invoice.due_date.to_s+"\n"
   @email_message += "Amount Due: "+invoice.amount.to_s+"\n\n"
   
-  @email_message += setting.pre_due_message+"\n"+company.name+"\n\n"  
+  @email_message += fetch_correct_message(invoice)+"\n"+company.name+"\n\n"   #SS Work out the correct Message to send here
   
   @email_message += "Payment Options: \n"+setting.payment_method_message
   
@@ -107,11 +117,85 @@ def build_reminder_email(client, company, invoice, setting)
   puts "\n--- Actual Email End ---\n"  
   
   save_to_history(@client, @company, invoice, @setting, @email_message)
+  update_last_date_sent(invoice) # SS See below
 end
 
 def send_to_mandrill(historysend)
 #  UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)
 end
+
+def work_out_reminder_type(invoice)
+  if (invoice.pd_date == DateTime.now.to_date)
+    @reminder_type = "Pre"
+  else
+    if (invoice.due_date == DateTime.now.to_date)
+      @reminder_type = "Due"
+    else
+      if (invoice.od1_date == DateTime.now.to_date)
+        @reminder_type = "OD1"
+      else
+        if (invoice.od2_date == DateTime.now.to_date)
+          @reminder_type = "OD2"
+        else
+          if (invoice.od3_date == DateTime.now.to_date)
+            @reminder_type = "OD3"
+          else
+            @reminder_type = "Unknown"  
+          end
+        end
+      end
+    end
+  end
+end
+
+def fetch_correct_subject_line(invoice)
+  if (invoice.pd_date == DateTime.now.to_date)
+    @setting.pre_due_subject
+  else
+    if (invoice.due_date == DateTime.now.to_date)
+      @setting.due_subject
+    else
+      if (invoice.od1_date == DateTime.now.to_date)
+          @setting.overdue1_subject
+      else
+        if (invoice.od2_date == DateTime.now.to_date)
+          @setting.overdue2_subject
+        else
+          if (invoice.od3_date == DateTime.now.to_date)
+            @setting.overdue3_subject
+          else
+            "ERROR"  
+          end
+        end
+      end
+    end
+  end
+end
+
+def fetch_correct_message(invoice)
+  if (invoice.pd_date == DateTime.now.to_date)
+    @setting.pre_due_message
+  else
+    if (invoice.due_date == DateTime.now.to_date)
+      @setting.due_message
+    else
+      if (invoice.od1_date == DateTime.now.to_date)
+          @setting.overdue1_message
+      else
+        if (invoice.od2_date == DateTime.now.to_date)
+          @setting.overdue2_message
+        else
+          if (invoice.od3_date == DateTime.now.to_date)
+            @setting.overdue3_message
+          else
+            "ERROR - If you received this email, something has gone wrong. Please contact the support staff at Slooly, or simply ignore it."  
+          end
+        end
+      end
+    end
+  end
+end
+
 
 def save_to_history(client, company, invoice, setting, actual_email_message)
   @history = History.new
@@ -119,11 +203,11 @@ def save_to_history(client, company, invoice, setting, actual_email_message)
   @history.invoice_number     = invoice.invoice_number
 	@history.date_sent          = DateTime.now
   @history.client_id          = client.id
-  @history.subject            = "Get the Correct Subject"
+  @history.subject            = fetch_correct_subject_line(invoice)
   @history.message            = actual_email_message
-  @history.reminder_type      = "Get the correct reminder Type"
+  @history.reminder_type      = work_out_reminder_type(invoice)
   @history.sent               = "f" # Will be false and changed as soon as sent to Mandrill
-  @history.email_return_code  = "Not yet sent" # Change on send of Mandrill
+  @history.email_return_code  = "Not yet sent" # Change on send of Mandrill - This is actually similar to the above flag, but can be used to save return codes from Mandrill instead
   @history.email_sent_from    = setting.send_from_name
   @history.copy_email         = setting.email_copy_to
   @history.email_sent_to	    = "shaun.searle@gmail.com" # SS Change this back! to client.email

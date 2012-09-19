@@ -95,7 +95,8 @@ class InvoicesController < ApplicationController
     @invoice.pd_date = calculate_predue_date(@invoice.due_date, @current_setting[0].days_before_pre_due)        
     @invoice.od1_date = calculate_od1_date(@invoice.due_date, @current_setting[0].days_between_chase)        
     @invoice.od2_date = calculate_od2_date(@invoice.due_date, @current_setting[0].days_between_chase)        
-    @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)    
+    @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)  
+    @invoice.last_date_sent = DateTime.now.to_date-100.years  
   end
 
   def calculate_predue_date(due_date, days_before)
