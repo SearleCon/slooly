@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base  
   cattr_accessor :current_user
+#  validates :terms_of_service, :acceptance => true
+  
   
   rolify
   # Include default devise modules. Others available are:
@@ -9,11 +11,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms_of_service
   
   has_many        :clients, :dependent => :destroy
   has_one         :company, :dependent => :destroy
   has_one         :setting, :dependent => :destroy
+  validates :terms_of_service, :acceptance => true
   
 # SS Added for Welcome email WAS HERE WORKING
   after_create :send_welcome_email
