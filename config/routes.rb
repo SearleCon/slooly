@@ -1,4 +1,6 @@
 Slooly::Application.routes.draw do
+  resources :announcements
+
   resources :histories
 
   get "pages/home"

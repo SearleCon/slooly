@@ -1,0 +1,11 @@
+<h1>News Section</h1>
+<h6>All the latest product information, offers and general business news</h6><br>
+
+<% @announcements.each do |announcement| %>
+<div class="span11 tooltip-demo well">
+	<img src="/images/news.png" class="header"><h3><%= announcement.headline %></h3><br>
+    <%= truncate(simple_format(announcement.description), :length => 600) %><br>
+    <%= link_to 'Read full article', announcement %>
+    <div class="muted">Posted by <%= announcement.posted_by %> on <%= announcement.created_at.to_date %></div><br>
+</div>
+<% end %>

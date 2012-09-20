@@ -15,6 +15,8 @@
     <% if current_user.has_role? :admin %>
       <li><%= link_to 'Administration', users_path %></li>
 	  <li><%= link_to 'Suggestions', suggestions_path %></li>
+	  <li><%= link_to 'Add News', new_announcement_path %></li>
+	
 	      
     <% end %>
   <% else %>
@@ -47,7 +49,7 @@
 
   <% else %>
 	<li>
-      <%= link_to 'News', '/pages/news' %>	
+      <%= link_to "News", announcements_path %>
     </li>
     <li>
       <%= link_to 'About', '/pages/about' %>	

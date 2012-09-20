@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:about, :pricing, :contact, :news, :tos, :privacy]
+  before_filter :authenticate_user!, :except => [:about, :pricing, :contact, :announcement, :tos, :privacy]
   helper_method :sort_column, :sort_direction
   
   
