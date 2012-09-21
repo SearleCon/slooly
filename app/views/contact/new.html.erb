@@ -1,0 +1,55 @@
+<img src="images/contact.png" class="header"> <br><h1>Contact and Support</h1><br><br>
+
+
+<h6>Got a question? Check these out:</h6>
+<h3><%= link_to 'Frequently Asked Questions', '/pages/faq' %></h3>
+
+<hr class="bs-docs-separator">
+
+<h6>Email us at:</h6>
+<h3><a href="mailto:Support@SearleConsulting.co.za">Support@SearleConsulting.co.za</a></h3>
+
+<hr class="bs-docs-separator">
+
+<h6>Follow or Tweet us:</h6>
+<a href="https://twitter.com/SearleCon" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SearleCon</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+<a href="https://twitter.com/intent/tweet?screen_name=SearleCon" class="twitter-mention-button" data-size="large">Tweet to @SearleCon</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<hr class="bs-docs-separator">
+
+<h6>Let us get back to you:</h6>
+
+<%= form_for @message, :url => contact_path do |form| %>
+  <fieldset class="fields">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <div class="field">
+      <%= form.label :subject %>
+      <%= form.text_field :subject %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_area :body %>
+    </div>
+  </fieldset>
+  
+<hr class="bs-docs-separator">
+
+  <fieldset class="actions">
+    <!-- <%= form.submit "Send" %> -->
+    <input type="submit" class="btn btn-primary" value="Send Enquiry" >
+
+  </fieldset>
+<% end %>

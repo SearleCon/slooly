@@ -7,7 +7,7 @@ Slooly::Application.routes.draw do
 
   get "pages/about"
 
-  get "pages/contact"
+  get "pages/faq"
 
   get "pages/help"
 
@@ -23,6 +23,8 @@ Slooly::Application.routes.draw do
 
   get "pages/privacy"
   
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact', :via => :post  
 
   resources :suggestions
 

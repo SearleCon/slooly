@@ -29,7 +29,7 @@
 <% @cancel_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete your ENTIRE ACCOUNT!<br><b>NOTE:</b> All related clients and invoices will also be deleted! This cannot be undone!<br><br> Are you sure you want to cancel your account?' %>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => @cancel_message }, :method => :delete %>.</p>
-(We would hate to see you go! Instead, why not <a href ="#">contact us</a>, tell us why you are unhappy, and let's first see if we can cater to your needs)
+(We would hate to see you go! Instead, why not <a href ="/contact">contact us</a>, tell us why you are unhappy, and let's first see if we can cater to your needs)
 
 <hr class="bs-docs-separator">
 

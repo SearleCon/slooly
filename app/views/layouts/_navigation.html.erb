@@ -39,7 +39,7 @@
 	      <li><%= link_to "User Profile", edit_user_registration_path %></li>
 	      <li><%= link_to "Company Profile", companies_path %></li>
 	      <li><%= link_to "Tutorials", "#" %></li>
-	      <li><%= link_to "Share with Friends", "#" %></li>
+	      <!-- <li><%= link_to "Share with Friends", "#" %></li> -->
 	      <li class="divider"></li>
 	      <li>		
 		    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
@@ -48,14 +48,14 @@
 	  </li>
 
   <% else %>
-	<li>
-      <%= link_to "News", announcements_path %>
-    </li>
     <li>
       <%= link_to 'About', '/pages/about' %>	
     </li>
     <li>
-      <%= link_to 'Contact', '/pages/contact' %>	
+      <%= link_to 'Contact', '/contact' %>	
+    </li>
+	<li>
+      <%= link_to "News", announcements_path %>
     </li>
     <li>
     <%= link_to 'Login', new_user_session_path %>  

@@ -11,4 +11,10 @@ class UserMailer < ActionMailer::Base
 #    mail(:to => @historysend.email_sent_to, :subject => @historysend.subject)     
     mail(:from => @historysend.email_sent_from, :to => @historysend.email_sent_to, :bcc => @historysend.copy_email, :subject => @historysend.subject)     
   end
+  
+  def new_message(message)
+      @message = message
+      mail(:from => message.email, :to => "support@searleconsulting.co.za", :subject => "Contact Us Notification: #{message.subject}")
+    end
+  
 end
