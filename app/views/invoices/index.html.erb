@@ -99,7 +99,9 @@
 	<td><%= time_ago_in_words(invoice.created_at) %> ago</td>
     <td><%= link_to 'Show', invoice %></td>
     <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% @delete_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete the invoice <b>'+invoice.invoice_number+'!</b><br><b>NOTE:</b> This cannot be undone!<br><br> Are you sure you want to continue?' %>
+
+    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: @delete_message } %></td>
   </tr>
 <% end %>
 </table>

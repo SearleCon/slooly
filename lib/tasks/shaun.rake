@@ -23,7 +23,21 @@ task :resend_todays_reminders => :environment do # This task ignores the last_da
         @client = Client.first :conditions => ["id = ?", invoice.client_id]
         @company = Company.first :conditions => ["user_id = ?", invoice.user_id]
         @setting = Setting.first :conditions => ["user_id = ?", invoice.user_id]
-        build_reminder_email(@client, @company, invoice, @setting)
+
+
+        if (((invoice.pd_date == Date.today) && (@setting.pre_due_reminder == false)) || ((invoice.due_date == Date.today) && (@setting.due_reminder == false)))
+          puts "Skipping this invoice, as it has either the Pre_Due boolean or the Due boolean set to false (i.e. DONT SEND for this User!)"
+          puts "predue date: "+invoice.pd_date.to_s
+          puts "predue set: "+@setting.pre_due_reminder.to_s
+          puts "due date: "+invoice.due_date.to_s
+          puts "due set: "+@setting.due_reminder.to_s
+
+        else
+          build_reminder_email(@client, @company, invoice, @setting)
+        end
+
+
+#        build_reminder_email(@client, @company, invoice, @setting)
       end
     else
     end
@@ -60,7 +74,19 @@ task :send_reminders => :environment do
       @client = Client.first :conditions => ["id = ?", invoice.client_id]
       @company = Company.first :conditions => ["user_id = ?", invoice.user_id]
       @setting = Setting.first :conditions => ["user_id = ?", invoice.user_id]
-      build_reminder_email(@client, @company, invoice, @setting)
+
+      if (((invoice.pd_date == Date.today) && (@setting.pre_due_reminder == false)) || ((invoice.due_date == Date.today) && (@setting.due_reminder == false)))
+        puts "Skipping this invoice, as it has either the Pre_Due boolean or the Due boolean set to false (i.e. DONT SEND for this User!)"
+        puts "predue date: "+invoice.pd_date.to_s
+        puts "predue set: "+@setting.pre_due_reminder.to_s
+        puts "due date: "+invoice.due_date.to_s
+        puts "due set: "+@setting.due_reminder.to_s
+
+      else
+        build_reminder_email(@client, @company, invoice, @setting)
+      end
+
+
       puts "Completed Processing Invoice number: "+invoice.invoice_number+"..."
 #      sleep(1)
     end
@@ -77,9 +103,9 @@ task :send_reminders => :environment do
   @to_send.each do |historysend|
     puts "Sending..."    
     #send_to_mandrill(historysend)
-puts historysend.email_sent_from
-puts historysend.email_sent_to
-puts historysend.copy_email
+    puts historysend.email_sent_from
+    puts historysend.email_sent_to
+    puts historysend.copy_email
 
 # SHAUN PUT BACK!!!!! JUST REMOVED FOR TESTING AND NO SENDING OF EMAILS!
     UserMailer.delay.send_it(historysend) # working with delayedJob using Mandrill (Don't forget to run: "rake jobs:work" in terminal to process the delayed jobs, or "heroku run rake jobs:work" on production)

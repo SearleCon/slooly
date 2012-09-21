@@ -62,6 +62,7 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1.json
   def update
     @invoice = Invoice.for_user(current_user.id).find(params[:id])
+    setup_chase_dates
 
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
