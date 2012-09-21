@@ -48,7 +48,7 @@
 	    <td><%= truncate(history.subject, :length => 50) %></td>
 	    <td><%= truncate(history.message, :length => 70) %></td>
 		<td><a href="#element" rel="popover" title="Email Message (Ref: <%= history.invoice_number %>)" 
-							   data-content="<%= simple_format(history.message) %>"><i class="icon-eye-open"></i></a></td>	
+							   data-content="<%=h history.message %>"><i class="icon-eye-open"></i></a></td>	
 	  </tr>
 	<% end %>
 	</table>

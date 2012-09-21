@@ -14,7 +14,6 @@
 # 2. "rake jobs:work" - On heroku can be run too. Needs to be running to process delayed jobs
 # 3. Your server must be running
 
-
 task :resend_todays_reminders => :environment do # This task ignores the last_date_send in the main query, thereby resending all the emails for today
     @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
 
@@ -148,7 +147,7 @@ def build_reminder_email(client, company, invoice, setting)
   puts "Building Reminder Email end for Invoice "+invoice.invoice_number
   puts "\n--- Actual Email Start ---\n\n"  
   @email_message =  ""
-  @email_message =  "Attention: \n"+client.business_name+" ("+client.contact_person+")\n"
+  @email_message =  "Attention: \n"+client.business_name.gsub(/['"]/, '')+" ("+client.contact_person+")\n"
   @email_message += client.address+"\n"
   @email_message += client.city+"\n"
   @email_message += client.post_code+"\n\n"

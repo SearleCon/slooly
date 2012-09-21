@@ -17,14 +17,18 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
-  <div><%= f.submit "Update" %></div>
+  <!-- <div><%= f.submit "Update" %></div> -->
+  <div><input type="submit" class="btn btn-primary" value="Update" ></div>
+
 <% end %>
 
 <hr class="bs-docs-separator">
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+<% @cancel_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete your ENTIRE ACCOUNT!<br><b>NOTE:</b> All related clients and invoices will also be deleted! This cannot be undone!<br><br> Are you sure you want to cancel your account?' %>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => @cancel_message }, :method => :delete %>.</p>
 (We would hate to see you go! Instead, why not <a href ="#">contact us</a>, tell us why you are unhappy, and let's first see if we can cater to your needs)
 
 <hr class="bs-docs-separator">

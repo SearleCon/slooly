@@ -16,39 +16,38 @@ To do so now, <%= link_to 'click here', new_company_path %>
 	<table>
 	  <tr>
 	    <td>Name:</td>
-	    <td><h4>	<%= best_in_place company, :name %></h4></td>
+	    <td><h4>	<%= company.name %></h4></td>
 	  </tr>
 	  <tr>
 	    <td>Address:</td>
-	    <td>	<%= best_in_place company, :address %></td>
+	    <td>	<%= company.address %></td>
 	  </tr>
 	  <tr>
 	    <td>City:</td>
-	    <td><%= best_in_place company, :city %></td>
+	    <td><%= company.city %></td>
 	  </tr>
 	  <tr>
 	    <td>Postal Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
-	    <td><%= best_in_place company, :post_code %></td>
+	    <td><%= company.post_code %></td>
 	  </tr>
 	  <tr>
 	    <td>Telephone:</td>
-	    <td><%= best_in_place company, :telephone %></td>
+	    <td><%= company.telephone %></td>
 	  </tr>
 	  <tr>
 	    <td>Fax:</td>
-	    <td><%= best_in_place company, :fax %></td>
+	    <td><%= company.fax %></td>
 	  </tr>
 	  <tr>
 	    <td>Email:</td>
-	    <td><%= best_in_place company, :email %></td>
+	    <td><%= company.email %></td>
 	  </tr>
 
 	</table>
 
     <hr class="bs-docs-separator">
 
-    <h6>Click on any of the above details to edit them directly,<br>
-	Or if you want to edit ALL the details at once, <%= link_to 'Click Here', edit_company_path(company) %></h6><br>
+    <h6><%= link_to 'Edit your company details', edit_company_path(company) %></h6>
 	
 	<h6>(Above is how the profile will appear on your reminder emails)</h6>
 
