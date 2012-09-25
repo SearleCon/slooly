@@ -21,6 +21,8 @@ Slooly::Application.routes.draw do
 
   get "pages/tos"
 
+  get "pages/tutorial"
+
   get "pages/privacy"
   
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
