@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920163120) do
+ActiveRecord::Schema.define(:version => 20120926160213) do
 
   create_table "announcements", :force => true do |t|
     t.string   "headline"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20120920163120) do
     t.date     "od2_date"
     t.date     "od3_date"
     t.date     "last_date_sent"
+    t.date     "fd_date"
   end
 
   create_table "roles", :force => true do |t|

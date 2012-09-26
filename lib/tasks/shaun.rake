@@ -15,7 +15,7 @@
 # 3. Your server must be running
 
 task :resend_todays_reminders => :environment do # This task ignores the last_date_send in the main query, thereby resending all the emails for today
-    @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
+    @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
 
     if @invoices.count > 0
       @invoices.each do |invoice|
@@ -58,8 +58,8 @@ end
 
 task :send_reminders => :environment do
   puts "Running reminders now..."
-  puts "Selecting all invoices with PD, D, OD1, OD2 or OD3 dates of TODAY..."
-  @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ?) and (last_date_sent != ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
+  puts "Selecting all invoices with PD, D, OD1, OD2, OD3 or FD dates of TODAY..."
+  @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?) and (last_date_sent != ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
   
   if @invoices.count > 0
     puts "------------------------------------------------"
@@ -195,7 +195,11 @@ def work_out_reminder_type(invoice)
           if (invoice.od3_date == DateTime.now.to_date)
             @reminder_type = "OD3"
           else
-            @reminder_type = "Unknown"  
+            if (invoice.fd_date == DateTime.now.to_date)
+              @reminder_type = "FD"
+            else
+              @reminder_type = "Unknown"  
+            end
           end
         end
       end
@@ -219,7 +223,11 @@ def fetch_correct_subject_line(invoice)
           if (invoice.od3_date == DateTime.now.to_date)
             @setting.overdue3_subject
           else
-            "ERROR"  
+            if (invoice.fd_date == DateTime.now.to_date)
+              @setting.final_demand_subject
+            else
+              "ERROR"  
+            end
           end
         end
       end
@@ -243,7 +251,11 @@ def fetch_correct_message(invoice)
           if (invoice.od3_date == DateTime.now.to_date)
             @setting.overdue3_message
           else
-            "ERROR - If you received this email, something has gone wrong. Please contact the support staff at Slooly, or simply ignore it."  
+            if (invoice.fd_date == DateTime.now.to_date)
+              @setting.final_demand_message
+            else
+              "ERROR - If you received this email, something has gone wrong. Please contact the support staff at Slooly, or simply ignore it."  
+            end
           end
         end
       end

@@ -62,6 +62,7 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1.json
   def update
     @invoice = Invoice.for_user(current_user.id).find(params[:id])
+    
     setup_chase_dates
 
     respond_to do |format|
@@ -96,8 +97,13 @@ class InvoicesController < ApplicationController
     @invoice.pd_date = calculate_predue_date(@invoice.due_date, @current_setting[0].days_before_pre_due)        
     @invoice.od1_date = calculate_od1_date(@invoice.due_date, @current_setting[0].days_between_chase)        
     @invoice.od2_date = calculate_od2_date(@invoice.due_date, @current_setting[0].days_between_chase)        
-    @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)  
+    @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)       
     @invoice.last_date_sent = DateTime.now.to_date-100.years  
+    
+    if (params[:invoice][:status_id] = 5)
+      @invoice.fd_date = Date.today+1.day
+    end
+
   end
 
   def calculate_predue_date(due_date, days_before)
