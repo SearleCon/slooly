@@ -100,7 +100,7 @@ class InvoicesController < ApplicationController
     @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)       
     @invoice.last_date_sent = DateTime.now.to_date-100.years  
     
-    if (params[:invoice][:status_id] = 5)
+    if (params[:invoice][:status_id] == 5.to_s)
       @invoice.fd_date = Date.today+1.day
     end
 
