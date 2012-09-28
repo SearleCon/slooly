@@ -254,7 +254,7 @@ def fetch_correct_message(invoice)
             if (invoice.fd_date == DateTime.now.to_date)
               @setting.final_demand_message
             else
-              "ERROR - If you received this email, something has gone wrong. Please contact the support staff at Slooly, or simply ignore it."  
+              "ERROR - If you received this email, something has gone wrong. Please contact the sender listed above, or simply ignore it."  
             end
           end
         end

@@ -1,8 +1,11 @@
+<!-- <li><%= image_tag("pm_logo.png") %><li> -->
+
 <% if user_signed_in? %>
-	<%= link_to "Slooly Invoice Chaser", '/pages/home', :class => 'brand' %>
+   <%= link_to "Paying Mantis - Get paid on time!", '/pages/home', :class => 'brand' %>
 <% else %>
-	<%= link_to "Slooly Invoice Chaser", root_path, :class => 'brand' %>
+   <%= link_to "Paying Mantis - Get paid on time!", root_path, :class => 'brand' %>
 <% end %>
+
 
 <ul class="nav pull-right">
   <% if user_signed_in? %>

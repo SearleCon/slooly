@@ -1,7 +1,7 @@
-h1. Slooly
+h1. Paying Mantis
 
-Slooly Invoice Chaser
+Paying Mantis - Debtors Chaser
 
 h2. Copyright
 
-Searle Consulting
+Searle Consulting 2012
