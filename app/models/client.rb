@@ -15,7 +15,7 @@ class Client < ActiveRecord::Base
     
   def self.search(search)
     if search
-      where('business_name LIKE ? or contact_person LIKE ?', "%#{search}%", "%#{search}%")
+      where('LOWER(business_name) LIKE ? or LOWER(contact_person) LIKE ?', "%#{search}%".downcase, "%#{search}%".downcase)
     else
       scoped
     end
