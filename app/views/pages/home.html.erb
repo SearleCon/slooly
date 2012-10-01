@@ -6,8 +6,11 @@
 <h2>Chasing Overview</h2>
 You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br>
 
-<hr class="bs-docs-separator">
+<% if @chasing_invoices.count == 0 %>
+	<%= render("no_records") %>
+<% else %>
 
+<hr class="bs-docs-separator">
 
   <table class="table">
     <thead>
@@ -74,3 +77,5 @@ You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br
 </div>
 	<%= will_paginate @chasing_invoices, :container => false %>
 </div>
+
+<% end %>

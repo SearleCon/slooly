@@ -1,0 +1,22 @@
+<hr class="bs-docs-separator">
+
+<h2>Welcome to your Home screen!</h2><br>
+<h6>This screen will show a listing of all your invoices that you are currently chasing.</h6>
+<!-- <img src="/images/warning.png" class="header"> -->
+<h6>At the moment, you don't have any invoices loaded... <img src="/images/sadface.png"> Let's fix that right away!</h6><br><br>
+
+<h4>Why don't we get started - Choose what you would like to do first:</h4><br>
+
+<img src="/images/clients.png" class="header"><h2><%= link_to 'Add a New Client', new_client_path %></h2><br>
+<img src="/images/invoices.png" class="header"><h2><%= link_to 'Add a New Invoice', new_invoice_path %></h2><br><br>
+
+
+<h4>Other options available are:</h4><br>
+<%= link_to 'Make sure your Settings are customized to suit your needs', settings_path %><br>
+<%= link_to 'Make sure your Company Profile is correctly setup', companies_path %><br><br>
+
+Remember that you can come back to this screen at any time, by clicking the "HOME" link in the above navigation menu. 
+
+<hr class="bs-docs-separator">
+
+Need help? Then check out the following: <a href="/pages/faq/#Question27">What does "chasing an invoice" mean?</a> | <%= link_to "Help", "/pages/tutorial" %> | <a href="/pages/faq">FAQs</a> | <a href="/pages/about">About</a> | <a href="/contact">Contact Us</a>

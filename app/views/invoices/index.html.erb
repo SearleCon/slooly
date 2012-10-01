@@ -26,7 +26,9 @@
 
 <h4 align="right">( <%= @invoices.count %> in total )</h4>
 
-
+<% if @invoices.count == 0 %>
+	<%= render("no_records") %>
+<% else %>
 
 <table class="table">
   <tr>
@@ -116,3 +118,5 @@
 <hr class="bs-docs-separator">
 
 <%= link_to 'Add Invoice', new_invoice_path %>
+
+<% end %>
