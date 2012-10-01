@@ -22,7 +22,7 @@ class Invoice < ActiveRecord::Base
   
   def self.search(search)
     if search
-      where('invoice_number LIKE ? or description LIKE ?', "%#{search}%", "%#{search}%")
+      where('LOWER(invoice_number) LIKE ? or LOWER(description) LIKE ?', "%#{search}%".downcase, "%#{search}%".downcase)
     else
       scoped
     end
