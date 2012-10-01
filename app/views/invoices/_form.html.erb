@@ -11,39 +11,82 @@
     </div>
   <% end %>
 
-<br>
-  <div class="field">
-    <%= f.label :client_id %>
-    <%= f.collection_select(:client_id, Client.for_user(current_user.id).order("business_name asc"), :id, :business_name, {:prompt => 'Select a Client'}) %>&nbsp; <a href="<%= new_client_path %>">(Add New Client)</a>	
-  </div>
-  <div class="field">
-    <%= f.label :due_date %>
-	<%= f.text_field :due_date, :databehaviour => 'datepicker', :placeholder => 'Select Invoice Due Date' %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :invoice_number %>
-    <%= f.text_field :invoice_number %>
-  </div>
 
-  <div class="field">
-    <%= f.label "Status" %>
-    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="span5">
+
+
+
+
+
+
+	<br>
+	  <div class="field">
+	    <%= f.label :client_id %>
+	    <%= f.collection_select(:client_id, Client.for_user(current_user.id).order("business_name asc"), :id, :business_name, {:prompt => 'Select a Client'}) %>&nbsp; <a href="<%= new_client_path %>">(Add New Client)</a>	
+	  </div>
+	  <div class="field">
+	    <%= f.label :due_date %>
+		<%= f.text_field :due_date, :databehaviour => 'datepicker', :placeholder => 'Select Invoice Due Date' %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :amount %>
+	    <%= f.text_field :amount %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :description %>
+	    <%= f.text_area :description %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :invoice_number %>
+	    <%= f.text_field :invoice_number %>
+	  </div>
+
+	  <div class="field">
+	    <%= f.label "Status" %>
+	    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
+	  </div>
+
+	  <hr class="bs-docs-separator">
+
+	  <div class="actions">
+	    <!-- <%= f.submit %> -->
+	    <input type="submit" class="btn btn-primary" value="Save Invoice" >
+
+	  </div>
+
+
+
+
+
+
+
+
+  	
   </div>
-
-  <hr class="bs-docs-separator">
-
-  <div class="actions">
-    <!-- <%= f.submit %> -->
-    <input type="submit" class="btn btn-primary" value="Save Invoice" >
-
+  <div class="span6 tooltip-demo well">
+		<img src="/images/tip.png" class="header"><h3>Important things to remember:</h3><br>
+	<ul>
+	<li>Make sure you enter the correct Client Email address, as this is where the reminder emails will be delivered.</li>
+	<li>Setup your company profile correctly, as these details will be visible to the client, and are what the client will use to contact you (Note: your company email will be used as the from address as well).</li>
+	<li>Settings are extremely important part of how the application works. Before loading any invoices, make sure to check and customize them to suit your needs, including the following items:</li>
+	<li>1. Your banking and payment details (Item 6 in example email)</li>
+	<li>2. Your reminder email subject and message.</li>
+	</ul>
   </div>
+</div>
+
+
 <% end %>
-

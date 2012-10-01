@@ -26,9 +26,14 @@
 
 <h4 align="right">( <%= @invoices.count %> in total )</h4>
 
-<% if @invoices.count == 0 %>
-	<%= render("no_records") %>
+<% if @invoices.count == 0
+	@invoices_checkall_for_user = Invoice.for_user(current_user.id)
+	if @invoices_checkall_for_user.count == 0 %>
+	  <%= render("no_records") %>
+<% end %>
 <% else %>
+
+
 
 <table class="table">
   <tr>
