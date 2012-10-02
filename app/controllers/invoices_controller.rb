@@ -45,7 +45,10 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create    
     @invoice = Invoice.new(params[:invoice])
-    setup_chase_dates
+    
+    if @invoice.due_date != nil
+      setup_chase_dates
+    end
 
     respond_to do |format|
       if @invoice.save
@@ -63,8 +66,10 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.for_user(current_user.id).find(params[:id])
     
-    setup_chase_dates
-
+    if @invoice.due_date != nil
+      setup_chase_dates
+    end
+  
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -92,14 +97,14 @@ class InvoicesController < ApplicationController
   def setup_chase_dates
     # Setup the chase dates
     @current_setting = Setting.for_user(current_user.id)
-
     @invoice.user_id = current_user.id
+
     @invoice.pd_date = calculate_predue_date(@invoice.due_date, @current_setting[0].days_before_pre_due)        
     @invoice.od1_date = calculate_od1_date(@invoice.due_date, @current_setting[0].days_between_chase)        
     @invoice.od2_date = calculate_od2_date(@invoice.due_date, @current_setting[0].days_between_chase)        
     @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)       
     @invoice.last_date_sent = DateTime.now.to_date-100.years  
-    
+        
     if (params[:invoice][:status_id] == 5.to_s)
       @invoice.fd_date = Date.today+1.day
     end
