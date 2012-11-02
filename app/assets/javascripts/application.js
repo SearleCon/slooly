@@ -16,6 +16,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require bootstrap-datepicker
+//= require jquery.turbolinks
 //= require_tree .
 
 
