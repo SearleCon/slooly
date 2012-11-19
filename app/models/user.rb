@@ -21,6 +21,16 @@ class User < ActiveRecord::Base
 # SS Added for Welcome email WAS HERE WORKING
   after_create :send_welcome_email
   
+  def reload(options = nil)
+     super
+     @subscription = nil
+   end
+  
+  def active_subscription
+    @subscription ||= Subscription.find_by_user_id_and_active(self, true)
+  end
+  
+  
   private
   
     def send_welcome_email #SS These are the changes to the Delayed Job!

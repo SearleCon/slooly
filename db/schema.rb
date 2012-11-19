@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926160213) do
+ActiveRecord::Schema.define(:version => 20121119095032) do
 
   create_table "announcements", :force => true do |t|
     t.string   "headline"
@@ -102,6 +102,25 @@ ActiveRecord::Schema.define(:version => 20120926160213) do
     t.date     "fd_date"
   end
 
+  create_table "payment_notifications", :force => true do |t|
+    t.text     "params"
+    t.integer  "user_id"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "plans", :force => true do |t|
+    t.string   "description"
+    t.integer  "duration"
+    t.decimal  "cost"
+    t.boolean  "active"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "free"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -142,6 +161,20 @@ ActiveRecord::Schema.define(:version => 20120926160213) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.datetime "bought_on"
+    t.integer  "plan_id"
+    t.date     "expiry_date"
+    t.string   "time"
+    t.boolean  "active"
+    t.string   "paypal_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "paypal_customer_token"
+    t.string   "paypal_recurring_profile_token"
   end
 
   create_table "suggestions", :force => true do |t|

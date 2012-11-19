@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :subscription_required
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -31,6 +32,13 @@ class ApplicationController < ActionController::Base
   def render_not_found
     render "/pages/not_found"
   end
-  
+
+  def subscription_required
+    unless current_user.nil?
+      if current_user.active_subscription && current_user.active_subscription.has_expired?
+        redirect_to payment_plans_subscriptions_url
+      end
+    end
+  end
 
 end
