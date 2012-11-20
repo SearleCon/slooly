@@ -6,12 +6,12 @@ class PaypalIpnObserver < ActiveRecord::Observer
     @subscription = Subscription.find_by_paypal_customer_token(notification.params[:payer_id])
 
     if notification.recurring_payment_profile?
-      BillingMailer.delay.subscription_activated(@subscription)
+#      BillingMailer.delay.subscription_activated(@subscription)
     elsif (notification.recurring_payment? || notification.express_checkout?) && notification.completed?
-      BillingMailer.delay.payment_received(@subscription)
+#      BillingMailer.delay.payment_received(@subscription)
     else
-      BillingMailer.delay.paypal_error(@subscription, payment_notification)
-      @subscription.toggle!(:active)
+#      BillingMailer.delay.paypal_error(@subscription, payment_notification)
+#      @subscription.toggle!(:active)
     end
   end
 end

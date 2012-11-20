@@ -2,13 +2,13 @@ class SubscriptionsController < ApplicationController
   before_filter :authenticate_user!
   skip_before_filter :subscription_required 
   
-  
-  caches_action :payment_plans, :cache_path => proc {|c|
-    plan = Plan.order('updated_at DESC').limit(1).first
-    unless plan.nil?
-      {:tag => plan.updated_at.to_i}
-    end
-    }
+# SHAUN Caches  
+  # caches_action :payment_plans, :cache_path => proc {|c|
+  #   plan = Plan.order('updated_at DESC').limit(1).first
+  #   unless plan.nil?
+  #     {:tag => plan.updated_at.to_i}
+  #   end
+  #   }
   
   def payment_plans
     @plans = Plan.find_all_by_active(true)
@@ -32,7 +32,7 @@ class SubscriptionsController < ApplicationController
       if params[:PayerID]
         @subscription.paypal_customer_token = params[:PayerID]
         @subscription.paypal_payment_token = params[:token]
-        @subscription.email = @subscription.paypal.checkout_details.email
+        # @subscription.email = @subscription.paypal.checkout_details.email
       end
     end
 
@@ -40,7 +40,7 @@ class SubscriptionsController < ApplicationController
       @subscription = Subscription.new(params[:subscription])
       @subscription.user_id = current_user.id
       if @subscription.save_with_paypal_payment
-        redirect_to @subscription, :notice => "Thank you for subscribing!"
+        redirect_to @subscription, :notice => "Thank you for supporting us!"
       else
         render :new
       end
