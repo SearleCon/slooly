@@ -15,7 +15,7 @@
 # 3. Your server must be running
 
 task :resend_todays_reminders => :environment do # This task ignores the last_date_send in the main query, thereby resending all the emails for today
-    @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
+    @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?)  and (status_id = ? or status_id = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
 
     if @invoices.count > 0
       @invoices.each do |invoice|
@@ -59,7 +59,7 @@ end
 task :send_reminders => :environment do
   puts "Running reminders now..."
   puts "Selecting all invoices with PD, D, OD1, OD2, OD3 or FD dates of TODAY..."
-  @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?) and (last_date_sent != ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date]
+  @invoices = Invoice.all :conditions => ["(pd_date = ? or due_date = ? or od1_date = ? or od2_date = ? or od3_date = ? or fd_date = ?) and (last_date_sent != ?) and (status_id = ? or status_id = ?)", DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, DateTime.now.to_date, 2, 5]
   
   if @invoices.count > 0
     puts "------------------------------------------------"
