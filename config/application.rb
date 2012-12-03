@@ -69,7 +69,8 @@ module Slooly
     #   ENV['LOCALTUNNEL'] = response['host']
     # end
     
-
+    config.assets.initialize_on_precompile = false
+    
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
