@@ -201,7 +201,7 @@ PLATFORMS
 DEPENDENCIES
   best_in_place
   bootstrap-datepicker-rails
-  bootstrap-sass
+  bootstrap-sass (>= 2.0.4.0)
   cancan (>= 1.6.8)
   capybara (>= 1.1.2)
   carrierwave
