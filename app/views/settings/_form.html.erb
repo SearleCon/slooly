@@ -40,23 +40,23 @@
 		
 		
 			  <div class="field">
-			    <%= f.label :send_from_name %>
+			    <%= f.label :send_from_name, 'Send from Name' %>
 			    <%= f.text_field :send_from_name %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :email_copy_to %>
+			    <%= f.label :email_copy_to, 'Email copy to:' %>
 			    <%= f.text_field :email_copy_to %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :days_between_chase %>
+			    <%= f.label :days_between_chase, 'Days between Chase' %>
 			    <%= f.number_field :days_between_chase %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :days_before_pre_due %>
+			    <%= f.label :days_before_pre_due, 'Days before Pre-Due' %>
 			    <%= f.number_field :days_before_pre_due %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :payment_method_message %>
+			    <%= f.label :payment_method_message, 'Payment Method Message' %>
 			    <%= f.text_area :payment_method_message %>
 			  </div>	  
 
@@ -69,7 +69,7 @@
 			<li><b>Email Copy To:</b> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will not see this email address))</li><br>
 			<li><b>Days Between Chase:</b> The number of days between the reminder emails (Default starts 7 days from the due date)</li><br>
 			<li><b>Days Before Pre-Due:</b> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)</li><br>
-			<li><b>Payment Method Message:</b> This will appear on the bottom of your reminder emails, and is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.</li>
+			<li><b>Payment Method Message:</b> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.</li>
 
 			</ul>
 		  </div>
@@ -91,15 +91,15 @@
 
 
 			  <div class="field">
-			    <%= f.label :pre_due_reminder %>
+			    <%= f.label :pre_due_reminder, 'Pre-Due Reminder' %>
 			    <%= f.check_box :pre_due_reminder %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :pre_due_subject %>
+			    <%= f.label :pre_due_subject, 'Pre-Due Subject' %>
 			    <%= f.text_field :pre_due_subject %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :pre_due_message %>
+			    <%= f.label :pre_due_message, 'Pre-Due Message' %>
 			    <%= f.text_area :pre_due_message %>
 			  </div>
 			
@@ -113,8 +113,8 @@
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
 				<li><b>Pre-Due Reminder Checkbox:</b> Uncheck this to NOT send a pre-due reminder message (Default is on).</li><br>
-				<li><b>Subject:</b> This will be used as the subject line of the pre-due reminder email.</li><br>
-				<li><b>Message:</b> This will be used as the message body for the pre-due reminder email.</li>
+				<li><b>Pre-Due Subject:</b> This will be used as the subject line of the pre-due reminder email.</li><br>
+				<li><b>Pre-Due Message:</b> This will be used as the message body for the pre-due reminder email.</li>
 
 				</ul>
 			  </div>
@@ -145,15 +145,15 @@
 		
 		
 			  <div class="field">
-			    <%= f.label :due_reminder %>
+			    <%= f.label :due_reminder, 'Due Reminder' %>
 			    <%= f.check_box :due_reminder %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :due_subject %>
+			    <%= f.label :due_subject, 'Due Subject' %>
 			    <%= f.text_field :due_subject %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :due_message %>
+			    <%= f.label :due_message, 'Due Message' %>
 			    <%= f.text_area :due_message %>
 			  </div>	
 			
@@ -167,8 +167,8 @@
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
 					<li><b>Due Reminder Checkbox:</b> Uncheck this to NOT send a reminder message on the due date (Default is on).</li><br>
-					<li><b>Subject:</b> This will be used as the subject line of the due reminder email.</li><br>
-					<li><b>Message:</b> This will be used as the message body for the due reminder email.</li>
+					<li><b>Due Subject:</b> This will be used as the subject line of the due reminder email.</li><br>
+					<li><b>Due Message:</b> This will be used as the message body for the due reminder email.</li>
 
 				</ul>
 			  </div>
@@ -194,11 +194,11 @@
 
 
 			  <div class="field">
-			    <%= f.label :overdue1_subject %>
+			    <%= f.label :overdue1_subject, 'Overdue 1 Subject' %>
 			    <%= f.text_field :overdue1_subject %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :overdue1_message %>
+			    <%= f.label :overdue1_message, 'Overdue 1 Message' %>
 			    <%= f.text_area :overdue1_message %>
 			  </div>	
 			
@@ -207,8 +207,8 @@
 			  <div class="span4 tooltip-demo well">
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
-					<li><b>Subject:</b> This will be used as the subject line of the first overdue reminder email.</li><br>
-					<li><b>Message:</b> This will be used as the message body for the first overdue reminder email.</li>
+					<li><b>Overdue 1 Subject:</b> This will be used as the subject line of the first overdue reminder email.</li><br>
+					<li><b>Overdue 1 Message:</b> This will be used as the message body for the first overdue reminder email.</li>
 
 				</ul>
 			  </div>
@@ -231,11 +231,11 @@
 		
 		
 			  <div class="field">
-			    <%= f.label :overdue2_subject %>
+			    <%= f.label :overdue2_subject, 'Overdue 2 Subject' %>
 			    <%= f.text_field :overdue2_subject %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :overdue2_message %>
+			    <%= f.label :overdue2_message, 'Overdue 2 Message' %>
 			    <%= f.text_area :overdue2_message %>
 			  </div>	
 
@@ -247,8 +247,8 @@
 			  <div class="span4 tooltip-demo well">
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
-					<li><b>Subject:</b> This will be used as the subject line of the second overdue reminder email.</li><br>
-					<li><b>Message:</b> This will be used as the message body for the second overdue reminder email.</li>
+					<li><b>Overdue 2 Subject:</b> This will be used as the subject line of the second overdue reminder email.</li><br>
+					<li><b>Overdue 2 Message:</b> This will be used as the message body for the second overdue reminder email.</li>
 
 				</ul>
 			  </div>
@@ -275,11 +275,11 @@
 		
 		
 			  <div class="field">
-			    <%= f.label :overdue3_subject %>
+			    <%= f.label :overdue3_subject, 'Overdue 3 Subject' %>
 			    <%= f.text_field :overdue3_subject %>
 			  </div>
 			  <div class="field">
-			    <%= f.label :overdue3_message %>
+			    <%= f.label :overdue3_message, 'Overdue 3 Message' %>
 			    <%= f.text_area :overdue3_message %>
 			  </div>	
 
@@ -291,8 +291,8 @@
 			  <div class="span4 tooltip-demo well">
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
-					<li><b>Subject:</b> This will be used as the subject line of the third overdue reminder email.</li><br>
-					<li><b>Message:</b> This will be used as the message body for the third overdue reminder email.</li>
+					<li><b>Overdue 3 Subject:</b> This will be used as the subject line of the third overdue reminder email.</li><br>
+					<li><b>Overdue 3 Message:</b> This will be used as the message body for the third overdue reminder email.</li>
 				</ul>
 			  </div>
 			</div>			
@@ -334,8 +334,8 @@
 			  <div class="span4 tooltip-demo well">
 					<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
 				<ul>
-					<li><b>Subject:</b> This will be used as the subject line of the final demand email.</li><br>
-					<li><b>Message:</b> This will be used as the message body for the final demand email.</li>
+					<li><b>Final Demand Subject:</b> This will be used as the subject line of the final demand email.</li><br>
+					<li><b>Final Demand Message:</b> This will be used as the message body for the final demand email.</li>
 				</ul>
 			  </div>
 			</div>			

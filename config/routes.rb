@@ -17,6 +17,8 @@ Slooly::Application.routes.draw do
 
   get "pages/about"
 
+  get "pages/ie_warning"
+
   get "pages/faq"
 
   get "pages/help"

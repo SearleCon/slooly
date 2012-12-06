@@ -13,10 +13,6 @@
 
 
 
-
-
-
-
 <div class="row">
   <div class="span5">
 
@@ -25,12 +21,15 @@
 
 
 
-
+<!-- 	<input type="text" autofocus="focus"> 
+	<script>
+	    $(function() {$('[autofocus]').focus()});
+	</script> -->
 
 
   <div class="field">
     <%= f.label :business_name %>
-    <%= f.text_field :business_name %>
+    <%= f.text_field :business_name, :autofocus=>true %>
   </div>
   <div class="field">
     <%= f.label :contact_person %>

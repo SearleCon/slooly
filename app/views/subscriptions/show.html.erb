@@ -1,7 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <h2>Thank you!</h2>
-<h3>Your subscription has been renewed!</h3><br>
-You may now continue to use the Paying Mantis service by clicking on the menu options above.
+
+<%= image_tag ("success.png") %>
+<h3>Your subscription has been successfully renewed!</h3><br>
+You may now continue to use the Paying Mantis service by clicking on the menu options above.<br>
+Or click here to go to your <%= link_to 'Home', '/pages/home' %> page.
 <br><br>
-Note: You can check your subscription status in your account profile.
+<b>Note:</b> You can check your subscription status in your <%= link_to "User Profile", edit_user_registration_path %>.

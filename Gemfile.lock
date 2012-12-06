@@ -37,6 +37,7 @@ GEM
     bootstrap-datepicker-rails (0.6.31)
       railties (>= 3.0)
     bootstrap-sass (2.0.4.2)
+    browser (0.1.5)
     builder (3.0.4)
     cancan (1.6.8)
     capybara (2.0.1)
@@ -201,6 +202,7 @@ DEPENDENCIES
   best_in_place
   bootstrap-datepicker-rails
   bootstrap-sass (~> 2.0.4.2)
+  browser
   cancan (>= 1.6.8)
   capybara (>= 1.1.2)
   carrierwave

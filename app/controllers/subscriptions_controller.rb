@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :payment_made, :only => [:create]
   skip_before_filter :subscription_required 
   
 # SHAUN Caches  
@@ -130,5 +131,13 @@ class SubscriptionsController < ApplicationController
       format.json { head :no_content }
     end
   end  
+  
+  private
+    def payment_made
+      if current_user.active_subscription.plan_id == params[:subscription][:plan_id].to_i
+        flash[:notice] = "Your order has already been processed, and you have been redirected back home."
+        redirect_to "/pages/home"
+      end
+    end
   
 end

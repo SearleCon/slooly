@@ -5,6 +5,7 @@ class Client < ActiveRecord::Base
   accepts_nested_attributes_for :invoices #SS - To allow managing of invoices through clients
   validates       :business_name, :email, :presence => true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_uniqueness_of :business_name, :scope => [:user_id]
   
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  

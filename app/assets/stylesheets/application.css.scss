@@ -84,9 +84,32 @@ th .desc {
 	clear:right;
 	margin-right:20px;
 	}
-	
+
+
+/* SS Internet Explorer IE Disclaimer */
+
+.ie_warn {
+    border: 1px solid;
+    padding:15px 20px 15px 55px;
+    font: bold 12px verdana;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.ie_warn {
+    color: #fff;
+    background: #eb4e4e no-repeat 10px center;
+}
+
+
+
 	
 /* SS CSS error styling */
+
 
 	.field_with_errors {
 	  padding: 2px;

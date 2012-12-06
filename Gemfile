@@ -25,6 +25,7 @@ gem 'delayed_job_active_record'
 gem "jquery-turbolinks"
 gem "paypal-recurring"
 gem "localtunnel"
+gem "browser"
 
 group :production do
   gem 'pg'
