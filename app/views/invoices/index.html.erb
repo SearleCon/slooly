@@ -66,7 +66,7 @@
 	
     <td><%= link_to invoice.invoice_number, invoice %></td>
     <td><%= invoice.due_date %></td>
-    <td><%= invoice.amount %></td>
+    <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
 	<% if invoice.description.size > 50 %> 
 		<td><a rel="popover" title='Invoice Description' 
 							   data-content='<%= truncate(simple_format(invoice.description), 

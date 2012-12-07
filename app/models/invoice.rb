@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   attr_accessible :amount, :client_id, :description, :due_date, :invoice_number, :status_id
   belongs_to      :client
-  validates       :client_id, :due_date, :description, :invoice_number, :presence => true
+  validates       :client_id, :due_date, :invoice_number, :presence => true
   validates_numericality_of :amount  
   
 

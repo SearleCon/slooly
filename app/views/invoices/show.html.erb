@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <td>Amount:</td>
-    <td><%= @invoice.amount %></td>
+    <td><%= number_with_precision(@invoice.amount, :precision => 2) %></td>
   </tr>
   <tr>
     <td>Status:</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
