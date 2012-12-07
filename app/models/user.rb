@@ -30,6 +30,11 @@ class User < ActiveRecord::Base
     @subscription ||= Subscription.find_by_user_id_and_active(self, true)
   end
   
+  def subscription_expiry
+    @subscription = Subscription.find_by_user_id_and_active(self, true)
+    @days = @subscription.expiry_date - Date.today
+    @days.to_i
+  end
   
   private
   

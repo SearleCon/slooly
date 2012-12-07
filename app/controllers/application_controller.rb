@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
        # new_setting_path
        '/pages/initial_setup'
      else
+       if (current_user.subscription_expiry <= 3)
+         flash[:warning] = "Please note: Your subscription is coming to an end in "+current_user.subscription_expiry.to_s+" days. You do not have to do anything, as you will be prompted with options when logging in after the expiry date."
+       end
+
        '/pages/home'
      end
   end

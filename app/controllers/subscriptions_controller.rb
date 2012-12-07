@@ -13,8 +13,7 @@ class SubscriptionsController < ApplicationController
   
   def payment_plans
     @plans = Plan.find_all_by_active(true)
-  end
-  
+  end  
   
   def paypal_checkout
       plan = Plan.find(params[:plan_id])
