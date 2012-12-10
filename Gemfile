@@ -26,6 +26,7 @@ gem "jquery-turbolinks"
 gem "paypal-recurring"
 gem "localtunnel"
 gem "browser"
+gem 'metamagic'
 
 group :production do
   gem 'pg'
