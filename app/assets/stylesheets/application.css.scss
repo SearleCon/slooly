@@ -106,6 +106,22 @@ th .desc {
 }
 
 
+/* SS Breaking News Box */
+
+.clean-gray {
+border:solid 1px #DEDEDE; 
+background:#EFEFEF;
+color:#222222;
+padding:4px;
+text-align:center;
+-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+
+box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+}
+
 
 	
 /* SS CSS error styling */

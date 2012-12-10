@@ -1,0 +1,8 @@
+<% @news = Announcement.find(:all, :conditions => ["created_at >= ?", Date.today-7.days], :order => "created_at desc") %>
+
+<% if @news.count > 0 %>
+	<br><br>
+	<div class="clean-gray">				
+		 <b>Breaking News: <%= link_to @news[0].headline, announcements_path %></b> (This message will disappear in <%= (@news[0].created_at.to_date+7.days - Date.today).to_i %> days time)
+	</div>
+<% end %>

@@ -5,7 +5,9 @@
 <div class="span11 tooltip-demo well">
 	<img src="/images/news.png" class="header"><h3><%= announcement.headline %></h3><br>
     <%=h truncate(announcement.description, :length => 600) %><br>
-    <%= link_to 'Read full article', announcement %>
-    <div class="muted">Posted by <%= announcement.posted_by %> on <%= announcement.created_at.to_date %></div><br>
+	<% if announcement.description.length > 600 %>
+    	<%= link_to 'Read full article', announcement %>
+	<% end %>
+    <br><br><div class="muted">Posted by <%= announcement.posted_by %> on <%= announcement.created_at.to_date %></div><br>
 </div>
 <% end %>
