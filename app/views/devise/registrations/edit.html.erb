@@ -23,9 +23,24 @@
 <% end %>
 
 <hr class="bs-docs-separator">
-<img src="/images/expired.png" class="header">
-<b>Note:</b> Your current subscription is valid until: <b><%= current_user.active_subscription.expiry_date.strftime('%A, %d %B %Y') %></b><br>
-(You will be prompted to renew when logging in after this date)
+<div id='subscription_status'>
+<%= render 'subscriptions/subscription_status' %>
+</div>
+<br>
+
+
+<%= link_to "Redeem Voucher", "#demo", :data => {:toggle=>"collapse"} %>
+<div id="demo" class="collapse"> 
+  	<%= form_tag('/redeem', :method => :put) do -%>
+      <%=label_tag 'Enter voucher number here:' %>
+	  <%=text_field_tag 'unique_code'%>
+	  <div><%= submit_tag 'Redeem' %></div>
+	<% end -%>
+</div>
+
+
+
+
 <hr class="bs-docs-separator">
 
 <h3>Cancel my account</h3>

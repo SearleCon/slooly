@@ -41,6 +41,8 @@ Slooly::Application.routes.draw do
   
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post  
+  
+  match 'redeem' => 'vouchers#redeem', :as => 'redeem', via: :put
 
   resources :suggestions
 
@@ -53,6 +55,7 @@ Slooly::Application.routes.draw do
   resources :statuses
 
   resources :invoices
+  
 
   authenticated :user do
     root :to => 'home#index'
