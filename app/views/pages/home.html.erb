@@ -45,7 +45,7 @@ You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br
 				
 		    <td><%= link_to invoice.invoice_number, invoice %></td>
 		    <td><%= invoice.due_date %></td>
-		    <td><%= invoice.amount %></td>
+		    <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
 			<% if invoice.description.size > 50 %> 
 				<td><a rel="popover" title='Invoice Description' 
 									   data-content='<%= truncate(simple_format(invoice.description), 
@@ -77,6 +77,10 @@ You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br
 </div>
 	<%= will_paginate @chasing_invoices, :container => false %>
 </div>
+
+<br>
+<div align="right"><b>Note:</b> This page only shows invoices with a status of <span class="label label-success">chasing</span><br>For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar</div>
+
 
 <% end %>
 
