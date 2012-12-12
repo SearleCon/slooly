@@ -23,23 +23,20 @@
 <% end %>
 
 <hr class="bs-docs-separator">
+
 <div id='subscription_status'>
 <%= render 'subscriptions/subscription_status' %>
 </div>
-<br>
 
-
-<%= link_to "Redeem Voucher", "#demo", :data => {:toggle=>"collapse"} %>
+<%= link_to "Have a Voucher? Click here to redeem it", "#demo", :data => {:toggle=>"collapse"} %>
 <div id="demo" class="collapse"> 
+	<br>
   	<%= form_tag('/redeem', :method => :put) do -%>
       <%=label_tag 'Enter voucher number here:' %>
 	  <%=text_field_tag 'unique_code'%>
-	  <div><%= submit_tag 'Redeem' %></div>
+	  <div><input type="submit" class="btn btn-primary" value="Redeem" ></div>
 	<% end -%>
 </div>
-
-
-
 
 <hr class="bs-docs-separator">
 
