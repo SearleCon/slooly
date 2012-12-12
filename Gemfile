@@ -27,7 +27,6 @@ gem "paypal-recurring"
 gem "localtunnel"
 gem "browser"
 gem 'metamagic'
-gem 'psych'
 
 group :production do
   gem 'pg'
