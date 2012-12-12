@@ -3,10 +3,7 @@ class Message
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
-  
-  
-  include ActiveModel::Serialization
-  
+    
   attr_accessor :name, :email, :subject, :body
 
   validates :name, :email, :subject, :body, :presence => true
@@ -17,12 +14,6 @@ class Message
       send("#{name}=", value)
     end
   end
-
-
-  def attributes
-    {'name'=>name, 'email'=>email, 'subject'=>subject, 'body'=>body}
-  end
-
 
   def persisted?
     false
