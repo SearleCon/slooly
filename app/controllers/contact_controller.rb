@@ -9,6 +9,7 @@ class ContactController < ApplicationController
 
       if @message.valid?
         UserMailer.delay.new_message(@message)
+        
 #        UserMailer.new_message(@message).deliver
         redirect_to(root_path, :notice => "Message was successfully sent.")
       else
