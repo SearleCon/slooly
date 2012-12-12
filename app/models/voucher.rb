@@ -16,8 +16,10 @@ class Voucher < ActiveRecord::Base
   end
 
   def self.redeemable?(voucher_code)
-   Voucher.exists?(unique_code: voucher_code, redeemed_by: nil) 
-   
+   # Voucher.exists?(unique_code: voucher_code, redeemed_by: nil)
+   voucher = Voucher.find_by_unique_code(voucher_code)
+   return false if voucher.nil?
+   voucher.valid_until.to_date >= Date.today && voucher.redeemed_by.nil?
   end
 
   private
