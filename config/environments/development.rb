@@ -25,13 +25,13 @@ Slooly::Application.configure do
   
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
+    address: ENV["EMAIL_SMTP_ADDRESS"],
     port: 587,
     domain: "example.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "searlecon",
-    password: "fd16abfe-3edb-4094-9e70-2de906656549",
+    user_name: ENV["EMAIL_USERNAME"],
+    password: ENV["EMAIL_PASSWORD"],
   }
 
 
