@@ -3,6 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to      :client
   validates       :client_id, :due_date, :invoice_number, :presence => true
   validates_numericality_of :amount  
+  before_save :setup_chase_dates
   
 
   
@@ -46,5 +47,41 @@ class Invoice < ActiveRecord::Base
 #    @clients_invoices_chasing = Invoice.find(:all, :conditions => ["client_id = ? and status_id = ?", client_id, status_id]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10) 
 
   end
+  
+  
+  def setup_chase_dates
+    if self.new_record? || self.due_date_changed?
+      # Setup the chase dates
+      @current_setting = Setting.for_user(self.user_id)
+    
+      self.pd_date = calculate_predue_date(self.due_date, @current_setting[0].days_before_pre_due)        
+      self.od1_date = calculate_od1_date(self.due_date, @current_setting[0].days_between_chase)        
+      self.od2_date = calculate_od2_date(self.due_date, @current_setting[0].days_between_chase)        
+      self.od3_date = calculate_od3_date(self.due_date, @current_setting[0].days_between_chase)       
+      self.last_date_sent = DateTime.now.to_date-100.years  
+        
+      if (self.status_id == 5.to_s)
+        self.fd_date = Date.today+1.day
+      end
+    end
+  end
+
+  def calculate_predue_date(due_date, days_before)
+    due_date-days_before.days
+  end
+  
+  def calculate_od1_date(due_date, chase_days)
+    due_date+chase_days.days
+  end
+  
+  def calculate_od2_date(due_date, chase_days)
+    due_date+(chase_days*2).days
+  end
+  
+  def calculate_od3_date(due_date, chase_days)
+    due_date+(chase_days*3).days
+  end
+  
+  
   
 end
