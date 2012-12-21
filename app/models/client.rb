@@ -6,6 +6,7 @@ class Client < ActiveRecord::Base
   validates       :business_name, :email, :presence => true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_uniqueness_of :business_name, :scope => [:user_id]
+  before_validation :strip_all_spaces
   
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  
@@ -30,5 +31,9 @@ class Client < ActiveRecord::Base
     end
     return @total_chasing
   end    
+  
+  def strip_all_spaces
+    self.email = self.email.strip
+  end
   
 end
