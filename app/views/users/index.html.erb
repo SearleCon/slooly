@@ -40,7 +40,7 @@
 
 	  <% @delayed_jobs.each do |dj| %>
 	    <tr>
-	      <td><%= jd.attempts %></td>
+	      <td><%= dj.attempts %></td>
 	      <td><%= dj.last_error %></td>
 		  <td><%= dj.run_at %></td>
 		  <td><%= dj.failed_at %></td>
