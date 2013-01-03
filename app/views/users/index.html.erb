@@ -1,8 +1,119 @@
-<h3>Users</h3>
-<ul class="users">
+<br>
+<h1>Administration</h1><br>
+
+<% @new_users = User.where("created_at >= ?", [DateTime.yesterday]).order("created_at desc") %>
+
+<% @delayed_jobs = Delayed::Job.all %>
+<% @history_today = History.where("created_at >= ?", [DateTime.yesterday]).order("created_at desc") %>
+<% @history_last_7_days = History.where("created_at >= ?", [DateTime.now-7.days]) %>
+<% @history_last_25_emails = History.find(:all, :order => "created_at desc", :limit => 25) %>
+<% @suggestions_last_7_days = Suggestion.where("created_at >= ?", [DateTime.now-7.days]) %>
+<% @total_suggestions = Suggestion.find(:all) %>
+
+<div class="well well-large">
+<% if @new_users.count > 0 %> 
+<h3>You have <%= @new_users.count %> new user(s)! (Signed up since Yesterday)</h3><br>
+<% end %>
+<h4>Total Users: <%= @users.count %></h4>
+<h4>Total Emails Sent Today: <%= @history_today.count %></h4>
+<h4>Total Emails Sent in the last 7 days: <%= @history_last_7_days.count %></h4>
+<h4>Total <%= link_to 'Suggestions', suggestions_path %>: <%= @total_suggestions.count %> (<%= @suggestions_last_7_days.count %> in the last 7 days)</h4>
+<h4>Total Records in Delayed_Jobs: <%= @delayed_jobs.count %></h4>
+</div>
+
+<%  if @delayed_jobs.count > 0 %>
+<br><br>
+<div class="well well-large">
+
+
+
+	<h3>WARNING! You have items in the Delayed Jobs Table! Check that there are no errors!</h3><br>
+
+	<table class="table">
+	  <tr>
+		<th>Attempts</th>
+	    <th>Last Error</th>
+	    <th>Run At</th>
+	    <th>Failed At</th>
+	    <th>Created At</th>
+	  </tr>
+
+	  <% @delayed_jobs.each do |dj| %>
+	    <tr>
+	      <td><%= jd.attempts %></td>
+	      <td><%= dj.last_error %></td>
+		  <td><%= dj.run_at %></td>
+		  <td><%= dj.failed_at %></td>
+		  <td><%= dj.created_at %></td>
+	    </tr>
+	  <% end %>
+	</table>
+
+
+
+</div>
+<% end %>
+
+<br><br>
+<div class="well well-large">
+	
+<h3>Total Users: <%= @users.count %></h3><br>
+
+<table class="table">
+  <tr>
+	<th>Name</th>
+    <th>Email</th>
+    <th>Registered</th>
+    <th></th>
+    <th>Last Signed in</th>
+    <th>Sign in Count</th>
+    <th>ID</th>
+  </tr>
+	
+	
   <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %> signed up <%= user.created_at.to_date %>
-    </li>
+    <tr>
+      <td><%= link_to user.name, user %></td>
+      <td><%= link_to user.email, user %></td>
+	  <td><%= user.created_at.to_date %></td>
+	  <td>(<%= time_ago_in_words(user.created_at) %> ago)</td>
+	  <td><%= time_ago_in_words(user.last_sign_in_at) %> ago</td>
+	  <td><%= user.sign_in_count %></td>
+      <td><%= link_to user.id, user %></td>
+    </tr>
   <% end %>
-</ul>
+</table>
+
+<div class="flickr_pagination">
+<div class="page_info">
+</div>
+  <%= will_paginate @users, :container => false %>
+</div>
+
+</div>
+
+<br><br>
+<div class="well well-large">
+	
+<h3>Last 25 emails sent</h3><br>
+
+<table class="table">
+  <tr>
+	<th>Sent From</th>
+    <th>Sent To</th>
+	<th>Date Sent</th>
+    <th>Subject</th>
+  </tr>
+	
+	
+  <% @history_last_25_emails.each do |history| %>
+    <tr>
+      <td><%= history.email_sent_from%></td>
+      <td><%= history.email_sent_to %></td>
+	  <td><%= history.date_sent %></td>
+	  <td><%= history.subject %></td>
+    </tr>
+  <% end %>
+</table>
+
+</div>
