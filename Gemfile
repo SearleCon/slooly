@@ -27,7 +27,8 @@ gem "paypal-recurring"
 gem "localtunnel"
 gem "browser"
 gem 'metamagic'
-gem 'hirefire'
+# gem 'hirefire'
+gem "workless", "~> 1.1.1"
 
 group :production do
   gem 'pg'
