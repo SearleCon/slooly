@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms_of_service
@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   
 # SS Added for Welcome email WAS HERE WORKING
   after_create :send_welcome_email
+  
+  def timeout_in
+    2.hours
+  end
   
   def reload(options = nil)
      super
