@@ -267,3 +267,9 @@ html, body {
   color: #333;
 }
 
+/* SS To force Internet Explorer to not show hidden fields */
+
+input[type="hidden"]
+{
+  display: none;
+}
