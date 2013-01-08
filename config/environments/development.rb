@@ -34,7 +34,10 @@ Slooly::Application.configure do
     password: ENV["EMAIL_PASSWORD"],
   }
 
-
+  config.after_initialize do
+    Delayed::Job.scaler = :null
+  end
+  
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 

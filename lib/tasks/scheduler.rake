@@ -147,26 +147,26 @@ def build_reminder_email(client, company, invoice, setting)
   puts "Building Reminder Email end for Invoice "+invoice.invoice_number
   puts "\n--- Actual Email Start ---\n\n"  
   @email_message =  ""
-  @email_message =  "Attention: \n"+client.business_name.gsub(/['"]/, '')+" ("+client.contact_person+")\n"
-  @email_message += client.address+"\n"
-  @email_message += client.city+"\n"
-  @email_message += client.post_code+"\n\n"
+  @email_message =  "Attention: \r\n"+client.business_name.gsub(/['"]/, '')+" ("+client.contact_person+")\r\n"
+  @email_message += client.address+"\r\n"
+  @email_message += client.city+"\r\n"
+  @email_message += client.post_code+"\r\n\n"
   
-  @email_message += "From: \n"+company.name+"\n"
-  @email_message += company.address+"\n"
-  @email_message += company.city+"\n"
-  @email_message += company.post_code+"\n"
-  @email_message += "Tel  : "+company.telephone+"\n"
-  @email_message += "Fax  : "+company.fax+"\n"
-  @email_message += "Email: "+company.email+"\n\n"
+  @email_message += "From: \r\n"+company.name+"\r\n"
+  @email_message += company.address+"\r\n"
+  @email_message += company.city+"\r\n"
+  @email_message += company.post_code+"\r\n"
+  @email_message += "Tel  : "+company.telephone+"\r\n"
+  @email_message += "Fax  : "+company.fax+"\r\n"
+  @email_message += "Email: "+company.email+"\r\n\n"
   
-  @email_message += "Reference : "+invoice.invoice_number+"\n"
-  @email_message += "Due Date  : "+invoice.due_date.to_s+"\n"
-  @email_message += "Amount Due: "+invoice.amount.to_s+"\n\n"
+  @email_message += "Reference : "+invoice.invoice_number+"\r\n"
+  @email_message += "Due Date  : "+invoice.due_date.to_s+"\r\n"
+  @email_message += "Amount Due: "+invoice.amount.to_s+"\r\n\n"
   
-  @email_message += fetch_correct_message(invoice)+"\n"+company.name+"\n\n"   #SS Work out the correct Message to send here
+  @email_message += fetch_correct_message(invoice)+"\r\n"+company.name+"\r\n\n"   #SS Work out the correct Message to send here
   
-  @email_message += "Payment Options: \n"+setting.payment_method_message
+  @email_message += "Payment Options: \r\n"+setting.payment_method_message
   
   puts @email_message
   puts "\n--- Actual Email End ---\n"  
