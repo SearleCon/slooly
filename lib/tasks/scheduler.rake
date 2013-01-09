@@ -147,24 +147,23 @@ def build_reminder_email(client, company, invoice, setting)
   puts "Building Reminder Email end for Invoice "+invoice.invoice_number
   puts "\n--- Actual Email Start ---\n\n"  
   @email_message =  ""
-  @email_message =  "Attention: \r\n"+client.business_name.gsub(/['"]/, '')+" ("+client.contact_person+")\r\n"
+  @email_message =  "Attention: "+client.contact_person+"\r\n"
+  @email_message += client.business_name.gsub(/['"]/, '')+"\r\n"
   @email_message += client.address+"\r\n"
   @email_message += client.city+"\r\n"
   @email_message += client.post_code+"\r\n\n"
+    
+  @email_message += "Reference : "+invoice.invoice_number+"\r\n"
+  @email_message += "Due Date  : "+invoice.due_date.to_s+"\r\n"
+  @email_message += "Amount Due: "+invoice.amount.to_s+"\r\n\n"
   
-  @email_message += "From: \r\n"+company.name+"\r\n"
+  @email_message += fetch_correct_message(invoice)+"\r\n"+company.name+"\r\n\n"   #SS Work out the correct Message to send here
   @email_message += company.address+"\r\n"
   @email_message += company.city+"\r\n"
   @email_message += company.post_code+"\r\n"
   @email_message += "Tel  : "+company.telephone+"\r\n"
   @email_message += "Fax  : "+company.fax+"\r\n"
   @email_message += "Email: "+company.email+"\r\n\n"
-  
-  @email_message += "Reference : "+invoice.invoice_number+"\r\n"
-  @email_message += "Due Date  : "+invoice.due_date.to_s+"\r\n"
-  @email_message += "Amount Due: "+invoice.amount.to_s+"\r\n\n"
-  
-  @email_message += fetch_correct_message(invoice)+"\r\n"+company.name+"\r\n\n"   #SS Work out the correct Message to send here
   
   @email_message += "Payment Options: \r\n"+setting.payment_method_message
   
