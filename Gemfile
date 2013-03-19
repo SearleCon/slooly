@@ -27,10 +27,10 @@ gem "paypal-recurring"
 gem "localtunnel"
 gem "browser"
 gem 'metamagic'
-# gem 'hirefire'
 gem "workless", "~> 1.1.1"
 gem "rack", "1.4.1"
 gem 'honeypot-captcha'
+gem 'roo'
 
 group :production do
   gem 'pg'

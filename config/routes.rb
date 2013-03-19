@@ -48,13 +48,20 @@ Slooly::Application.routes.draw do
 
   resources :settings
 
-  resources :clients
+  resources :clients do
+    new do
+     get :import_clients, :as => :import
+    end
+
+  end
 
   resources :companies
 
   resources :statuses
 
   resources :invoices
+
+  match 'clients/import', as: :import, :via => :post
   
 
   authenticated :user do

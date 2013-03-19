@@ -7,6 +7,8 @@ class Client < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_uniqueness_of :business_name, :scope => [:user_id]
   before_validation :strip_all_spaces
+
+  include Importable
   
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  

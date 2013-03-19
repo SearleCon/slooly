@@ -90,7 +90,24 @@ class ClientsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  # GET creates new import for clients
+  def import_clients
+    @import = Client.build_importer
+  end
+
+  # POST reads from the spreadsheets and saves
+  def import
+    @import = Client.build_importer(params[:importer])
+    @import.imported.each { |record| record.user_id = current_user.id }
+    if @import.save
+      redirect_to clients_url
+    else
+      render 'import_clients'
+    end
+  end
+
+
   
   private
   def sort_column
