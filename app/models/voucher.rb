@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: vouchers
+#
+#  id             :integer          primary key
+#  unique_code    :string(255)
+#  redeemed_by    :integer
+#  valid_until    :timestamp
+#  number_of_days :integer
+#  created_at     :timestamp        not null
+#  updated_at     :timestamp        not null
+#
+
 class Voucher < ActiveRecord::Base
 
   attr_accessible :redeemed_by

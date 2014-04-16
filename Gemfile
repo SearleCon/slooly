@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.17'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -14,7 +14,7 @@ gem "database_cleaner", ">= 0.8.0", :group => :test
 gem "launchy", ">= 2.1.2", :group => :test
 gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "bootstrap-sass", "~> 2.0.4.2"
-gem "devise", ">= 2.1.2"
+gem 'devise', '~> 3.2.4'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "best_in_place"
@@ -27,8 +27,7 @@ gem "paypal-recurring"
 gem "localtunnel"
 gem "browser"
 gem 'metamagic'
-gem "workless", "~> 1.1.1"
-gem "rack", "1.4.1"
+gem "workless", "~> 1.2.3"
 gem 'honeypot-captcha'
 gem 'roo'
 
@@ -38,4 +37,9 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+end
+
+group :development do
+  gem 'annotate'
+  gem 'quiet_assets'
 end

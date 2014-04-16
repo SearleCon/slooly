@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: plans
+#
+#  id          :integer          primary key
+#  description :string(255)
+#  duration    :integer
+#  cost        :decimal(, )
+#  active      :boolean
+#  created_at  :timestamp        not null
+#  updated_at  :timestamp        not null
+#  free        :boolean
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do

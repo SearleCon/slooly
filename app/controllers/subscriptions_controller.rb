@@ -1,15 +1,9 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :payment_made, :only => [:create]
+  #before_filter :payment_made, :only => [:create]
   skip_before_filter :subscription_required 
   
-# SHAUN Caches  
-  # caches_action :payment_plans, :cache_path => proc {|c|
-  #   plan = Plan.order('updated_at DESC').limit(1).first
-  #   unless plan.nil?
-  #     {:tag => plan.updated_at.to_i}
-  #   end
-  #   }
+
   
   def payment_plans
     @plans = Plan.find_all_by_active(true)
