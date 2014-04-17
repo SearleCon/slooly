@@ -58,16 +58,6 @@ module Slooly
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-# SHAUN - This is to test the IPN Paypal notifications
-    # if Rails.env.development?
-    #   tunnel = LocalTunnel::Tunnel.new(3000, nil)
-    #   response = tunnel.register_tunnel
-    # 
-    #   # Start localtunnel in a detached process.
-    #   Process.detach fork { tunnel.start_tunnel }
-    # 
-    #   ENV['LOCALTUNNEL'] = response['host']
-    # end
     
     config.assets.initialize_on_precompile = false
     
