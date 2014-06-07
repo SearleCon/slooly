@@ -26,7 +26,7 @@ class Client < ActiveRecord::Base
   validates_uniqueness_of :business_name, :scope => [:user_id]
   before_validation :strip_all_spaces
 
-  include Importable
+  #include Importable
   
   
   #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  

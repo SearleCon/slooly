@@ -30,7 +30,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :setting do
+  factory :settings do
     send_from_name "MyString"
     email_copy_to "MyString"
     days_between_chase 1

@@ -1,61 +1,52 @@
 <h2>Company Profile</h2><br>
 
-<% if @companies.size == 0 %>
-<h3>You have not yet setup your company information</h3>
-To do so now, <%= link_to 'click here', new_company_path %>
+
+<% if @company.image_url != nil %>
+    <%= image_tag @company.image_url.to_s %><br><br>
 <% else %>
-
-<% @companies.each do |company| %>
-
-	<% if @companies[0].image_url != nil %>
-   		<%= image_tag @companies[0].image_url.to_s %><br><br>
-	<% else %>
-	  <%= link_to image_tag("/images/your_logo_here.gif"), edit_company_path(company)%><br><br>
-	<% end %>
-	
-	<table>
-	  <tr>
-	    <td>Name:</td>
-	    <td><h4>	<%= company.name %></h4></td>
-	  </tr>
-	  <tr>
-	    <td>Address:</td>
-	    <td>	<%= company.address %></td>
-	  </tr>
-	  <tr>
-	    <td>City:</td>
-	    <td><%= company.city %></td>
-	  </tr>
-	  <tr>
-	    <td>Postal Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> <!-- &nbsp; SS is the code for Spaces in HTML -->
-	    <td><%= company.post_code %></td>
-	  </tr>
-	  <tr>
-	    <td>Telephone:</td>
-	    <td><%= company.telephone %></td>
-	  </tr>
-	  <tr>
-	    <td>Fax:</td>
-	    <td><%= company.fax %></td>
-	  </tr>
-	  <tr>
-	    <td>Email:</td>
-	    <td><%= company.email %></td>
-	  </tr>
-
-	</table>
-
-    <hr class="bs-docs-separator">
-
-    <h6><%= link_to 'Edit your company details', edit_company_path(company) %></h6>
-	
-	<h6>(Above is how the profile will appear on your reminder emails)</h6>
-
-
+    <%= link_to image_tag("/images/your_logo_here.gif"), edit_company_path(@company) %><br><br>
 <% end %>
+
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><h4>    <%= @company.name %></h4></td>
+  </tr>
+  <tr>
+    <td>Address:</td>
+    <td>    <%= @company.address %></td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><%= @company.city %></td>
+  </tr>
+  <tr>
+    <td>Postal Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <!-- &nbsp; SS is the code for Spaces in HTML -->
+    <td><%= @company.post_code %></td>
+  </tr>
+  <tr>
+    <td>Telephone:</td>
+    <td><%= @company.telephone %></td>
+  </tr>
+  <tr>
+    <td>Fax:</td>
+    <td><%= @company.fax %></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><%= @company.email %></td>
+  </tr>
+
+</table>
+
+<hr class="bs-docs-separator">
+
+<h6><%= link_to 'Edit your company details', edit_company_path(@company) %></h6>
+
+<h6>(Above is how the profile will appear on your reminder emails)</h6>
 
 <hr class="bs-docs-separator">
 
 <%= link_to "Back", :back %> | <%= link_to "User Profile", edit_user_registration_path %> | <%= link_to "Settings", settings_path %>
 
-<% end %>

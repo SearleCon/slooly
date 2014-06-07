@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   
   
   def home
-    @chasing_invoices = Invoice.paginate :conditions => ["user_id = ? and status_id = ?", current_user.id, 2],
+    @chasing_invoices = Invoice.paginate conditions: ["user_id = ? and status_id = ?", current_user.id, 2],
     :order => (sort_column + ' ' + sort_direction), :page => params[:page], :per_page => 10
   end
 

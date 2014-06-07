@@ -74,7 +74,7 @@ class Invoice < ActiveRecord::Base
   def setup_chase_dates
     if self.new_record? || self.due_date_changed?
       # Setup the chase dates
-      @current_setting = Setting.for_user(self.user_id)
+      @current_setting = Setting.where(user_id: self.user_id)
     
       self.pd_date = calculate_predue_date(self.due_date, @current_setting[0].days_before_pre_due)        
       self.od1_date = calculate_od1_date(self.due_date, @current_setting[0].days_between_chase)        

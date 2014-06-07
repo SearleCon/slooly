@@ -158,7 +158,7 @@ Slooly::Application.routes.draw do
 
   resources :suggestions
 
-  resources :settings
+  resources :settings, only: [:index, :edit, :update]
 
   resources :clients do
     new do
@@ -167,7 +167,7 @@ Slooly::Application.routes.draw do
 
   end
 
-  resources :companies
+  resources :companies, only: [:index, :edit, :update]
 
   resources :statuses
 
@@ -182,7 +182,7 @@ Slooly::Application.routes.draw do
   root :to => "home#index"
 #  devise_for :users
   
-  devise_for :users, :controllers => {:sessions => "sessions"}
+  devise_for :users, controllers: {registrations: 'registrations',:sessions => "sessions"}
   resources :users, :only => [:show, :index]
   
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action).

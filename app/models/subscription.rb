@@ -18,7 +18,9 @@
 
 class Subscription < ActiveRecord::Base
   belongs_to :plan
-  attr_accessible :active, :bought_on, :expiry_date, :paypal_id, :plan_id, :time, :user_id, :paypal_customer_token, :paypal_payment_token
+  belongs_to :user
+
+  attr_accessible :active, :bought_on, :expiry_date, :paypal_id, :plan_id, :time, :user, :paypal_customer_token, :paypal_payment_token
   attr_accessor :paypal_payment_token
 
   def paypal

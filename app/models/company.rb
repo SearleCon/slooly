@@ -19,20 +19,32 @@
 
 class Company < ActiveRecord::Base
   attr_accessible :address, :city, :email, :fax, :logo_path, :name, :post_code, :telephone, :user_id, :image, :remote_image_url
+
   belongs_to      :user
-  validates       :email, :presence => true
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
+  validates       :email, presence: true
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
   before_validation :strip_all_spaces
-  
-  
-  def self.by_user(user)
-    where("user_id = ?", user)    
-  end
-  
+  after_initialize :set_defaults, if: :new_record?
+
   mount_uploader :image, ImageUploader
-  
-  def strip_all_spaces
-    self.email = self.email.strip
-  end
+
+  protected
+    def strip_all_spaces
+      self.email = self.email.strip
+    end
+
+    def set_defaults
+     self.name = "Your Company Name"
+     self.address				= "44 Street Name, Suburb"
+     self.city 					= "Best City"
+     self.post_code 				= "1234"
+     self.telephone 				= "555 345 6789"
+     self.fax 					= "People still fax?"
+     self.email 					= "you@example.com"
+    end
+
+
   
 end

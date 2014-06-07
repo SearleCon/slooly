@@ -46,14 +46,14 @@ describe SettingsController do
     it "assigns the requested setting as @setting" do
       setting = Setting.create! valid_attributes
       get :show, {:id => setting.to_param}, valid_session
-      assigns(:setting).should eq(setting)
+      assigns(:settings).should eq(setting)
     end
   end
 
   describe "GET new" do
     it "assigns a new setting as @setting" do
       get :new, {}, valid_session
-      assigns(:setting).should be_a_new(Setting)
+      assigns(:settings).should be_a_new(Setting)
     end
   end
 
@@ -61,7 +61,7 @@ describe SettingsController do
     it "assigns the requested setting as @setting" do
       setting = Setting.create! valid_attributes
       get :edit, {:id => setting.to_param}, valid_session
-      assigns(:setting).should eq(setting)
+      assigns(:settings).should eq(setting)
     end
   end
 
@@ -69,18 +69,18 @@ describe SettingsController do
     describe "with valid params" do
       it "creates a new Setting" do
         expect {
-          post :create, {:setting => valid_attributes}, valid_session
+          post :create, {:settings => valid_attributes}, valid_session
         }.to change(Setting, :count).by(1)
       end
 
       it "assigns a newly created setting as @setting" do
-        post :create, {:setting => valid_attributes}, valid_session
-        assigns(:setting).should be_a(Setting)
-        assigns(:setting).should be_persisted
+        post :create, {:settings => valid_attributes}, valid_session
+        assigns(:settings).should be_a(Setting)
+        assigns(:settings).should be_persisted
       end
 
       it "redirects to the created setting" do
-        post :create, {:setting => valid_attributes}, valid_session
+        post :create, {:settings => valid_attributes}, valid_session
         response.should redirect_to(Setting.last)
       end
     end
@@ -89,14 +89,14 @@ describe SettingsController do
       it "assigns a newly created but unsaved setting as @setting" do
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        post :create, {:setting => {}}, valid_session
-        assigns(:setting).should be_a_new(Setting)
+        post :create, {:settings => {}}, valid_session
+        assigns(:settings).should be_a_new(Setting)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        post :create, {:setting => {}}, valid_session
+        post :create, {:settings => {}}, valid_session
         response.should render_template("new")
       end
     end
@@ -111,18 +111,18 @@ describe SettingsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Setting.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => setting.to_param, :setting => {'these' => 'params'}}, valid_session
+        put :update, {:id => setting.to_param, :settings => {'these' => 'params'}}, valid_session
       end
 
       it "assigns the requested setting as @setting" do
         setting = Setting.create! valid_attributes
-        put :update, {:id => setting.to_param, :setting => valid_attributes}, valid_session
-        assigns(:setting).should eq(setting)
+        put :update, {:id => setting.to_param, :settings => valid_attributes}, valid_session
+        assigns(:settings).should eq(setting)
       end
 
       it "redirects to the setting" do
         setting = Setting.create! valid_attributes
-        put :update, {:id => setting.to_param, :setting => valid_attributes}, valid_session
+        put :update, {:id => setting.to_param, :settings => valid_attributes}, valid_session
         response.should redirect_to(setting)
       end
     end
@@ -132,15 +132,15 @@ describe SettingsController do
         setting = Setting.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        put :update, {:id => setting.to_param, :setting => {}}, valid_session
-        assigns(:setting).should eq(setting)
+        put :update, {:id => setting.to_param, :settings => {}}, valid_session
+        assigns(:settings).should eq(setting)
       end
 
       it "re-renders the 'edit' template" do
         setting = Setting.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Setting.any_instance.stub(:save).and_return(false)
-        put :update, {:id => setting.to_param, :setting => {}}, valid_session
+        put :update, {:id => setting.to_param, :settings => {}}, valid_session
         response.should render_template("edit")
       end
     end
