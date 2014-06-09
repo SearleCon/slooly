@@ -23,7 +23,7 @@
            <td><b><%= plan.description %></b></td>
            <td><%= plan.duration %> Months</td>
            <td>$ <%= number_with_precision(plan.cost, :precision => 2) %></td>
-           <td><center><%= link_to 'Place Order', new_subscription_path(:plan_id => plan.id), class: "btn btn-primary" %></center></td>
+           <td><center><%= link_to 'Place Order', new_subscription_path(plan_id: plan.id), class: "btn btn-primary" %></center></td>
            </tr>
         <% end %>
        <% end %>

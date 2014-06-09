@@ -23,6 +23,8 @@
 class Invoice < ActiveRecord::Base
   attr_accessible :amount, :client_id, :description, :due_date, :invoice_number, :status_id
   belongs_to      :client
+  belongs_to      :user
+
   validates       :client_id, :due_date, :invoice_number, :presence => true
   validates_numericality_of :amount  
   before_save :setup_chase_dates
@@ -66,7 +68,6 @@ class Invoice < ActiveRecord::Base
   
   def self.for_user_and_status(client_id, status_id) 
     @clients_invoices_chasing = Invoice.all :conditions => ["client_id = ? and status_id = ?", client_id, status_id], :order => "due_date asc"
-#    @clients_invoices_chasing = Invoice.find(:all, :conditions => ["client_id = ? and status_id = ?", client_id, status_id]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10) 
 
   end
   

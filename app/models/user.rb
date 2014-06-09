@@ -44,21 +44,11 @@ class User < ActiveRecord::Base
     2.hours
   end
   
-  def reload(options = nil)
-     super
-     @subscription = nil
-   end
-  
   def active_subscription
-    @subscription ||= Subscription.find_by_user_id_and_active(self, true)
+    subscriptions.active.first
   end
   
-  def subscription_expiry
-    @subscription = Subscription.find_by_user_id_and_active(self, true)
-    @days = @subscription.expiry_date - Date.today
-    @days.to_i
-  end
-  
+
 
 
 end

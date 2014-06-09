@@ -7,8 +7,8 @@ class UserSetup
   def call
     User.transaction do
       setup_company
-      setup_subscription
       setup_settings
+      setup_subscription
     end
   end
 
@@ -19,8 +19,8 @@ class UserSetup
 
    def setup_subscription
      plan = Plan.find_by_free(true)
-     subscription = plan.subscriptions.create!(user: @user)
-     subscription.save!
+     expiry_date = Time.zone.now + plan.duration.months
+     @user.subscriptions.create!(plan_id: plan, expiry_date: expiry_date)
    end
 
    def setup_settings

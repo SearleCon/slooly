@@ -23,6 +23,8 @@ class Subscription < ActiveRecord::Base
   attr_accessible :active, :bought_on, :expiry_date, :paypal_id, :plan_id, :time, :user, :paypal_customer_token, :paypal_payment_token
   attr_accessor :paypal_payment_token
 
+  scope :active, -> { where(active: true) }
+
   def paypal
       PaypalPayment.new(self)
     end
@@ -43,7 +45,11 @@ class Subscription < ActiveRecord::Base
     end
 
     def has_expired?
-      Time.now > self.expiry_date
+      Time.zone.now > self.expiry_date
+    end
+
+    def expires_in
+      (expiry_date - Time.zone.today).to_i
     end
 
     def payment_provided?
