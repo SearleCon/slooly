@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <td>Email:</td>
-    <td><%= link_to @client.email, "mailto:"+@client.email %></td>
+    <td><%= mail_to @client.email, nil, encode: :javascript %></td>
   </tr>
 
 </table><br>
@@ -45,16 +45,6 @@
 
 <hr class="bs-docs-separator">
 
-
-
-
-
-
-
-
-
-
-
 <div class="tabbable tabs-top">
   <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#chasing" data-toggle="tab">Currently Chasing</a></li>
@@ -63,21 +53,15 @@
 
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="chasing">
-		<% if @client_invoices_chasing.count > 0 %>
-		  You are currently chasing the following <b><%= @client_invoices_chasing.count.to_s+" invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= Client.total_chasing_outstanding(@client.id) %></b> (total chasing amount). <br>
-
-
+		<% if @client.invoices.chasing.any? %>
+		  You are currently chasing the following <b><%= "#{@client.invoices.chasing.size} invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= @client.invoices.chasing.sum(:amount) %></b> (total chasing amount). <br>
 		<%= render 'invoices_for_client' %>
-
 		<% else %>
 		  You are <b>not</b> chasing any invoices for <%= @client.business_name %>.
 		<% end %>
-		
-
-		
     </div>
     <div class="tab-pane fade in" id="history">
-		<% if @client_invoices_history.count > 0 %>
+		<% if @client.histories.any? %>
 		  Here are the emails you have <b>already sent</b> to <b><%= @client.business_name %></b> (Newest to Oldest).<br>
 		
 		  <%= render 'history_for_client' %>
@@ -89,17 +73,7 @@
   </div>
 </div>
 
-
-
-
-
-
 <hr class="bs-docs-separator">
-
-
-
-
-
 
 
 <div><a data-toggle="modal" href="#myModal" >Add invoice for this client</a></div>

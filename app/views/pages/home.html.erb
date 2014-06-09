@@ -5,19 +5,17 @@
  <br><br><h1>Home</h1>
 
 <h2>Chasing Overview</h2>
-You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br>
+You are currently chasing <b><%= @chasing_invoices.size %></b> invoices.<br><br>
 
-<% if @chasing_invoices.count == 0 %>
+<% if @chasing_invoices.empty? %>
     <%= render("no_records") %>
 <% else %>
-
     <hr class="bs-docs-separator">
 
     <table class="table">
       <thead>
       <tr>
-        <!-- <th><span rel="tooltip" title="The age of the invoice">Age</span></th> -->
-        <th><%= sortable "due_date", "Age" %> <a rel="popover" title='Invoice Age' data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green'><i class="icon-question-sign"></i></span></a></th>
+        <th><%= sortable "due_date", "Age" %> <a rel="popover" title='Invoice Age' data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green'><i class="icon-question-sign"></i></a></th>
         <th><%= sortable "invoice_number", "Invoice Number" %></th>
         <th><%= sortable "due_date", "Due Date" %></th>
         <th><%= sortable "amount", "Amount" %></th>
@@ -31,41 +29,21 @@ You are currently chasing <b><%= @chasing_invoices.count %></b> invoices.<br><br
       <tbody>
       <% @chasing_invoices.each do |invoice| %>
           <tr>
-            <% if Invoice.age(invoice.due_date) > 0 %>
-                <td><span class="badge badge-important"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-            <% else %>
-                <% if Invoice.age(invoice.due_date) == 0 %>
-                    <td><span class="badge badge-info"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-                <% else %>
-                    <% if Invoice.age(invoice.due_date) < 0 %>
-                        <td><span class="badge badge-success"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-                    <% end %>
-                <% end %>
-            <% end %>
-
+            <td><%= display_age_badge(invoice) %></td>
             <td><%= link_to invoice.invoice_number, invoice %></td>
             <td><%= invoice.due_date %></td>
             <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
-            <% if invoice.description.size > 50 %>
-                <td><a rel="popover" title='Invoice Description'
-                       data-content='<%= truncate(simple_format(invoice.description), :length => 500) %>'><%= truncate(invoice.description, :length => 50)%></span></a></td>
-            <% else %>
-                <td><%= invoice.description %></td>
-            <% end %>
+            <td><%= display_description(invoice)%></td>
             <% if invoice.status_id != nil %>
-                <% @status = Status.all :conditions => ["id = ?", invoice.status_id] %>
-                <!-- <td><span class="label label-success"><%= @status[0].description %></span></td> -->
                 <td><span class="label label-success"><%= best_in_place invoice, :status_id, type: :select, collection: [[2, "Chasing"], [4, "Paid"]] %></span></td>
             <% else %>
                 <td></td>
             <% end %>
-            <td><%= link_to invoice.client.business_name, '/clients/'+invoice.client_id.to_s %></td>
+            <td><%= link_to invoice.client.business_name, invoice.client %></td>
             <td><%= time_ago_in_words(invoice.created_at) %> ago</td>
             <td><%= link_to 'Show', invoice %></td>
             <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-            <% @delete_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete the invoice <b>'+invoice.invoice_number+'!</b><br><b>NOTE:</b> This cannot be undone!<br><br> Are you sure you want to continue?' %>
-
-            <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: @delete_message } %></td>
+            <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) } %></td>
           </tr>
       <% end %>
       </tbody>

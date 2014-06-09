@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   
   has_many        :clients, dependent: :destroy
   has_many        :subscriptions, dependent: :destroy
+  has_many        :invoices, dependent: :destroy
   has_one         :company, dependent: :destroy
   has_one         :setting, dependent: :destroy
 

@@ -1,140 +1,68 @@
 class InvoicesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_invoice, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.for_user(current_user.id).search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10) 
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @invoices }
-    end
+    @invoices = current_user.invoices.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)
   end
 
-  # GET /invoices/1
-  # GET /invoices/1.json
-  def show
-    @invoice = Invoice.for_user(current_user.id).find(params[:id])
+  def show;end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @invoice }
-    end
-  end
-
-  # GET /invoices/new
-  # GET /invoices/new.json
   def new
-    @invoice = Invoice.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @invoice }
-    end
+    @invoice = current_user.invoices.build
   end
 
-  # GET /invoices/1/edit
-  def edit
-    @invoice = Invoice.for_user(current_user.id).find(params[:id])
+  def edit;end
+
+  def create
+    @invoice = current_user.invoices.build(params[:invoice])
+    setup_invoice_dates
+    flash[:notice] = 'Invoice was successfully created.' if @invoice.save
+    respond_with @invoice
   end
 
-  # POST /invoices
-  # POST /invoices.json
-  def create    
-    @invoice = Invoice.new(params[:invoice])
-    @invoice.user_id = current_user.id
-    
-    # if @invoice.due_date != nil
-    #   setup_chase_dates
-    # end
-
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
-        format.json { render json: @invoice, status: :created, location: @invoice }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /invoices/1
-  # PUT /invoices/1.json
   def update
-    @invoice = Invoice.for_user(current_user.id).find(params[:id])
-    
-    # if @invoice.due_date != nil
-    #   setup_chase_dates
-    # end
-  
-    respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
+    @invoice.assign_attributes(params[:invoice])
+    setup_invoice_dates if @invoice.due_date_changed?
+    flash[:notice] = 'Invoice was successfully updated.' if @invoice.save
+    respond_with(@invoice)
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.json
   def destroy
-    @invoice = Invoice.for_user(current_user.id).find(params[:id])
     @invoice.destroy
-
-    respond_to do |format|
-      format.html { redirect_to invoices_url }
-      format.json { head :no_content }
-    end
+    respond_with(@invoice)
   end
-  
-  
-  # def setup_chase_dates
-  #   # Setup the chase dates
-  #   @current_setting = Setting.for_user(current_user.id)
-  #   @invoice.user_id = current_user.id
-  # 
-  #   @invoice.pd_date = calculate_predue_date(@invoice.due_date, @current_setting[0].days_before_pre_due)        
-  #   @invoice.od1_date = calculate_od1_date(@invoice.due_date, @current_setting[0].days_between_chase)        
-  #   @invoice.od2_date = calculate_od2_date(@invoice.due_date, @current_setting[0].days_between_chase)        
-  #   @invoice.od3_date = calculate_od3_date(@invoice.due_date, @current_setting[0].days_between_chase)       
-  #   @invoice.last_date_sent = DateTime.now.to_date-100.years  
-  #       
-  #   if (params[:invoice][:status_id] == 5.to_s)
-  #     @invoice.fd_date = Date.today+1.day
-  #   end
-  # 
-  # end
-  # 
-  # def calculate_predue_date(due_date, days_before)
-  #   due_date-days_before.days
-  # end
-  # 
-  # def calculate_od1_date(due_date, chase_days)
-  #   due_date+chase_days.days
-  # end
-  # 
-  # def calculate_od2_date(due_date, chase_days)
-  #   due_date+(chase_days*2).days
-  # end
-  # 
-  # def calculate_od3_date(due_date, chase_days)
-  #   due_date+(chase_days*3).days
-  # end
+
   
   private
-  def sort_column
-    Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"    
-  end
+    def set_invoice
+      @invoice = current_user.invoices.find(params[:id])
+    end
+
+    def sort_column
+      Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+    end
+
+    def invoice_dates
+      InvoiceDates.new(@invoice, current_user.setting)
+    end
+
+    def setup_invoice_dates
+      @invoice.pd_date = invoice_dates.pre_due
+      @invoice.od1_date = invoice_dates.over_due1
+      @invoice.od2_date = invoice_dates.over_due2
+      @invoice.od3_date = invoice_dates.over_due3
+      @invoice.last_date_sent = invoice_dates.last_date_sent
+      @invoice.fd_date = invoice_dates.final_demand if @invoice.status == :send_final_demand
+    end
+
   
 end

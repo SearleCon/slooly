@@ -4,8 +4,7 @@ class PagesController < ApplicationController
   
   
   def home
-    @chasing_invoices = Invoice.paginate conditions: ["user_id = ? and status_id = ?", current_user.id, 2],
-    :order => (sort_column + ' ' + sort_direction), :page => params[:page], :per_page => 10
+    @chasing_invoices = current_user.invoices.chasing.order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)
   end
 
   def about
@@ -27,7 +26,7 @@ class PagesController < ApplicationController
   end
   
   def reports
-    @summary = Invoice.all :conditions => ["user_id = ? and status_id = ?", current_user.id, 2]
+    @summary_report = SummaryReport.new(current_user.invoices.chasing)
   end
     
   private

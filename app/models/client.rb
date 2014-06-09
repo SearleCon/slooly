@@ -19,6 +19,7 @@
 class Client < ActiveRecord::Base
   attr_accessible :address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone, :user_id
   has_many        :invoices, :dependent => :destroy
+  has_many        :histories, :dependent => :destroy
   belongs_to      :user
   accepts_nested_attributes_for :invoices #SS - To allow managing of invoices through clients
   validates       :business_name, :email, :presence => true
@@ -34,14 +35,19 @@ class Client < ActiveRecord::Base
       where("user_id = ?", user)
   end
 
-    
-  def self.search(search)
-    if search
-      where('LOWER(business_name) LIKE ? or LOWER(contact_person) LIKE ?', "%#{search}%".downcase, "%#{search}%".downcase)
+  def self.client
+    self.arel_table
+  end
+  private_class_method :client
+
+  def self.search(criteria)
+    if criteria
+      where(client[:business_name].matches("%#{criteria}%").or(client[:contact_person].matches("%#{criteria}%")))
     else
       scoped
     end
   end
+
   
   def self.total_chasing_outstanding(client_id)
     @clients_chasing = Invoice.all :conditions => ["client_id = ? and status_id = ?", client_id, 2]

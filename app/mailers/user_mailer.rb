@@ -15,6 +15,6 @@ class UserMailer < ActionMailer::Base
   def new_message(message)
       @message = message
       mail(:from => message.email, :to => "support@searleconsulting.co.za", :subject => "Contact Us Notification: #{message.subject}")
-    end
+  end
   
 end

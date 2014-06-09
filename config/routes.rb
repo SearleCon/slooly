@@ -117,13 +117,13 @@ Slooly::Application.routes.draw do
   
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
   
-  resources :subscriptions do
+  resources :subscriptions, only: [:new, :create] do
     get :payment_plans, on: :collection
   end  
   
   resources :announcements
 
-  resources :histories
+  resources :histories, only: :show
 
   get "pages/home"
 
@@ -168,8 +168,6 @@ Slooly::Application.routes.draw do
   end
 
   resources :companies, only: [:index, :edit, :update]
-
-  resources :statuses
 
   resources :invoices
 

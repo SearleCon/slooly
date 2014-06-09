@@ -3,38 +3,6 @@
 <h3>Summary report (Invoices with Chasing Status)</h3><!-- <%= link_to "(Save to PDF)", "#" %> -->
 <br><br>
 
-<% 
-  @od_greater_90 = 0
-  @od_60_90		 = 0
-  @od_30_60		 = 0
-  @od_0_30		 = 0
-  @od_not_due    = 0
-  @od_total		 = 0
- 
-  @summary.each do |summary|
-	if Invoice.age(summary.due_date) > 90 then
-		@od_greater_90 += summary.amount		
-	else
-		if Invoice.age(summary.due_date) >= 61 and Invoice.age(summary.due_date) <= 90
-				@od_60_90 += summary.amount
-		else
-			if Invoice.age(summary.due_date) >= 31 and Invoice.age(summary.due_date) <= 60
-				@od_30_60 += summary.amount
-			else
-				if Invoice.age(summary.due_date) >= 0 and Invoice.age(summary.due_date) <= 30
-					@od_0_30 += summary.amount
-				else
-					if Invoice.age(summary.due_date) < 0 
-						@od_not_due += summary.amount
-					end
-				end
-			end
-		end		
-	end
-	@od_total += summary.amount
-  end 
-%>
-
 
 
 
@@ -42,32 +10,38 @@
 <!-- <table class="table"> -->
   <tr>
     <td>More than 90 days overdue:&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td align="right"><h4><%= @od_greater_90 %></h4></td>
+    <td align="right"><h4><%= @summary_report.over_ninety_days %></h4></td>
+
 	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>60 - 90 days:</td>
-    <td align="right"><h4><%= @od_60_90 %></h4></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
+    <td align="right"><h4><%= @summary_report.sixty_to_ninety_days %></h4></td>
+
+    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>30 - 60 days:</td>
-    <td align="right"><h4><%= @od_30_60 %></h4></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
+    <td align="right"><h4><%= @summary_report.thirty_to_sixty_days %></h4></td>
+
+    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>0 - 30 days:</td> 
-    <td align="right"><h4><%= @od_0_30 %></h4></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
+    <td align="right"><h4><%= @summary_report.zero_to_thirty_days %></h4></td>
+
+    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>Not yet due:</td>
-    <td align="right"><h4><%= @od_not_due %></h4></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
+    <td align="right"><h4><%= @summary_report.not_due %></h4></td>
+
+    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td><br>Total due to you:</td>
-    <td align="right"><br><h4><%= @od_total %></h4></td>
+    <td align="right"><h4><%= @summary_report.total %></h4></td>
+
   </tr>
 
 </table>

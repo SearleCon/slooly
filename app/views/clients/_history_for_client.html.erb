@@ -11,39 +11,11 @@
 		<th><span rel="tooltip" title="Quick View"><i class="icon-eye-open"></i></span></th>
 	  </tr>
 
-	<% @client_invoices_history.each do |history| %>
+	<% @client.histories.order("date_sent desc").each do |history| %>
 	  <tr>
-		<!-- <td><%= link_to '<i class="icon-search"></i>', history %></td> -->
-		<!-- <td><a href="<%= history_path(history) %>"<i class="icon-eye-open"></i></a></td> -->
-		
-		
-		
 	    <td><%= link_to history.date_sent, history %></td>
 		<td><%= history.email_sent_to %></td>
-
-		
-		<% if history.reminder_type == "Pre" %>
-		  <td><span class="badge badge-success"><%= history.reminder_type %></span></td>
-		<% else %>		
-			<% if history.reminder_type == "Due" %>
-		  		<td><span class="badge badge-info"><%= history.reminder_type %></span></td>
-			<% else %>
-				<% if history.reminder_type == "OD1" %>
-			  		<td><span class="badge"><%= history.reminder_type %></span></td>
-				<% else %>
-					<% if history.reminder_type == "OD2" %>
-					  <td><span class="badge badge-warning"><%= history.reminder_type %></span></td>
-					<% else %>
-						<% if history.reminder_type == "OD3" %>
-					  		<td><span class="badge badge-important"><%= history.reminder_type %></span></td>
-						<% else %>
-					  		<td><span class="badge"><%= history.reminder_type %></span></td>
-						<% end %>
-					<% end %>
-				<% end %>
-			<% end %>
-		<% end %>
-		
+        <td><%= display_reminder_badge(history) %></td>
 	    <td><%= history.invoice_number %></td>
 	    <td><%= truncate(history.subject, :length => 50) %></td>
 	    <td><%= truncate(history.message, :length => 70) %></td>

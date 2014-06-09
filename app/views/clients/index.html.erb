@@ -23,16 +23,11 @@
 	<% end %>
 <% end %>
 
-<h4 align="right">( <%= @clients.count %> in total )</h4>
+<h4 align="right">( <%= current_user.clients.size %> in total )</h4>
 
-<% if @clients.count == 0
-	@clients_checkall_for_user = Client.for_user(current_user.id)
-	if @clients_checkall_for_user.count == 0 %>
+<% if current_user.clients.empty? %>
 	  <%= render("no_records") %>
-<% end %>
 <% else %>
-
-
 <table class="table">
   <tr>
     <th><%= sortable "business_name", "Business Name" %></th>
@@ -50,13 +45,11 @@
     <td><%= link_to client.business_name, client %></td>
     <td><%= client.contact_person %></td>
     <td><%= client.telephone %></td>
-    <td><%= link_to client.email, "mailto:"+client.email %></td>
+    <td><%= mail_to client.email, nil, encode: :javascript %></td>
 	<td><%= time_ago_in_words(client.created_at) %> ago</td>
     <td><%= link_to 'Show', client %></td>
     <td><%= link_to 'Edit', edit_client_path(client) %></td>
-	<% @delete_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete the client <b>'+client.business_name+'!</b><br><b>NOTE:</b> All related invoices will also be deleted! This cannot be undone!<br><br> Are you sure you want to continue?' %>
-	
-    <td><%= link_to 'Delete', client, method: :delete, data: { confirm: @delete_message } %></td>
+    <td><%= link_to 'Delete', client, method: :delete, data: { confirm: confirm_delete_client_message(client) } %></td>
   </tr>
 <% end %>
 </table>

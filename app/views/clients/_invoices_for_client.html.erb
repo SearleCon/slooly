@@ -14,66 +14,19 @@
 	    <th></th>
 	  </tr>
 
-	<% @client_invoices_chasing.each do |invoice| %>
+	<% @client.invoices.chasing.each do |invoice| %>
 	  <tr>
-			<% if Invoice.age(invoice.due_date) > 0 %>
-				<td><span class="badge badge-important"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-			<% else %>
-				<% if Invoice.age(invoice.due_date) == 0 %>
-					<td><span class="badge badge-info"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-				<% else %>
-					<% if Invoice.age(invoice.due_date) < 0 %>
-						<td><span class="badge badge-success"><%= Invoice.age(invoice.due_date) %></span></td> <!-- SS Age -->
-					<% end %>
-				<% end %>
-			<% end %>
-		
+        <td><%= display_age_badge(invoice) %></td>
 	    <td><%= link_to invoice.invoice_number, invoice %></td>
 	    <td><%= invoice.due_date %></td>
 	    <td><%= invoice.amount %></td>
-		<% if invoice.description.size > 50 %> 
-			<td><a rel="popover" title='Invoice Description' 
-								   data-content='<%= truncate(simple_format(invoice.description), 
-											:length => 500) %>'><%= truncate(invoice.description, :length => 50)%></span></a></td>
-		<% else %>
-		    <td><%= invoice.description %></td>
-		<% end %>
-		<% if invoice.status_id != nil %>
-			<% @status = Status.all :conditions => ["id = ?", invoice.status_id] %> 
-
-			<% if invoice.status_id == 2 %>
-			  <td><span class="label label-success"><%= @status[0].description %></span></td>
-			<% else %>		
-				<% if invoice.status_id == 3 %>
-				  <td><span class="label label-warning"><%= @status[0].description %></span></td>
-				<% else %>
-					<% if invoice.status_id == 4 %>
-					  <td><span class="label label-info"><%= @status[0].description %></span></td>
-					<% else %>
-						<% if invoice.status_id == 5 %>
-						  <td><span class="label label-important"><%= @status[0].description %></span></td>
-						<% else %>
-							<% if invoice.status_id == 6 %>
-							  <td><span class="label label-inverse"><%= @status[0].description %></span></td>
-							<% else %>
-								<% if invoice.status_id == 7 %>
-								  <td><span class="label label-default"><%= @status[0].description %></span></td>
-								<% end %>
-							<% end %>
-						<% end %>
-					<% end %>
-				<% end %>
-			<% end %>
-		<% end %>
+		<td><%= display_description(invoice)%></td>
+		<td><%= display_status_label(invoice)%></td>
 		<td><%= time_ago_in_words(invoice.created_at) %> ago</td>
-
-
-
 	    <td><%= link_to 'Show', invoice %></td>
 	    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>	
-		<% @delete_message = '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete the invoice <b>'+invoice.invoice_number+'!</b><br><b>NOTE:</b> This cannot be undone!<br><br> Are you sure you want to continue?' %>
 
-	    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: @delete_message } %></td>
+	    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) } %></td>
 	  </tr>
 	<% end %>
 	</table>
