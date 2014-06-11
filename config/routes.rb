@@ -133,8 +133,6 @@ Slooly::Application.routes.draw do
 
   get "pages/faq"
 
-  get "pages/help"
-
   get "pages/news"
 
   get "pages/reports"
@@ -162,7 +160,7 @@ Slooly::Application.routes.draw do
 
   resources :clients do
     new do
-     get :import_clients, :as => :import
+     get :import_clients, as: :import
     end
 
   end
@@ -175,13 +173,12 @@ Slooly::Application.routes.draw do
   
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'pages#home'
   end
   root :to => "home#index"
-#  devise_for :users
-  
-  devise_for :users, controllers: {registrations: 'registrations',:sessions => "sessions"}
-  resources :users, :only => [:show, :index]
+
+  devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
+  resources :users, only: [:show, :index]
   
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action).
   match "*path", :to => "application#routing_error"

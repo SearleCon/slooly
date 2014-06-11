@@ -1,5 +1,4 @@
 class CompaniesController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :set_company
 
   def index;  end

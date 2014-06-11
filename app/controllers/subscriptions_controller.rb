@@ -1,5 +1,4 @@
 class SubscriptionsController < ApplicationController
-  before_filter :authenticate_user!
   #before_filter :payment_made, :only => [:create]
   skip_before_filter :subscription_required 
   
@@ -22,7 +21,9 @@ class SubscriptionsController < ApplicationController
   def new
       @plan = Plan.find(params[:plan_id])
       @subscription = current_user.subscriptions.build(plan_id: @plan.id)
-      @subscription.expiry_date = Time.zone.now + @plan.duration.months
+      @subscription.expiry_date = Time.zone.now.advance(months: @plan.duration)
+      @subscription.bought_on = Time.zone.now
+      @subscription.time =  "#{@plan.duration} month(s)"
       if params[:PayerID]
         @subscription.paypal_customer_token = params[:PayerID]
         @subscription.paypal_payment_token = params[:token]
@@ -44,7 +45,7 @@ class SubscriptionsController < ApplicationController
     def payment_made
       if current_user.active_subscription.plan_id == params[:subscription][:plan_id].to_i
         flash[:notice] = "Your order has already been processed, and you have been redirected back home."
-        redirect_to "/pages/home"
+        redirect_to root_path
       end
     end
   

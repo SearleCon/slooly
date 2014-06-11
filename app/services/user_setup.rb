@@ -19,8 +19,13 @@ class UserSetup
 
    def setup_subscription
      plan = Plan.find_by_free(true)
-     expiry_date = Time.zone.now + plan.duration.months
-     @user.subscriptions.create!(plan_id: plan, expiry_date: expiry_date)
+     @user.subscriptions.create! do |subscription|
+       subscription.plan_id = plan.id
+       subscription.expiry_date = Time.zone.now.advance(months: plan.duration)
+       subscription.bought_on = Time.zone.now
+       subscription.time =  "#{plan.duration} month(s)"
+       subscription.active = true
+     end
    end
 
    def setup_settings

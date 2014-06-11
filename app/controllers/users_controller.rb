@@ -1,29 +1,19 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  authorize_resource only: [:index]
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @users = User.paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
+    all_users = User.scoped
+    users = all_users.paginate(page: params[:page], per_page: 5).order('created_at DESC')
+    new_users = all_users.where('created_at >= ?', DateTime.yesterday)
+    histories =  History.order('created_at desc')
+    suggestions = Suggestion.scoped
+    jobs = Delayed::Job.all
+    @administration_data = AdministrationData.new(users, new_users ,histories, suggestions, jobs)
   end
 
   def show
     @user = User.find(params[:id])
   end
-  
 
-  # def create
-  #   @user = User.new(params[:user])
-  # 
-  #   respond_to do |format|
-  #     if @user.save
-  #       UserMailer.registration_confirmation(@user).deliver
-  #       format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-  #       format.xml  { render :xml => @user, :status => :created, :location => @user }
-  #     else
-  #       format.html { render :action => "new" }
-  #       format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-  #     end
-  #   end
-  # end
   
 end

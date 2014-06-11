@@ -1,4 +1,5 @@
 class VouchersController < ApplicationController
+
   def redeem
     respond_to do |format|
       if RedeemVoucher.new(current_user,params[:unique_code]).call

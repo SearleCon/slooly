@@ -26,34 +26,34 @@ class Subscription < ActiveRecord::Base
   scope :active, -> { where(active: true) }
 
   def paypal
-      PaypalPayment.new(self)
-    end
+    PaypalPayment.new(self)
+  end
 
-    def save_with_paypal_payment
-      response = paypal.request_payment
-      response.approved? && response.success? ? save! : false
-    end
+  def save_with_paypal_payment
+    response = paypal.request_payment
+    response.approved? && response.success? ? save! : false
+    save
+  end
 
-    def cancel
-      response = paypal.cancel
-      response.success?
-    end
+  def cancel
+    response = paypal.cancel
+    response.success?
+  end
 
-    def reactivate
-      response = paypal.reactivate
-      response.success?
-    end
+  def reactivate
+    response = paypal.reactivate
+    response.success?
+  end
 
-    def has_expired?
-      Time.zone.now > self.expiry_date
-    end
+  def has_expired?
+    Time.zone.now > self.expiry_date
+  end
 
-    def expires_in
-      (expiry_date - Time.zone.today).to_i
-    end
+  def expires_in
+    (expiry_date - Time.zone.today).to_i
+  end
 
-    def payment_provided?
-      paypal_payment_token.present?
-    end
-
+  def payment_provided?
+    paypal_payment_token.present?
+  end
 end

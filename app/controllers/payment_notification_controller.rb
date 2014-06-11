@@ -1,5 +1,7 @@
 class PaymentNotificationController < ApplicationController
-  protect_from_forgery :except => [:create]
+  skip_before_filter  :authenticate_user!
+
+  protect_from_forgery except: [:create]
 
 
 

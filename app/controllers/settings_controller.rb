@@ -1,8 +1,5 @@
 class SettingsController < ApplicationController
-  before_filter :authenticate_user!
   before_filter :set_settings
-
-
 
   def index;end
 
