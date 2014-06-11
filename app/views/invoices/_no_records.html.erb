@@ -2,8 +2,7 @@
 
 <h2>Welcome to your Invoices screen!</h2>
 <h6>This screen will show a listing of all your invoices loaded.</h6>
-<!-- <img src="/images/warning.png" class="header"> -->
-<h6>But at the moment, you don't have any... <img src="/images/sadface.png"> Let's fix that right away!</h6><br><br>
+<h6>But at the moment, you don't have any... <%= image_tag('sadface.png', size: '15x15') %>  Let's fix that right away!</h6><br><br>
 
 <h4>Why don't we get started:</h4><br>
 
@@ -18,4 +17,4 @@ Remember that you can come back to this screen at any time, by clicking the "INV
 
 <hr class="bs-docs-separator">
 
-Need help? Then check out the following: <%= link_to "Help", "/pages/tutorial" %> | <a href="/pages/faq">FAQs</a> | <a href="/pages/about">About</a> | <a href="/contact">Contact Us</a>
+Need help? Then check out the following: <%= link_to "Help", pages_tutorial_path %> | <%= link_to 'FAQs', pages_faq_path %>  | <%= link_to 'About', pages_about_path %> | <%= link_to 'Contact Us', contact_path %>

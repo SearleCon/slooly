@@ -17,8 +17,8 @@
   <body>
 	
 	<!-- SS Full screen BG Background S -->
-	<img alt="full screen background image" src="/images/background_wood.jpg" id="full-screen-background-image" />
-	<!-- SS Full screen BG Background E -->	
+    <%= image_tag 'background_wood.jpg', alt: 'full screen background image', id: 'full-screen-background-image' %>
+	<!-- SS Full screen BG Background E -->
 	
     <header class="navbar navbar-fixed-top">
       <nav class="navbar-inner">
@@ -33,7 +33,7 @@
 			<% if browser.ie6? || browser.ie7? || browser.ie8? %>
 				<div class="ie_warn">				
 			  		WARNING: You're running an older version of Internet Explorer that is not fully supported.<br>
-					For more information, please click <%= link_to 'here', '/pages/ie_warning' %>
+					For more information, please click <%= link_to 'here', pages_ie_warning_path %>
 				</div><br>
 			<% end %>
 	

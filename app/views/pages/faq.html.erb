@@ -30,7 +30,7 @@
 
 <br>
 
-Your question not listed above? You can also check out the <%= link_to 'About', '/pages/about' %> page or <%= link_to 'Contact Us', '/contact' %>.
+Your question not listed above? You can also check out the <%= link_to 'About', pages_about_path %> page or <%= link_to 'Contact Us',contact_path %>.
 
 <hr class="bs-docs-separator">
 
@@ -38,16 +38,16 @@ Your question not listed above? You can also check out the <%= link_to 'About', 
 
 
 <a name="Question1">1. How much does Paying Mantis cost?</a><a href="#top"> (Back to Top)</a><br>
-There are a few options available, namely Basic (Monthly), Bronze (3 Months, 16% discount), Silver (6 Months, 33% discount) and Gold (12 Months, 50% discount). Everyone automatically starts out on the fully functioning free version. After 1 month of the free version, you will be asked which of the payment plans you would like to upgrade to in order to continue using the software. For more information on pricing, have a look at the <%= link_to 'pricing', '/pages/pricing' %> page.
+There are a few options available, namely Basic (Monthly), Bronze (3 Months, 16% discount), Silver (6 Months, 33% discount) and Gold (12 Months, 50% discount). Everyone automatically starts out on the fully functioning free version. After 1 month of the free version, you will be asked which of the payment plans you would like to upgrade to in order to continue using the software. For more information on pricing, have a look at the <%= link_to 'pricing', pages_pricing_path %> page.
 
 <br><br><a name="Question2">2. Can I load old outstanding invoices?</a><a href="#top"> (Back to Top)</a><br>
 Of course you can! Gather all your old outstanding invoices that you have given up receiving payment on, and load a few of them and watch Paying Mantis do it's job. You have nothing to lose and everything to gain. <b>Note:</b> For best results with old outstanding invoices, we recommend that you load them into Paying Mantis with a due date of yesterday. This will ensure that a "pre-due" and "due" reminders are not sent (because obviously for these bad payers, the due date has already passed). It will also make sure that the chain of overdue reminders sent will start at the first one, and go through the entire process, yielding the best possible results for your business. If thereafter, your client still has not paid you, you have the option of sending them a Final Demand letter directly from the website.
 
 <br><br><a name="Question3">3. Is there a limit on the number of invoices per client that I can load in the free trial?</a><a href="#top"> (Back to Top)</a><br>
-No. You can load as many invoices as you want. For more information on payments, have a look at the <%= link_to 'pricing', '/pages/pricing' %> page.
+No. You can load as many invoices as you want. For more information on payments, have a look at the <%= link_to 'pricing', pages_pricing_path %> page.
 
 <br><br><a name="Question4">4. Is there a limit on the number of clients I can load in the free trial?</a><a href="#top"> (Back to Top)</a><br>
-No. You can have as many clients as you want. For more information on payments, have a look at the <%= link_to 'pricing', '/pages/pricing' %> page.
+No. You can have as many clients as you want. For more information on payments, have a look at the <%= link_to 'pricing', pages_pricing_path %> page.
 
 <br><br><a name="Question5">5. What if my registration email did not get delivered?</a><a href="#top"> (Back to Top)</a><br>
 For maximum reliability, we use specialized bulk email services. The delivery rate of the emails is very reliable. So if you or your clients do not receive emails, please make sure to check your email junk and spam folders. We take the greatest care to ensure that every email gets delivered to it's intended recipient, but some email filters are more strict than others, so that would always be the first place to check. 
@@ -80,16 +80,16 @@ No. Paying Mantis works absolutely independently from any accounting software. N
 At the moment, no. But we are in discussions with a lot of the large accounting software development teams, and are working on getting interoperability between their packages and ours working, in order to make this a reality. 
 
 <br><br><a name="Question15">15. How secure is my data?</a><a href="#top"> (Back to Top)</a><br>
-Very. It is stored on secure servers and we take every precaution to make sure no-one but you can see your data. For more information, view our <%= link_to 'privacy policy', '/pages/privacy' %>.
+Very. It is stored on secure servers and we take every precaution to make sure no-one but you can see your data. For more information, view our <%= link_to 'privacy policy', pages_privacy_path %>.
 
 <br><br><a name="Question16">16. Do I still own my data once I upload it to your servers?</a><a href="#top"> (Back to Top)</a><br>
 Yes, you do. Your data is yours, and always will be.
 
 <br><br><a name="Question17">17. Will you ever sell any of my information?</a><a href="#top"> (Back to Top)</a><br>
-Never! And that is a promise! For more information, view our <%= link_to 'privacy policy', '/pages/privacy' %>.
+Never! And that is a promise! For more information, view our <%= link_to 'privacy policy', pages_privacy_path %>.
 
 <br><br><a name="Question18">18. Is it easy for me to cancel my account and remove my data?</a><a href="#top"> (Back to Top)</a><br>
-Yes, it is. If you are unhappy with the product, simply go to your user profile (in the Account drop down menu), and click on the "Cancel my Account" link. Beware that this will delete all your customer and invoice information and close your Paying Mantis account. We hope that you love the service though, and if you ever are unhappy, we would prefer that you rather <%= link_to 'contact us', '/contact' %> and let us know why, so we can try make things better for you.
+Yes, it is. If you are unhappy with the product, simply go to your user profile (in the Account drop down menu), and click on the "Cancel my Account" link. Beware that this will delete all your customer and invoice information and close your Paying Mantis account. We hope that you love the service though, and if you ever are unhappy, we would prefer that you rather <%= link_to 'contact us', contact_path %> and let us know why, so we can try make things better for you.
 
 <br><br><a name="Question19">19. How do I send a Final Demand letter?</a><a href="#top"> (Back to Top)</a><br>
 Go to the edit screen of specific invoice in question, and change the status of the invoice to "Send Final Demand", and save. That's it! 
@@ -110,7 +110,7 @@ View the client, and you will see a section at the bottom that has two tabs. The
 Go to your home screen. This will show all the invoices that you are currently chasing. Simply click on the green <span class="label label-success">Chasing</span> label, and it will change into a drop down list, which will enable you to select "Paid". This saves automatically and will stop all chasing for that invoice. Next time you view the home screen, that invoice will no longer appear.
 
 <br><br><a name="Question25">25. You mentioned Charity?</a><a href="#top"> (Back to Top)</a><br>
-We are a company that does like to give back wherever possible. And as you can see from our <%= link_to 'pricing', '/pages/pricing' %>, we offer this service at very affordable prices for businesses. So we urge you to upgrade to a paid package if you enjoy the service, and it works for you. We always try give a percentage of the Paying Mantis profits to charity. Look out in the news section for information of which charities will benefit. We pick one new charity each year. 
+We are a company that does like to give back wherever possible. And as you can see from our <%= link_to 'pricing', pages_pricing_path %>, we offer this service at very affordable prices for businesses. So we urge you to upgrade to a paid package if you enjoy the service, and it works for you. We always try give a percentage of the Paying Mantis profits to charity. Look out in the news section for information of which charities will benefit. We pick one new charity each year.
 
 <br><br><a name="Question26">26. Why is Paying Mantis so awesome? </a><a href="#top">(Back to Top)</a><br>
 It just is :)
@@ -120,4 +120,4 @@ Your Home screen shows all the invoices that you are currently chasing. This mea
 
 <hr class="bs-docs-separator">
 
-For more information on how Paying Mantis works, check out the <%= link_to 'About page', '/pages/about' %>.<br>
+For more information on how Paying Mantis works, check out the <%= link_to 'About page', pages_about_path %>.<br>

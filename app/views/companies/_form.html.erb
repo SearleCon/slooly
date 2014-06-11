@@ -60,7 +60,7 @@
 
       </div>
       <div class="span6 tooltip-demo well">
-        <img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
+        <%= image_tag('tip.png', class: 'header') %><h3>Notes:</h3><br>
         <ul>
           <li><b>Email:</b> This email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be shown as sent FROM this address.</li><br>
           <li><b>Contact Info:</b> All of the other fields on this form (apart from your company logo) will be shown on the invoice and it is important that you enter correct information here, as this is what the client will use to contact you or to send you payment confirmation etc.</li><br>
@@ -103,7 +103,6 @@
     <hr class="bs-docs-separator">
 
     <div class="actions">
-      <!-- <%= f.submit %> -->
-      <input type="submit" class="btn btn-primary" value="Update" >
+      <%= f.submit 'Update', class: 'btn btn-primary' %>
     </div>
 <% end %>

@@ -21,11 +21,8 @@
 	    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
 	  </div>		  
 	
-	  <!-- <div class="field" hidden="true"> -->
-	    <%= f.hidden_field :client_id %>
-	  <!-- </div>	 -->
-	  <!-- <%= f.submit %>	 -->
-      <input type="submit" class="btn btn-primary" value="Save Invoice" >
+	  <%= f.hidden_field :client_id %>
+      <%= f.submit 'Save Invoice', class: 'btn btn-primary' %>
 
 	<% end %>
 </div>

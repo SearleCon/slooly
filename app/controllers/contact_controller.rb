@@ -7,11 +7,8 @@ class ContactController < ApplicationController
     def create
         @message = Message.new(params[:message])
         if @message.valid?
-          unless params[:content].present?
-            UserMailer.new_message(@message).deliver
-            flash[:notice] = "Message was successfully sent."
-          end
-          redirect_to root_url
+          UserMailer.new_message(@message).deliver
+          redirect_to root_url, notice: "Message was successfully sent."
         else
           render :new
         end

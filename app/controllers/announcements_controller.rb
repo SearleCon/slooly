@@ -62,7 +62,7 @@ class AnnouncementsController < ApplicationController
   # PUT /announcements/1
   # PUT /announcements/1.json
   def update
-    authorize! :index, @user, :message => 'You are not authorized as an administrator.'
+    authorize! :index, @user, message: 'You are not authorized as an administrator.'
     
     @announcement = Announcement.find(params[:id])
 

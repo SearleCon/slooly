@@ -1,8 +1,8 @@
-<img src="images/contact.png" class="header"> <br><h1>Contact and Support</h1><br><br>
+<%= image_tag('contact.png', class: 'header') %> <br><h1>Contact and Support</h1><br><br>
 
 
 <h6>Got a question? Check these out:</h6>
-<h3><%= link_to 'Frequently Asked Questions', '/pages/faq' %></h3>
+<h3><%= link_to 'Frequently Asked Questions', pages_faq_path %></h3>
 
 <hr class="bs-docs-separator">
 
@@ -24,7 +24,7 @@
 
 <h6>Let us get back to you:</h6>
 
-<%= form_for @message, :url => contact_path do |form| %>
+<%= form_for @message, :url => contact_path, :html => { :honeypot => true } do |form| %>
     <% if @message.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being sent:</h2>
@@ -55,19 +55,11 @@
       <%= form.label :body %>
       <%= form.text_area :body %>
     </div>
-
-    <div class="field honeypot">
-      <%= label_tag :content %>
-      <%= text_field_tag :content, nil, tabindex: '-1' %>
-      <span class="help">Do not fill in this field. It is an anti-spam measure.</span>
-    </div>
   </fieldset>
   
 <hr class="bs-docs-separator">
 
   <fieldset class="actions">
-    <!-- <%= form.submit "Send" %> -->
-    <input type="submit" class="btn btn-primary" value="Send Enquiry" >
-
+    <%= form.submit "Send Enquiry", class: 'btn btn-primary' %>
   </fieldset>
 <% end %>

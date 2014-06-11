@@ -1,8 +1,7 @@
-<img src="/images/settings.png" class="header"><h1>Settings</h1><br><br>
+<%= image_tag 'settings.png', class: 'header' %><h1>Settings</h1><br><br>
+
 
 <table>
-
-
 
       <div class="tabbable tabs-left">
         <ul id="myTab" class="nav nav-tabs">
@@ -35,8 +34,6 @@
             <h6>Pre-Due Email Subject line:</h6> 		<%= @settings.pre_due_subject %><br><br>
             <h6>Pre-Due Email Message Content:</h6> 	<%= simple_format(@settings.pre_due_message) %>
 
-            <!-- <h3 align="right"><a href="<%= new_invoice_path %>" class="btn btn-primary btn-mini">Send Test Email</a></h3>
-		<p class="muted" align="right">(Will be sent to your <%= link_to "Company Profile", companies_path %> Email)</p> -->
 
           </div>
           <div class="tab-pane fade" id="due">

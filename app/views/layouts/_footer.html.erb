@@ -1,15 +1,15 @@
 <footer class="footer">
   <small>
-	 <a href="http://searleconsulting.com/">Searle Consulting © Copyright 2013</a>
+     <%= link_to 'Searle Consulting © Copyright 2013', 'http://searleconsulting.com/' %>
   </small>
   <nav>
     <ul>
-      <li><a href="/pages/about">About</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><%= link_to 'About', pages_about_path %></li>
+      <li><%= link_to 'Contact', contact_path %></li>
       <li><%= link_to "News", announcements_path %></li>
-      <li><a href="/pages/faq">FAQs</a></li>
-      <li><a href="/pages/tos">Terms</a></li>
-      <li><a href="/pages/privacy">Privacy</a></li>
+      <li><%= link_to 'FAQs', pages_faq_path %></li>
+      <li><%= link_to 'Terms', pages_tos_path %></li>
+      <li><%= link_to 'Privacy', pages_privacy_path %></li>
     </ul>
   </nav>
 </footer>

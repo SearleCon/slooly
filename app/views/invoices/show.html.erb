@@ -1,5 +1,5 @@
 
-<img src="/images/invoices.png" class="header"> <h2>Invoice Details</h2><br>
+<%= image_tag('invoices.png', class: 'header') %> <h2>Invoice Details</h2><br>
 
 <table>
   <tr>
@@ -29,29 +29,24 @@
 </table>
 <% if @invoice.status == :chasing %>
 <hr class="bs-docs-separator">
-<!-- <i class="icon-calendar header"></i><h4>Reminder Email Dates:</h4><br> -->
-<img src="/images/calendarbig.png" class="header"> <h4>Reminder Email Dates for Invoice <%= @invoice.invoice_number %>:</h4><br>
+    <%= image_tag('calendarbig.png', class: 'header') %> <h4>Reminder Email Dates for Invoice <%= @invoice.invoice_number %>:</h4><br>
 
 <table>
   <tr>
     <td>1. Pre-Due Reminder (if applicable):&nbsp;&nbsp;</td>
     <td><b><%= @invoice.pd_date %></b></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td> -->
   </tr>
   <tr>
     <td>2. First Overdue Reminder:</td>
     <td><b><%= @invoice.od1_date %></b></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td> -->
   </tr>
   <tr>
     <td>3. Second Overdue Reminder:</td>
     <td><b><%= @invoice.od2_date %></b></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td> -->
   </tr>
   <tr>
     <td>4. Third Overdue Reminder:</td>
     <td><b><%= @invoice.od3_date %></b></td>
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#" %></td> -->
   </tr>
 </table>
 <% end %>

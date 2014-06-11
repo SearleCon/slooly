@@ -50,7 +50,7 @@
   	
   </div>
   <div class="span6 tooltip-demo well">
-		<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
+		<%= image_tag('tip.png', class: 'header')%><h3>Notes:</h3><br>
 	<ul>
 	<li><b>Due Date:</b> The due date is important. It is what drives the reminder emails. The "DAYS FOR PRE-DUE REMINDER" and "DAYS BETWEEN REMINDER EMAILS" in your settings will be subtracted or added respectively to the Due Date. <i><b>Example:</b></i> If your due date is <b>today</b>, the first overdue reminder will be <b>today plus 7 days</b> (Default in settings is 7 - You can change this if you want). In this case, the Pre-Due reminder date will be set to <b>today less 2</b> (Default in Settings is 2 - You can also change this to suit your needs)</li><br>
 	<li><b>Status:</b> The default status is "Chasing". Leave it as this in order to set this newly added invoice to be chased. If you are editing an invoice, changing it to anything other than "Chasing", will STOP the reminder emails from being sent for this invoice. "Delete" will mark it as deleted, but will not in fact delete it from the database. To delete the invoice permanently, click the delete link for that invoice on the invoice listing screen. Selecting "Send Final Demand" will set this to send the final demand letter to the client. Please note that it will send it the NEXT day, along with the daily reminder email run, in order to give you the chance to stop it from being sent, if need be.</li><br>
@@ -70,9 +70,7 @@
 <hr class="bs-docs-separator">
 
 <div class="actions">
-  <!-- <%= f.submit %> -->
-  <input type="submit" class="btn btn-primary" value="Save Invoice" >
-
+  <%= f.submit 'Save Invoice', class: 'btn btn-primary' %>
 </div>
 
 

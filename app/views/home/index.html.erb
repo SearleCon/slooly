@@ -3,30 +3,30 @@
   <div class="span6">
 	<h2>The easiest way to chase outstanding invoices!</h2>
 	<h6>Take the hassle out of chasing your debtors, and get paid on time!</h6>
-	<!-- <%= image_tag ("calendar.png") %>	 -->
 
 
     <div class="bs-docs-example">
       <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="item active">
-            <img src="carousel/images/calendar1.png" alt="">
+            <%= image_tag 'calendar1.png'%>
+
+            <!--<img src="carousel/images/calendar1.png" alt="">-->
             <div class="carousel-caption">
-              <!-- <h4>Get paid on time!</h4> -->
               <p>Drastically increase your chances of getting paid on time, every time!</p>
             </div>
           </div>
           <div class="item">
-            <img src="carousel/images/chasing.png" alt="">
+            <%= image_tag 'chasing.png'%>
+            <!--<img src="carousel/images/chasing.png" alt="">-->
             <div class="carousel-caption">
-              <!-- <h4>Stop chasing your cash</h4> -->
               <p>Stop wasting your own time chasing after Outstanding Invoices!</p>
             </div>
           </div>
           <div class="item">
-            <img src="carousel/images/unlock1.png" alt="">
+            <%= image_tag('unlock1.png') %>
+            <!--<img src="carousel/images/unlock1.png" alt="">-->
             <div class="carousel-caption">
-              <!-- <h4>Unlock your Cash Flow!</h4> -->
               <p>Unlock your Cash Flow and free up your Time with very little effort!</p>
             </div>
           </div>
@@ -57,7 +57,7 @@
 
     </p>		  	
 	<h3>Need more information?</h3>
-    <%= link_to 'Click here', '/pages/about' %>  
+    <%= link_to 'Click here', pages_about_path %>
     </p>
     <p align="right"><br><br><br><br>
 	<%= render 'layouts/share' %>
@@ -73,10 +73,7 @@
     <h3 id="myModalLabel">Quick overview of how Paying Mantis works</h3>
   </div>
   <div class="modal-body">
-    <!-- <iframe width="530" height="315" src="http://www.youtube.com/embed/6_hJ3R8jEZM" frameborder="0" allowfullscreen></iframe> -->
     <iframe width="530" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" frameborder="0" allowfullscreen></iframe>
-<!-- http://www.youtube.com/watch?v=yJGI6CC9kPo -->
-<!-- <iframe width="420" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" frameborder="0" allowfullscreen></iframe> -->
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

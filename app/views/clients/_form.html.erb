@@ -17,16 +17,6 @@
   <div class="span5">
 
 
-
-
-
-
-<!-- 	<input type="text" autofocus="focus"> 
-	<script>
-	    $(function() {$('[autofocus]').focus()});
-	</script> -->
-
-
   <div class="field">
     <%= f.label :business_name %>
     <%= f.text_field :business_name, :autofocus=>true %>
@@ -73,7 +63,7 @@
 
   </div>
   <div class="span6 tooltip-demo well">
-		<img src="/images/tip.png" class="header"><h3>Notes:</h3><br>
+		<%= image_tag('tip.png', class: 'header')%><h3>Notes:</h3><br>
 	<ul>
 	<li><b>Email:</b> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.</li><br>
 	<li><b>Other:</b> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.</li>
@@ -87,8 +77,7 @@
 <hr class="bs-docs-separator">
 
 <div class="actions">
-  <!-- <%= f.submit %> -->
-  <input type="submit" class="btn btn-primary" value="Save Client" >
+   <%= f.submit 'Save Client', class: 'btn btn-primary' %>
 </div>
 
 

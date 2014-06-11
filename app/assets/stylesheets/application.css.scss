@@ -20,13 +20,13 @@
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
-/*  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15); */
-/*  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15); */
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  /*  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15); */
+  /*  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15); */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
 
-/* SS Added for more Shadow effect (took out the top two) */
-  -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
-  -moz-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+  /* SS Added for more Shadow effect (took out the top two) */
+  -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 
 }
 
@@ -37,208 +37,225 @@
   background-repeat: no-repeat;
   background-position: right center;
 }
-th .asc { 
-  background-image: url(sortups.png); 
+
+th .asc {
+  background-image: url(sortups.png);
 }
 
-th .desc { 
-  background-image: url(sortdowns.png); 
+th .desc {
+  background-image: url(sortdowns.png);
 }
-
 
 /* SS added for Pagination */
 
 .flickr_pagination {
   text-align: center;
   padding: 0.3em;
-  cursor: default; }
-  .flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
-    padding: 0.2em 0.5em; }
-  .flickr_pagination .disabled {
-    color: #aaaaaa; }
-  .flickr_pagination .current {
-    font-style: normal;
-    font-weight: bold;
-    color: #ff0084; }
-  .flickr_pagination a {
-    border: 1px solid #dddddd;
-    color: #0063dc;
-    text-decoration: none; }
-    .flickr_pagination a:hover, .flickr_pagination a:focus {
-      border-color: #003366;
-      background: #0063dc;
-      color: white; }
-  .flickr_pagination .page_info {
-    color: #aaaaaa;
-    padding-top: 0.8em; }
-  .flickr_pagination .previous_page, .flickr_pagination .next_page {
-    border-width: 2px; }
-  .flickr_pagination .previous_page {
-    margin-right: 1em; }
-  .flickr_pagination .next_page {
-    margin-left: 1em; }
+  cursor: default;
+}
+
+.flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
+  padding: 0.2em 0.5em;
+}
+
+.flickr_pagination .disabled {
+  color: #aaaaaa;
+}
+
+.flickr_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  color: #ff0084;
+}
+
+.flickr_pagination a {
+  border: 1px solid #dddddd;
+  color: #0063dc;
+  text-decoration: none;
+}
+
+.flickr_pagination a:hover, .flickr_pagination a:focus {
+  border-color: #003366;
+  background: #0063dc;
+  color: white;
+}
+
+.flickr_pagination .page_info {
+  color: #aaaaaa;
+  padding-top: 0.8em;
+}
+
+.flickr_pagination .previous_page, .flickr_pagination .next_page {
+  border-width: 2px;
+}
+
+.flickr_pagination .previous_page {
+  margin-right: 1em;
+}
+
+.flickr_pagination .next_page {
+  margin-left: 1em;
+}
 
 /* SS Test image left */
-	img.header {
-	float:left;
-	clear:right;
-	margin-right:20px;
-	}
-
+img.header {
+  float: left;
+  clear: right;
+  margin-right: 20px;
+}
 
 /* SS Internet Explorer IE Disclaimer */
 
 .ie_warn {
-    border: 1px solid;
-    padding:15px 20px 15px 55px;
-    font: bold 12px verdana;
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+  border: 1px solid;
+  padding: 15px 20px 15px 55px;
+  font: bold 12px verdana;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px #888;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 }
 
 .ie_warn {
-    color: #fff;
-    background: #eb4e4e no-repeat 10px center;
+  color: #fff;
+  background: #eb4e4e no-repeat 10px center;
 }
-
 
 /* SS Breaking News Box */
 
 .clean-gray {
-border:solid 1px #DEDEDE; 
-background:#EFEFEF;
-color:#222222;
-padding:4px;
-text-align:center;
--moz-box-shadow: 0 0 5px #888;
--webkit-box-shadow: 0 0 5px#888;
+  border: solid 1px #DEDEDE;
+  background: #EFEFEF;
+  color: #222222;
+  padding: 4px;
+  text-align: center;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px #888;
 
-box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
--webkit-border-radius: 15px;
--moz-border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
 }
 
-
-	
 /* SS CSS error styling */
 
+.field_with_errors {
+  padding: 2px;
+  color: red;
+  display: table;
+}
 
-	.field_with_errors {
-	  padding: 2px;
-	  color: red;
-	  display: table; }
-
-	#error_explanation {
-	  width: 300px;
-	  border: 2px solid red;
-	  padding: 7px;
-	  padding-bottom: 0;
-	  margin-bottom: 20px;
-	  background-color: #f0f0f0;
-	  h2 {
-	    text-align: left;
-	    font-weight: bold;
-	    padding: 5px 5px 5px 15px;
-	    font-size: 12px;
-	    margin: -7px;
-	    margin-bottom: 0px;
-	    background-color: #f0f0f0;
-	    color: red; }
-	  ul li {
-	    font-size: 12px;
-	    list-style: square; } }
-
+#error_explanation {
+  width: 300px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #f0f0f0;
+    color: red;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
 
 /* Pricing blocks added by Shaun */
 
 h11, h21, h31, h41, h51, h61, p1, ul1, ol1, li1, form1, input1, textarea1 {
-	padding: 0px;
-	margin: 0px;
-}
-a1.more {
-	font-size: 11px;
-	font-weight: bold;
-	color: #333333;
-	text-decoration: none;
-}
-a1.more:hover {
-	color: #FFFFFF;
+  padding: 0px;
+  margin: 0px;
 }
 
+a1.more {
+  font-size: 11px;
+  font-weight: bold;
+  color: #333333;
+  text-decoration: none;
+}
+
+a1.more:hover {
+  color: #FFFFFF;
+}
 
 .sections {
-	width: 899px;
-	height: 184px;
-	float: left;
-	padding-top: 41px;
+  width: 899px;
+  height: 184px;
+  float: left;
+  padding-top: 41px;
 }
+
 .section1 {
-	font-size: 11px;
-	background-image: url(sec3bg.jpg);
-	background-repeat: no-repeat;
-	background-position: left top;
-	width: 171px;
-	height: 111px;
-	float: left;
-	padding: 18px;
-	margin-left: 10px;
+  font-size: 11px;
+  background-image: url(sec3bg.jpg);
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 171px;
+  height: 111px;
+  float: left;
+  padding: 18px;
+  margin-left: 10px;
 }
+
 .section1 h3, .section4 h3 {
-	font-size: 14px;
+  font-size: 14px;
 }
+
 .section2 {
-	font-size: 11px;
-	background-image: url(sec2bg.jpg);
-	background-repeat: no-repeat;
-	background-position: left top;
-	width: 171px;
-	height: 111px;
-	float: left;
-	padding: 18px;
-	margin-left: 17px;
+  font-size: 11px;
+  background-image: url(sec2bg.jpg);
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 171px;
+  height: 111px;
+  float: left;
+  padding: 18px;
+  margin-left: 17px;
 }
+
 .section2 h3 {
-	font-size: 14px;
-	color: #1f5aa0;
+  font-size: 14px;
+  color: #1f5aa0;
 }
+
 .section3 {
-	font-size: 11px;
-	background-image: url(sec1bg.jpg);
-	background-repeat: no-repeat;
-	background-position: left top;
-	width: 171px;
-	height: 111px;
-	float: left;
-	padding: 18px;
-	margin-left: 17px;
+  font-size: 11px;
+  background-image: url(sec1bg.jpg);
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 171px;
+  height: 111px;
+  float: left;
+  padding: 18px;
+  margin-left: 17px;
 }
+
 .section3 h3 {
-	font-size: 14px;
-	color: #2d680c;
+  font-size: 14px;
+  color: #2d680c;
 }
+
 .section4 {
-	font-size: 11px;
-	background-image: url(sec4bg.jpg);
-	background-repeat: no-repeat;
-	background-position: left top;
-	width: 172px;
-	height: 111px;
-	float: left;
-	padding: 18px;
-	margin-left: 17px;
+  font-size: 11px;
+  background-image: url(sec4bg.jpg);
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 172px;
+  height: 111px;
+  float: left;
+  padding: 18px;
+  margin-left: 17px;
 }
-
-
-
-
-
-
-
-
 
 /* Full Screen BG */
 html, body {
@@ -269,7 +286,6 @@ html, body {
 
 /* SS To force Internet Explorer to not show hidden fields */
 
-input[type="hidden"]
-{
-  display: none;
+input[type="hidden"]{
+ display: none;
 }
