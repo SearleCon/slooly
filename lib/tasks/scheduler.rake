@@ -30,7 +30,6 @@ task :resend_todays_reminders => :environment do # This task ignores the last_da
           puts "predue set: "+@setting.pre_due_reminder.to_s
           puts "due date: "+invoice.due_date.to_s
           puts "due set: "+@setting.due_reminder.to_s
-
         else
           build_reminder_email(@client, @company, invoice, @setting)
         end

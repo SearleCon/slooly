@@ -2,13 +2,9 @@ class ApplicationController < ActionController::Base
   respond_to :html, :js, :json
   protect_from_forgery
 
-
   before_filter :authenticate_user!
   before_filter :subscription_required
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: exception.message
-  end
 
   # SS Not found and Routing error redirects
   rescue_from ActionController::RoutingError, with: :render_not_found

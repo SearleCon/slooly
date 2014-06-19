@@ -17,49 +17,29 @@
 #
 
 class Client < ActiveRecord::Base
-  attr_accessible :address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone, :user_id
-  has_many        :invoices, :dependent => :destroy
-  has_many        :histories, :dependent => :destroy
-  belongs_to      :user
-  accepts_nested_attributes_for :invoices #SS - To allow managing of invoices through clients
-  validates       :business_name, :email, :presence => true
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  has_many        :invoices, inverse_of: :client ,dependent: :destroy
+  has_many        :histories, inverse_of: :client ,dependent: :destroy
+  belongs_to      :user, inverse_of: :clients
+  accepts_nested_attributes_for :invoices
+  validates       :business_name, :email, presence: true
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_uniqueness_of :business_name, :scope => [:user_id]
   before_validation :strip_all_spaces
 
   #include Importable
   
-  
-  #SS Defined by you (user is the variable passed in from the controller - See ClientsController index action)  
-  def self.for_user(user) 
-      where("user_id = ?", user)
-  end
 
-  def self.client
-    self.arel_table
-  end
-  private_class_method :client
 
   def self.search(criteria)
     if criteria
-      where(client[:business_name].matches("%#{criteria}%").or(client[:contact_person].matches("%#{criteria}%")))
+      where(arel_table[:business_name].matches("%#{criteria}%").or(arel_table[:contact_person].matches("%#{criteria}%")))
     else
       scoped
     end
   end
-
-  
-  def self.total_chasing_outstanding(client_id)
-    @clients_chasing = Invoice.all :conditions => ["client_id = ? and status_id = ?", client_id, 2]
-    @total_chasing = 0
-    @clients_chasing.each do |c|
-      @total_chasing = @total_chasing + c.amount
-    end
-    return @total_chasing
-  end    
   
   def strip_all_spaces
-    self.email = self.email.strip
+    self.email = email.strip if email
   end
   
 end

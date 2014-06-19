@@ -11,13 +11,9 @@
 #
 
 class Announcement < ActiveRecord::Base
-  attr_accessible :description, :headline, :posted_by
+  #attr_accessible :description, :headline, :posted_by
 
-  scope :last_7_days, -> { where(announcement[:created_at].gteq(Date.today- 7.days)).order('created_at desc')  }
+  scope :last_7_days, -> { where(arel_table[:created_at].gteq(Date.today - 7.days)).order('created_at desc')  }
 
-  def self.announcement
-    self.arel_table
-  end
-  private_class_method :announcement
 
 end

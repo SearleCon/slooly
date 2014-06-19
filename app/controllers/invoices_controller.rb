@@ -6,7 +6,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = current_user.invoices.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)
+    @invoices = current_user.invoices.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
   end
 
   def show;end
@@ -18,14 +18,14 @@ class InvoicesController < ApplicationController
   def edit;end
 
   def create
-    @invoice = current_user.invoices.build(params[:invoice])
+    @invoice = current_user.invoices.build(invoice_params)
     setup_invoice_dates
     flash[:notice] = 'Invoice was successfully created.' if @invoice.save
     respond_with @invoice
   end
 
   def update
-    @invoice.assign_attributes(params[:invoice])
+    @invoice.assign_attributes(invoice_params)
     setup_invoice_dates if @invoice.due_date_changed?
     flash[:notice] = 'Invoice was successfully updated.' if @invoice.save
     respond_with(@invoice)
@@ -40,6 +40,10 @@ class InvoicesController < ApplicationController
   private
     def set_invoice
       @invoice = current_user.invoices.find(params[:id])
+    end
+
+    def invoice_params
+      params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status_id, :last_date_sent)
     end
 
     def sort_column

@@ -18,8 +18,6 @@
 #
 
 class Company < ActiveRecord::Base
-  attr_accessible :address, :city, :email, :fax, :logo_path, :name, :post_code, :telephone, :user_id, :image, :remote_image_url
-
   belongs_to      :user
 
   validates       :email, presence: true
@@ -37,12 +35,12 @@ class Company < ActiveRecord::Base
 
     def set_defaults
      self.name = "Your Company Name"
-     self.address				= "44 Street Name, Suburb"
-     self.city 					= "Best City"
-     self.post_code 				= "1234"
-     self.telephone 				= "555 345 6789"
-     self.fax 					= "People still fax?"
-     self.email 					= "you@example.com"
+     self.address = "44 Street Name, Suburb"
+     self.city	= "Best City"
+     self.post_code = "1234"
+     self.telephone = "555 345 6789"
+     self.fax = "People still fax?"
+     self.email	= "you@example.com"
     end
 
 

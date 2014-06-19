@@ -12,7 +12,6 @@ gem "bootstrap-datepicker-rails"
 gem 'devise', '~> 3.2.4'
 
 # Authorization
-gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 
 # In place editing
@@ -45,6 +44,9 @@ gem 'roo'
 
 # Server
 gem 'unicorn'
+
+# Strong params
+gem 'strong_parameters'
 
 
 group :assets do

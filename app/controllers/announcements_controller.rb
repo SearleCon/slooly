@@ -1,27 +1,25 @@
 class AnnouncementsController < ApplicationController
-  load_resource except: [:index]
-  authorize_resource only: [:new, :create, :edit, :update, :destroy]
+
+  before_filter :authorize, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
     @announcements = Announcement.order('created_at desc')
   end
 
-  def show;end
-
-
-  def new; end
-
-  def edit;end
-
+  def new
+    @announcement = Announcement.new
+  end
 
   def create
-    flash[:notice] =  'Announcement was successfully created.' if @announcement.save
+    @announcement.new(announcement_params)
+    flash[:notice] = 'Announcement was successfully created.' if @announcement.save
     respond_with @announcement
   end
 
 
   def update
-    flash[:notice] =  'Announcement was successfully updated.' if @announcement.update_attributes(params[:announcement])
+    flash[:notice] = 'Announcement was successfully updated.' if @announcement.update_attributes(announcement_params)
     respond_with @announcement
   end
 
@@ -30,4 +28,17 @@ class AnnouncementsController < ApplicationController
     @announcement.destroy
     respond_with @announcement
   end
+
+  private
+   def set_announcement
+     @announcement = Announcement.find(params[:id])
+   end
+
+   def announcement_params
+     params.require(:announcement).permit(:description, :headline, :posted_by)
+   end
+
+   def authorize
+     redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
+   end
 end

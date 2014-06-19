@@ -12,8 +12,6 @@
 #
 
 class Voucher < ActiveRecord::Base
-
-  attr_accessible :redeemed_by
   attr_readonly :unique_code, :valid_until, :number_of_days
   attr_accessor :prefix, :suffix, :validity_period, :free_days
 
@@ -25,8 +23,8 @@ class Voucher < ActiveRecord::Base
     end
 
     def set_valid_until
-      period = (validity_period || 0).months
-      self.valid_until= Time.zone.now + period
+      period = validity_period || 0
+      self.valid_until= Time.zone.now + period.months
     end
 
     def set_free_days

@@ -13,8 +13,6 @@
           </div>
       <% end %>
 
-
-
       <div class="form-inputs">
         <%= f.hidden_field :expiry_date %>
         <%= f.hidden_field :bought_on %>
@@ -34,7 +32,7 @@
             </tr>
           </table>
 
-          <input type="submit" class="btn btn-primary" value="Complete my Order" >
+          <%= f.submit 'Complete My Order', class: 'btn btn-primary' %>
 
       <% else %>
           <h2>Order details</h2>

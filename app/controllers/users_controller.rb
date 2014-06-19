@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  authorize_resource only: [:index]
+  before_filter :authorize, only: [:index]
 
   def index
     all_users = User.scoped
@@ -15,5 +15,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  
+  private
+   def authorize
+     redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
+   end
 end

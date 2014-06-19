@@ -18,28 +18,23 @@
 #  name                   :string(255)
 #
 
-class User < ActiveRecord::Base  
-  cattr_accessor :current_user
-#  validates :terms_of_service, :acceptance => true
-  
-  
+class User < ActiveRecord::Base
   rolify
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :terms_of_service
-  
-  has_many        :clients, dependent: :destroy
-  has_many        :subscriptions, dependent: :destroy
-  has_many        :invoices, dependent: :destroy
+  has_many        :clients, inverse_of: :user ,dependent: :destroy
+  has_many        :subscriptions, inverse_of: :user,dependent: :destroy
+  has_many        :invoices,inverse_of: :user, dependent: :destroy
+  has_many        :histories, inverse_of: :user, dependent: :destroy
   has_one         :company, dependent: :destroy
   has_one         :setting, dependent: :destroy
 
-  validates :terms_of_service, :acceptance => true
+  validates :terms_of_service, acceptance: true
 
   def timeout_in
     2.hours

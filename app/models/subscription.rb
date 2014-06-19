@@ -17,10 +17,9 @@
 #
 
 class Subscription < ActiveRecord::Base
-  belongs_to :plan
-  belongs_to :user
+  belongs_to :plan, inverse_of: :subscriptions
+  belongs_to :user, inverse_of: :subscriptions
 
-  attr_accessible :active, :bought_on, :expiry_date, :paypal_id, :plan_id, :time, :user, :paypal_customer_token, :paypal_payment_token
   attr_accessor :paypal_payment_token
 
   scope :active, -> { where(active: true) }
@@ -32,7 +31,6 @@ class Subscription < ActiveRecord::Base
   def save_with_paypal_payment
     response = paypal.request_payment
     response.approved? && response.success? ? save! : false
-    save
   end
 
   def cancel

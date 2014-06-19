@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   
   
   def home
-    @chasing_invoices = current_user.invoices.chasing.order(sort_column + ' ' + sort_direction).paginate(:page => params[:page], :per_page => 10)
+    @chasing_invoices = current_user.invoices.chasing.order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
   end
 
   def about;end
