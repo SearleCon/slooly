@@ -114,13 +114,13 @@ Slooly::Application.routes.draw do
   resources :plans
 
   # resources :subscriptions
-  
+
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
-  
+
   resources :subscriptions, only: [:new, :create] do
     get :payment_plans, on: :collection
-  end  
-  
+  end
+
   resources :announcements
 
   resources :histories, only: :show
@@ -136,9 +136,9 @@ Slooly::Application.routes.draw do
   get "pages/news"
 
   get "pages/reports"
-  
+
   get "pages/initial_setup"
-  
+
   get "pages/pricing"
 
   get "pages/tos"
@@ -146,12 +146,12 @@ Slooly::Application.routes.draw do
   get "pages/tutorial"
 
   get "pages/privacy"
-  
+
   get "paypal/checkout", to: "subscriptions#paypal_checkout"
-  
-  match 'contact' => 'contact#new', :as => 'contact', :via => :get
-  match 'contact' => 'contact#create', :as => 'contact', :via => :post  
-  
+
+  match 'contact' => 'contact#new', as: 'new_contact', via: :get
+  match 'contact' => 'contact#create', :as => 'contact', via: :post
+
   match 'redeem' => 'vouchers#redeem', :as => 'redeem', via: :put
 
   resources :suggestions
@@ -160,7 +160,7 @@ Slooly::Application.routes.draw do
 
   resources :clients do
     new do
-     get :import_clients, as: :import
+      get :import_clients, as: :import
     end
 
   end
@@ -169,17 +169,17 @@ Slooly::Application.routes.draw do
 
   resources :invoices
 
-  match 'clients/import', as: :import, :via => :post
-  
+  match 'clients/import', as: :import, via: :post
+
 
   authenticated :user do
-    root :to => 'pages#home'
+    root :to => 'pages#home', as: :authenticated_root
   end
   root :to => "home#index"
 
   devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
   resources :users, only: [:show, :index]
-  
+
   # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action).
-  match "*path", :to => "application#routing_error"
+  match "*path", to: "application#routing_error", via: :all
 end

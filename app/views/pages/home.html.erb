@@ -34,11 +34,7 @@ You are currently chasing <b><%= @chasing_invoices.size %></b> invoices.<br><br>
             <td><%= invoice.due_date %></td>
             <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
             <td><%= display_description(invoice)%></td>
-            <% if invoice.status_id != nil %>
-                <td><span class="label label-success"><%= best_in_place invoice, :status_id, type: :select, collection: [[2, "Chasing"], [4, "Paid"]] %></span></td>
-            <% else %>
-                <td></td>
-            <% end %>
+            <td><%= display_status_label(invoice) %></td>
             <td><%= link_to invoice.client.business_name, invoice.client %></td>
             <td><%= time_ago_in_words(invoice.created_at) %> ago</td>
             <td><%= link_to 'Show', invoice %></td>
