@@ -6,7 +6,7 @@ class SettingsController < ApplicationController
   def edit;end
 
   def update
-   flash[:notice] = 'Settings were successfully updated.' if @settings.update_attributes(settings_params)
+   flash[:notice] = 'Settings were successfully updated.' if @settings.update(settings_params)
    respond_with @settings, location: settings_url
   end
 

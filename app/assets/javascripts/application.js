@@ -14,12 +14,13 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require obfuscatejs
 //= require jquery.turbolinks
 //= require_tree .
 
 
 $(document).ready(function() {
-	$('.carousel').carousel()
+	$('.carousel').carousel();
     $("[rel=tooltip]").tooltip(); // this will trigger a tooltip on all that have rel="tooltip" elements
     $("[rel=popover]").popover(); // this will trigger a POPOVER on all that have rel="popover" elements	
 });

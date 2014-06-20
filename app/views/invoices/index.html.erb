@@ -1,64 +1,40 @@
 
 <!-- SS Search box -->
 <div class="header form-search" align="right">
-<%= form_tag invoices_path, :method => 'get' do %>
-  <p>
-    <%= hidden_field_tag :direction, params[:direction] %>
-    <%= hidden_field_tag :sort, params[:sort] %>	
-	
-    <%= text_field_tag :search, params[:search], :class => "input-medium search-query", :placeholder => "Search invoices", :method => 'get' %>
-	<% if params[:search] %>
-		<% if params[:search] != '' %>
-			<span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), invoices_path %></span>
-		<% end %>
-	<% end %>
-  </p>
-<% end %>
+  <%= search_form_for @q do |f| %>
+      <p>
+        <%= f.search_field :invoice_number_or_description_cont, class: "input-medium search-query", placeholder: "Search invoices" %>
+        <% if @q.conditions.any? %>
+            <span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), invoices_path %></span>
+        <% end %>
+      </p>
+  <% end %>
 </div>
 
 <%= image_tag('invoices.png', class: 'header') %> <h1>Invoices</h1>
 
-<% if params[:search] %>
-	<% if params[:search] != '' %>
-		<%= render "search_invoice_results" %>
-	<% end %>
-<% end %>
+<%= render "search_invoice_results" if @q.conditions.any? %>
 
-<h4 align="right">( <%= current_user.invoices.size %> in total )</h4>
+<h4 align="right">( <%= @invoices.total_entries %> in total )</h4>
 
 <% 	if current_user.invoices.empty?%>
 	  <%= render("no_records") %>
 <% else %>
 <table class="table">
   <tr>
-	<th><%= sortable "due_date", "Age" %></th>
-    <th><%= sortable "invoice_number", "Invoice Number" %></th>
-    <th><%= sortable "due_date", "Due Date" %></th>
-    <th><%= sortable "amount", "Amount" %></th>
-    <th><%= sortable "description", "Description" %></th>
-    <th><%= sortable "status_id", "Status" %></th>
-    <th><%= sortable "client_id", "Client" %></th>
-    <th><%= sortable "created_at", "Created" %></th>
+    <%= content_tag :th, sort_link(@q, :due_date, 'Age') %>
+    <%= content_tag :th, sort_link(@q, :invoice_number, 'Invoice Number') %>
+    <%= content_tag :th, sort_link(@q, :due_date, 'Due Date') %>
+    <%= content_tag :th, sort_link(@q, :amount, 'Amount') %>
+    <%= content_tag :th, sort_link(@q, :description, 'Description') %>
+    <%= content_tag :th, sort_link(@q, :status_id, 'Status') %>
+    <%= content_tag :th, sort_link(@q, :client_id, 'Client') %>
+    <%= content_tag :th, sort_link(@q, :created_at, 'Created') %>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
-<% @invoices.each do |invoice| %>
-  <tr>
-    <td><%= display_age_badge(invoice)%></td>
-    <td><%= link_to invoice.invoice_number, invoice %></td>
-    <td><%= invoice.due_date %></td>
-    <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
-    <td><%= display_description(invoice)%></td>
-    <td><%= display_status_label(invoice) %></td>
-    <td><%= link_to invoice.client.business_name, invoice.client %></td>
-	<td><%= "#{time_ago_in_words(invoice.created_at)} ago"%></td>
-    <td><%= link_to 'Show', invoice %></td>
-    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) } %></td>
-  </tr>
-<% end %>
+  <%= render @invoices %>
 </table>
 
 

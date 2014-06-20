@@ -13,5 +13,4 @@
 
 class PaymentNotification < ActiveRecord::Base
   serialize :params
-  attr_accessible :params, :user_id, :status, :transaction_id
 end

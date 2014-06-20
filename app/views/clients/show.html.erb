@@ -32,7 +32,7 @@
   </tr>
   <tr>
     <td>Email:</td>
-    <td><%= mail_to @client.email, nil, encode: :javascript %></td>
+    <td><%= obfuscate_email @client.email %></td>
   </tr>
 
 </table><br>
@@ -53,7 +53,7 @@
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="chasing">
 		<% if @client.invoices.chasing.any? %>
-		  You are currently chasing the following <b><%= "#{@client.invoices.chasing.size} invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= @client.invoices.chasing.sum(:amount) %></b> (total chasing amount). <br>
+		  You are currently chasing the following <b><%= "#{@client.invoices.chasing.size} invoice(s)" %></b> for <b><%= @client.business_name %></b> to the value of <b><%= @client.invoices.chasing.total %></b> (total chasing amount). <br>
 		<%= render 'invoices_for_client' %>
 		<% else %>
 		  You are <b>not</b> chasing any invoices for <%= @client.business_name %>.

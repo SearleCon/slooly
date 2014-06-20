@@ -81,6 +81,10 @@ Slooly::Application.configure do
       user_name: ENV["EMAIL_USERNAME"],
       password: ENV["EMAIL_PASSWORD"]
   }
+  # Delayed Job Scaling
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
 
 
   def update
-    flash[:notice] =  'Company was successfully updated.'  if @company.update_attributes(company_params)
+    flash[:notice] =  'Company was successfully updated.'  if @company.update(company_params)
     respond_with @company, location: companies_url
   end
 

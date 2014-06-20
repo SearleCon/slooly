@@ -30,10 +30,10 @@
     <div id="main" role="main">
       <div class="container">
 	
-			<% if browser.ie6? || browser.ie7? || browser.ie8? %>
+			<% if browser.ie6? || browser.ie7? || browser.ie8?  %>
 				<div class="ie_warn">				
 			  		WARNING: You're running an older version of Internet Explorer that is not fully supported.<br>
-					For more information, please click <%= link_to 'here', pages_ie_warning_path %>
+					For more information, please click <%= link_to 'here', ie_warning_path %>
 				</div><br>
 			<% end %>
 	

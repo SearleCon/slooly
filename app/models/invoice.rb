@@ -21,6 +21,8 @@
 #
 
 class Invoice < ActiveRecord::Base
+  self.per_page = 10
+
   belongs_to      :client, inverse_of: :histories
   belongs_to      :user, inverse_of: :invoices
 
@@ -31,16 +33,12 @@ class Invoice < ActiveRecord::Base
 
   scope :chasing,  -> { where(status_id: STATUSES[:chasing]) }
 
-  def self.search(criteria)
-    if criteria
-      where(arel_table[:invoice_number].matches("%#{criteria}%").or(arel_table[:description].matches("%#{criteria}%")))
-    else
-      scoped
-    end
-  end
-
   def age
     (Date.today - due_date.to_date).to_i
+  end
+
+  def self.total
+    sum(:amount)
   end
 
 

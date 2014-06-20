@@ -1,9 +1,10 @@
 class ClientsController < ApplicationController
   before_filter :set_client, except: [:index, :new, :create]
-  helper_method :sort_column, :sort_direction
-  
+
   def index
-    @clients = current_user.clients.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+    @q = current_user.clients.search(params[:q])
+    @q.sorts = 'updated_at desc' if @q.sorts.empty?
+    @clients = @q.result(distinct: true).page(params[:page])
   end
 
   def new
@@ -13,13 +14,13 @@ class ClientsController < ApplicationController
   def edit;end
 
   def create
-    @client = current_user.clients.build(client_params)
-    flash[:notice] =  'Client was successfully created.' if @client.save
+    @client = current_user.clients.create(client_params)
+    flash[:notice] =  'Client was successfully created.' if @client.errors.empty?
     respond_with @client
   end
 
   def update
-    flash[:notice] = 'Client was successfully updated.' if @client.update_attributes(client_params)
+    flash[:notice] = 'Client was successfully updated.' if @client.update(client_params)
     respond_with @client
   end
 
@@ -45,14 +46,6 @@ class ClientsController < ApplicationController
   end
   
   private
-    def sort_column
-      Client.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
-    end
-
     def set_client
       @client = current_user.clients.find(params[:id])
     end

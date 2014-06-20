@@ -18,7 +18,7 @@
 	  </div>
 	  <div class="field">
 	    <%= f.label "Status" %>
-	    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
+	    <%= f.collection_select(:status_id, Status.all, :id, :description ) %>
 	  </div>		  
 	
 	  <%= f.hidden_field :client_id %>

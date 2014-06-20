@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_not_found
-    render '/pages/not_found'
+    render 'pages/not_found'
   end
 
   def subscription_required

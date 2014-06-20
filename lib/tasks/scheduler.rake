@@ -80,10 +80,10 @@ task :send_reminders => :environment do
 
         email_message += "Payment Options: \r\n"+ @setting.payment_method_message
 
-        history = create_history(invoice, @setting, email_message )
-       # UserMailer.delay.send_it(history)
-        history.update_attributes(sent: true)
-        invoice.update_attributes(last_date_sent: Date.today)
+        history = create_history(invoice, @setting, email_message)
+        UserMailer.delay.send_it(history)
+        history.update(sent: true)
+        invoice.update(last_date_sent: Date.today)
       end
       puts "Sending Invoices #{@invoices.size} complete"
     end

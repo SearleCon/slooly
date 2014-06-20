@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-
+  skip_before_filter :authenticate_user!, only: :index
   before_filter :authorize, only: [:new, :create, :edit, :update, :destroy]
   before_filter :set_announcement, only: [:show, :edit, :update, :destroy]
 
@@ -12,14 +12,14 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    @announcement.new(announcement_params)
-    flash[:notice] = 'Announcement was successfully created.' if @announcement.save
+    @announcement = Announcement.create(announcement_params)
+    flash[:notice] = 'Announcement was successfully created.' if @announcement.errors.empty?
     respond_with @announcement
   end
 
 
   def update
-    flash[:notice] = 'Announcement was successfully updated.' if @announcement.update_attributes(announcement_params)
+    flash[:notice] = 'Announcement was successfully updated.' if @announcement.update(announcement_params)
     respond_with @announcement
   end
 

@@ -1,63 +1,42 @@
 <!-- SS Search box -->
 <div class="header form-search" align="right">
-<%= form_tag clients_path, :method => 'get' do %>
+<%= search_form_for @q do |f| %>
   <p>
-    <%= hidden_field_tag :direction, params[:direction] %>
-    <%= hidden_field_tag :sort, params[:sort] %>	
-	
-    <%= text_field_tag :search, params[:search], :class => "input-medium search-query", :placeholder => "Search clients", :method => 'get' %>
-	<% if params[:search] %>
-		<% if params[:search] != '' %>
-			<span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), clients_path %></span>
-		<% end %>
-	<% end %>
+    <%= f.search_field :business_name_or_contact_person_cont, class: "input-medium search-query", placeholder: "Search clients" %>
+    <% if @q.conditions.any? %>
+        <span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), clients_path %></span>
+    <% end %>
   </p>
 <% end %>
 </div>
 
 <%= image_tag('clients.png', class: 'header') %><h1>Clients</h1>
 
-<% if params[:search] %>
-	<% if params[:search] != '' %>
-		<%= render "search_client_results" %>
-	<% end %>
-<% end %>
+<%= render "search_client_results" if @q.conditions.any? %>
 
-<h4 align="right">( <%= current_user.clients.size %> in total )</h4>
+<h4 align="right">( <%= @clients.total_entries %> in total )</h4>
 
 <% if current_user.clients.empty? %>
 	  <%= render("no_records") %>
 <% else %>
 <table class="table">
   <tr>
-    <th><%= sortable "business_name", "Business Name" %></th>
-    <th><%= sortable "contact_person", "Contact Person" %></th>
-    <th><%= sortable "telephone", "Telephone" %></th>
-    <th><%= sortable "email", "Email" %></th>
-    <th><%= sortable "created_at", "Created" %></th>
+    <%= content_tag :th, sort_link(@q, :business_name, 'Business Name') %>
+    <%= content_tag :th, sort_link(@q, :contact_person, 'Contact Person') %>
+    <%= content_tag :th, sort_link(@q, :telephone, 'Telephone') %>
+    <%= content_tag :th, sort_link(@q, :email, 'Email') %>
+    <%= content_tag :th, sort_link(@q, :created_at, 'Created') %>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
-<% @clients.each do |client| %>
-  <tr>
-    <td><%= link_to client.business_name, client %></td>
-    <td><%= client.contact_person %></td>
-    <td><%= client.telephone %></td>
-    <td><%= mail_to client.email, nil, encode: :javascript %></td>
-	<td><%= time_ago_in_words(client.created_at) %> ago</td>
-    <td><%= link_to 'Show', client %></td>
-    <td><%= link_to 'Edit', edit_client_path(client) %></td>
-    <td><%= link_to 'Delete', client, method: :delete, data: { confirm: confirm_delete_client_message(client) } %></td>
-  </tr>
-<% end %>
+  <%= render @clients %>
 </table>
 
 <div class="flickr_pagination">
 <div class="page_info">
 </div>
-  <%= will_paginate @clients, :container => false %>
+  <%= will_paginate @clients, container: false %>
 </div>
 
 <hr class="bs-docs-separator">

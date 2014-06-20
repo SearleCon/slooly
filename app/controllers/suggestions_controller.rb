@@ -15,13 +15,13 @@ class SuggestionsController < ApplicationController
 
 
   def create
-    @suggestion = Suggestion.new(suggestion_params)
-    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.save
+    @suggestion = Suggestion.create(suggestion_params)
+    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.errors.empty?
     respond_with @suggestion, location: root_url
   end
 
   def update
-    flash[:notice] = 'Suggestion was successfully updated.' if @suggestion.update_attributes(suggestion_params)
+    flash[:notice] = 'Suggestion was successfully updated.' if @suggestion.update(suggestion_params)
     respond_with @suggestion
   end
 

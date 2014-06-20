@@ -2,7 +2,7 @@
 <h6>All the latest product information, offers and general business news</h6><br>
 
 <% @announcements.each do |announcement| %>
-<div class="span11 tooltip-demo well">
+<div class="span11 well">
 	<%= image_tag('news.png', class: 'header')%><h3><%= announcement.headline %></h3><br>
     <%=h truncate(announcement.description, :length => 600) %><br>
 	<% if announcement.description.length > 600 %>

@@ -13,7 +13,6 @@
 	    <th></th>
 	    <th></th>
 	  </tr>
-
 	<% @client.invoices.chasing.each do |invoice| %>
 	  <tr>
         <td><%= display_age_badge(invoice) %></td>
@@ -25,7 +24,6 @@
 		<td><%= time_ago_in_words(invoice.created_at) %> ago</td>
 	    <td><%= link_to 'Show', invoice %></td>
 	    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>	
-
 	    <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) } %></td>
 	  </tr>
 	<% end %>

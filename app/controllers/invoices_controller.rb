@@ -1,12 +1,13 @@
 class InvoicesController < ApplicationController
   before_filter :set_invoice, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
-  
+
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = current_user.invoices.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+    @q = current_user.invoices.search(params[:q])
+    @q.sorts = 'updated_at desc' if @q.sorts.empty?
+    @invoices = @q.result(distinct: true).page(params[:page])
   end
 
   def show;end
@@ -46,13 +47,6 @@ class InvoicesController < ApplicationController
       params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status_id, :last_date_sent)
     end
 
-    def sort_column
-      Invoice.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
-    end
 
     def invoice_dates
       InvoiceDates.new(@invoice, current_user.setting)

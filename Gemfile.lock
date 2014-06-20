@@ -58,12 +58,16 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-async (0.9.0)
+      devise (~> 3.2)
     erubis (2.7.0)
     excon (0.37.0)
     execjs (2.2.0)
     heroku-api (0.3.18)
       excon (~> 0.27)
       multi_json (~> 1.8)
+    heroku-deflater (0.5.3)
+      rack (>= 1.4.5)
     hike (1.2.3)
     honeypot-captcha (0.0.2)
     i18n (0.6.9)
@@ -86,9 +90,14 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    obfuscatejs (1.1.3)
+      jquery-rails
+      rails (>= 3.2.11)
     orm_adapter (0.5.0)
     paypal-recurring (1.1.0)
     pg (0.17.1)
+    polyamorous (1.0.0)
+      activerecord (>= 3.0)
     polyglot (0.3.5)
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
@@ -103,6 +112,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.5)
       sprockets-rails (~> 2.0.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.0.5)
       actionpack (= 4.0.5)
       activesupport (= 4.0.5)
@@ -110,6 +124,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.3.2)
+    ransack (1.2.3)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.0.0)
     rolify (3.4.0)
     roo (1.13.2)
       nokogiri
@@ -175,14 +195,19 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   delayed_job_active_record
   devise (~> 3.2.4)
+  devise-async
+  heroku-deflater
   honeypot-captcha
   jquery-rails
   jquery-turbolinks
   metamagic
+  obfuscatejs
   paypal-recurring
   pg
   quiet_assets
   rails (~> 4.0.0)
+  rails_12factor
+  ransack
   rolify (>= 3.2.0)
   roo
   sass-rails (~> 4.0.0)

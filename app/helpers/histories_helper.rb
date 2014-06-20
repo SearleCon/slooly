@@ -8,8 +8,6 @@ module HistoriesHelper
      when 'OD3' then type = 'badge badge-important'
      else type = 'badge'
    end
-
    content_tag :span, history.reminder_type, class: type
-
  end
 end

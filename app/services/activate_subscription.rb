@@ -13,10 +13,10 @@ class ActivateSubscription
 
   private
    def deactivate_current
-     @user.active_subscription.update_attributes!(active: false)
+     @user.active_subscription.update!(active: false)
    end
 
    def activate_new
-     @subscription.update_attributes!(active: true)
+     @subscription.update!(active: true)
    end
 end

@@ -13,6 +13,7 @@ gem "bootstrap-datepicker-rails"
 
 # Authentication
 gem 'devise', '~> 3.2.4'
+gem 'devise-async'
 
 # Authorization
 gem "rolify", ">= 3.2.0"
@@ -48,8 +49,16 @@ gem 'roo'
 # Server
 gem 'unicorn'
 
+# Obfuscate emails
+gem 'obfuscatejs'
+
+# Searching
+gem 'ransack'
+
 group :production do
   gem 'pg'
+  gem 'heroku-deflater'
+  gem 'rails_12factor'
 end
 
 group :development, :test do

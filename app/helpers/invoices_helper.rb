@@ -20,7 +20,6 @@ module InvoicesHelper
 
   STATUSES = {chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7}.freeze
 
-
   def display_status_label(invoice)
     case invoice.status
       when :chasing then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-success' )

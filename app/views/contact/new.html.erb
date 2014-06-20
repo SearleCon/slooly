@@ -2,12 +2,12 @@
 
 
 <h6>Got a question? Check these out:</h6>
-<h3><%= link_to 'Frequently Asked Questions', pages_faq_path %></h3>
+<h3><%= link_to 'Frequently Asked Questions', faq_path %></h3>
 
 <hr class="bs-docs-separator">
 
 <h6>Email us at:</h6>
-<h3><%= mail_to 'Support@SearleConsulting.co.za', nil, encode: :javascript %></h3>
+<h3><%= obfuscate_email 'Support@SearleConsulting.co.za' %></h3>
 
 
 <hr class="bs-docs-separator">

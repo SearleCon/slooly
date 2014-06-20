@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
     def after_sign_up_path_for(resource)
-      pages_initial_setup_path
+      initial_setup_path
     end
 
     def configure_permitted_parameters
