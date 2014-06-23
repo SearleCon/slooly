@@ -36,7 +36,7 @@
 
 	  <div class="field">
 	    <%= f.label "Status" %>
-	    <%= f.collection_select(:status_id, Status.find(:all), :id, :description ) %> 
+	    <%= f.select(:status_id, options_for_select(options_for_status)) %>
 	  </div>
 
 

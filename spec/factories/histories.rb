@@ -20,7 +20,24 @@
 #  email_from_name   :string(255)
 #
 
-class History < ActiveRecord::Base
-  belongs_to :user, inverse_of: :histories, touch: true
-  belongs_to :client, inverse_of: :histories, touch: true
+FactoryGirl.define do
+  factory :history do
+    date_sent         Date.today
+    subject           { Faker::Lorem.sentence(3) }
+    message           { Faker::Lorem.paragraph }
+    reminder_type     'PD'
+    sent              false
+    email_return_code '005'
+    email_sent_from    { Faker::Internet.email }
+    copy_email         { Faker::Internet.email }
+    email_sent_to      { Faker::Internet.email }
+    invoice_number    '1'
+    email_from_name    { Faker::Name.name }
+    client
+    user
+
+  end
 end
+
+
+

@@ -2,16 +2,11 @@
 
 <ul class="nav pull-right">
   <% if user_signed_in? %>
-    <% if current_user.has_role? :admin %>
-      <li><%= link_to 'Administration', users_path %></li>
-	  <li><%= link_to 'Add News', new_announcement_path %></li>
-      <li><%= link_to 'Plans', plans_path %></li>
-<% end %>
-  <% else %>
-    <li><%= link_to 'Sign up', new_user_registration_path %></li>
-	<li><%= link_to 'Pricing', pricing_path %></li>
-  <% end %>
-  <% if user_signed_in? %>
+      <% if current_user.has_role? :admin %>
+          <li><%= link_to 'Administration', users_path %></li>
+          <li><%= link_to 'Add News', new_announcement_path %></li>
+          <li><%= link_to 'Plans', plans_path %></li>
+      <% end %>
   	  <li><%= link_to 'Home', root_path %></li>
 	  <li><%= link_to 'Clients', clients_path %></li>
 	  <li><%= link_to 'Invoices', invoices_path %></li>
@@ -30,12 +25,14 @@
 	      <!-- <li><%= link_to "Share with Friends", "#" %></li> -->
 	      <li class="divider"></li>
 	      <li>		
-		    <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>        
+		    <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 	      </li>
 	    </ul>
 	  </li>
 
   <% else %>
+    <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <li><%= link_to 'Pricing', pricing_path %></li>
     <li>
       <%= link_to 'About', about_path %>
     </li>

@@ -12,9 +12,12 @@
 #  free        :boolean
 #
 
-class Plan < ActiveRecord::Base
-  has_many :subscriptions, inverse_of: :plan
-
-  scope :active, ->{ where(active: true) }
-  
+FactoryGirl.define do
+  factory :plan do
+    description 'Plan'
+    duration    1
+    cost       0
+    active     false
+    free       false
+  end
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -25,7 +25,7 @@ gem "rolify", ">= 3.2.0"
 gem "carrierwave"
 
 # Pagination
-gem 'will_paginate', '3.0.3'
+gem 'will_paginate', '~> 3.0'
 
 # Background Processing
 gem 'delayed_job_active_record'
@@ -53,7 +53,7 @@ gem 'unicorn'
 gem 'obfuscatejs'
 
 # Searching
-gem 'ransack'
+gem "ransack"
 
 group :production do
   gem 'pg'
@@ -63,9 +63,22 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
+  gem 'spring'
   gem 'annotate'
   gem 'quiet_assets'
+  gem 'rails_apps_testing'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end

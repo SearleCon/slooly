@@ -13,6 +13,10 @@ class ClientsController < ApplicationController
 
   def edit;end
 
+  def show
+    fresh_when @client
+  end
+
   def create
     @client = current_user.clients.create(client_params)
     flash[:notice] =  'Client was successfully created.' if @client.errors.empty?
@@ -47,7 +51,7 @@ class ClientsController < ApplicationController
   
   private
     def set_client
-      @client = current_user.clients.find(params[:id])
+      @client = current_user.clients.includes(:invoices).find(params[:id])
     end
 
     def client_params

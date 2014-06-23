@@ -28,7 +28,7 @@
 #
 
 class Setting < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
 
   validates :days_between_chase, :days_before_pre_due, :presence => true
   validates_inclusion_of :days_between_chase, in: 1..31, message: "can only be between 0 and 31."

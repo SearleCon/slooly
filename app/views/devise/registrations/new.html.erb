@@ -12,11 +12,15 @@
   <%= f.password_field :password %></div>
 
   <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div><br>
+   <%= f.password_field :password_confirmation %>
+  </div>
 
-  <%= f.check_box :terms_of_service %>&nbsp; 
-  I accept and agree to the <%= link_to "Terms of Service", tos_path %> <br><br><br>
+  <div>
+    <%= f.check_box :terms_of_service %>
+    <%= f.label :terms_of_service, "I accept and agree to the #{link_to 'Terms of Service', tos_path}.".html_safe, {class: "checkbox inline"} %>
+  </div>
 
+  <br>
   <%= f.submit 'Sign Up', class: 'btn btn-primary' %>
 
 <% end %>

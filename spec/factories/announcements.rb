@@ -10,6 +10,10 @@
 #  updated_at  :timestamp        not null
 #
 
-class Announcement < ActiveRecord::Base
-  scope :last_7_days, -> { where(arel_table[:created_at].gteq(Date.today - 7.days)).order(created_at: :desc)  }
+FactoryGirl.define do
+  factory :announcement do
+    headline  { Faker::Lorem.sentence(3)}
+    description { Faker::Lorem.paragraph }
+    posted_by { Faker::Name.name }
+  end
 end

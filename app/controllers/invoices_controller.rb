@@ -10,7 +10,9 @@ class InvoicesController < ApplicationController
     @invoices = @q.result(distinct: true).page(params[:page])
   end
 
-  def show;end
+  def show
+   fresh_when @invoice
+  end
 
   def new
     @invoice = current_user.invoices.build

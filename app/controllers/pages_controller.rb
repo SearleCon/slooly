@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @q = current_user.invoices.chasing.search(params[:q])
     @q.sorts = 'updated_at desc' if @q.sorts.empty?
-    @chasing_invoices = @q.result(distinct: true).page(params[:page])
+    @chasing_invoices = @q.result(distinct: true).includes(:client).page(params[:page])
   end
 
   def about;end

@@ -19,20 +19,19 @@
 class Client < ActiveRecord::Base
   self.per_page = 10
 
+  belongs_to      :user, inverse_of: :clients, touch: true
   has_many        :invoices, inverse_of: :client ,dependent: :destroy
   has_many        :histories, inverse_of: :client ,dependent: :destroy
-  belongs_to      :user, inverse_of: :clients
-  accepts_nested_attributes_for :invoices
-
 
   validates :business_name, :email, presence: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  validates_uniqueness_of :business_name, :scope => [:user_id]
-  before_validation :strip_all_spaces
+  validates_uniqueness_of :business_name, scope: :user_id
+  before_save :normalize_data
 
-
-  def strip_all_spaces
-    self.email = email.strip if email
-  end
+  protected
+    def normalize_data
+      self.business_name = business_name.strip if business_name
+      self.email = email.strip if email
+    end
   
 end

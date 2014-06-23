@@ -3,10 +3,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :authenticate_user!
-  before_filter :subscription_required
 
+  etag { current_user.try :id }
 
-  # SS Not found and Routing error redirects
   rescue_from ActionController::RoutingError, with: :render_not_found
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
@@ -18,10 +17,5 @@ class ApplicationController < ActionController::Base
     render 'pages/not_found'
   end
 
-  def subscription_required
-    if user_signed_in?
-      redirect_to payment_plans_subscriptions_url if current_user.active_subscription.has_expired?
-    end
-  end
 
 end

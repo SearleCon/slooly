@@ -18,18 +18,18 @@
 #
 
 class Company < ActiveRecord::Base
-  belongs_to      :user
+  belongs_to :user, touch: true
 
   validates       :email, presence: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
-  before_validation :strip_all_spaces
+  before_save :normalize_data
   after_initialize :set_defaults, if: :new_record?
 
   mount_uploader :image, ImageUploader
 
   protected
-    def strip_all_spaces
+    def normalize_data
       self.email = self.email.strip
     end
 
@@ -42,7 +42,4 @@ class Company < ActiveRecord::Base
      self.fax = "People still fax?"
      self.email	= "you@example.com"
     end
-
-
-  
 end

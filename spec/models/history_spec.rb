@@ -20,7 +20,13 @@
 #  email_from_name   :string(255)
 #
 
-class History < ActiveRecord::Base
-  belongs_to :user, inverse_of: :histories, touch: true
-  belongs_to :client, inverse_of: :histories, touch: true
+describe History do
+  it 'has a valid factory' do
+    history = build(:history)
+    expect(history).to be_valid
+  end
+
+  it { should belong_to(:user).touch(:true) }
+  it { should belong_to(:client).touch(:true) }
+
 end

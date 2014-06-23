@@ -21,18 +21,15 @@
 class User < ActiveRecord::Base
   rolify
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :async ,:registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
-  has_many        :clients, inverse_of: :user ,dependent: :destroy
-  has_many        :subscriptions, inverse_of: :user,dependent: :destroy
-  has_many        :invoices,inverse_of: :user, dependent: :destroy
-  has_many        :histories, inverse_of: :user, dependent: :destroy
-  has_one         :company, dependent: :destroy
-  has_one         :setting, dependent: :destroy
+  has_many  :clients, inverse_of: :user ,dependent: :destroy
+  has_many  :subscriptions, inverse_of: :user,dependent: :destroy
+  has_many  :invoices,inverse_of: :user, dependent: :destroy
+  has_many  :histories, inverse_of: :user, dependent: :destroy
+  has_one   :company, dependent: :destroy
+  has_one   :setting, dependent: :destroy
 
   validates :terms_of_service, acceptance: true
 
@@ -43,8 +40,5 @@ class User < ActiveRecord::Base
   def active_subscription
     subscriptions.active.first
   end
-  
-
-
 
 end

@@ -1,8 +1,7 @@
 class SubscriptionsController < ApplicationController
-  skip_before_filter :subscription_required
 
   def payment_plans
-    @plans = Plan.find_all_by_active(true)
+    @plans = Plan.active
   end  
   
   def paypal_checkout

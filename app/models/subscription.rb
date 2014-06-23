@@ -17,8 +17,8 @@
 #
 
 class Subscription < ActiveRecord::Base
-  belongs_to :plan, inverse_of: :subscriptions
-  belongs_to :user, inverse_of: :subscriptions
+  belongs_to :plan, inverse_of: :subscriptions, touch: true
+  belongs_to :user, inverse_of: :subscriptions, touch: true
 
   attr_accessor :paypal_payment_token
 

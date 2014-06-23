@@ -18,8 +18,6 @@ module InvoicesHelper
     end
   end
 
-  STATUSES = {chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7}.freeze
-
   def display_status_label(invoice)
     case invoice.status
       when :chasing then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-success' )
@@ -36,5 +34,9 @@ module InvoicesHelper
                    You are about to delete the invoice <b> #{invoice.invoice_number}!</b><br>
                    <b>NOTE:</b> This cannot be undone!<br>
                    Are you sure you want to continue?", {}, sanitize: false)
+  end
+
+  def options_for_status
+    Invoice::STATUSES.transform_keys { |key| key.to_s.titleize }
   end
 end

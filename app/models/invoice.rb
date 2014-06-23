@@ -23,10 +23,10 @@
 class Invoice < ActiveRecord::Base
   self.per_page = 10
 
-  belongs_to      :client, inverse_of: :histories
-  belongs_to      :user, inverse_of: :invoices
+  belongs_to      :client, inverse_of: :histories, touch: true
+  belongs_to      :user, inverse_of: :invoices, touch: true
 
-  validates :client_id, :due_date, :invoice_number, presence: true
+  validates :client, :due_date, :invoice_number, presence: true
   validates_numericality_of :amount  
 
   STATUSES = {chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7}.freeze

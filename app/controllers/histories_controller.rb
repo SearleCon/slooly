@@ -1,5 +1,6 @@
 class HistoriesController < ApplicationController
   def show
-    @history = current_user.histories.find(params[:id])
+    @history = History.find(params[:id])
+    fresh_when @history
   end
 end
