@@ -44,7 +44,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def has_expired?
-    Time.zone.now > self.expiry_date
+    Time.zone.now > expiry_date
   end
 
   def expires_in

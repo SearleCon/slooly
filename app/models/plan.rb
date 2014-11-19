@@ -15,6 +15,5 @@
 class Plan < ActiveRecord::Base
   has_many :subscriptions, inverse_of: :plan
 
-  scope :active, ->{ where(active: true) }
-  
+  scope :active, -> { where(active: true) }
 end

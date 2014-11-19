@@ -1,18 +1,15 @@
 class SuggestionsController < ApplicationController
-  skip_before_filter  :authenticate_user!, only: [:new, :create]
-  before_filter :authorize, except: [:new, :create]
-  before_filter :set_suggestion, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, only: [:new, :create]
+  before_action :authorize, except: [:new, :create]
+  before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
 
   def index
     @suggestions = Suggestion.all
   end
 
-
   def new
-   @suggestion = Suggestion.new
+    @suggestion = Suggestion.new
   end
-
 
   def create
     @suggestion = Suggestion.create(suggestion_params)
@@ -26,11 +23,12 @@ class SuggestionsController < ApplicationController
   end
 
   def destroy
-     @suggestion.destroy
-     respond_with @suggestion
+    @suggestion.destroy
+    respond_with @suggestion
   end
 
   private
+
   def set_suggestion
     @suggestion = Suggestion.find(params[:id])
   end
@@ -42,5 +40,4 @@ class SuggestionsController < ApplicationController
   def authorize
     redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
   end
-  
 end

@@ -1,5 +1,4 @@
 module ClientsHelper
-
   def confirm_delete_client_message(client)
     simple_format("<span class='label label-important'>WARNING!</span><br>
                    You are about to delete the client <b> #{client.business_name}!</b><br>

@@ -9,9 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  *= require bootstrap-datepicker
+ *= require_tree .
 */
+
 
 .content {
   background-color: #eee;
@@ -30,7 +31,8 @@
 
 }
 
-/* SS added below for the sorting carrot symbol */
+
+/* SS added for Pagination */
 
 .current {
   padding-right: 15px;
@@ -38,7 +40,6 @@
   background-position: right center;
 }
 
-/* SS added for Pagination */
 
 .flickr_pagination {
   text-align: center;

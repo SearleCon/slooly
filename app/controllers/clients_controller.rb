@@ -1,17 +1,18 @@
 class ClientsController < ApplicationController
-  before_filter :set_client, except: [:index, :new, :create]
+  before_action :set_client, except: [:index, :new, :create]
 
   def index
     @q = current_user.clients.search(params[:q])
     @q.sorts = 'updated_at desc' if @q.sorts.empty?
     @clients = @q.result(distinct: true).page(params[:page])
+    respond_with @clients
   end
 
   def new
-    @client = current_user.clients.build
+    @client = current_user.clients.new
   end
 
-  def edit;end
+  def edit; end
 
   def show
     fresh_when @client
@@ -48,13 +49,14 @@ class ClientsController < ApplicationController
       render 'import_clients'
     end
   end
-  
-  private
-    def set_client
-      @client = current_user.clients.includes(:invoices).find(params[:id])
-    end
 
-    def client_params
-      params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
-    end
+  private
+
+  def set_client
+    @client = current_user.clients.includes(:invoices).find(params[:id])
+  end
+
+  def client_params
+    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
+  end
 end

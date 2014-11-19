@@ -7,7 +7,6 @@ module AnnouncementsHelper
     announcements.first
   end
 
-
   def time_remaining_for_announcement
     ((latest_announcement.created_at.to_date + 7.days) - Date.today).to_i
   end

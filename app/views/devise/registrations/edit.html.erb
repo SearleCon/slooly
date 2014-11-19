@@ -21,7 +21,7 @@
 
 <% end %>
 
-<hr class="bs-docs-separator">
+<hr>
 
 <div id='subscription_status'>
 <%= render 'subscriptions/subscription_status' %>
@@ -37,7 +37,7 @@
 	<% end -%>
 </div>
 
-<hr class="bs-docs-separator">
+<hr>
 
 <h3>Cancel my account</h3>
 
@@ -46,6 +46,6 @@
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => @cancel_message }, :method => :delete %>.</p>
 (We would hate to see you go! Instead, why not <a href ="/contact">contact us</a>, tell us why you are unhappy, and let's first see if we can cater to your needs)
 
-<hr class="bs-docs-separator">
+<hr>
 
 <%= link_to "Back", :back %> | <%= link_to "Company Profile", companies_path %> | <%= link_to "Settings", settings_path %>

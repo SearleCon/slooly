@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   respond_to :html, :js, :json
   protect_from_forgery
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   etag { current_user.try :id }
 
@@ -10,12 +10,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def routing_error
-    raise ActionController::RoutingError.new(params[:path])
+    fail ActionController::RoutingError.new(params[:path])
   end
 
   def render_not_found
     render 'pages/not_found'
   end
-
-
 end

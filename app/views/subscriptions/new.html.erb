@@ -49,13 +49,13 @@
 
 
           <div id="paypal_checkout" >
-            <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkout_path(:plan_id => @plan) %>
+            <%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkout_path(plan_id: @plan) %>
           </div>
 
           <br>
           <b>Please note:</b><br>One you click on the above button, you will be taken to the secure Paypal site, where you can complete your payment.<br>You will be redirected back to the Paying Mantis site once completed. The site's full functionality will be restored immediately once you re.
 
-          <hr class="bs-docs-separator">
+          <hr>
 
           <%= link_to 'Back', :back %>
 

@@ -1,0 +1,8 @@
+@import "bootstrap_and_overrides";
+.home{
+    .sign_up_button{
+      @extend  .btn;
+      @extend  .btn-large;
+      @extend  .btn-primary;
+    }
+  }

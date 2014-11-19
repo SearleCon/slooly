@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 
 #Frontend
 gem "bootstrap-sass", "~> 2.0.4.2"
+
 gem "bootstrap-datepicker-rails"
 
 
@@ -17,9 +18,6 @@ gem 'devise-async'
 
 # Authorization
 gem "rolify", ">= 3.2.0"
-
-# In place editing
-#gem "best_in_place"
 
 # File uploads
 gem "carrierwave"
@@ -55,6 +53,8 @@ gem 'obfuscatejs'
 # Searching
 gem "ransack"
 
+gem 'autosize-rails'
+
 group :production do
   gem 'pg'
   gem 'heroku-deflater'
@@ -73,6 +73,7 @@ group :development do
   gem 'annotate'
   gem 'quiet_assets'
   gem 'rails_apps_testing'
+  gem 'rubocop', require: false
 end
 
 group :test do

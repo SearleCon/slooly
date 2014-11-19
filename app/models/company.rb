@@ -20,26 +20,27 @@
 class Company < ActiveRecord::Base
   belongs_to :user, touch: true
 
-  validates       :email, presence: true
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates :email, presence: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
-  before_save :normalize_data
   after_initialize :set_defaults, if: :new_record?
+  before_save :normalize_data
 
   mount_uploader :image, ImageUploader
 
   protected
-    def normalize_data
-      self.email = self.email.strip
-    end
 
-    def set_defaults
-     self.name = "Your Company Name"
-     self.address = "44 Street Name, Suburb"
-     self.city	= "Best City"
-     self.post_code = "1234"
-     self.telephone = "555 345 6789"
-     self.fax = "People still fax?"
-     self.email	= "you@example.com"
-    end
+  def normalize_data
+    self.email = email.strip
+  end
+
+  def set_defaults
+    self.name = 'Your Company Name'
+    self.address = '44 Street Name, Suburb'
+    self.city	= 'Best City'
+    self.post_code = '1234'
+    self.telephone = '555 345 6789'
+    self.fax = 'People still fax?'
+    self.email	= 'you@example.com'
+  end
 end

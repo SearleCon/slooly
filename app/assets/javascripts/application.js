@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require obfuscatejs
+//= require jquery.autosize
 //= require jquery.turbolinks
 //= require_tree .
 
@@ -22,7 +23,8 @@
 $(document).ready(function() {
 	$('.carousel').carousel();
     $("[rel=tooltip]").tooltip(); // this will trigger a tooltip on all that have rel="tooltip" elements
-    $("[rel=popover]").popover(); // this will trigger a POPOVER on all that have rel="popover" elements	
+    $("[rel=popover]").popover(); // this will trigger a POPOVER on all that have rel="popover" elements
+    $('textarea').autosize();
 });
 
 $(document).on("focus", "[databehaviour~='datepicker']", function(e){

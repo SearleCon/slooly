@@ -1,5 +1,4 @@
 class PaypalPayment
-
   def initialize(subscription)
     @subscription = subscription
     @plan = Plan.find(subscription.plan_id)
@@ -7,7 +6,6 @@ class PaypalPayment
 
   def profile_details
     process(:profile, profile_id: @subscription.paypal_recurring_profile_token)
-
   end
 
   def checkout_details
@@ -19,15 +17,15 @@ class PaypalPayment
   end
 
   def suspend
-    process(:suspend,{ profile_id: @subscription.paypal_recurring_profile_token })
+    process(:suspend, profile_id: @subscription.paypal_recurring_profile_token)
   end
 
   def reactivate
-    process(:reactivate,{ profile_id: @subscription.paypal_recurring_profile_token })
+    process(:reactivate, profile_id: @subscription.paypal_recurring_profile_token)
   end
 
   def cancel
-    process(:cancel, { profile_id: @subscription.paypal_recurring_profile_token })
+    process(:cancel,  profile_id: @subscription.paypal_recurring_profile_token)
   end
 
   def checkout_url(options)
@@ -39,16 +37,17 @@ class PaypalPayment
   end
 
   private
+
   def process(action, options = {})
     options = options.reverse_merge(
         token: @subscription.paypal_payment_token,
         payer_id: @subscription.paypal_customer_token,
         description: @plan.description,
         amount: @plan.cost,
-        currency: "USD",
+        currency: 'USD'
     )
     response = PayPal::Recurring.new(options).send(action)
-    raise response.errors.inspect if response.errors.present?
+    fail response.errors.inspect if response.errors.present?
     response
   end
 end

@@ -24,7 +24,7 @@ task :resend_todays_reminders => :environment do # This task ignores the last_da
         @setting = Setting.first :conditions => ["user_id = ?", invoice.user_id]
 
 
-        if (((invoice.pd_date == Date.today) && (@setting.pre_due_reminder == false)) || ((invoice.due_date == Date.today) && (@setting.due_reminder == false)))
+        if (invoice.pre_due? && !@setting.pre_due_reminder) || (invoice.due? && !@setting.due_reminder)
           puts "Skipping this invoice, as it has either the Pre_Due boolean or the Due boolean set to false (i.e. DONT SEND for this User!)"
           puts "predue date: "+invoice.pd_date.to_s
           puts "predue set: "+@setting.pre_due_reminder.to_s
@@ -51,77 +51,75 @@ task :resend_todays_reminders => :environment do # This task ignores the last_da
 end  
 
 task :send_reminders => :environment do
-  @invoices = Invoice.where("(last_date_sent != :today) and (pd_date = :today or due_date = :today or od1_date = :today or od2_date = :today or od3_date = :today or fd_date = :today) and  (status_id = :chasing or status_id = :send_final_demand)", today: DateTime.now.to_date,chasing: 2, send_final_demand: 5)
+  @invoices = Invoice.where("(last_date_sent != :today) and (pd_date = :today or due_date = :today or od1_date = :today or od2_date = :today or od3_date = :today or fd_date = :today) and  (status_id = :chasing or status_id = :send_final_demand)", today: DateTime.now.to_date, chasing: 2, send_final_demand: 5)
+    puts 'Sending Invoices'
     @invoices.each do |invoice|
-      puts 'Sending Invoices'
 
       @client = invoice.client
       @company = invoice.user.company
       @setting = invoice.user.setting
 
-      unless (invoice.pd_date == Date.today && @setting.pre_due_reminder == false) || (invoice.due_date == Date.today && @setting.due_reminder == false)
-        email_message =  "Attention: "+ @client.contact_person+"\r\n"
-        email_message += @client.business_name.gsub(/['"]/, '')+"\r\n"
-        email_message += @client.address+"\r\n"
-        email_message += @client.city+"\r\n"
-        email_message += @client.post_code+"\r\n\n"
+      next if (invoice.pre_due? && !@setting.pre_due_reminder) || (invoice.due?  && !@setting.due_reminder)
 
-        email_message += "Reference : "+invoice.invoice_number+"\r\n"
-        email_message += "Due Date  : "+invoice.due_date.to_s+"\r\n"
-        email_message += "Amount Due: "+invoice.amount.to_s+"\r\n\n"
+      email_message = %(Attention: #{@client.contact_person}\r
+                        #{@client.business_name.gsub(/['"]/, '')}\r
+                        #{@client.address}\r
+                        #{@client.city}\r
+                        #{@client.post_code}\r\n
+                        Reference : #{invoice.invoice_number}\r
+                        Due Date  : #{invoice.due_date.to_s}\r
+                        Amount Due: #{invoice.amount.to_s}\r\n
+                        #{fetch_correct_message(invoice)}\r
+                        #{@company.name}\r\n
+                        #{@company.address}\r
+                        #{@company.city}\r
+                        #{@company.post_code}\r
+                        Tel  : #{@company.telephone}\r
+                        Fax  : #{@company.fax}\r
+                        Email: #{@company.email}\r\n
+                        Payment Options: \r
+                        #{@setting.payment_method_message})
 
-        email_message += fetch_correct_message(invoice)+"\r\n"+@company.name+"\r\n\n"
-        email_message += @company.address+"\r\n"
-        email_message += @company.city+"\r\n"
-        email_message += @company.post_code+"\r\n"
-        email_message += "Tel  : "+@company.telephone+"\r\n"
-        email_message += "Fax  : "+@company.fax+"\r\n"
-        email_message += "Email: "+@company.email+"\r\n\n"
-
-        email_message += "Payment Options: \r\n"+ @setting.payment_method_message
-
-        history = create_history(invoice, @setting, email_message)
-        UserMailer.delay.send_it(history)
-        history.update(sent: true)
-        invoice.update(last_date_sent: Date.today)
-      end
-      puts "Sending Invoices #{@invoices.size} complete"
+      history = create_history(invoice, @setting, email_message)
+      UserMailer.send_it(history).deliver
+      history.update(sent: true)
+      invoice.update(last_date_sent: Date.today)
     end
+    puts "Sending Invoices #{@invoices.size} complete"
 end
 
 def work_out_reminder_type(invoice)
   reminder_type = "Unknown"
-  reminder_type = "Pre" if invoice.pd_date == DateTime.now.to_date
-  reminder_type = "Due" if invoice.due_date == DateTime.now.to_date
-  reminder_type = "OD1" if invoice.od1_date == DateTime.now.to_date
-  reminder_type = "OD2" if invoice.od2_date == DateTime.now.to_date
-  reminder_type = "OD3" if invoice.od3_date == DateTime.now.to_date
-  reminder_type = "FD" if invoice.fd_date == DateTime.now.to_date
+  reminder_type = "Pre" if invoice.pre_due?
+  reminder_type = "Due" if invoice.due?
+  reminder_type = "OD1" if invoice.over_due1?
+  reminder_type = "OD2" if invoice.over_due2?
+  reminder_type = "OD3" if invoice.over_due3?
+  reminder_type = "FD" if  invoice.final_demand?
   reminder_type
 end
 
 def fetch_correct_subject_line(invoice)
   subject = "ERROR"
-  subject = @setting.pre_due_subject if invoice.pd_date == DateTime.now.to_date
-  subject = @setting.due_subject if invoice.due_date == DateTime.now.to_date
-  subject = @setting.overdue1_subject if invoice.od1_date == DateTime.now.to_date
-  subject = @setting.overdue2_subject if invoice.od2_date == DateTime.now.to_date
-  subject = @setting.overdue3_subject if invoice.od3_date == DateTime.now.to_date
-  subject = @setting.final_demand_subject if invoice.fd_date == DateTime.now.to_date
+  subject = @setting.pre_due_subject if invoice.pre_due?
+  subject = @setting.due_subject if invoice.due?
+  subject = @setting.overdue1_subject if invoice.over_due1?
+  subject = @setting.overdue2_subject if invoice.over_due2?
+  subject = @setting.overdue3_subject if invoice.over_due3?
+  subject = @setting.final_demand_subject if invoice.final_demand?
   subject
 end
 
 def fetch_correct_message(invoice)
   message = "ERROR - If you received this email, something has gone wrong. Please contact the sender listed above, or simply ignore it."
-  message = @setting.pre_due_message if invoice.pd_date == DateTime.now.to_date
-  message = @setting.due_message if invoice.due_date == DateTime.now.to_date
-  message = @setting.overdue1_message if invoice.od1_date == DateTime.now.to_date
-  message = @setting.overdue2_message if invoice.od2_date == DateTime.now.to_date
-  message = @setting.overdue3_message if invoice.od3_date == DateTime.now.to_date
-  message = @setting.final_demand_message if invoice.fd_date == DateTime.now.to_date
+  message = @setting.pre_due_message if invoice.pre_due?
+  message = @setting.due_message if invoice.due?
+  message = @setting.overdue1_message if invoice.over_due1?
+  message = @setting.overdue2_message if invoice.over_due2?
+  message = @setting.overdue3_message if invoice.over_due3?
+  message = @setting.final_demand_message if invoice.final_demand?
   message
 end
-
 
 def create_history(invoice, setting, actual_email_message)
   History.create do  |history|
@@ -135,7 +133,7 @@ def create_history(invoice, setting, actual_email_message)
     history.email_return_code  = "Not yet sent"
     history.email_sent_from    = invoice.user.company.email
     history.copy_email         = setting.email_copy_to
-    history.email_sent_to	    = invoice.client.email
+    history.email_sent_to	     = invoice.client.email
     history.user_id            = invoice.user_id
     history.email_from_name    = setting.send_from_name
   end

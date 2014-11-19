@@ -19,21 +19,23 @@ Slooly::Application.configure do
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'paul.com' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.smtp_settings = { address: 'localhost',
+                                         port: 1025 }
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: "utf-8"
   #  config.action_mailer.default :from => "slooly@example.com"
 
 
-
-  config.action_mailer.smtp_settings = {
-      address: ENV["EMAIL_SMTP_ADDRESS"],
-      port: 587,
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: ENV["EMAIL_USERNAME"],
-      password: ENV["EMAIL_PASSWORD"],
-  }
+  #
+  # config.action_mailer.smtp_settings = {
+  #     address: ENV["EMAIL_SMTP_ADDRESS"],
+  #     port: 587,
+  #     authentication: "plain",
+  #     enable_starttls_auto: true,
+  #     user_name: ENV["EMAIL_USERNAME"],
+  #     password: ENV["EMAIL_PASSWORD"],
+  # }
 
   # Delayed Job Scaling
   config.after_initialize do

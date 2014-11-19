@@ -41,10 +41,10 @@
 <div class="flickr_pagination">
 <div class="page_info">
 </div>
-  <%= will_paginate @invoices, :container => false %>
+ <div class="pagination-links"></div> <%= will_paginate @invoices, :container => false %></div>
 </div>
 
-<hr class="bs-docs-separator">
+<hr>
 
 <%= link_to 'Add Invoice', new_invoice_path %>
 

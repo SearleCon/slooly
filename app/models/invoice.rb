@@ -21,28 +21,52 @@
 #
 
 class Invoice < ActiveRecord::Base
+  STATUSES = { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7 }.freeze
+
   self.per_page = 10
 
-  belongs_to      :client, inverse_of: :histories, touch: true
-  belongs_to      :user, inverse_of: :invoices, touch: true
+  belongs_to :client, inverse_of: :histories, touch: true
+  belongs_to :user, inverse_of: :invoices, touch: true
 
   validates :client, :due_date, :invoice_number, presence: true
-  validates_numericality_of :amount  
+  validates :amount, numericality: true
 
-  STATUSES = {chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7}.freeze
-
-  scope :chasing,  -> { where(status_id: STATUSES[:chasing]) }
+  scope :chasing, -> { where(status_id: STATUSES[:chasing]) }
 
   def age
     (Date.today - due_date.to_date).to_i
+  end
+
+  def status
+    STATUSES.key(status_id)
+  end
+
+  def pre_due?
+    pd_date == DateTime.now.to_date
+  end
+
+  def due?
+    due_date == DateTime.now.to_date
+  end
+
+  def over_due1?
+    od1_date == DateTime.now.to_date
+  end
+
+  def over_due2?
+    od2_date == DateTime.now.to_date
+  end
+
+  def over_due3?
+    od3_date == DateTime.now.to_date
+  end
+
+  def final_demand?
+    fd_date == DateTime.now.to_date
   end
 
   def self.total
     sum(:amount)
   end
 
-
-  def status
-    STATUSES.key(status_id)
-  end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorize, only: [:index]
+  before_action :authorize, only: [:index]
 
   def index
     all_users = User.scoped
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     histories =  History.order('created_at desc')
     suggestions = Suggestion.scoped
     jobs = Delayed::Job.all
-    @administration_data = AdministrationData.new(users, new_users ,histories, suggestions, jobs)
+    @administration_data = AdministrationData.new(users, new_users, histories, suggestions, jobs)
   end
 
   def show
@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   private
-   def authorize
-     redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
-   end
+
+  def authorize
+    redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
+  end
 end

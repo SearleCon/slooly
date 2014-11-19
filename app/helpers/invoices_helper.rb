@@ -1,32 +1,32 @@
 module InvoicesHelper
+  STATUS_LABELS = { chasing: 'label label-success',
+                    stop_chasing: 'label label-warning',
+                    paid: 'label label-info',
+                    send_final_demand: 'label label-important',
+                    write_off: 'label label-inverse',
+                    delete: 'label label-default' }
+
   def display_age_badge(invoice)
     case
       when invoice.age > 0 then type = 'badge badge-important'
       when invoice.age == 0 then type = 'badge badge-info'
       when invoice.age < 0 then type = 'badge badge-success'
       else
-       type = 'badge'
+        type = 'badge'
     end
     content_tag(:span, invoice.age, class: type)
   end
 
   def display_description(invoice)
     if invoice.description.size > 50
-      content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: truncate(simple_format(invoice.description), length: 500)}) if invoice.description.size > 50
+      content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: truncate(simple_format(invoice.description), length: 500) }) if invoice.description.size > 50
     else
       invoice.description
     end
   end
 
   def display_status_label(invoice)
-    case invoice.status
-      when :chasing then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-success' )
-      when :stop_chasing then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-warning' )
-      when :paid then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-info' )
-      when :send_final_demand then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-important' )
-      when :write_off then content_tag(:span, invoice.status.to_s.titleize, class: 'label label-inverse' )
-      when :delete then content_tag(:span,  invoice.status.to_s.titleize, class: 'label label-default' )
-    end
+    content_tag(:span, invoice.status.to_s.titleize, class: STATUS_LABELS[invoice.status])
   end
 
   def confirm_delete_invoice_message(invoice)

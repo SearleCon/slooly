@@ -28,7 +28,7 @@
   </tr>
 </table>
 <% if @invoice.status == :chasing %>
-<hr class="bs-docs-separator">
+<hr>
     <%= image_tag('calendarbig.png', class: 'header') %> <h4>Reminder Email Dates for Invoice <%= @invoice.invoice_number %>:</h4><br>
 
 <table>
@@ -51,7 +51,7 @@
 </table>
 <% end %>
 
-<hr class="bs-docs-separator">
+<hr>
 
 <%= link_to 'Edit Invoice', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', :back %>

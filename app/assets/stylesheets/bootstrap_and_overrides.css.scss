@@ -37,10 +37,11 @@ width: 300px;
 }
 
 textarea {
-height: 200px;
-width: 300px;
+ height: 200px;
+ width: 300px;
+  white-space: pre-wrap;
 }
 
 .modal-body {
-    max-height: 470px;
+  max-height: 470px;
 }

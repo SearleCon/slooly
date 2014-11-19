@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController
-  skip_before_filter :authenticate_user!, only: :index
-  before_filter :authorize, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :set_announcement, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: :index
+  before_action :authorize, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
     @announcements = Announcement.order('created_at desc')
@@ -17,12 +17,10 @@ class AnnouncementsController < ApplicationController
     respond_with @announcement
   end
 
-
   def update
     flash[:notice] = 'Announcement was successfully updated.' if @announcement.update(announcement_params)
     respond_with @announcement
   end
-
 
   def destroy
     @announcement.destroy
@@ -30,15 +28,16 @@ class AnnouncementsController < ApplicationController
   end
 
   private
-   def set_announcement
-     @announcement = Announcement.find(params[:id])
-   end
 
-   def announcement_params
-     params.require(:announcement).permit(:description, :headline, :posted_by)
-   end
+  def set_announcement
+    @announcement = Announcement.find(params[:id])
+  end
 
-   def authorize
-     redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
-   end
+  def announcement_params
+    params.require(:announcement).permit(:description, :headline, :posted_by)
+  end
+
+  def authorize
+    redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.has_role? :admin
+  end
 end

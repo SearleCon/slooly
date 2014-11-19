@@ -1,0 +1,2 @@
+$('.clients-listing').html("<%= j render @clients %>");
+$('.pagination-links').html("<%= j(will_paginate @clients, container: false, renderer: RemoteLinkPaginationHelper::LinkRenderer) %>");

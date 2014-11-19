@@ -1,5 +1,4 @@
 class AdministrationData
-
   def initialize(users, new_users, histories, suggestions, jobs)
     @users = users
     @new_users = new_users
@@ -45,7 +44,8 @@ class AdministrationData
   end
 
   private
-   def seven_days_ago
-     DateTime.now - 7.days
-   end
+
+  def seven_days_ago
+    DateTime.now - 7.days
+  end
 end

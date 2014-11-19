@@ -1,73 +1,68 @@
-
 <div class="row">
   <div class="span6">
-	<h2>The easiest way to chase outstanding invoices!</h2>
-	<h6>Take the hassle out of chasing your debtors, and get paid on time!</h6>
+    <h2>The easiest way to chase outstanding invoices!</h2>
+    <h6>Take the hassle out of chasing your debtors, and get paid on time!</h6>
 
+  <div id="home_carousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="item active">
+        <%= image_tag 'calendar1.png' %>
 
-    <div class="bs-docs-example">
-      <div id="myCarousel" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="item active">
-            <%= image_tag 'calendar1.png'%>
-
-            <!--<img src="carousel/images/calendar1.png" alt="">-->
-            <div class="carousel-caption">
-              <p>Drastically increase your chances of getting paid on time, every time!</p>
-            </div>
-          </div>
-          <div class="item">
-            <%= image_tag 'chasing.png'%>
-            <!--<img src="carousel/images/chasing.png" alt="">-->
-            <div class="carousel-caption">
-              <p>Stop wasting your own time chasing after Outstanding Invoices!</p>
-            </div>
-          </div>
-          <div class="item">
-            <%= image_tag('unlock1.png') %>
-            <!--<img src="carousel/images/unlock1.png" alt="">-->
-            <div class="carousel-caption">
-              <p>Unlock your Cash Flow and free up your Time with very little effort!</p>
-            </div>
-          </div>
+        <div class="carousel-caption">
+          <p>Drastically increase your chances of getting paid on time, every time!</p>
         </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+      <div class="item">
+        <%= image_tag 'chasing.png' %>
+        <div class="carousel-caption">
+          <p>Stop wasting your own time chasing after Outstanding Invoices!</p>
+        </div>
+      </div>
+      <div class="item">
+        <%= image_tag('unlock1.png') %>
+        <div class="carousel-caption">
+          <p>Unlock your Cash Flow and free up your Time with very little effort!</p>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <div class="span6">
-	<h3>How it works:</h3>
-	<h6>1. Do your once off setup of how you would like to chase invoices</h6>
-	<h6>2. Load your invoice(s)</h6>
-	<h6>3. Let Paying Mantis chase your customers that owe you money</h6>
-	<h6>4. Get paid!</h6>
-	<p><br><br>
-	<h3>Wanna give it a try and increase your cashflow?</h3><br>
-	<a href="<%= new_user_registration_path %>" class="btn btn-large btn-primary">Sign up for a free account now!</a>	
-	</p><br><br>
-	<p>
-	<h3>Already have an account?</h3>
-    <%= link_to 'Login here', new_user_session_path %>  
-    </p>		  	
-	<p>
-	<h3>Watch the Tutorial Video</h3>
-	<a href="#myModal" data-toggle="modal">View Video</a>
-
-    </p>		  	
-	<h3>Need more information?</h3>
-    <%= link_to 'Click here', about_path %>
-    </p>
-    <p align="right"><br><br><br><br>
-	<%= render 'layouts/share' %>
-	</p>
+    <a class="left carousel-control" href="#home_carousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#home_carousel" data-slide="next">&rsaquo;</a>
   </div>
 </div>
 
- 
+  <div class="span6">
+    <h3>How it works:</h3>
+    <h6>1. Do your once off setup of how you would like to chase invoices</h6>
+    <h6>2. Load your invoice(s)</h6>
+    <h6>3. Let Paying Mantis chase your customers that owe you money</h6>
+    <h6>4. Get paid!</h6>
+
+    <p><br><br>
+    <h3>Wanna give it a try and increase your cashflow?</h3><br>
+    <%= link_to 'Sign up for a free account now!', new_user_registration_path, class: 'sign_up_button'  %>
+    </p><br><br>
+
+    <p>
+
+    <h3>Already have an account?</h3>
+    <%= link_to 'Login here', new_user_session_path %>
+    </p>
+    <p>
+    <h3>Watch the Tutorial Video</h3>
+    <a href="#tutorial_video" data-toggle="modal">View Video</a>
+    </p>
+    <h3>Need more information?</h3>
+    <%= link_to 'Click here', about_path %>
+    </p>
+    <p align="right"><br><br><br><br>
+      <%= render 'layouts/share' %>
+    </p>
+  </div>
+</div>
+
+
 <!-- Modal Video for the Tutorial / How it works -->
-<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal hide fade" id="tutorial_video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Quick overview of how Paying Mantis works</h3>
