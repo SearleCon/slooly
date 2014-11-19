@@ -11,10 +11,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
-    @subscription = current_user.subscriptions.build(plan_id: @plan.id)
-    @subscription.expiry_date = Time.zone.now.advance(months: @plan.duration)
-    @subscription.bought_on = Time.zone.now
-    @subscription.time =  "#{@plan.duration} month(s)"
+    @subscription = current_user.subscriptions.build(plan_id: @plan.id,
+                                                     bought_on: Time.zone.now,
+                                                     expiry_date: Time.zone.now.advance(months: @plan.duration),
+                                                     time: "#{@plan.duration} month(s)")
     if params[:PayerID]
       @subscription.paypal_customer_token = params[:PayerID]
       @subscription.paypal_payment_token = params[:token]

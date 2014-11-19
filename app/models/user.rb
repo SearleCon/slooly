@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
 
   validates :terms_of_service, acceptance: true
 
+  delegate :email, to: :company, prefix: true
+
   def timeout_in
     2.hours
   end

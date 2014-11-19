@@ -16,4 +16,6 @@ class ApplicationController < ActionController::Base
   def render_not_found
     render 'pages/not_found'
   end
+
+
 end

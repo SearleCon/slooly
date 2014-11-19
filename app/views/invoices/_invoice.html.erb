@@ -2,11 +2,11 @@
   <td><%= display_age_badge(invoice)%></td>
   <td><%= link_to invoice.invoice_number, invoice %></td>
   <td><%= invoice.due_date %></td>
-  <td><%= number_with_precision(invoice.amount, :precision => 2) %></td>
+  <td><%= number_with_precision(invoice.amount, precision: 2) %></td>
   <td><%= display_description(invoice)%></td>
   <td><%= display_status_label(invoice) %></td>
-  <td><%= link_to invoice.client.business_name, invoice.client %></td>
-  <td><%= "#{time_ago_in_words(invoice.created_at)} ago"%></td>
+  <td><%= link_to invoice.client_business_name, invoice.client %></td>
+  <td><%= local_time_ago(invoice.created_at)%></td>
   <td><%= link_to 'Show', invoice %></td>
   <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
   <td><%= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) } %></td>

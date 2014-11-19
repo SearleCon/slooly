@@ -3,7 +3,7 @@
   <td><%= client.contact_person %></td>
   <td><%= client.telephone %></td>
   <td><%= obfuscate_email client.email %></td>
-  <td><%= time_ago_in_words(client.created_at) %> ago</td>
+  <td><%= local_time_ago(client.created_at) %></td>
   <td><%= link_to 'Show', client %></td>
   <td><%= link_to 'Edit', edit_client_path(client) %></td>
   <td><%= link_to 'Delete', client, method: :delete, data: { confirm: confirm_delete_client_message(client) } %></td>

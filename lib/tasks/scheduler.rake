@@ -131,9 +131,9 @@ def create_history(invoice, setting, actual_email_message)
     history.reminder_type      = work_out_reminder_type(invoice)
     history.sent               = false
     history.email_return_code  = "Not yet sent"
-    history.email_sent_from    = invoice.user.company.email
+    history.email_sent_from    = invoice.user.company_email
     history.copy_email         = setting.email_copy_to
-    history.email_sent_to	     = invoice.client.email
+    history.email_sent_to	     = invoice.client_email
     history.user_id            = invoice.user_id
     history.email_from_name    = setting.send_from_name
   end

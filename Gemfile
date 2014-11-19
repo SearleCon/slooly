@@ -55,6 +55,8 @@ gem "ransack"
 
 gem 'autosize-rails'
 
+gem 'local_time'
+
 group :production do
   gem 'pg'
   gem 'heroku-deflater'

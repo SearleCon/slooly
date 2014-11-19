@@ -33,6 +33,8 @@ class Invoice < ActiveRecord::Base
 
   scope :chasing, -> { where(status_id: STATUSES[:chasing]) }
 
+  delegate :email, :business_name, to: :client, prefix: true
+
   def age
     (Date.today - due_date.to_date).to_i
   end

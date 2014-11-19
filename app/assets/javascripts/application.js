@@ -16,6 +16,7 @@
 //= require bootstrap-datepicker
 //= require obfuscatejs
 //= require jquery.autosize
+//= require local_time
 //= require jquery.turbolinks
 //= require_tree .
 
