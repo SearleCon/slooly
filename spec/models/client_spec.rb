@@ -33,7 +33,7 @@ describe Client do
   it { should validate_uniqueness_of(:business_name).scoped_to(:user_id) }
 
   it do
-     Client.create(business_name: "Test")
+     create(:client, business_name: "Test")
      should validate_uniqueness_of(:business_name)
   end
 

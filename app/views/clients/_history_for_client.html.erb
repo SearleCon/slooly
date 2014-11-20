@@ -11,8 +11,7 @@
 		<th><span rel="tooltip" title="Quick View"><i class="icon-eye-open"></i></span></th>
 	  </tr>
 
-	<% @client.histories.order("date_sent desc").each do |history| %>
-	  <tr>
+	<%= content_tag_for(:tr, @client.histories) do |history| %>
 	    <td><%= link_to history.date_sent, history %></td>
 		<td><%= history.email_sent_to %></td>
         <td><%= display_reminder_badge(history) %></td>
@@ -24,6 +23,5 @@
               <i class="icon-eye-open"></i>
           <% end %>
         </td>
-	  </tr>
 	<% end %>
 	</table>

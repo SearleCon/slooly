@@ -53,7 +53,7 @@ class ClientsController < ApplicationController
   private
 
   def set_client
-    @client = current_user.clients.includes(:invoices).find(params[:id])
+    @client = current_user.clients.includes(:histories, :invoices).find(params[:id])
   end
 
   def client_params

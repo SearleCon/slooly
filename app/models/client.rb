@@ -21,7 +21,7 @@ class Client < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :clients, touch: true
   has_many :invoices, inverse_of: :client, dependent: :destroy
-  has_many :histories, inverse_of: :client, dependent: :destroy
+  has_many :histories, -> { order('date_sent desc') }, inverse_of: :client, dependent: :destroy
 
   validates :business_name, :email, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }

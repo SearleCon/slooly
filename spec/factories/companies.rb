@@ -26,6 +26,5 @@ FactoryGirl.define do
     telephone   { Faker::PhoneNumber.phone_number }
     fax         { Faker::PhoneNumber.phone_number }
     email       { Faker::Internet.email }
-    user
   end
 end

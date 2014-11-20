@@ -23,6 +23,8 @@ FactoryGirl.define do
     name "Test User"
     email { Faker::Internet.email }
     password "please123"
+    setting
+    company
 
 
     factory :subscribed_user do

@@ -38,6 +38,7 @@ class Setting < ActiveRecord::Base
   before_save :strip_messages
 
   protected
+
   def set_defaults
     self.send_from_name = 'Your Business'
     self.email_copy_to = 'copy@example.com'
@@ -100,12 +101,12 @@ class Setting < ActiveRecord::Base
   end
 
   def strip_messages
-    self.payment_method_message.strip!
-    self.pre_due_message.strip!
-    self.due_message.strip!
-    self.overdue1_message.strip!
-    self.overdue2_message.strip!
-    self.overdue3_message.strip!
-    self.final_demand_message.strip!
+    payment_method_message.strip!
+    pre_due_message.strip!
+    due_message.strip!
+    overdue1_message.strip!
+    overdue2_message.strip!
+    overdue3_message.strip!
+    final_demand_message.strip!
   end
 end

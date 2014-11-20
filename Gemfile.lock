@@ -171,6 +171,10 @@ GEM
       nokogiri
       rubyzip
       spreadsheet (> 0.6.4)
+    rspec (3.1.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -287,6 +291,7 @@ DEPENDENCIES
   ransack
   rolify (>= 3.2.0)
   roo
+  rspec
   rspec-rails
   rubocop
   sass-rails (~> 4.0.0)

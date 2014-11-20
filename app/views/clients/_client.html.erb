@@ -1,4 +1,4 @@
-<tr id=<%dom_id(client)%> class=<%dom_class(client) %>>
+<%= content_tag_for(:tr, client) do %>
   <td><%= link_to client.business_name, client %></td>
   <td><%= client.contact_person %></td>
   <td><%= client.telephone %></td>
@@ -7,4 +7,4 @@
   <td><%= link_to 'Show', client %></td>
   <td><%= link_to 'Edit', edit_client_path(client) %></td>
   <td><%= link_to 'Delete', client, method: :delete, data: { confirm: confirm_delete_client_message(client) } %></td>
-</tr>
+<% end %>

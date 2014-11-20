@@ -1,10 +1,10 @@
 class InvoicesToSend
-
   def invoices
-   @invoices ||= Invoice.where(send_today.and(unsent).and(chasing_or_final_demand))
+    @invoices ||= Invoice.where(send_today.and(unsent).and(chasing_or_final_demand))
   end
 
   private
+
   def table
     Invoice.arel_table
   end
@@ -46,7 +46,6 @@ class InvoicesToSend
   end
 
   def today
-    DateTime.now.to_date
+    Date.today
   end
-
 end

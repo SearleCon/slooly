@@ -33,4 +33,8 @@ Slooly::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Don't run delayed jobs
+  Delayed::Worker.delay_jobs = false
+
 end

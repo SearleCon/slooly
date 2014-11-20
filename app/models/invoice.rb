@@ -33,7 +33,9 @@ class Invoice < ActiveRecord::Base
 
   scope :chasing, -> { where(status_id: STATUSES[:chasing]) }
 
-  delegate :email, :business_name, to: :client, prefix: true
+  delegate :business_name, to: :client, prefix: true
+
+  after_initialize :setup_defaults, if: :new_record?
 
   def age
     (Date.today - due_date.to_date).to_i
@@ -71,4 +73,9 @@ class Invoice < ActiveRecord::Base
     sum(:amount)
   end
 
+  private
+
+  def setup_defaults
+    self.last_date_sent = Date.today - 1.year
+  end
 end

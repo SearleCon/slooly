@@ -11,18 +11,14 @@ module InvoicesHelper
       when invoice.age > 0 then type = 'badge badge-important'
       when invoice.age == 0 then type = 'badge badge-info'
       when invoice.age < 0 then type = 'badge badge-success'
-      else
-        type = 'badge'
+      else type = 'badge'
     end
     content_tag(:span, invoice.age, class: type)
   end
 
   def display_description(invoice)
-    if invoice.description.size > 50
-      content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: truncate(simple_format(invoice.description), length: 500) }) if invoice.description.size > 50
-    else
-      invoice.description
-    end
+    return invoice.description unless invoice.description.size > 50
+    content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
   end
 
   def display_status_label(invoice)

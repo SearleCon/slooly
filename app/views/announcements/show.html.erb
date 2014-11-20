@@ -1,6 +1,5 @@
-
-	<%= image_tag('news.png', class: 'header') %><h3><%= @announcement.headline %></h3><br><br>
-    <%= simple_format(@announcement.description) %><br><br>
-    <div class="muted">Posted by <%= @announcement.posted_by %> on <%= @announcement.created_at.to_date %></div><br>
+<%= image_tag('news.png', class: 'header') %><h3><%= @announcement.headline %></h3><br><br>
+<%= simple_format(@announcement.description) %><br><br>
+<div class="muted">Posted by <%= @announcement.posted_by %> on <%= @announcement.created_at.to_date %></div><br>
 
 <%= link_to 'Back', announcements_path %>
