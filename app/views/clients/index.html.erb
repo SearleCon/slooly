@@ -45,13 +45,9 @@
     </div>
     <hr>
     <div>
-      <%= form_tag import_clients_path, multipart: true do %>
-          <div class="field">
-            <%= file_field_tag :file %>
-          </div>
-          <div class="actions">
-            <%= submit_tag 'Import Clients', class: 'btn btn-primary' %>
-          </div>
+      <%= simple_form_for ImportForm.new, url: import_clients_path, html: {multipart: true} do |f| %>
+          <%= f.input :file, as: :file %>
+          <%= f.button :submit, 'Import' %>
       <% end %>
     </div>
 

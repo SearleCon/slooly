@@ -12,7 +12,6 @@ class ClientsController < ApplicationController
     @client = current_user.clients.new
   end
 
-
   def show
     fresh_when @client
   end

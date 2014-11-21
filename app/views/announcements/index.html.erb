@@ -1,13 +1,20 @@
-<h1>News Section</h1>
-<h6>All the latest product information, offers and general business news</h6><br>
-
-<% @announcements.each do |announcement| %>
-<div class="span11 well">
-	<%= image_tag('news.png', class: 'header')%><h3><%= announcement.headline %></h3><br>
-    <%=h truncate(announcement.description, length: 600) %><br>
-	<% if announcement.description.length > 600 %>
-    	<%= link_to 'Read full article', announcement %>
-	<% end %>
-    <br><br><div class="muted">Posted by <%= announcement.posted_by %> on <%= announcement.created_at.to_date %></div><br>
+<div class="page-header">
+  <h1>News Section</h1>
+  <h6>All the latest product information, offers and general business news</h6>
 </div>
+<% announcements.each do |announcement| %>
+    <div class="span11 well">
+        <%= announcement.headline %>
+        <br>
+        <%= announcement.short_description %>
+        <br>
+        <br>
+        <%= announcement.posted_by %>
+        <%- if current_user.has_role? :admin %>
+          <div class="pull-right">
+            <%= link_to 'Edit', edit_announcement_path(announcement)%>
+            <%= link_to 'Destroy', announcement, method: :delete %>
+          </div>
+        <% end %>
+    </div>
 <% end %>

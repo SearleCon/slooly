@@ -1,6 +1,8 @@
-<h1>Listing plans</h1>
+<div class="page-header">
+  <h1>Plans</h1>
+</div>
 
-<table>
+<table class="table table-condensed table-bordered">
   <tr>
     <th>Description</th>
     <th>Duration</th>
@@ -14,9 +16,9 @@
 <% @plans.each do |plan| %>
   <tr>
     <td><%= plan.description %></td>
-    <td><%= plan.duration %></td>
-    <td><%= plan.cost %></td>
-    <td><%= plan.active %></td>
+    <td><%= pluralize(plan.duration, 'Month') %></td>
+    <td><%= number_to_currency(plan.cost) %></td>
+    <td><%= boolean_to_words(plan.active) %></td>
     <td><%= link_to 'Show', plan %></td>
     <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
     <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>

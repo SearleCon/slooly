@@ -1,7 +1,7 @@
 <h2>Company Profile</h2><br>
 
 
-<% if @company.image_url != nil %>
+<% if @company.image_url %>
     <%= image_tag @company.image_url.to_s %><br><br>
 <% else %>
     <%= link_to image_tag('your_logo_here.gif'), edit_company_path(@company) %><br><br>
@@ -10,7 +10,7 @@
 <table>
   <tr>
     <td>Name:</td>
-    <td><h4>    <%= @company.name %></h4></td>
+    <td><h4> <%= @company.name %></h4></td>
   </tr>
   <tr>
     <td>Address:</td>
@@ -21,8 +21,7 @@
     <td><%= @company.city %></td>
   </tr>
   <tr>
-    <td>Postal Code:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <!-- &nbsp; SS is the code for Spaces in HTML -->
+    <td>Postal Code:</td>
     <td><%= @company.post_code %></td>
   </tr>
   <tr>

@@ -1,5 +1,4 @@
 class UserMailer < ActionMailer::Base
-
   def registration_confirmation(user)
     @user = user
     mail(from: 'registrations@payingmantis.com', to: @user.email, subject: 'Paying Mantis - Registration Details')
