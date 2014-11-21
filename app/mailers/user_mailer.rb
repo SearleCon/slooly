@@ -1,5 +1,4 @@
 class UserMailer < ActionMailer::Base
-  #  default :from => "YourBusiness"
 
   def registration_confirmation(user)
     @user = user
@@ -7,8 +6,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def send_it(history)
-    @historysend = history
-    mail(from: @historysend.email_sent_from, to: @historysend.email_sent_to, bcc: @historysend.copy_email, subject: @historysend.subject)
+    @message = history.message
+    mail(from: history.email_sent_from, to: history.email_sent_to, bcc: history.copy_email, subject: history.subject)
   end
 
   def new_message(message)

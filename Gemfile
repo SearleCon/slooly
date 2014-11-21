@@ -53,9 +53,19 @@ gem 'obfuscatejs'
 # Searching
 gem "ransack"
 
+# Resize text areas
 gem 'autosize-rails'
 
+# relative time display
 gem 'local_time'
+
+# import from excel
+gem 'active_importer'
+
+# Form builder
+gem 'simple_form'
+
+
 
 group :production do
   gem 'pg'

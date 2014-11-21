@@ -4,7 +4,7 @@ class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: [:show, :edit, :update, :destroy]
 
   def index
-    @announcements = Announcement.order('created_at desc')
+    @announcements = Announcement.all
   end
 
   def new

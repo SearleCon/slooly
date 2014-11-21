@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, except: [:index, :new, :create]
+  before_action :set_client, except: [:index, :import, :new, :create]
 
   def index
     @q = current_user.clients.search(params[:q])
@@ -12,7 +12,6 @@ class ClientsController < ApplicationController
     @client = current_user.clients.new
   end
 
-  def edit; end
 
   def show
     fresh_when @client
@@ -24,6 +23,13 @@ class ClientsController < ApplicationController
     respond_with @client
   end
 
+  def import
+    file_path = params[:file].path
+    ext = File.extname(params[:file].original_filename).delete('.').to_sym
+    ClientImporter.import(file_path, extension: ext, params: { user_id: current_user })
+    redirect_to clients_url
+  end
+
   def update
     flash[:notice] = 'Client was successfully updated.' if @client.update(client_params)
     respond_with @client
@@ -32,22 +38,6 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     respond_with @client
-  end
-
-  # GET creates new import for clients
-  def import_clients
-    @import = Client.build_importer
-  end
-
-  # POST reads from the spreadsheets and saves
-  def import
-    @import = Client.build_importer(params[:importer])
-    @import.imported.each { |record| record.user_id = current_user.id }
-    if @import.save
-      redirect_to clients_url
-    else
-      render 'import_clients'
-    end
   end
 
   private

@@ -22,17 +22,17 @@
 #                             PUT    /announcements/:id(.:format)           announcements#update
 #                             DELETE /announcements/:id(.:format)           announcements#destroy
 #                     history GET    /histories/:id(.:format)               histories#show
-#                  pages_home GET    /pages/home(.:format)                  pages#home
-#                 pages_about GET    /pages/about(.:format)                 pages#about
-#            pages_ie_warning GET    /pages/ie_warning(.:format)            pages#ie_warning
-#                   pages_faq GET    /pages/faq(.:format)                   pages#faq
-#                  pages_news GET    /pages/news(.:format)                  pages#news
-#               pages_reports GET    /pages/reports(.:format)               pages#reports
-#         pages_initial_setup GET    /pages/initial_setup(.:format)         pages#initial_setup
-#               pages_pricing GET    /pages/pricing(.:format)               pages#pricing
-#                   pages_tos GET    /pages/tos(.:format)                   pages#tos
-#              pages_tutorial GET    /pages/tutorial(.:format)              pages#tutorial
-#               pages_privacy GET    /pages/privacy(.:format)               pages#privacy
+#                        home GET    /home(.:format)                        pages#home
+#                       about GET    /about(.:format)                       pages#about
+#                  ie_warning GET    /ie_warning(.:format)                  pages#ie_warning
+#                         faq GET    /faq(.:format)                         pages#faq
+#                        news GET    /news(.:format)                        pages#news
+#                     reports GET    /reports(.:format)                     pages#reports
+#               initial_setup GET    /initial_setup(.:format)               pages#initial_setup
+#                     pricing GET    /pricing(.:format)                     pages#pricing
+#                         tos GET    /tos(.:format)                         pages#tos
+#                    tutorial GET    /tutorial(.:format)                    pages#tutorial
+#                     privacy GET    /privacy(.:format)                     pages#privacy
 #             paypal_checkout GET    /paypal/checkout(.:format)             subscriptions#paypal_checkout
 #                 new_contact GET    /contact(.:format)                     contact#new
 #                     contact POST   /contact(.:format)                     contact#create
@@ -49,7 +49,6 @@
 #                edit_setting GET    /settings/:id/edit(.:format)           settings#edit
 #                     setting PATCH  /settings/:id(.:format)                settings#update
 #                             PUT    /settings/:id(.:format)                settings#update
-#           import_new_client GET    /clients/new/import_clients(.:format)  clients#import_clients
 #                     clients GET    /clients(.:format)                     clients#index
 #                             POST   /clients(.:format)                     clients#create
 #                  new_client GET    /clients/new(.:format)                 clients#new
@@ -70,7 +69,6 @@
 #                             PATCH  /invoices/:id(.:format)                invoices#update
 #                             PUT    /invoices/:id(.:format)                invoices#update
 #                             DELETE /invoices/:id(.:format)                invoices#destroy
-#                      import POST   /clients/import(.:format)              clients#import
 #          authenticated_root GET    /                                      pages#home
 #                        root GET    /                                      home#index
 #            new_user_session GET    /users/sign_in(.:format)               sessions#new
@@ -133,8 +131,8 @@ Slooly::Application.routes.draw do
   resources :settings, only: [:index, :edit, :update]
 
   resources :clients do
-    new do
-      get :import_clients, as: :import
+    collection do
+      post :import
     end
   end
 
@@ -142,15 +140,13 @@ Slooly::Application.routes.draw do
 
   resources :invoices
 
-  match 'clients/import', as: :import, via: :post
+
 
   authenticated :user do
-    root :to => 'pages#home', as: :authenticated_root
+    root to: 'pages#home', as: :authenticated_root
   end
-  root :to => "home#index"
+  root to: "home#index"
 
   devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
   resources :users, only: [:show, :index]
-
-  match "*path", to: "application#routing_error", via: :all
 end

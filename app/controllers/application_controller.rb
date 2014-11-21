@@ -6,11 +6,10 @@ class ApplicationController < ActionController::Base
 
   etag { current_user.try :id }
 
-  rescue_from ActionController::RoutingError, with: :render_not_found
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
 
   def routing_error
-    fail ActionController::RoutingError.new(params[:path])
+    #fail ActionController::RoutingError.new(params[:path])
   end
 
   def render_not_found
