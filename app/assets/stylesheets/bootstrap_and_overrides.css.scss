@@ -45,3 +45,9 @@ textarea {
 .modal-body {
   max-height: 470px;
 }
+
+.popover{
+  display:block !important;
+  overflow: auto;
+  width: auto;
+}

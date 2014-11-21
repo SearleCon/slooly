@@ -16,10 +16,10 @@
 		<td><%= history.email_sent_to %></td>
         <td><%= display_reminder_badge(history) %></td>
 	    <td><%= history.invoice_number %></td>
-	    <td><%= truncate(history.subject, :length => 50) %></td>
-	    <td><%= truncate(history.message, :length => 70) %></td>
+	    <td><%= truncate(history.subject, length: 50) %></td>
+	    <td><%= truncate(history.message, length: 70) %></td>
         <td>
-          <%= link_to '#', {rel: 'popover', title: "Email Message (Ref: #{history.invoice_number})", data: {content: "#{h history.message}", placement: 'left'} } do %>
+          <%= link_to '#', {rel: 'popover', title: "Email Message (Ref: #{history.invoice_number})", data: {content: "#{history.message}", placement: 'left'} } do %>
               <i class="icon-eye-open"></i>
           <% end %>
         </td>

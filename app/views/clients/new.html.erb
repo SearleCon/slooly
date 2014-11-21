@@ -1,7 +1,9 @@
-<%= image_tag('clients.png', class: 'header') %><h1>Add a Client</h1><br>
+<div class="page-header">
+  <%= image_tag('clients.png', class: 'header') %><h1>Add a Client</h1><br>
+</div>
 
 <%= render 'form' %>
 
 <hr>
 
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', clients_path %>

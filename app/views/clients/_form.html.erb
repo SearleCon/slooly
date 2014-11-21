@@ -1,70 +1,26 @@
-<%= form_for(@client) do |f| %>
-  <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul>
-      <% @client.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-
-<div class="row">
-  <div class="span5">
-
-
-  <div class="field">
-    <%= f.label :business_name %>
-    <%= f.text_field :business_name, :autofocus=>true %>
+<%= simple_form_for(@client) do |f| %>
+    <%= errors_for(@announcement) %>
+    <div class="row">
+     <div class="span5">
+       <%= f.input :business_name, autofocus: true %>
+       <%= f.input :contact_person %>
+       <%= f.input :address %>
+       <%= f.input :city %>
+       <%= f.input :post_code, label: 'Zip / Post Code' %>
+       <%= f.input :telephone %>
+       <%= f.input :fax %>
+       <%= f.input :email, as: :email %>
+     </div>
+      <div class="span6 well">
+        <%= image_tag('tip.png', class: 'header')%><h3>Notes:</h3><br>
+        <ul>
+          <li><b>Email:</b> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.</li><br>
+          <li><b>Other:</b> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.</li>
+        </ul>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :contact_person %>
-    <%= f.text_field :contact_person %>
-  </div>
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :post_code, 'Zip / Post Code' %>
-    <%= f.text_field :post_code %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone %>
-    <%= f.text_field :telephone %>
-  </div>
-  <div class="field">
-    <%= f.label :fax %>
-    <%= f.text_field :fax %>
-  </div>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-
-  </div>
-  <div class="span6 tooltip-demo well">
-		<%= image_tag('tip.png', class: 'header')%><h3>Notes:</h3><br>
-	<ul>
-	<li><b>Email:</b> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.</li><br>
-	<li><b>Other:</b> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.</li>
-	</ul>
-  </div>
-</div>
-
 <hr>
-
-<div class="actions">
-   <%= f.submit 'Save Client', class: 'btn btn-primary' %>
-</div>
+    <%= f.button :submit, 'Save Client' %>
 
 
 <% end %>
