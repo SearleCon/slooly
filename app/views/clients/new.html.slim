@@ -1,6 +1,9 @@
 .page-header
-  = image_tag('clients.png', class: 'header')
-  h1 Add a Client
+  .media
+    .pull-left
+      =image_tag('clients.png', class: 'media-object')
+    .media-body
+      h1 Add a Client
 = render 'form'
 hr
 = link_to 'Back', clients_path

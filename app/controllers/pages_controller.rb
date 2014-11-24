@@ -7,9 +7,11 @@ class PagesController < ApplicationController
     @chasing_invoices = @q.result(distinct: true).includes(:client).page(params[:page])
   end
 
-  def about; end
+  def about
+  end
 
-  def faq; end
+  def faq
+  end
 
   def pricing; end
 

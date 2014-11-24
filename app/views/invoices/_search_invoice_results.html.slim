@@ -1,11 +1,4 @@
 br
 .alert.alert-block.alert-info.fade.in
-  button.close[type="button" data-dismiss="alert"]
-    | ×
-  b
-    = @invoices.total_entries
-    |  invoice(s) found
-  |  containing the search string 
-  b
-    = "'#{@q.conditions.collect(&:value).join(' ')}'"
-  |  (In their Invoice Number or Description fields). 
+  button.close[type="button" data-dismiss="alert"] ×
+  = simple_format("<strong>#{pluralize(@invoices.total_entries, 'invoice')} found</strong> containing the search string <strong>'#{@q.conditions.collect(&:value).join(' ')}'</strong> (In their Invoice Number or Description fields). ")

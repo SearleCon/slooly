@@ -1,6 +1,9 @@
 .page-header
-  = image_tag('clients.png', class: 'header')
-  h1 Clients
+  .media
+    .pull-left
+      =image_tag('clients.png', class: 'media-object')
+    .media-body
+      h1 Clients
 
 .header.form-search[align="right"]
   = search_form_for @q do |f|

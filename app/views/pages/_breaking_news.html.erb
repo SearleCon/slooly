@@ -1,6 +1,0 @@
-<% if announcements.any? %>
-	<br><br>
-	<div class="clean-gray">				
-		 <b>Breaking News: <%= link_to latest_announcement.headline, announcements_path %></b> (This message will disappear in <%= time_remaining_for_announcement %> days time)
-	</div>
-<% end %>

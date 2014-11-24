@@ -1,11 +1,13 @@
 .page-header
-  = image_tag('clients.png', class: 'header')
-  h2 Client Details
+  .media
+    .pull-left
+      =image_tag('clients.png', class: 'media-object')
+    .media-body
+      h1 Client Details
 table
   tr
     td Business Name:
-    td
-      h4= @client.business_name
+    td: h4= @client.business_name
   tr
     td Contact Person:
     td = @client.contact_person

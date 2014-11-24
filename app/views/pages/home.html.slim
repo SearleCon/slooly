@@ -1,0 +1,42 @@
+.page-header
+  h3[align='right']=link_to 'Add a New Invoice', new_invoice_path, class: 'btn btn-primary'
+  .media
+    .pull-left=image_tag('home.png', class: 'media-object')
+    .media-body
+      h1 Home
+      h2 Chasing Overview
+      | You are currently chasing
+      '
+      strong=pluralize(@chasing_invoices.total_entries, 'invoice')
+- if @chasing_invoices.empty?
+  = render("no_records")
+- else
+  hr
+  table.table
+    thead
+      tr
+        = content_tag :th  do
+          a[rel="popover" title='Invoice Age' data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green']: i.icon-question-sign
+          '
+          = sort_link(@q, :due_date, 'Age')
+        = content_tag :th, sort_link(@q, :invoice_number, 'Invoice Number')
+        = content_tag :th, sort_link(@q, :due_date, 'Due Date')
+        = content_tag :th, sort_link(@q, :amount, 'Amount')
+        = content_tag :th, sort_link(@q, :description, 'Description')
+        = content_tag :th, sort_link(@q, :status_id, 'Status')
+        = content_tag :th, sort_link(@q, :client_id, 'Client')
+        = content_tag :th, sort_link(@q, :created_at, 'Created')
+    tbody
+      = render @chasing_invoices
+  .flickr_pagination
+    .page_info
+    = will_paginate @chasing_invoices, container: false
+  br
+  div[align="right"]
+    strong Note:
+    | This page only shows invoices with a status of
+    '
+    span.label.label-success Chasing
+    br
+    | For all invoices, click #{link_to 'here', invoices_path} or on the Invoices menu item in the Navigation bar
+= render 'pages/breaking_news'

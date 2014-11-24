@@ -1,7 +1,9 @@
-= image_tag('invoices.png', class: 'header')
-h2
-  | Edit Invoice
-br
+.page-header
+  .media
+    .pull-left
+      =image_tag('invoices.png', class: 'media-object')
+    .media-body
+      h1 Edit Invoice
 = render 'form'
 = link_to 'Show', @invoice
 |  | 

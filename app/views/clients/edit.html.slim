@@ -1,6 +1,9 @@
 .page-header
-  = image_tag('clients.png', class: 'header')
-  h2 Edit Client
+  .media
+    .pull-left
+      =image_tag('clients.png', class: 'media-object')
+    .media-body
+      h1 Edit Client
 = render 'form'
 = link_to 'Show', @client
 |  | 

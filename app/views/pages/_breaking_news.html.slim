@@ -1,0 +1,4 @@
+- if announcements.any?
+  .breaking-news
+    strong> Breaking News: #{link_to latest_announcement.headline, announcements_path}
+    | (This message will disappear in #{time_remaining_for_announcement} days time)

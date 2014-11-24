@@ -23,6 +23,7 @@
 class Invoice < ActiveRecord::Base
   STATUSES = { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7 }.freeze
 
+
   self.per_page = 10
 
   belongs_to :client, inverse_of: :histories, touch: true
