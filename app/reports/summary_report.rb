@@ -26,6 +26,6 @@ class SummaryReport
   end
 
   def total
-    @invoices.sum(&:amount)
+    @invoices.sum(:amount)
   end
 end

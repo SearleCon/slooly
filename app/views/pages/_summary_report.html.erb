@@ -1,44 +1,36 @@
-
 <hr>
-<h3>Summary report (Invoices with Chasing Status)</h3><!-- <%= link_to "(Save to PDF)", "#" %> -->
+<h3>Summary report (Invoices with Chasing Status)</h3>
 <br><br>
 
 <table>
-<!-- <table class="table"> -->
   <tr>
-    <td>More than 90 days overdue:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>More than 90 days overdue:</td>
     <td align="right"><h4><%= @summary_report.over_ninety_days %></h4></td>
 
-	<!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>60 - 90 days:</td>
     <td align="right"><h4><%= @summary_report.sixty_to_ninety_days %></h4></td>
 
-    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>30 - 60 days:</td>
     <td align="right"><h4><%= @summary_report.thirty_to_sixty_days %></h4></td>
 
-    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>0 - 30 days:</td> 
     <td align="right"><h4><%= @summary_report.zero_to_thirty_days %></h4></td>
 
-    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td>Not yet due:</td>
     <td align="right"><h4><%= @summary_report.not_due %></h4></td>
 
-    <!-- <td>&nbsp;&nbsp;<%= link_to "(View)", "#"%></td> -->
   </tr>
   <tr>
     <td><br>Total due to you:</td>
     <td align="right"><h4><%= @summary_report.total %></h4></td>
-
   </tr>
 
 </table>

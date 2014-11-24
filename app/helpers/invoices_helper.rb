@@ -35,4 +35,8 @@ module InvoicesHelper
   def options_for_status
     Invoice::STATUSES.transform_keys { |key| key.to_s.titleize }
   end
+
+  def status
+    Invoice::STATUSES.sort.transform_keys { |key| key.to_s.titleize }
+  end
 end

@@ -7,8 +7,8 @@
 
 	<%= metamagic :title => "Paying Mantis - Increase your Cash Flow", :author => "Searle Consulting", :description => "Automatically chase your customers that owe you money, and get paid quicker. Paying Mantis dramatically ups your chances of increasing your cash flow.", :keywords => %w(Cash Flow Cashflow Get Paid Money owed Chase Debtors Increase) %>
 
-    <%= stylesheet_link_tag  "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag  "application", :media => "all", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
@@ -24,7 +24,7 @@
       </nav>
     </header>
     <div id="main" role="main">
-      <div class="container">
+      <div id="content" class="container">
 		<%= render 'layouts/browser_warning' %>
         <div class="content">
            <div class="row">

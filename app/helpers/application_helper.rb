@@ -15,6 +15,6 @@ module ApplicationHelper
   end
 
   def boolean_to_words(value)
-    value ? "Yes" : "No"
+    value ? 'Yes' : 'No'
   end
 end

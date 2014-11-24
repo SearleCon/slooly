@@ -8,7 +8,9 @@ gem 'uglifier', '>= 1.3.0'
 
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
-gem "bootstrap-datepicker-rails"
+gem 'bootstrap-datetimepicker-rails'
+gem 'twitter-bootstrap-rails-confirm'
+
 
 # Decorators
 gem 'draper', '~> 1.3'
@@ -33,7 +35,7 @@ gem "workless", "~> 1.2.3"
 
 
 # Turbolinks
-gem "jquery-turbolinks"
+gem 'turbolinks'
 
 # Paypal
 gem "paypal-recurring"
@@ -43,8 +45,6 @@ gem "browser"
 gem 'metamagic'
 gem 'honeypot-captcha'
 
-# Excel
-gem 'roo'
 
 # Server
 gem 'unicorn'
@@ -66,6 +66,9 @@ gem 'active_importer'
 
 # Form builder
 gem 'simple_form'
+
+# Templating
+gem 'slim-rails'
 
 
 

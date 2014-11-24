@@ -28,6 +28,7 @@ class AnnouncementsController < ApplicationController
   end
 
   private
+
   def build_announcement
     @announcement = Announcement.new(announcement_params)
   end

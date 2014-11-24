@@ -1,0 +1,93 @@
+.page-header
+  = image_tag('clients.png', class: 'header')
+  h2 Client Details
+table
+  tr
+    td Business Name:
+    td
+      h4= @client.business_name
+  tr
+    td Contact Person:
+    td = @client.contact_person
+  tr
+    td Address:
+    td= @client.address
+  tr
+    td City:
+    td= @client.city
+  tr
+    td Post Code:
+    td= @client.post_code
+  tr
+    td Telephone:
+    td= @client.telephone
+  tr
+    td Fax:
+    td= @client.fax
+  tr
+    td Email:
+    td= obfuscate_email @client.email
+br
+= link_to 'Edit this Client', edit_client_path(@client)
+|  | 
+= link_to 'Add another Client', new_client_path
+|  | 
+= link_to 'Back', :back
+hr
+.tabbable.tabs-top
+  ul#myTab.nav.nav-tabs
+    li.active
+      a[href="#chasing" data-toggle="tab"] Currently Chasing
+    li
+      a[href="#history" data-toggle="tab"] Chasing History
+  #myTabContent.tab-content
+    #chasing.tab-pane.fade.in.active
+      - if @client.invoices.chasing.any?
+        |  You are currently chasing the following 
+        b= "#{@client.invoices.chasing.size} invoice(s)"
+        |  for 
+        b= @client.business_name
+        |  to the value of 
+        b= @client.invoices.chasing.total
+        |  (total chasing amount). 
+        br
+        = render 'invoices_for_client'
+      - else
+        |  You are 
+        b
+          | not
+        |  chasing any invoices for 
+        = @client.business_name
+        | . 
+    #history.tab-pane.fade.in
+      - if @client.histories.any?
+        |  Here are the emails you have
+        b  already sent
+        |  to
+        b= @client.business_name
+        |  (Newest to Oldest).
+        br
+        = render 'history_for_client'
+      - else
+        | You have
+        b no
+        | chase history for
+        = @client.business_name
+        | . 
+hr
+div
+  a[data-toggle="modal" href="#myModal"]
+    | Add invoice for this client
+#myModal.modal.hide.fade
+  .modal-header
+    button.close[type="button" data-dismiss="modal"]
+      | ×
+    h3
+      | Add Invoice (for 
+      = @client.business_name
+      | )
+  .modal-body
+    = render 'quick_invoice'
+  .modal-footer
+    a.btn[href="#" data-dismiss="modal"]
+      | Close

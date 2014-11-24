@@ -1,0 +1,24 @@
+= simple_form_for(@client) do |f|
+  = errors_for(@client)
+  .row
+    .span5
+      = f.input :business_name, autofocus: true
+      = f.input :contact_person
+      = f.input :address
+      = f.input :city
+      = f.input :post_code, label: 'Zip / Post Code'
+      = f.input :telephone
+      = f.input :fax
+      = f.input :email, as: :email
+    .span6.well
+      .media
+        .pull-left
+          =image_tag('tip.png', class: 'media-object')
+        .media-body
+          h3.media-heading Notes:
+      ul.form-notes
+        li=simple_format(t('forms.notes.clients.email'))
+        li=simple_format(t('forms.notes.clients.other'))
+
+  hr
+  = f.button :submit, 'Save Client'

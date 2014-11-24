@@ -1,0 +1,38 @@
+.page-header
+  .media
+    .pull-left=image_tag('invoices.png', class: 'header')
+    .media-body
+      h1 Invoices
+.header.form-search[align="right"]
+  = search_form_for @q do |f|
+    p
+      = f.search_field :invoice_number_or_description_cont, class: "input-medium search-query", placeholder: "Search invoices"
+      - if @q.conditions.any?
+        span[rel="tooltip" title="Clear Search"]= link_to image_tag("close.png"), invoices_path
+= render "search_invoice_results" if @q.conditions.any?
+
+h4[align="right"] ( #{@invoices.total_entries} in total )
+
+- if current_user.invoices.empty?
+  = render("no_records")
+- else
+  table.table
+    tr
+      = content_tag :th, sort_link(@q, :due_date, 'Age')
+      = content_tag :th, sort_link(@q, :invoice_number, 'Invoice Number')
+      = content_tag :th, sort_link(@q, :due_date, 'Due Date')
+      = content_tag :th, sort_link(@q, :amount, 'Amount')
+      = content_tag :th, sort_link(@q, :description, 'Description')
+      = content_tag :th, sort_link(@q, :status_id, 'Status')
+      = content_tag :th, sort_link(@q, :client_id, 'Client')
+      = content_tag :th, sort_link(@q, :created_at, 'Created')
+      th
+      th
+      th
+    = render @invoices
+  .flickr_pagination
+    .page_info
+    .pagination-links
+      = will_paginate @invoices, :container => false
+  hr
+  = link_to 'Add Invoice', new_invoice_path

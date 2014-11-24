@@ -1,0 +1,17 @@
+= content_tag_for(:tr, client) do
+  td
+    = link_to client.business_name, client
+  td
+    = client.contact_person
+  td
+    = client.telephone
+  td
+    = obfuscate_email client.email
+  td
+    = local_time_ago(client.created_at)
+  td
+    = link_to 'Show', client
+  td
+    = link_to 'Edit', edit_client_path(client)
+  td
+    = link_to 'Delete', client, method: :delete, data: { confirm: confirm_delete_client_message(client) }

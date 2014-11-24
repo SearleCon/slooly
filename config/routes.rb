@@ -1,7 +1,7 @@
 # == Route Map
 #
 #                      Prefix Verb   URI Pattern                            Controller#Action
-#                       plans GET    /plans(.:format)                       plans#index
+#                       plans GET    /plans(.:format)                       plans#sindex
 #                             POST   /plans(.:format)                       plans#create
 #                    new_plan GET    /plans/new(.:format)                   plans#new
 #                   edit_plan GET    /plans/:id/edit(.:format)              plans#edit
@@ -13,7 +13,7 @@
 # payment_plans_subscriptions GET    /subscriptions/payment_plans(.:format) subscriptions#payment_plans
 #               subscriptions POST   /subscriptions(.:format)               subscriptions#create
 #            new_subscription GET    /subscriptions/new(.:format)           subscriptions#new
-#               announcements GET    /announcements(.:format)               announcements#index
+#               announcements GET    /announcements(.:format)               announcements#sindex
 #                             POST   /announcements(.:format)               announcements#create
 #            new_announcement GET    /announcements/new(.:format)           announcements#new
 #           edit_announcement GET    /announcements/:id/edit(.:format)      announcements#edit
@@ -37,7 +37,7 @@
 #                 new_contact GET    /contact(.:format)                     contact#new
 #                     contact POST   /contact(.:format)                     contact#create
 #                      redeem PATCH  /redeem(.:format)                      vouchers#redeem
-#                 suggestions GET    /suggestions(.:format)                 suggestions#index
+#                 suggestions GET    /suggestions(.:format)                 suggestions#sindex
 #                             POST   /suggestions(.:format)                 suggestions#create
 #              new_suggestion GET    /suggestions/new(.:format)             suggestions#new
 #             edit_suggestion GET    /suggestions/:id/edit(.:format)        suggestions#edit
@@ -45,11 +45,11 @@
 #                             PATCH  /suggestions/:id(.:format)             suggestions#update
 #                             PUT    /suggestions/:id(.:format)             suggestions#update
 #                             DELETE /suggestions/:id(.:format)             suggestions#destroy
-#                    settings GET    /settings(.:format)                    settings#index
+#                    settings GET    /settings(.:format)                    settings#sindex
 #                edit_setting GET    /settings/:id/edit(.:format)           settings#edit
 #                     setting PATCH  /settings/:id(.:format)                settings#update
 #                             PUT    /settings/:id(.:format)                settings#update
-#                     clients GET    /clients(.:format)                     clients#index
+#                     clients GET    /clients(.:format)                     clients#sindex
 #                             POST   /clients(.:format)                     clients#create
 #                  new_client GET    /clients/new(.:format)                 clients#new
 #                 edit_client GET    /clients/:id/edit(.:format)            clients#edit
@@ -57,11 +57,11 @@
 #                             PATCH  /clients/:id(.:format)                 clients#update
 #                             PUT    /clients/:id(.:format)                 clients#update
 #                             DELETE /clients/:id(.:format)                 clients#destroy
-#                   companies GET    /companies(.:format)                   companies#index
+#                   companies GET    /companies(.:format)                   companies#sindex
 #                edit_company GET    /companies/:id/edit(.:format)          companies#edit
 #                     company PATCH  /companies/:id(.:format)               companies#update
 #                             PUT    /companies/:id(.:format)               companies#update
-#                    invoices GET    /invoices(.:format)                    invoices#index
+#                    invoices GET    /invoices(.:format)                    invoices#sindex
 #                             POST   /invoices(.:format)                    invoices#create
 #                 new_invoice GET    /invoices/new(.:format)                invoices#new
 #                edit_invoice GET    /invoices/:id/edit(.:format)           invoices#edit
@@ -70,7 +70,7 @@
 #                             PUT    /invoices/:id(.:format)                invoices#update
 #                             DELETE /invoices/:id(.:format)                invoices#destroy
 #          authenticated_root GET    /                                      pages#home
-#                        root GET    /                                      home#index
+#                        root GET    /                                      home#sindex
 #            new_user_session GET    /users/sign_in(.:format)               sessions#new
 #                user_session POST   /users/sign_in(.:format)               sessions#create
 #        destroy_user_session DELETE /users/sign_out(.:format)              sessions#destroy
@@ -86,7 +86,7 @@
 #                             PATCH  /users(.:format)                       registrations#update
 #                             PUT    /users(.:format)                       registrations#update
 #                             DELETE /users(.:format)                       registrations#destroy
-#                       users GET    /users(.:format)                       users#index
+#                       users GET    /users(.:format)                       users#sindex
 #                        user GET    /users/:id(.:format)                   users#show
 #                                    /*path(.:format)                       application#routing_error
 #
@@ -116,7 +116,6 @@ Slooly::Application.routes.draw do
     get :tos
     get :tutorial
     get :privacy
-
   end
 
   get "paypal/checkout", to: "subscriptions#paypal_checkout"
@@ -140,7 +139,9 @@ Slooly::Application.routes.draw do
 
   resources :invoices
 
-
+  authenticated :user, lambda {|u| u.has_role? :admin} do
+    root to: "users#index", as: :admin_root
+  end
 
   authenticated :user do
     root to: 'pages#home', as: :authenticated_root

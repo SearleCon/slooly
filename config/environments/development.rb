@@ -42,6 +42,8 @@ Slooly::Application.configure do
     Delayed::Job.scaler = :null
   end
 
+  # Slim
+  Slim::Engine.set_default_options pretty: true, sort_attrs: false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -1,0 +1,26 @@
+= simple_form_for(@invoice) do |f|
+  = errors_for(@invoice)
+  .row
+    .span5
+      = f.association :client, hint: "#{link_to '(Add New Client)', new_client_path}".html_safe, prompt: "Choose a Client", collection: current_user.clients.order(:business_name), label_method: :business_name
+      = f.input :due_date, as: :date_picker
+      = f.input :amount
+      = f.input :description, as: :text
+      = f.input :invoice_number
+      = f.input :status_id, collection: options_for_status, include_blank: false
+    .span6.well
+      .media
+        .pull-left
+          =image_tag('tip.png', class: 'media-object')
+        .media-body
+          h3.media-heading Notes:
+      ul.form-notes
+        li= simple_format(t('forms.notes.invoices.due_date'))
+        li= simple_format(t('forms.notes.invoices.status'))
+        li= simple_format(t('forms.notes.invoices.description'))
+        li= simple_format(t('forms.notes.invoices.settings'))
+        li= simple_format(t('forms.notes.invoices.old_invoices'))
+
+      hr
+  .actions
+    = f.button :submit, 'Save Invoice'
