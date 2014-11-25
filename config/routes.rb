@@ -92,7 +92,7 @@
 #
 
 Slooly::Application.routes.draw do
-  resources :plans
+  resources :plans, except: :show
 
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
 
@@ -125,7 +125,7 @@ Slooly::Application.routes.draw do
 
   match 'redeem' => 'vouchers#redeem', :as => 'redeem', via: :patch
 
-  resources :suggestions
+  resources :suggestions, except: [:show, :edit, :update]
 
   resources :settings, only: [:index, :edit, :update]
 

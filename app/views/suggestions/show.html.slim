@@ -1,0 +1,15 @@
+p
+  b
+    | Subject:
+  = @suggestion.subject
+p
+  b
+    | Comment:
+  = @suggestion.comment
+p
+  b
+    | Email:
+  = @suggestion.email
+= link_to 'Edit', edit_suggestion_path(@suggestion)
+|  | 
+= link_to 'Back', :back

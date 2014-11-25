@@ -31,6 +31,35 @@ en:
      clients:
       email: '<strong>Email:</strong> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.'
       other: '<strong>Other:</strong> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.'
+     settings:
+      send_from_name: '<strong>Send From Name:</strong> This name will be used at the end of the reminder email.'
+      email_copy_to: '<strong>Email Copy To:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will not see this email address))'
+      days_between_chase: '<strong>Days Between Chase:</strong> The number of days between the reminder emails (Default starts 7 days from the due date)'
+      days_before_pre_due: '<strong>Days Before Pre-Due:</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)'
+      payment_method_message: '<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.'
+      pre_due_reminder_checkbox: '<strong>Pre-Due Reminder Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).'
+      pre_due_subject: '<strong>Pre-Due Subject:</strong> This will be used as the subject line of the pre-due reminder email.'
+      pre_due_message: '<strong>Pre-Due Message:</strong> This will be used as the message body for the pre-due reminder email.'
+      due_reminder_checkbox: '<strong>Due Reminder Checkbox:</strong> Uncheck this to NOT send a due reminder message (Default is on).'
+      due_subject: '<strong>Due Subject:</strong> This will be used as the subject line of the due reminder email.'
+      due_message: '<strong>Due Message:</strong> This will be used as the message body for the due reminder email.'
+      overdue1_subject: '<strong>Overdue 1 Subject</strong> This will be used as the subject line of the first overdue reminder email.'
+      overdue1_message: '<strong>Overdue 1 Message:</strong> This will be used as the message body for the first overdue reminder email.'
+      overdue2_subject: '<strong>Overdue 2 Subject</strong> This will be used as the subject line of the second overdue reminder email.'
+      overdue2_message: '<strong>Overdue 2 Message:</strong> This will be used as the message body for the second overdue reminder email.'
+      overdue3_subject: '<strong>Overdue 3 Subject</strong> This will be used as the subject line of the third overdue reminder email.'
+      overdue3_message: '<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.'
+      final_demand_subject: '<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.'
+      final_demand_message: '<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.'
+
+
+
+
+
+
+
+
+
 
 
 

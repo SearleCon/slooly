@@ -1,0 +1,8 @@
+= simple_form_for(@plan) do |f|
+  = errors_for(@plan)
+  = f.input :description
+  = f.input :duration, as: :integer
+  = f.input :cost
+  = f.input :active, as: :boolean
+  .actions
+    = f.button :submit

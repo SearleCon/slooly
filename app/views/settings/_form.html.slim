@@ -1,0 +1,143 @@
+= simple_form_for(@settings) do |f|
+  = errors_for(@settings)
+  br
+  br
+  .tabbable.tabs-left
+    ul#myTab.nav.nav-tabs
+      li.active
+        a[href="#general" data-toggle="tab"] General
+      li
+        a[href="#predue" data-toggle="tab"] Pre-Due Reminder
+      li
+        a[href="#due" data-toggle="tab"] Due Reminder
+      li
+        a[href="#od1" data-toggle="tab"] Overdue Reminder 1
+      li
+        a[href="#od2" data-toggle="tab"] Overdue Reminder 2
+      li
+        a[href="#od3" data-toggle="tab"] Overdue Reminder 3
+      li
+        a[href="#fd" data-toggle="tab"] Final Demand
+    #myTabContent.tab-content
+      #general.tab-pane.fade.in.active
+        h3 General Settings
+        .row
+          .span5
+            = f.input :send_from_name
+            = f.input :email_copy_to
+            = f.input :days_between_chase
+            = f.input :days_before_pre_due
+            = f.input :payment_method_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.send_from_name'))
+              li=simple_format(t('forms.notes.settings.email_copy_to'))
+              li=simple_format(t('forms.notes.settings.days_between_chase'))
+              li=simple_format(t('forms.notes.settings.days_before_pre_due'))
+              li=simple_format(t('forms.notes.settings.payment_method_message'))
+
+      #predue.tab-pane.fade
+        h3 Pre-Due Reminder
+        .row
+          .span5
+            = f.input :pre_due_reminder, as: :boolean
+            = f.input :pre_due_subject
+            = f.input :pre_due_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.pre_due_reminder_checkbox'))
+              li=simple_format(t('forms.notes.settings.pre_due_subject'))
+              li=simple_format(t('forms.notes.settings.pre_due_message'))
+
+
+      #due.tab-pane.fade
+        h3 Due Reminder
+        .row
+          .span5
+            = f.input :due_reminder, as: :boolean
+            = f.input :due_subject
+            = f.input :due_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.due_reminder_checkbox'))
+              li=simple_format(t('forms.notes.settings.due_subject'))
+              li=simple_format(t('forms.notes.settings.due_message'))
+
+      #od1.tab-pane.fade
+        h3 First Overdue Reminder
+        .row
+          .span5
+            = f.input :overdue1_subject
+            = f.input :overdue1_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.overdue1_subject'))
+              li=simple_format(t('forms.notes.settings.overdue1_message'))
+      #od2.tab-pane.fade
+        h3 Second Overdue Reminder
+        .row
+          .span5
+            = f.input :overdue2_subject
+            = f.input :overdue2_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.overdue2_subject'))
+              li=simple_format(t('forms.notes.settings.overdue2_message'))
+      #od3.tab-pane.fade
+        h3 Third Overdue Reminder
+        .row
+          .span5
+            = f.input :overdue3_subject
+            = f.input :overdue3_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.overdue3_subject'))
+              li=simple_format(t('forms.notes.settings.overdue3_message'))
+      #fd.tab-pane.fade
+        h3 Final Demand
+        .row
+          .span5
+            = f.input :final_demand_subject
+            = f.input :final_demand_message, as: :text
+          .span4.well
+            .media
+              .pull-left
+                =image_tag('tip.png', class: 'media-object')
+              .media-body
+                h3.media-heading Notes:
+            ul
+              li=simple_format(t('forms.notes.settings.final_demand_subject'))
+              li=simple_format(t('forms.notes.settings.final_demand_message'))
+  hr
+  .actions
+    = f.button :submit, 'Save your Settings'

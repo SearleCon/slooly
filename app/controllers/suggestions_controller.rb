@@ -1,7 +1,7 @@
 class SuggestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :authorize, except: [:new, :create]
-  before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
+  before_action :set_suggestion, only: [:destroy]
 
   def index
     @suggestions = Suggestion.all
@@ -15,11 +15,6 @@ class SuggestionsController < ApplicationController
     @suggestion = Suggestion.create(suggestion_params)
     flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.errors.empty?
     respond_with @suggestion, location: root_url
-  end
-
-  def update
-    flash[:notice] = 'Suggestion was successfully updated.' if @suggestion.update(suggestion_params)
-    respond_with @suggestion
   end
 
   def destroy

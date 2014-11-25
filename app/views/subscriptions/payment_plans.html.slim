@@ -1,0 +1,24 @@
+.hero-unit
+  = image_tag 'expired.png', class: 'header'
+  h2 Please Subscribe
+  br
+  = image_tag 'secure-paypal-logo.png', style: "float:right"
+  br
+  - if current_user.active_subscription.has_expired?
+    p Your free trial has expired. To continue using Paying Mantis you need to subscribe:
+    p
+      | (Note that payment is done through PayPal and is 100% secure)
+  br
+  table.table.table-bordered
+    tr
+      td Package
+      td Subscription Duration
+      td Price
+      td
+    - @plans.each do |plan|
+      - unless plan.free
+        tr
+          td: strong= plan.description
+          td= pluralize(plan.duration, 'Month')
+          td= number_to_currency(plan.cost, precision: 2)
+          td.text-center= link_to 'Place Order', new_subscription_path(plan_id: plan.id), class: "btn btn-primary"

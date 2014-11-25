@@ -70,6 +70,7 @@ gem 'simple_form'
 # Templating
 gem 'slim-rails'
 
+gem 'premailer-rails'
 
 
 group :production do

@@ -26,6 +26,8 @@ Slooly::Application.configure do
   config.action_mailer.default charset: "utf-8"
   #  config.action_mailer.default :from => "slooly@example.com"
 
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailer_previews"
+
 
   #
   # config.action_mailer.smtp_settings = {

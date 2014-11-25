@@ -1,0 +1,6 @@
+= simple_form_for(@suggestion) do |f|
+  = errors_for(@suggestion)
+  = f.input :email, placeholder: "Optional email"
+  = f.input :subject
+  = f.input :comment, as: :text
+  = f.button :submit

@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def active_subscription
-    subscriptions.active.first
+    subscriptions.active.first || NullSubscription.new
   end
 
   protected
