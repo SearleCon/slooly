@@ -1,8 +1,8 @@
-class InvoiceDates
+class Invoice::DateCalculator
   attr_reader :pre_due, :over_due1, :over_due2, :over_due3, :last_date_sent, :final_demand
-  def initialize(invoice, settings)
+  def initialize(invoice)
     @invoice = invoice
-    @settings = settings
+    @settings = invoice.user.setting
   end
 
   def pre_due
@@ -22,7 +22,7 @@ class InvoiceDates
   end
 
   def last_date_sent
-    DateTime.now - 100.years
+    Date.today - 100.years
   end
 
   def final_demand

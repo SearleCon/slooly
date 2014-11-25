@@ -37,6 +37,7 @@ class Invoice < ActiveRecord::Base
   delegate :business_name, to: :client, prefix: true
 
   after_initialize :setup_defaults, if: :new_record?
+  before_save :calculate_dates, if: :due_date_changed?
 
   def age
     (Date.today - due_date.to_date).to_i
@@ -78,5 +79,15 @@ class Invoice < ActiveRecord::Base
 
   def setup_defaults
     self.last_date_sent = Date.today - 1.year
+  end
+
+  def calculate_dates
+    calculator = Invoice::DateCalculator.new(self)
+    self.pd_date = calculator.pre_due
+    self.od1_date = calculator.over_due1
+    self.od2_date = calculator.over_due2
+    self.od3_date = calculator.over_due3
+    self.last_date_sent = calculator.last_date_sent
+    self.fd_date = calculator.final_demand if status == :send_final_demand
   end
 end

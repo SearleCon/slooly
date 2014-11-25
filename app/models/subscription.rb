@@ -17,12 +17,21 @@
 #
 
 class Subscription < ActiveRecord::Base
-  belongs_to :plan, inverse_of: :subscriptions, touch: true
-  belongs_to :user, inverse_of: :subscriptions, touch: true
+  belongs_to :plan, touch: true
+  belongs_to :user, touch: true
 
   attr_accessor :paypal_payment_token
 
   scope :active, -> { where(active: true) }
+
+  after_initialize :setup_defaults, if: :new_record?
+  before_create :setup_expiry_date
+  before_create :setup_time
+
+  def extend_by!(period)
+    self.expiry_date += period.days
+    save!
+  end
 
   def paypal
     PaypalPayment.new(self)
@@ -53,5 +62,18 @@ class Subscription < ActiveRecord::Base
 
   def payment_provided?
     paypal_payment_token.present?
+  end
+
+  private
+  def setup_defaults
+    self.bought_on = Time.zone.now
+  end
+
+  def setup_expiry_date
+    self.expiry_date = Time.zone.now.advance(months: plan.duration)
+  end
+
+  def setup_time
+    self.time = "#{plan.duration} month(s)"
   end
 end

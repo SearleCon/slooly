@@ -3,12 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def create
-    super do |resource|
-      if resource.persisted?
-        UserSetup.new(resource).call
-        UserMailer.delay.registration_confirmation(resource)
-      end
-    end
+    super { |user| User::Registration.register(user) if user.persisted? }
   end
 
   protected

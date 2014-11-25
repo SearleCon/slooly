@@ -15,9 +15,23 @@ class Voucher < ActiveRecord::Base
   attr_readonly :unique_code, :valid_until, :number_of_days
   attr_accessor :prefix, :suffix, :validity_period, :free_days
 
+  belongs_to :redeemer, class_name: 'User', foreign_key: :redeemed_by
+
   before_create :generate_unique_code, :set_valid_until, :set_free_days
 
+  validate :expired
+
+  def redeem!(user)
+    self.redeemer = user
+    save!
+  end
+
   private
+  def expired
+   if valid_until < Date.today || redeemer.present?
+     errors.add(:expired, "has expired")
+   end
+  end
 
   def generate_unique_code
     self.unique_code = "#{prefix}#{SecureRandom.hex(4)}#{suffix}"

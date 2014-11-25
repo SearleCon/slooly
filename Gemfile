@@ -70,8 +70,11 @@ gem 'simple_form'
 # Templating
 gem 'slim-rails'
 
+# Email css
 gem 'premailer-rails'
 
+# Form Objects
+gem 'reform'
 
 group :production do
   gem 'pg'
