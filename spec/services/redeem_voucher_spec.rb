@@ -1,0 +1,3 @@
+describe RedeemVoucher do
+
+end

@@ -27,6 +27,7 @@ FactoryGirl.define do
     company
 
 
+
     factory :subscribed_user do
       after(:create) do |user, evaluator|
         plan = create(:plan, free: true, duration: 1, description: 'Free Trial')

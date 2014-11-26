@@ -7,9 +7,9 @@ class SetupUser
 
   def call
     User.transaction do
-      user.create_company!
-      user.create_setting!
-      user.subscriptions.create!(plan: free_trial, active: true)
+      @user.create_company!
+      @user.create_setting!
+      @user.subscriptions.create!(plan: free_trial, active: true)
     end
     UserMailer.delay.registration_confirmation(@user)
   end

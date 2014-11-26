@@ -150,4 +150,7 @@ Slooly::Application.routes.draw do
 
   devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
   resources :users, only: [:show, :index]
+
+
+  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 end
