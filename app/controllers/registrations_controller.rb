@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def create
-    super { |user| User::Registration.register(user) if user.persisted? }
+    super { |user| SetupUser.call(user) if user.persisted? }
   end
 
   protected

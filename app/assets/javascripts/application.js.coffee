@@ -11,7 +11,7 @@
 
 
 $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Paying Mantis'
-Turbolinks.enableProgressBar();
+Turbolinks.enableProgressBar()
 
 pageLoad = ->
   $('.carousel').carousel()

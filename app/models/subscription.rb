@@ -28,18 +28,13 @@ class Subscription < ActiveRecord::Base
   before_create :setup_expiry_date
   before_create :setup_time
 
-  def extend_by!(period)
-    self.expiry_date += period.days
-    save!
-  end
-
   def paypal
     PaypalPayment.new(self)
   end
 
   def save_with_paypal_payment
     response = paypal.request_payment
-    response.approved? && response.success? ? save! : false
+    response.approved? && response.success? && save
   end
 
   def cancel
@@ -65,6 +60,7 @@ class Subscription < ActiveRecord::Base
   end
 
   private
+
   def setup_defaults
     self.bought_on = Time.zone.now
   end

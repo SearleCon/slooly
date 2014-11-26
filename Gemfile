@@ -65,7 +65,7 @@ gem 'local_time'
 gem 'active_importer'
 
 # Form builder
-gem 'simple_form'
+gem 'simple_form', '~> 3.0.0'
 
 # Templating
 gem 'slim-rails'
