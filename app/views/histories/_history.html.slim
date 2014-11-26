@@ -1,0 +1,11 @@
+- cache history do
+  = content_tag_for(:tr, history) do
+    td= link_to history.date_sent, history
+    td= history.email_sent_to
+    td= display_reminder_badge(history)
+    td= history.invoice_number
+    td= truncate(history.subject, length: 50)
+    td= truncate(history.message, length: 70)
+    td
+      = link_to '#', {rel: 'popover', title: "Email Message (Ref: #{history.invoice_number})", data: {content: "#{history.message}", placement: 'left'} } do
+        i.icon-eye-open

@@ -1,23 +1,25 @@
 class ClientsController < ApplicationController
+  etag { current_user.try :id }
+
   before_action :set_client, except: [:index, :import, :new, :create]
 
   def index
-    @q = current_user.clients.search(params[:q])
+    @q = client_scope.search(params[:q])
     @q.sorts = 'updated_at desc' if @q.sorts.empty?
     @clients = @q.result(distinct: true).page(params[:page])
-    respond_with @clients
+    fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at) unless params[:q].present?
   end
 
   def new
-    @client = current_user.clients.new
+    @client = client_scope.new
   end
 
   def show
-    fresh_when @client
+    #fresh_when @client
   end
 
   def create
-    @client = current_user.clients.create(client_params)
+    @client = client_scope.create(client_params)
     flash[:notice] =  'Client was successfully created.' if @client.errors.empty?
     respond_with @client
   end
@@ -40,9 +42,12 @@ class ClientsController < ApplicationController
   end
 
   private
+  def client_scope
+    current_user.clients.includes(:histories, :invoices)
+  end
 
   def set_client
-    @client = current_user.clients.includes(:histories, :invoices).find(params[:id])
+    @client = client_scope.find(params[:id])
   end
 
   def client_params

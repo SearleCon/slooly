@@ -1,12 +1,13 @@
-= content_tag_for :tr, invoice do
-  td= display_age_badge(invoice)
-  td= link_to invoice.invoice_number, invoice
-  td= invoice.due_date
-  td= number_with_precision(invoice.amount, precision: 2)
-  td= display_description(invoice)
-  td= display_status_label(invoice)
-  td= link_to invoice.client_business_name, invoice.client
-  td= local_time_ago(invoice.created_at)
-  td= link_to 'Show', invoice
-  td= link_to 'Edit', edit_invoice_path(invoice)
-  td= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) }
+- cache invoice do
+  = content_tag_for :tr, invoice do
+    td= display_age_badge(invoice)
+    td= link_to invoice.invoice_number, invoice
+    td= invoice.due_date
+    td= number_with_precision(invoice.amount, precision: 2)
+    td= display_description(invoice)
+    td= display_status_label(invoice)
+    td= link_to invoice.client_business_name, invoice.client
+    td= local_time_ago(invoice.created_at)
+    td= link_to 'Show', invoice
+    td= link_to 'Edit', edit_invoice_path(invoice)
+    td= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) }

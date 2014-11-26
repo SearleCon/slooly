@@ -1,42 +1,15 @@
-br
-table.table.table-condensed
-  tr
-    th
-      | Age
-    th
-      | Invoice Number
-    th
-      | Due date
-    th
-      | Amount
-    th
-      | Description
-    th
-      | Status
-    th
-      | Created
-    th
-    th
-    th
-  - @client.invoices.chasing.each do |invoice|
-    tr
-      td
-        = display_age_badge(invoice)
-      td
-        = link_to invoice.invoice_number, invoice
-      td
-        = invoice.due_date
-      td
-        = invoice.amount
-      td
-        = display_description(invoice)
-      td
-        = display_status_label(invoice)
-      td
-        = local_time_ago(invoice.created_at)
-      td
-        = link_to 'Show', invoice
-      td
-        = link_to 'Edit', edit_invoice_path(invoice)
-      td
-        = link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) }
+- cache invoice do
+  = content_tag_for(:tr, invoice)
+    td= display_age_badge(invoice)
+    td= link_to invoice.invoice_number, invoice
+    td= invoice.due_date
+    td= invoice.amount
+    td= display_description(invoice)
+    td= display_status_label(invoice)
+    td= local_time_ago(invoice.created_at)
+    td
+      = link_to 'Show', invoice
+    td
+      = link_to 'Edit', edit_invoice_path(invoice)
+    td
+      = link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) }

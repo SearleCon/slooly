@@ -7,20 +7,16 @@
       |  ! (Signed up since Yesterday)
     br
   h4 Total Users:
-    =  @administration_data.total_users
+  = @administration_data.total_users
   h4 Total Emails Sent Today:
-    = @administration_data.emails_sent_today_count
+  = @administration_data.emails_sent_today_count
   h4 Total Emails Sent in the last 7 days:
-    = @administration_data.emails_sent_last_7_days_count
-  h4 Total
-    = link_to 'Suggestions', suggestions_path
-    | : 
-    = @administration_data.total_suggestions
-    |  (
-    = @administration_data.suggestions_last_7_days_count
-    |  in the last 7 days)
+  = @administration_data.emails_sent_last_7_days_count
+  h4 Total #{link_to 'Suggestions', suggestions_path} :
+  | #{@administration_data.total_suggestions}
+    (#{@administration_data.suggestions_last_7_days_count} in the last 7 days)
   h4 Total Records in Delayed_Jobs:
-    = @administration_data.delayed_jobs.count
+  = @administration_data.delayed_jobs.count
 - if @administration_data.delayed_jobs.any?
   br
   .well.well-large
