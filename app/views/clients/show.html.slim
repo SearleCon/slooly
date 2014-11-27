@@ -10,47 +10,43 @@
       td Business Name:
       td
         '
-        h4= @client.business_name
+        h4= client.business_name
     tr
       td Contact Person:
-      td = @client.contact_person
+      td = client.contact_person
     tr
       td Address:
-      td= @client.address
+      td= client.address
     tr
       td City:
-      td= @client.city
+      td= client.city
     tr
       td Post Code:
-      td= @client.post_code
+      td= client.post_code
     tr
       td Telephone:
-      td= @client.telephone
+      td= client.telephone
     tr
       td Fax:
-      td= @client.fax
+      td= client.fax
     tr
       td Email:
-      td= obfuscate_email @client.email
+      td= client.email
   br
-  = link_to 'Edit this Client', edit_client_path(@client)
-  |  |
-  = link_to 'Add another Client', new_client_path
-  |  |
-  = link_to 'Back', :back
+  p #{link_to 'Edit this Client', edit_client_path(@client)} | #{link_to 'Add another Client', new_client_path} | #{link_to 'Back', :back}
   hr
   .tabbable.tabs-top
-    ul#myTab.nav.nav-tabs
+    ul#invoices.nav.nav-tabs
       li.active
         a[href="#chasing" data-toggle="tab"] Currently Chasing
       li
         a[href="#history" data-toggle="tab"] Chasing History
-    #myTabContent.tab-content
+    .tab-content
       #chasing.tab-pane.fade.in.active
-        - if @client.invoices.chasing.any?
+        - if client.invoices_chasing.any?
           p
-            | You are currently chasing the following <strong>#{pluralize(@client.invoices.chasing.size, 'invoice')}</strong> for
-              <strong>#{@client.business_name}</strong> to the value of <strong>#{@client.invoices.chasing.total}</strong> (total chasing amount).
+            | You are currently chasing the following #{strong pluralize(client.invoices_chasing.size, 'invoice')} for
+              #{strong client.business_name} to the value of #{strong client.invoices_chasing.total} (total chasing amount).
           table.table.table-condensed
             tr
               th Age
@@ -63,23 +59,22 @@
               th
               th
               th
-            = render  partial: 'invoices/invoice', collection: @client.invoices.chasing, as: :invoice
+            = render client.invoices_chasing
         - else
-          p You are <strong>not</strong> chasing any invoices for #{@client.business_name}.
+          p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
       #history.tab-pane.fade.in
-        - cache @client.histories do
-          - if @client.histories.any?
-            p  Here are the emails you have <strong>already sent</strong> to <strong>#{@client.business_name}</strong> (Newest to Oldest).
-            table.table.table-condensed
-              tr
-                th Date Sent
-                th Sent To
-                th Type
-                th Reference
-                th Subject
-                th Message
-                th: span[rel="tooltip" title="Quick View"]: i.icon-eye-open
-              = render @client.histories
-          - else
-            p You have <strong>no</strong> chase history for #{@client.business_name}.
+        - if @client.histories.any?
+          p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
+          table.table.table-condensed
+            tr
+              th Date Sent
+              th Sent To
+              th Type
+              th Reference
+              th Subject
+              th Message
+              th: span[rel="tooltip" title="Quick View"]: i.icon-eye-open
+            = render @client.histories
+        - else
+          p You have #{strong 'no'} chase history for #{@client.business_name}.
     hr

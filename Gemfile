@@ -11,10 +11,8 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-datetimepicker-rails'
 gem 'twitter-bootstrap-rails-confirm'
 
-
 # Decorators
 gem 'draper', '~> 1.3'
-
 
 # Authentication
 gem 'devise', '~> 3.2.4'
@@ -33,7 +31,6 @@ gem 'will_paginate', '~> 3.0'
 gem 'delayed_job_active_record'
 gem "workless", "~> 1.2.3"
 
-
 # Turbolinks
 gem 'turbolinks'
 
@@ -44,7 +41,6 @@ gem "paypal-recurring"
 gem "browser"
 gem 'metamagic'
 gem 'honeypot-captcha'
-
 
 # Server
 gem 'unicorn'

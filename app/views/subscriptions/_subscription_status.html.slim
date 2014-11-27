@@ -1,4 +1,4 @@
 = image_tag('expired.png', class: 'header')
 p
-   | <strong>Note:</strong> Your current subscription is valid until: <strong>#{current_user.active_subscription.expiry_date.strftime('%A, %d %B %Y')}</strong><br>
+   | #{strong 'Note:'} Your current subscription is valid until: #{strong l(current_user.active_subscription.expiry_date)}<br>
      (You will be prompted to renew when logging in after this date)
