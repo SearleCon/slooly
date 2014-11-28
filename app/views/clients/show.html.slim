@@ -1,39 +1,35 @@
-- cache @client do
+- cache client do
   .page-header
     .media
       .pull-left
         =image_tag('clients.png', class: 'media-object')
       .media-body
         h1 Client Details
-  table
-    tr
-      td Business Name:
-      td
-        '
-        h4= client.business_name
-    tr
-      td Contact Person:
-      td = client.contact_person
-    tr
-      td Address:
-      td= client.address
-    tr
-      td City:
-      td= client.city
-    tr
-      td Post Code:
-      td= client.post_code
-    tr
-      td Telephone:
-      td= client.telephone
-    tr
-      td Fax:
-      td= client.fax
-    tr
-      td Email:
-      td= client.email
-  br
-  p #{link_to 'Edit this Client', edit_client_path(@client)} | #{link_to 'Add another Client', new_client_path} | #{link_to 'Back', :back}
+        h3=client.business_name
+        = link_to clients_path do
+          = fa_icon 'arrow-left', text: 'Back'
+  p Business Name: #{strong client.business_name}
+  p Contact Person: #{client.contact_person}
+  p Telephone: #{client.telephone}
+  p Fax:  #{client.fax}
+  p Email: #{client.email}
+  address
+    strong Address
+    br
+    | #{client.address}
+    br
+    | #{client.city}
+    br
+    | #{client.post_code}
+
+  ul.inline
+    li= link_to  edit_client_path(client) do
+      = fa_icon 'edit', text: ' Edit this client'
+    li= link_to new_client_path do
+      = fa_icon 'male', text: ' Add another Client'
+    li= link_to new_client_invoice_path(client) do
+      = fa_icon 'file-text', text: ' Add invoice for this client'
+
   hr
   .tabbable.tabs-top
     ul#invoices.nav.nav-tabs
@@ -59,7 +55,7 @@
               th
               th
               th
-            = render client.invoices_chasing
+            = render partial: 'invoices/invoice', collection: client.invoices_chasing
         - else
           p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
       #history.tab-pane.fade.in

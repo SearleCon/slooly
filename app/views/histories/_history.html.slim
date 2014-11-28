@@ -6,6 +6,5 @@
     td= history.invoice_number
     td= truncate(history.subject, length: 50)
     td= truncate(history.message, length: 70)
-    td
-      = link_to '#', {rel: 'popover', title: "Email Message (Ref: #{history.invoice_number})", data: {content: "#{history.message}", placement: 'left'} } do
-        i.icon-eye-open
+    td: i.icon-eye-open[rel='popover' data-title="Email Message (Ref: #{history.invoice_number})" data-content="#{simple_format(history.message)}" data-placement= 'left']
+

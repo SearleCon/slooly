@@ -11,10 +11,7 @@
       = f.search_field :business_name_or_contact_person_cont, class: "input-medium search-query", placeholder: "Search clients"
       span[rel="tooltip" title="Clear Search"] = link_to image_tag("close.png"), clients_path if @q.conditions.any?
 = render "search_client_results" if @q.conditions.any?
-h4[align="right"]
-  | ( 
-  = @clients.total_entries
-  |  in total )
+h4[align="right"] ( #{clients.total_entries} in total )
 br
 - if current_user.clients.empty?
   = render("no_records")
@@ -30,11 +27,11 @@ br
       th
       th
     tbody
-      = render @clients
+      = render clients
   .flickr_pagination
     .page_info
     .pagination-links
-      = will_paginate @clients, container: false
+      = will_paginate clients, container: false
   hr
   div
     = simple_form_for ImportForm.new, url: import_clients_path, html: {multipart: true} do |f|

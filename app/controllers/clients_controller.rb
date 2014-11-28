@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
   before_action :set_client, except: [:index, :import, :new, :create]
 
   decorates_assigned :client
+  decorates_assigned :clients
 
   def index
     @q = client_scope.search(params[:q])
@@ -17,12 +18,12 @@ class ClientsController < ApplicationController
   end
 
   def show
-    #fresh_when @client
+    fresh_when @client
   end
 
   def create
     @client = client_scope.create(client_params)
-    flash[:notice] =  'Client was successfully created.' if @client.errors.empty?
+    flash[:notice] =  'Client was successfully created.' unless @client.errors.any?
     respond_with @client
   end
 
@@ -44,6 +45,7 @@ class ClientsController < ApplicationController
   end
 
   private
+
   def client_scope
     current_user.clients.includes(:histories, :invoices)
   end

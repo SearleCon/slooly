@@ -130,6 +130,7 @@ Slooly::Application.routes.draw do
   resources :settings, only: [:index, :edit, :update]
 
   resources :clients do
+    resources :invoices, only: [:new, :create], controller: 'clients/invoices'
     collection do
       post :import
     end

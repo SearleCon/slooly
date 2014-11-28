@@ -18,7 +18,6 @@ class ClientDecorator < Draper::Decorator
   end
 
   def email
-    h.obfuscate_email model.email
+    h.obfuscate_email model.email if model.email.present?
   end
-
 end

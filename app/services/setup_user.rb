@@ -15,7 +15,8 @@ class SetupUser
   end
 
   private
+
   def free_trial
-   @free_trial ||= Plan.find_by(free: true)
+    @free_trial ||= Plan.find_by(free: true)
   end
 end
