@@ -131,9 +131,10 @@ Slooly::Application.routes.draw do
 
   resources :clients do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
-    collection do
-      post :import
-    end
+  end
+
+  namespace :clients do
+    resources :imports, only: [:new, :create]
   end
 
   resources :companies, only: [:index, :edit, :update]

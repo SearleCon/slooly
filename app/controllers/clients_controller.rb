@@ -27,13 +27,6 @@ class ClientsController < ApplicationController
     respond_with @client
   end
 
-  def import
-    file_path = params[:file].path
-    ext = File.extname(params[:file].original_filename).delete('.').to_sym
-    ClientImporter.import(file_path, extension: ext, params: { user_id: current_user })
-    redirect_to clients_url
-  end
-
   def update
     flash[:notice] = 'Client was successfully updated.' if @client.update(client_params)
     respond_with @client

@@ -8,7 +8,7 @@ module UnobtrusiveFlash
   private
   def add_flash_to_cookie
     if flash.any?
-      messages = flash.to_hash.select{|_, v| v.present? }
+      messages = flash.to_hash.merge(flash.now.flash.to_hash).select{|_, v| v.present? }
       cookies[:flash_messages] = {value: JSON.generate(messages), domain: set_cookie_domain}
       flash.clear
     end

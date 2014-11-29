@@ -1,5 +1,6 @@
 class ClientImporter < ActiveImporter::Base
   imports Client
+  transactional
 
   column 'BusinessName', :business_name
   column 'Email', :email
@@ -11,6 +12,6 @@ class ClientImporter < ActiveImporter::Base
   column 'Fax', :fax, optional: true
 
   fetch_model do
-    Client.where(business_name: row['business_name'], user_id: params[:user_id]).first_or_initialize
+    Client.find_or_initialize_by(business_name: row['BusinessName'], user_id: params[:user_id])
   end
 end
