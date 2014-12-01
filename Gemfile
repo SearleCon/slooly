@@ -13,6 +13,8 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-datetimepicker-rails'
 gem 'twitter-bootstrap-rails-confirm'
 gem "font-awesome-rails"
+gem 'bootstrap_sortable_rails'
+
 
 # Decorators
 gem 'draper', '~> 1.3'

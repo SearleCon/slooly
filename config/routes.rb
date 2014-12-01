@@ -120,8 +120,7 @@ Slooly::Application.routes.draw do
 
   get "paypal/checkout", to: "subscriptions#paypal_checkout"
 
-  match 'contact' => 'contact#new', as: 'new_contact', via: :get
-  match 'contact' => 'contact#create', :as => 'contact', via: :post
+  resources :contacts, only: [:new, :create]
 
   match 'redeem' => 'vouchers#redeem', :as => 'redeem', via: :patch
 
@@ -131,11 +130,16 @@ Slooly::Application.routes.draw do
 
   resources :clients do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
+    collection do
+      get :search
+    end
   end
 
   namespace :clients do
     resources :imports, only: [:new, :create]
   end
+
+
 
   resources :companies, only: [:index, :edit, :update]
 

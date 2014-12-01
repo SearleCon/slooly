@@ -1,16 +1,24 @@
 class ClientsController < ApplicationController
   etag { current_user.try :id }
 
-  before_action :set_client, except: [:index, :import, :new, :create]
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   decorates_assigned :client
   decorates_assigned :clients
 
   def index
-    @q = client_scope.search(params[:q])
-    @q.sorts = 'updated_at desc' if @q.sorts.empty?
-    @clients = @q.result(distinct: true).page(params[:page])
+    @clients = client_scope.page(params[:page])
     fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at) unless params[:q].present?
+  end
+
+  def search
+    @clients = client_scope.search(business_name_or_contact_person_cont: params[:q][:keyword]).result.page(params[:page])
+    flash[:info] = "#{view_context.pluralize(@clients.size, 'client')} found containing the search string '#{params[:q][:keyword]}' (In their Business Name or Contact Person fields)."
+    if @clients.blank? || @clients.many?
+      render :index
+    else
+      redirect_to @clients.take
+    end
   end
 
   def new

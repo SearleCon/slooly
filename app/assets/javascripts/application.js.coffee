@@ -3,6 +3,7 @@
 #= require jquery-cookie
 #= require bootstrap
 #= require bootstrap-datetimepicker
+#= require bootstrap-sortable
 #= require twitter/bootstrap/rails/confirm
 #= require obfuscatejs
 #= require jquery.autosize
@@ -14,7 +15,7 @@
 $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Paying Mantis'
 Turbolinks.enableProgressBar()
 
-showFlashMessages =  ->
+showFlashMessages = ->
   alert_types =
     notice: 'success'
     alert: 'error'
@@ -25,8 +26,9 @@ showFlashMessages =  ->
   if cookie?
     flashMessages = JSON.parse(cookie)
     for type, message of flashMessages
-      $flash = $("<div class=\"alert alert-" + alert_types[type] + " fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>" + message + "</div>")
-      $('.messages').prepend($flash)
+      $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", text: message }).prepend(
+        $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
+      ).appendTo(".messages")
     $.removeCookie(cookieName, path: '/')
 
 pageLoad = ->
@@ -37,7 +39,10 @@ pageLoad = ->
   $('.datepicker').datetimepicker({pickTime: false, autoclose: true}).on 'changeDate', (e) ->
      if $(this).data('datetimepicker').viewMode == 0
         $(this).datetimepicker('hide')
+  $.bootstrapSortable(applyLast=true)
   showFlashMessages()
+
+
 
 
 $(document).on 'page:load', pageLoad
