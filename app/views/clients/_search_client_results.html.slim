@@ -1,5 +1,0 @@
-br
-.alert.alert-block.alert-info.fade.in
-  button.close[type="button" data-dismiss="alert"] ×
-  = simple_format("<strong>#{pluralize(@clients.total_entries, 'client')} found</strong> containing the search string <strong>'#{@q.conditions.collect(&:value).join(' ')}'</strong> (In their Business Name or Contact Person fields). ")
-

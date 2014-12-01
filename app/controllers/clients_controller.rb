@@ -8,7 +8,11 @@ class ClientsController < ApplicationController
 
   def index
     @clients = client_scope.page(params[:page])
-    fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at) unless params[:q].present?
+    if @clients.any?
+      fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at) unless params[:q].present?
+    else
+      render :dashboard
+    end
   end
 
   def search

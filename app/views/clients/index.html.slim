@@ -12,25 +12,22 @@
         = f.input_field :keyword, as: :search_box,  class: 'input-medium'
         span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 
-- if current_user.clients.empty?
-  = render("no_records")
-- else
-  table.clients-listing.table.table-hover.sortable
-    thead
-      tr
-        = content_tag :th, 'Business Name'
-        = content_tag :th, 'Contact Person'
-        = content_tag :th, 'Telephone'
-        = content_tag :th, 'Email'
-        = content_tag :th, 'Created'
-        th
-        th
-        th
-    tbody= render clients
-  .flickr_pagination
-    .page_info
-    .pagination-links
-      = will_paginate clients, container: false
+table.clients-listing.table.table-hover.sortable
+  thead
+    tr
+      = content_tag :th, 'Business Name'
+      = content_tag :th, 'Contact Person'
+      = content_tag :th, 'Telephone'
+      = content_tag :th, 'Email'
+      = content_tag :th, 'Created'
+      th
+      th
+      th
+  tbody= render clients
+.flickr_pagination
+  .page_info
+  .pagination-links
+    = will_paginate clients, container: false
 .actions
   = link_to new_clients_import_path, class: 'btn btn-info' do
     = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'

@@ -1,6 +1,5 @@
 class Clients::ImportsController < ApplicationController
-
-  def new;end
+  def new; end
 
   def create
     importer.import
@@ -11,6 +10,7 @@ class Clients::ImportsController < ApplicationController
   end
 
   private
+
   def importer
     @importer ||= ClientImporter.new(file_path, extension: file_extension, params: { user_id: current_user })
   end
@@ -22,6 +22,4 @@ class Clients::ImportsController < ApplicationController
   def file_extension
     File.extname(params[:client][:file].original_filename).delete('.').to_sym
   end
-
-
 end
