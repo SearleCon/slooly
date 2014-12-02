@@ -4,12 +4,12 @@
     .media-body
       h1 Add an Invoice for #{@client.business_name}
 
-= simple_form_for([@client,@invoice]) do |f|
+= simple_form_for [@client, @invoice], html: { data: { validate: true } } do |f|
   = errors_for(@invoice)
   .row
     .span5
-      = f.input :due_date, as: :date_picker
-      = f.input :amount
+      = f.input :due_date, as: :date_picker, input_html: {data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}}
+      = f.input :amount, input_html: { data: { rule_number: true } }
       = f.input :description, as: :text
       = f.input :invoice_number
       = f.input :status_id, collection: options_for_status, include_blank: false

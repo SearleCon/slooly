@@ -18,6 +18,13 @@ $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Paying Mantis'
 
 $.validator.setDefaults
   debug: true
+
+  errorElement: 'span'
+
+  errorPlacement: (error, element) ->
+   error.appendTo( element.closest('div.controls'))
+
+
   highlight: (element) ->
     $(element).closest(".control-group").removeClass("success").addClass "error"
     return
@@ -26,7 +33,7 @@ $.validator.setDefaults
     $(element).closest(".control-group").removeClass("error").addClass "success"
     return
 
-  errorClass: "help-inline"
+  errorClass: "help-block"
 
 showFlashMessages = ->
   alert_types =
