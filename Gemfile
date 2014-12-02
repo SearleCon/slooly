@@ -3,6 +3,7 @@ source 'https://rails-assets.org'
 
 gem 'rails', '~> 4.1.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
@@ -23,8 +24,6 @@ gem 'draper', '~> 1.3'
 gem 'devise', '~> 3.2.4'
 gem 'devise-async'
 
-# Authorization
-gem "rolify", ">= 3.2.0"
 
 # File uploads
 gem "carrierwave"
@@ -79,6 +78,9 @@ gem 'reform'
 
 # Javascript cookie handler
 gem 'rails-assets-jquery-cookie'
+
+# Javascript validation
+gem 'rails-assets-jquery-validate'
 
 group :production do
   gem 'pg'

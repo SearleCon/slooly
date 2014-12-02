@@ -1,0 +1,37 @@
+- if invoices.any?
+  p
+    | You are currently chasing the following #{strong pluralize(client.invoices_chasing.size, 'invoice')} for
+       #{strong client.business_name} to the value of #{strong client.invoices_chasing.total} (total chasing amount).
+  table.table.table-condensed
+    tr
+      th Age
+      th Invoice Number
+      th Due date
+      th Amount
+      th Description
+      th Status
+      th Created
+      th
+      th
+      th
+    - invoices.each do |invoice|
+      - cache invoice do
+        = content_tag_for :tr, invoice do
+          td= display_age_badge(invoice)
+          td= link_to invoice.invoice_number, invoice
+          td= invoice.due_date
+          td= number_with_precision(invoice.amount, precision: 2)
+          td= display_description(invoice)
+          td= display_status_label(invoice)
+          td= local_time_ago(invoice.created_at)
+          td
+            = link_to invoice do
+              = fa_icon 'play-circle-o', text: 'Show'
+          td
+            = link_to edit_invoice_path(invoice) do
+              = fa_icon 'edit', text: ' Edit'
+          td
+            = link_to invoice, method: :delete, data: {confirm: confirm_delete_invoice_message(invoice)} do
+              = fa_icon 'trash', text: 'Delete'
+- else
+  p You are #{strong 'not'} chasing any invoices for #{client.business_name}.

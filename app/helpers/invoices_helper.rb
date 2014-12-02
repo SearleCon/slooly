@@ -17,8 +17,12 @@ module InvoicesHelper
   end
 
   def display_description(invoice)
-    return invoice.description unless invoice.description.size > 50
-    content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
+    return unless invoice.description.present?
+    if invoice.description invoice.description.size > 50
+      content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
+    else
+      invoice.description
+    end
   end
 
   def display_status_label(invoice)

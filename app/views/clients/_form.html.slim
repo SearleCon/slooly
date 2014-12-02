@@ -1,15 +1,18 @@
-= simple_form_for(@client) do |f|
+= simple_form_for @client, html: { data: {validate: true }} do |f|
   = errors_for(@client)
   .row
     .span5
-      = f.input :business_name, autofocus: true
+      - if @client.new_record?
+        = f.input :business_name, autofocus: true, input_html: { data: { rule_remote: duplicate_client_url, msg_remote: 'A client with this business name already exists.' } }
+      - else
+        = f.input :business_name, autofocus: true
       = f.input :contact_person
       = f.input :address
       = f.input :city
       = f.input :post_code, label: 'Zip / Post Code'
       = f.input :telephone
       = f.input :fax
-      = f.input :email, as: :email
+      = f.input :email, as: :email, input_html: {data: {rule_email: true}}
     .span6.well
       .media
         .pull-left

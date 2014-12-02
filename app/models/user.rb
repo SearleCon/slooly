@@ -19,7 +19,7 @@
 #
 
 class User < ActiveRecord::Base
-  rolify
+  enum role: [:user, :admin]
 
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
 
   validates :terms_of_service, acceptance: true
 
+  after_initialize :set_default_role, if: :new_record?
+
   def timeout_in
     2.hours
   end
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def set_default_role
+    self.role ||= :user
+  end
 
   def cancel
     false

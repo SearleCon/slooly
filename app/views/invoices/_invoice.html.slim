@@ -8,6 +8,12 @@
     td= display_status_label(invoice)
     td= link_to invoice.client_business_name, invoice.client
     td= local_time_ago(invoice.created_at)
-    td= link_to 'Show', invoice
-    td= link_to 'Edit', edit_invoice_path(invoice)
-    td= link_to 'Delete', invoice, method: :delete, data: { confirm: confirm_delete_invoice_message(invoice) }
+    td
+      = link_to invoice do
+        = fa_icon 'play-circle-o', text: 'Show'
+    td
+      = link_to edit_invoice_path(invoice) do
+        = fa_icon 'edit', text: ' Edit'
+    td
+      = link_to invoice, method: :delete, data: {confirm: confirm_delete_invoice_message(invoice)} do
+        = fa_icon 'trash', text: 'Delete'

@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    fresh_when @client
+    # fresh_when @client
   end
 
   def create
@@ -46,7 +46,13 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy
-    respond_with @client
+    respond_with(@client)
+  end
+
+  def duplicate
+    respond_with do |format|
+      format.json { render json: !current_user.clients.exists?(client_params) }
+    end
   end
 
   private

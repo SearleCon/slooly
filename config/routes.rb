@@ -135,6 +135,10 @@ Slooly::Application.routes.draw do
     end
   end
 
+  resource :client, only: :none do
+    get :duplicate, on: :member
+  end
+
   namespace :clients do
     resources :imports, only: [:new, :create]
   end
@@ -145,7 +149,7 @@ Slooly::Application.routes.draw do
 
   resources :invoices
 
-  authenticated :user, lambda {|u| u.has_role? :admin} do
+  authenticated :user, lambda { |u| u.admin? } do
     root to: "users#index", as: :admin_root
   end
 

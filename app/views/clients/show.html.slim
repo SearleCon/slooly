@@ -39,27 +39,9 @@
         a[href="#history" data-toggle="tab"] Chasing History
     .tab-content
       #chasing.tab-pane.fade.in.active
-        - if client.invoices_chasing.any?
-          p
-            | You are currently chasing the following #{strong pluralize(client.invoices_chasing.size, 'invoice')} for
-              #{strong client.business_name} to the value of #{strong client.invoices_chasing.total} (total chasing amount).
-          table.table.table-condensed
-            tr
-              th Age
-              th Invoice Number
-              th Due date
-              th Amount
-              th Description
-              th Status
-              th Created
-              th
-              th
-              th
-            = render partial: 'invoices/invoice', collection: client.invoices_chasing
-        - else
-          p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
+        = render 'invoices_chasing',  invoices: client.invoices_chasing
       #history.tab-pane.fade.in
-        - if @client.histories.any?
+        - if client.histories.any?
           p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
           table.table.table-condensed
             tr
@@ -70,7 +52,7 @@
               th Subject
               th Message
               th: span[rel="tooltip" title="Quick View"]: i.icon-eye-open
-            = render @client.histories
+            = render client.histories
         - else
           p You have #{strong 'no'} chase history for #{@client.business_name}.
     hr
