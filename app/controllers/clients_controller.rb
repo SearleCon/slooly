@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
   def index
     @clients = client_scope.page(params[:page])
     if @clients.any?
-      fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at) unless params[:q].present?
+      fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at)
     else
       render :dashboard
     end
@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    # fresh_when @client
+     fresh_when @client
   end
 
   def create

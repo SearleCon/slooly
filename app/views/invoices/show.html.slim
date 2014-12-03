@@ -1,49 +1,37 @@
-.page-header
-  .media
-    .pull-left
-      =image_tag('invoices.png', class: 'media-object')
-    .media-body
-      h1 Invoice Details
-table
-  tr
-    td Invoice for:
-    td: strong= link_to @invoice.client_business_name, @invoice.client
-  tr
-    td Invoice Number:     
-    td= @invoice.invoice_number
-  tr
-    td Due Date:
-    td= @invoice.due_date
-  tr
-    td Amount:
-    td= number_with_precision(@invoice.amount, precision: 2)
-  tr
-    td Status:
-    td= display_status_label(@invoice)
-  tr
-    td Description:
-    td= simple_format(@invoice.description)
-- if @invoice.status == :chasing
-  hr
-  .media
-    .pull-left
-      =image_tag('calendarbig.png', class: 'media-object')
-    .media-body
-      h4 Reminder Email Dates for Invoice #{@invoice.invoice_number}:
-      table
-        tr
-          td 1. Pre-Due Reminder (if applicable):  
-          td: strong= @invoice.pd_date
-        tr
-          td 2. First Overdue Reminder:
-          td: strong= @invoice.od1_date
-        tr
-          td 3. Second Overdue Reminder:
-          td: strong= @invoice.od2_date
-        tr
-          td 4. Third Overdue Reminder:
-          td: strong= @invoice.od3_date
+- cache invoice do
+  .page-header
+    .media
+      .pull-left
+        =image_tag('invoices.png', class: 'media-object')
+      .media-body
+        h1 Invoice Details
+        h3=invoice.invoice_number
+        = link_to invoices_path do
+          = fa_icon 'arrow-left', text: 'Back'
+
+  p Invoice For: #{strong(link_to invoice.client_business_name, invoice.client)}
+  p Invoice Number: #{invoice.invoice_number}
+  p Due Date: #{invoice.due_date}
+  p Amount: #{invoice.amount}
+  p Status: #{invoice.status}
+  p Description: #{invoice.description}
+
+  - if @invoice.status?(:chasing)
+    hr
+    .media
+      .pull-left
+        =image_tag('calendarbig.png', class: 'media-object')
+      .media-body
+        h4 Reminder Email Dates for Invoice #{invoice.invoice_number}:
+        ol
+          li Pre-Due Reminder (if applicable): #{strong invoice.pd_date}
+          li First Overdue Reminder: #{strong invoice.od1_date}
+          li Second Overdue Reminder: #{strong invoice.od2_date}
+          li Third Overdue Reminder: #{strong invoice.od3_date}
+
 hr
-= link_to 'Edit Invoice', edit_invoice_path(@invoice)
-|  | 
-= link_to 'Back', :back
+ul.inline
+  li= link_to  edit_invoice_path(invoice) do
+    = fa_icon 'edit', text: ' Edit this invoice'
+  li= link_to new_invoice_path do
+    = fa_icon 'file-text-o', text: ' Add another invoice'

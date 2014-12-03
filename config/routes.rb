@@ -147,7 +147,11 @@ Slooly::Application.routes.draw do
 
   resources :companies, only: [:index, :edit, :update]
 
-  resources :invoices
+  resources :invoices do
+    collection do
+      get :search
+    end
+  end
 
   authenticated :user, lambda { |u| u.admin? } do
     root to: "users#index", as: :admin_root

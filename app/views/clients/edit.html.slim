@@ -4,7 +4,6 @@
       =image_tag('clients.png', class: 'media-object')
     .media-body
       h1 Edit Client
+      = link_to clients_path do
+        = fa_icon 'arrow-left', text: 'Back'
 = render 'form'
-= link_to 'Show', @client
-|  | 
-= link_to 'Back', :back

@@ -4,6 +4,6 @@
       =image_tag('clients.png', class: 'media-object')
     .media-body
       h1 Add a Client
+      = link_to clients_path do
+        = fa_icon 'arrow-left', text: 'Back'
 = render 'form'
-hr
-= link_to 'Back', clients_path

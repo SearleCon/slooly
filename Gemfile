@@ -46,8 +46,6 @@ gem "browser"
 gem 'metamagic'
 gem 'honeypot-captcha'
 
-# Server
-gem 'unicorn'
 
 # Obfuscate emails
 gem 'obfuscatejs'
@@ -86,6 +84,7 @@ group :production do
   gem 'pg'
   gem 'heroku-deflater'
   gem 'rails_12factor'
+  gem 'unicorn'
 end
 
 group :development, :test do
@@ -97,6 +96,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem 'spring'
   gem 'annotate'
   gem 'quiet_assets'

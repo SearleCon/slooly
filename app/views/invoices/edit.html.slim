@@ -4,7 +4,7 @@
       =image_tag('invoices.png', class: 'media-object')
     .media-body
       h1 Edit Invoice
+      = link_to invoices_path do
+        = fa_icon 'arrow-left', text: 'Back'
 = render 'form'
-= link_to 'Show', @invoice
-|  | 
-= link_to 'Back', :back
+

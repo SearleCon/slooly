@@ -1,11 +1,11 @@
 - cache invoice do
   = content_tag_for :tr, invoice do
-    td= display_age_badge(invoice)
+    td= invoice.age
     td= link_to invoice.invoice_number, invoice
     td= invoice.due_date
-    td= number_with_precision(invoice.amount, precision: 2)
-    td= display_description(invoice)
-    td= display_status_label(invoice)
+    td= invoice.amount
+    td= invoice.description
+    td= invoice.status
     td= link_to invoice.client_business_name, invoice.client
     td= local_time_ago(invoice.created_at)
     td
@@ -15,5 +15,5 @@
       = link_to edit_invoice_path(invoice) do
         = fa_icon 'edit', text: ' Edit'
     td
-      = link_to invoice, method: :delete, data: {confirm: confirm_delete_invoice_message(invoice)} do
+      = link_to invoice, method: :delete, data: {confirm: confirm_delete_invoice_message(invoice)}, remote: true do
         = fa_icon 'trash', text: 'Delete'

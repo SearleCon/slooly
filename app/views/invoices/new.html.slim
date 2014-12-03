@@ -3,7 +3,8 @@
     .pull-left=image_tag('invoices.png', class: 'header')
     .media-body
       h1 Add an Invoice
+      = link_to invoices_path do
+        = fa_icon 'arrow-left', text: 'Back'
 
 = render 'form'
-hr
-= link_to 'Back', :back
+

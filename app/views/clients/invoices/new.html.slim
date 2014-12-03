@@ -3,6 +3,8 @@
     .pull-left=image_tag('invoices.png', class: 'header')
     .media-body
       h1 Add an Invoice for #{@client.business_name}
+      = link_to @client do
+        = fa_icon 'arrow-left', text: 'Back'
 
 = simple_form_for [@client, @invoice], html: { data: { validate: true } } do |f|
   = errors_for(@invoice)

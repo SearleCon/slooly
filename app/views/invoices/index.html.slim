@@ -1,38 +1,38 @@
 .page-header
   .media
-    .pull-left=image_tag('invoices.png', class: 'header')
+    .pull-left
+      =image_tag('invoices.png', class: 'media-object')
     .media-body
       h1 Invoices
-.header.form-search[align="right"]
-  = search_form_for @q do |f|
-    p
-      = f.search_field :invoice_number_or_description_cont, class: "input-medium search-query", placeholder: "Search invoices"
-      - if @q.conditions.any?
-        span[rel="tooltip" title="Clear Search"]= link_to image_tag("close.png"), invoices_path
-= render "search_invoice_results" if @q.conditions.any?
+      = page_entries_info invoices
 
-h4[align="right"] ( #{@invoices.total_entries} in total )
+  .search-form.pull-right
+    = simple_form_for :q, url: search_invoices_path, defaults: {required: false, label: false}, html: {class: 'form-inline', method: :get} do |f|
+      span
+        = f.input_field :keyword, as: :search_box, class: 'input-medium'
+        span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
 
-- if current_user.invoices.empty?
-  = render("no_records")
-- else
-  table.table
+
+table.table.invoices-listing.table.table-hover.sortable
+  thead
     tr
-      = content_tag :th, sort_link(@q, :due_date, 'Age')
-      = content_tag :th, sort_link(@q, :invoice_number, 'Invoice Number')
-      = content_tag :th, sort_link(@q, :due_date, 'Due Date')
-      = content_tag :th, sort_link(@q, :amount, 'Amount')
-      = content_tag :th, sort_link(@q, :description, 'Description')
-      = content_tag :th, sort_link(@q, :status_id, 'Status')
-      = content_tag :th, sort_link(@q, :client_id, 'Client')
-      = content_tag :th, sort_link(@q, :created_at, 'Created')
+      th Age
+      th Invoice Number
+      th Due Date
+      th Amount
+      th Description
+      th Status
+      th Client
+      th Created
       th
       th
       th
-    = render @invoices
-  .flickr_pagination
-    .page_info
-    .pagination-links
-      = will_paginate @invoices, :container => false
-  hr
-  = link_to 'Add Invoice', new_invoice_path
+  tbody= render invoices
+.flickr_pagination
+  .page_info
+  .pagination-links
+    = will_paginate invoices, container: false
+hr
+.actions
+  = link_to new_invoice_path do
+    = fa_icon 'file-text', text: ' Add Invoice'

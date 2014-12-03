@@ -8,9 +8,9 @@ module InvoicesHelper
 
   def display_age_badge(invoice)
     case
-      when invoice.age > 0 then type = 'badge badge-important'
-      when invoice.age == 0 then type = 'badge badge-info'
-      when invoice.age < 0 then type = 'badge badge-success'
+      when invoice.age.due? then type = 'badge badge-important'
+      when invoice.age.current? then type = 'badge badge-info'
+      when invoice.age.overdue? then type = 'badge badge-success'
       else type = 'badge'
     end
     content_tag(:span, invoice.age, class: type)

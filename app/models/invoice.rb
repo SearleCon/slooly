@@ -21,12 +21,12 @@
 #
 
 class Invoice < ActiveRecord::Base
-  STATUSES = { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7 }.freeze
-
   self.per_page = 10
 
-  belongs_to :client, inverse_of: :histories, touch: true
-  belongs_to :user, inverse_of: :invoices, touch: true
+  STATUSES = { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, delete: 7 }.freeze
+
+  belongs_to :client, touch: true
+  belongs_to :user, touch: true
 
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
@@ -39,11 +39,15 @@ class Invoice < ActiveRecord::Base
   before_save :calculate_dates, if: :due_date_changed?
 
   def age
-    (Date.today - due_date.to_date).to_i
+    @age ||= Invoice::Age.from_due_date(due_date)
   end
 
   def status
     STATUSES.key(status_id)
+  end
+
+  def status?(value)
+   status == value
   end
 
   def pre_due?
