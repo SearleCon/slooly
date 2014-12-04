@@ -24,19 +24,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
-  has_many :clients, inverse_of: :user, dependent: :destroy
-  has_many :subscriptions, inverse_of: :user, dependent: :destroy
-  has_many :invoices, inverse_of: :user, dependent: :destroy
-  has_many :histories, inverse_of: :user, dependent: :destroy
-  has_one :company, dependent: :destroy
-  has_one :setting, dependent: :destroy
+  has_many :clients
+  has_many :subscriptions
+  has_many :invoices
+  has_many :histories
+  has_one :company
+  has_one :setting
 
   validates :terms_of_service, acceptance: true
 
   after_initialize :set_default_role, if: :new_record?
 
   def timeout_in
-    2.hours
+    2.minutes
   end
 
   def active_subscription

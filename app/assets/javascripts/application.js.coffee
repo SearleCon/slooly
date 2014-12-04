@@ -35,6 +35,7 @@ $.validator.setDefaults
 
   errorClass: "help-block"
 
+
 showFlashMessages = ->
   alert_types =
     notice: 'success'
@@ -46,10 +47,11 @@ showFlashMessages = ->
   if cookie?
     flashMessages = JSON.parse(cookie)
     for type, message of flashMessages
-      $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", text: message }).prepend(
-        $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
-      ).appendTo(".messages")
-    $.removeCookie(cookieName, path: '/')
+      if alert_types.hasOwnProperty(type)
+        $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", text: message }).prepend(
+          $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
+        ).appendTo(".messages")
+    $.removeCookie(cookieName, { path: '/' })
 
 pageLoad = ->
   $("form").each ->

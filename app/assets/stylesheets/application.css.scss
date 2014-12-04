@@ -301,3 +301,7 @@ input[type="hidden"]{
     margin: 1em 0;
   }
 }
+
+li.tree-view:hover {
+  cursor: pointer;
+}

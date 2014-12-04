@@ -13,7 +13,7 @@
 #
 
 class Plan < ActiveRecord::Base
-  has_many :subscriptions, inverse_of: :plan
+  has_many :subscriptions
 
   scope :active, -> { where(active: true) }
 end

@@ -80,15 +80,21 @@ gem 'rails-assets-jquery-cookie'
 # Javascript validation
 gem 'rails-assets-jquery-validate'
 
+
+gem 'foreigner'
+gem 'immigrant'
+
+
+gem 'pg'
+
+
 group :production do
-  gem 'pg'
   gem 'heroku-deflater'
   gem 'rails_12factor'
   gem 'unicorn'
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'

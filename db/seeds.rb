@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Plan.find_or_create_by(description: 'Free Trial', duration: 1, cost: 0, active: true, free: true)
