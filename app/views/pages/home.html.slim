@@ -2,35 +2,100 @@
   .media
     .pull-left=image_tag('home.png', class: 'media-object')
     .media-body
-      h1 Home
+      h2 Home
+      = render 'breaking_news'
 
 ul.thumbnails
   li.span4
     .thumbnail
       = image_tag('clients.png')
       h4.text-center= link_to 'Clients', clients_path
-      p.text-center= link_to 'Add Client', new_client_path
+      p.text-center
+        = link_to new_client_path do
+          = fa_icon 'male', text: ' Add a New Client'
   li.span4
     .thumbnail
       = image_tag('invoices.png')
       h4.text-center= link_to 'Invoices', invoices_path
-      p.text-center= link_to 'Add Invoice', new_invoice_path
+      p.text-center
+        = link_to new_invoice_path do
+          = fa_icon 'file-text', text: ' Add a New Invoice'
   li.span4
     .thumbnail
       = image_tag('settings.png')
       h4.text-center= link_to 'Settings', settings_path
-      p.text-center= link_to 'Change Settings', edit_setting_path(current_user.setting)
-
+      p.text-center
+        = link_to settings_path do
+          = fa_icon 'gears', text: 'Change your settings.'
 
 .well
-  ul.clients.fa-ul
-    - current_user.clients.each do |client|
-      li
-        = content_tag(:li, fa_icon("male li", text: client.business_name), class: 'tree-view', data: {toggle: 'collapse', target: "##{dom_id(client)}"})
-        ul.invoices.fa-ul.collapse[id=dom_id(client)]
+  - if @clients.any?
+    h3 Currently chasing #{strong(pluralize(@clients.total_entries, 'client'))}
+    = page_entries_info @clients
+    p.pull-right
+      strong Note:
+      | This page only shows invoices with a status of
+      '
+      span.label.label-success Chasing
+      br
+      | For all invoices, click #{link_to 'here', invoices_path} or on the Invoices menu item in the Navigation bar
+    ul.unstyled
+      - @clients.each do |client|
+        li
+          h4
+            = link_to client.business_name, client
+          p
+            | #{strong 'Invoices: '}
+            span.badge.badge-inverse #{client.invoices_chasing.size}
+          p
+            | #{strong 'Total:'} #{client.invoices_chasing.total}
+        table.table.table-striped.table-condensed.sortable
+          thead
+            tr
+              th
+                | Age
+                '
+                i.icon-question-sign[rel='popover' data-title="Invoice Age" data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green' data-placement= 'top']
+              th Invoice Number
+              th Due date
+              th Amount
+              th Created
+          tbody
           - client.invoices_chasing.each do |invoice|
-            li
-              = content_tag(:li, fa_icon("file-text li", text: invoice.invoice_number))
+            - cache invoice do
+              = content_tag_for :tr, invoice do
+                td= display_age_badge(invoice)
+                td= link_to invoice.invoice_number, invoice
+                td= invoice.due_date
+                td= number_with_precision(invoice.amount, precision: 2)
+                td= local_time_ago(invoice.created_at)
+        hr
+    .flickr_pagination
+      .page_info
+      .pagination-links
+        = will_paginate @clients, container: false
+  - else
+    .hero-unit
+      p.lead
+        | You currenly have no clients with invoices being chased at the moment...
+        = image_tag('sadface.png', size: '15x15')
+        |  Let's fix that right away!
+      p #{strong "Why don't we get started:"}
+      h3
+        = link_to new_invoice_path do
+          = fa_icon 'file-text', text: ' Add a new Invoice'
+      h3
+        = link_to new_client_path do
+          = fa_icon 'male', text: ' Add a New Client'
 
-
-
+.well
+  p.lead Remember that you can come back to this screen at any time, by clicking the "HOME" link in the above navigation menu. Need help? Then check out the following:
+  ul.inline
+    li= link_to tutorial_path do
+      = fa_icon 'book', text: 'Help'
+    li= link_to faq_path do
+      = fa_icon 'question-circle', text: 'FAQs'
+    li= link_to about_path do
+      = fa_icon 'info-circle', text: 'About'
+    li= link_to new_contact_path do
+      = fa_icon 'send', text: 'Contact Us'

@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, if: :new_record?
 
   def timeout_in
-    2.minutes
+    2.hours
   end
 
   def active_subscription
