@@ -16,7 +16,7 @@
   p Status: #{invoice.status}
   p Description: #{invoice.description}
 
-  - if @invoice.status?(:chasing)
+  - if @invoice.chasing?
     hr
     .media
       .pull-left

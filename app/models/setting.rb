@@ -37,6 +37,9 @@ class Setting < ActiveRecord::Base
   after_initialize :set_defaults, if: :new_record?
   before_save :strip_messages
 
+
+
+
   protected
 
   def set_defaults
