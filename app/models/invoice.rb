@@ -29,17 +29,14 @@ class Invoice < ActiveRecord::Base
   belongs_to :client, touch: true
   belongs_to :user, touch: true
 
-
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
 
   delegate :business_name, to: :client, prefix: true
 
-
   def age
     @age ||= Invoice::Age.from_due_date(due_date)
   end
-
 
   def self.total
     sum(:amount)

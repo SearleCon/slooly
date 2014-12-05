@@ -1,6 +1,10 @@
 class InvoiceDecorator < Draper::Decorator
   delegate_all
 
+  def due_date
+    l model.due_date, format: :long
+  end
+
   def age
     h.display_age_badge(model)
   end

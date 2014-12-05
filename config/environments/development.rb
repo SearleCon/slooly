@@ -39,9 +39,20 @@ Slooly::Application.configure do
   #     password: ENV["EMAIL_PASSWORD"],
   # }
 
-  # Delayed Job Scaling
+
   config.after_initialize do
+    # Delayed Job Scaling
     Delayed::Job.scaler = :null
+
+    Bullet.enable = true
+    Bullet.alert = false
+    Bullet.bullet_logger = false
+    Bullet.console = true
+    Bullet.growl = false
+    Bullet.rails_logger = true
+    Bullet.bugsnag = false
+    Bullet.airbrake = false
+    Bullet.add_footer = true
   end
 
   # Slim

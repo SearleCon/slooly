@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-     fresh_when @client
+    fresh_when @client
   end
 
   def create
@@ -58,11 +58,11 @@ class ClientsController < ApplicationController
   private
 
   def client_scope
-    current_user.clients.includes(:histories, :invoices)
+    current_user.clients
   end
 
   def set_client
-    @client = client_scope.find(params[:id])
+    @client = client_scope.includes(:invoices_chasing, :histories).find(params[:id])
   end
 
   def client_params

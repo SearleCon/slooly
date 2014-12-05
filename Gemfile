@@ -80,13 +80,12 @@ gem 'rails-assets-jquery-cookie'
 # Javascript validation
 gem 'rails-assets-jquery-validate'
 
-
+# Foreign Keys
 gem 'foreigner'
 gem 'immigrant'
 
-
+# Postgres
 gem 'pg'
-
 
 group :production do
   gem 'heroku-deflater'
@@ -109,6 +108,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_apps_testing'
   gem 'rubocop', require: false
+  gem 'bullet'
 end
 
 group :test do

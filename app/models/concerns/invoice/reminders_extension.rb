@@ -42,5 +42,4 @@ module Invoice::RemindersExtension
   def set_final_demand
     self.fd_date = Date.today.days_since(1) if send_final_demand?
   end
-
 end

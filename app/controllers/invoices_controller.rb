@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   def index
     @invoices = invoice_scope.page(params[:page])
     if @invoices.any?
-      fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
+      # fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
     else
       render :dashboard
     end
@@ -50,8 +50,9 @@ class InvoicesController < ApplicationController
   end
 
   private
+
   def invoice_scope
-    current_user.invoices
+    current_user.invoices.includes(:client)
   end
 
   def set_invoice

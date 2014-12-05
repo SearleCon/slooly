@@ -24,7 +24,7 @@
       .media-body
         h4 Reminder Email Dates for Invoice #{invoice.invoice_number}:
         ol
-          li Pre-Due Reminder (if applicable): #{strong(l invoice.pd_date)}
+          li Pre-Due Reminder (if applicable): #{strong invoice.pd_date }
           li First Overdue Reminder: #{strong invoice.od1_date}
           li Second Overdue Reminder: #{strong invoice.od2_date}
           li Third Overdue Reminder: #{strong invoice.od3_date}

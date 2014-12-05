@@ -15,7 +15,7 @@ module UnobtrusiveFlash
   end
 
   def messages_from_flash
-     flash.to_hash.merge(flash.now.flash.to_hash).select { |k, v| v.present? }
+    flash.to_hash.merge(flash.now.flash.to_hash).select { |_k, v| v.present? }
   end
 
   def set_cookie_domain

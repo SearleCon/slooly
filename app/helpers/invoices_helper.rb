@@ -18,8 +18,8 @@ module InvoicesHelper
 
   def display_description(invoice)
     return unless invoice.description.present?
-    if invoice.description.size > 50
-      content_tag(:a, truncate(invoice.description, length: 45), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
+    if invoice.description.size > 20
+      content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
     else
       invoice.description
     end

@@ -143,8 +143,6 @@ Slooly::Application.routes.draw do
     resources :imports, only: [:new, :create]
   end
 
-
-
   resources :companies, only: [:index, :edit, :update]
 
   resources :invoices do
@@ -153,12 +151,14 @@ Slooly::Application.routes.draw do
     end
   end
 
+  resources :dashboard, only: :index
+
   authenticated :user, lambda { |u| u.admin? } do
     root to: "users#index", as: :admin_root
   end
 
   authenticated :user do
-    root to: 'pages#home', as: :authenticated_root
+    root to: 'dashboard#index', as: :authenticated_root
   end
   root to: "home#index"
 
