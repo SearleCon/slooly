@@ -153,8 +153,12 @@ Slooly::Application.routes.draw do
 
   resources :dashboard, only: :index
 
+  namespace :admin do
+    resources :dashboard, only: :index
+  end
+
   authenticated :user, lambda { |u| u.admin? } do
-    root to: "users#index", as: :admin_root
+    root to: "admin/dashboard#index", as: :admin_root
   end
 
   authenticated :user do
@@ -163,7 +167,7 @@ Slooly::Application.routes.draw do
   root to: "home#index"
 
   devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
-  resources :users, only: [:show, :index]
+  resources :users, only: [:show]
 
 
   match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
