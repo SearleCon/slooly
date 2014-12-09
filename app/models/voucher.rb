@@ -18,6 +18,14 @@ class Voucher < ActiveRecord::Base
 
   validate :expired, :redeemed
 
+  def redeem_for(user)
+    Voucher.transaction do
+      user.subscription.expiry_date += number_of_days
+      user.subscription.save!
+      update!(redeemed_by: user)
+    end
+  end
+
   private
 
   def expired

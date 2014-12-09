@@ -5,10 +5,10 @@ class SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if resource.user?
-      if resource.active_subscription.has_expired?
+      if resource.subscription_has_expired?
         payment_plans_subscriptions_url
       else
-        flash[:warning] = "Please note: Your subscription is coming to an end in #{current_user.active_subscription.expires_in} days. You do not have to do anything, as you will be prompted with options when logging in after the expiry date." if current_user.active_subscription.expires_in <= 3
+        flash[:warning] = "Please note: Your subscription is coming to an end in #{resouce.subscription_expires_in} days. You do not have to do anything, as you will be prompted with options when logging in after the expiry date." if current_user.subscription_expiring_soon?
       end
     end
     root_url

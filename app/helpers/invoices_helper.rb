@@ -18,14 +18,13 @@ module InvoicesHelper
 
   def display_description(invoice)
     if invoice.description.present?
-     content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
+      content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
     end
   end
 
   def display_status_label(invoice)
     content_tag(:span, invoice.status.to_s.titleize, class: STATUS_LABELS[invoice.status])
   end
-
 
   def options_for_status
     Invoice::STATUSES.transform_keys { |key| key.to_s.titleize }

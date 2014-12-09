@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   has_many :clients
-  has_many :subscriptions, before_add: :deactivate_subscription, after_add: :activate_subscription
   has_many :invoices
+  has_many :subscriptions, before_add: :activate_subscription
   has_many :histories
   has_one :company
   has_one :setting
@@ -35,29 +35,24 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role, if: :new_record?
 
+  delegate :expiry_date, :expiring_soon?, :expires_in, :has_expired?, to: :subscription, allow_nil: true, prefix: true
+
   def timeout_in
     2.hours
   end
 
-  def active_subscription
+  def subscription
     subscriptions.active.first
   end
 
   protected
 
-  def activate_subscription(subscription)
-    subscription.update(active: true)
-  end
-
-  def deactivate_subscription
-    active_subscription.update(active: false)
+  def activate_subscription(new_subscription)
+    current_subscription.update(active: false) if current_subscription.present?
+    new_subscription.active = true
   end
 
   def set_default_role
     self.role ||= :user
-  end
-
-  def cancel
-    false
   end
 end

@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_plan, only: [:new, :paypal_checkout]
 
   def payment_plans
-    @plans = Plan.active
+    @plans = Plan.active.where.not(free: true)
   end
 
   def paypal_checkout
@@ -11,10 +11,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
-    @subscription = current_user.subscriptions.build(plan_id: @plan.id,
-                                                     bought_on: Time.zone.now,
-                                                     expiry_date: Time.zone.now.advance(months: @plan.duration),
-                                                     time: "#{@plan.duration} month(s)")
+    @subscription = current_user.subscriptions.build(plan_id: @plan.id)
     if params[:PayerID]
       @subscription.paypal_customer_token = params[:PayerID]
       @subscription.paypal_payment_token = params[:token]
@@ -38,13 +35,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_params
-    params.require(:subscription).permit(:active,
-                                         :bought_on,
-                                         :expiry_date,
-                                         :paypal_id,
-                                         :plan_id,
-                                         :time,
-                                         :paypal_customer_token, :paypal_payment_token
-    )
+    params.require(:subscription).permit(:plan_id, :paypal_customer_token, :paypal_payment_token)
   end
 end

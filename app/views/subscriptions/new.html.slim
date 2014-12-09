@@ -2,9 +2,6 @@
   = simple_form_for(@subscription) do |f|
     = errors_for(@subscription)
     .form-inputs
-      = f.hidden_field :expiry_date
-      = f.hidden_field :bought_on
-      = f.hidden_field :time
       = f.hidden_field :paypal_customer_token
       = f.hidden_field :paypal_payment_token
       = f.hidden_field :plan_id
