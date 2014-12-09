@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   has_many :clients
-  has_many :subscriptions
+  has_many :subscriptions, before_add: :deactivate_subscription, after_add: :activate_subscription
   has_many :invoices
   has_many :histories
   has_one :company
@@ -40,10 +40,18 @@ class User < ActiveRecord::Base
   end
 
   def active_subscription
-    subscriptions.active.first || NullSubscription.new
+    subscriptions.active.first
   end
 
   protected
+
+  def activate_subscription(subscription)
+    subscription.update(active: true)
+  end
+
+  def deactivate_subscription
+    active_subscription.update(active: false)
+  end
 
   def set_default_role
     self.role ||= :user

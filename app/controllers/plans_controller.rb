@@ -1,18 +1,14 @@
 class PlansController < ApplicationController
   before_action :authorize, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_plan, except: [:new, :create, :index]
+  before_action :build_plan, only: [:new, :create]
 
   def index
     @plans = Plan.all
   end
 
-  def new
-    @plan = Plan.new
-  end
-
   def create
-    @plan = Plan.create(plan_params)
-    flash[:notice] = 'Plan was successfully created.' if @plan.errors.empty?
+    flash[:notice] = 'Plan was successfully created.' if @plan.save
     respond_with @plan
   end
 
@@ -32,8 +28,12 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
+  def build_plan
+    @plan = Plan.new(plan_params)
+  end
+
   def plan_params
-    params.require(:plan).permit(:active, :cost, :description, :duration)
+    params.fetch(:plan, {}).permit(:active, :cost, :description, :duration)
   end
 
   def authorize

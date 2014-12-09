@@ -2,7 +2,7 @@
   p
     | You are currently chasing the following #{strong pluralize(client.invoices_chasing.size, 'invoice')} for
        #{strong client.business_name} to the value of #{strong client.invoices_chasing.total} (total chasing amount).
-  table.table.table-condensed
+  table.table.table-condensed.sortable
     tr
       th Age
       th Invoice Number
@@ -11,8 +11,6 @@
       th Description
       th Status
       th Created
-      th
-      th
       th
     - invoices.each do |invoice|
       - cache invoice do
@@ -25,13 +23,11 @@
           td= display_status_label(invoice)
           td= local_time_ago(invoice.created_at)
           td
-            = link_to invoice do
-              = fa_icon 'play-circle-o', text: 'Show'
-          td
-            = link_to edit_invoice_path(invoice) do
-              = fa_icon 'edit', text: ' Edit'
-          td
-            = link_to invoice, method: :delete, data: {confirm: confirm_delete_invoice_message(invoice)} do
-              = fa_icon 'trash', text: 'Delete'
+            ul.inline
+              li= link_to invoice do
+                = fa_icon 'play-circle-o', text: 'Show'
+              li= link_to edit_invoice_path(invoice) do
+                = fa_icon 'edit', text: ' Edit'
+
 - else
   p You are #{strong 'not'} chasing any invoices for #{client.business_name}.

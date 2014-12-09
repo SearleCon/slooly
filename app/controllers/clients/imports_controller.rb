@@ -1,6 +1,4 @@
 class Clients::ImportsController < ApplicationController
-  def new; end
-
   def create
     importer.import
     redirect_to clients_url, notice: "#{importer.row_success_count} clients were imported successfully."

@@ -2,18 +2,14 @@ class SuggestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :authorize, except: [:new, :create]
   before_action :set_suggestion, only: [:destroy]
+  before_action :build_suggestion, only: [:new, :create]
 
   def index
     @suggestions = Suggestion.all
   end
 
-  def new
-    @suggestion = Suggestion.new
-  end
-
   def create
-    @suggestion = Suggestion.create(suggestion_params)
-    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.errors.empty?
+    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.save
     respond_with @suggestion, location: root_url
   end
 
@@ -28,8 +24,12 @@ class SuggestionsController < ApplicationController
     @suggestion = Suggestion.find(params[:id])
   end
 
+  def build_suggestion
+    @suggestion = Suggestion.new(suggestion_params)
+  end
+
   def suggestion_params
-    params.require(:suggestion).permit(:comment, :email, :subject)
+    params.fetch(:suggestion, {}).permit(:comment, :email, :subject)
   end
 
   def authorize

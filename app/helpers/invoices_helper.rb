@@ -17,11 +17,8 @@ module InvoicesHelper
   end
 
   def display_description(invoice)
-    return unless invoice.description.present?
-    if invoice.description.size > 20
-      content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
-    else
-      invoice.description
+    if invoice.description.present?
+     content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: simple_format(invoice.description) })
     end
   end
 
@@ -29,12 +26,6 @@ module InvoicesHelper
     content_tag(:span, invoice.status.to_s.titleize, class: STATUS_LABELS[invoice.status])
   end
 
-  def confirm_delete_invoice_message(invoice)
-    simple_format("<span class='label label-important'>WARNING!</span><br>
-                   You are about to delete the invoice <b> #{invoice.invoice_number}!</b><br>
-                   <b>NOTE:</b> This cannot be undone!<br>
-                   Are you sure you want to continue?", {}, sanitize: false)
-  end
 
   def options_for_status
     Invoice::STATUSES.transform_keys { |key| key.to_s.titleize }

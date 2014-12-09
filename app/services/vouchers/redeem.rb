@@ -1,4 +1,4 @@
-class RedeemVoucher
+class Vouchers::Redeem
   include Service
 
   def initialize(voucher, user)
@@ -18,5 +18,3 @@ class RedeemVoucher
     end
   end
 end
-
-class RedeemVoucherFailed < Exception; end

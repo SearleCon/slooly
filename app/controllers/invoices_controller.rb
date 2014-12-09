@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :build_invoice, only: [:new, :create]
 
   decorates_assigned :invoice
   decorates_assigned :invoices
@@ -7,7 +8,7 @@ class InvoicesController < ApplicationController
   def index
     @invoices = invoice_scope.page(params[:page])
     if @invoices.any?
-      # fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
+      fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
     else
       render :dashboard
     end
@@ -27,25 +28,19 @@ class InvoicesController < ApplicationController
     fresh_when @invoice
   end
 
-  def new
-    @invoice = invoice_scope.new
-  end
-
-  def edit; end
-
   def create
-    @invoice = invoice_scope.build(invoice_params)
-    flash[:notice] = 'Invoice was successfully created.' if @invoice.save
+    flash[:notice] = "#{@invoice.invoice_number} was successfully created." if @invoice.save
     respond_with @invoice
   end
 
   def update
-    flash[:notice] = 'Invoice was successfully updated.' if @invoice.update(invoice_params)
+    flash[:notice] = "#{@invoice.invoice_number} was successfully updated." if @invoice.update(invoice_params)
     respond_with(@invoice)
   end
 
   def destroy
     @invoice.destroy
+    flash[:notice] = "#{@invoice.invoice_number} was successfully destroyed." if @invoice.destroyed?
     respond_with(@invoice)
   end
 
@@ -53,6 +48,10 @@ class InvoicesController < ApplicationController
 
   def invoice_scope
     current_user.invoices.includes(:client)
+  end
+
+  def build_invoice
+    @invoice = invoice_scope.build(invoice_params)
   end
 
   def set_invoice

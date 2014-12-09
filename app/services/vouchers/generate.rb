@@ -1,4 +1,4 @@
-class GenerateVoucher
+class Vouchers::Generate
   include Service
 
   def initialize(*args)

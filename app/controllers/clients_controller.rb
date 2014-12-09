@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
   etag { current_user.try :id }
 
   before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :build_client, only: [:new, :create]
 
   decorates_assigned :client
   decorates_assigned :clients
@@ -25,31 +26,27 @@ class ClientsController < ApplicationController
     end
   end
 
-  def new
-    @client = client_scope.new
-  end
-
   def show
     fresh_when @client
   end
 
   def create
-    @client = client_scope.create(client_params)
-    flash[:notice] =  'Client was successfully created.' unless @client.errors.any?
+    flash[:notice] = "#{@client.business_name.titleize} was successfully created." if  @client.save
     respond_with @client
   end
 
   def update
-    flash[:notice] = 'Client was successfully updated.' if @client.update(client_params)
+    flash[:notice] = "#{@client.business_name.titleize} was successfully updated." if @client.update(client_params)
     respond_with @client
   end
 
   def destroy
     @client.destroy
+    flash[:notice] = "#{@client.business_name.titleize} was successfully destroyed." if @client.destroyed?
     respond_with(@client)
   end
 
-  def duplicate
+  def exists
     respond_with do |format|
       format.json { render json: !current_user.clients.exists?(client_params) }
     end
@@ -61,11 +58,15 @@ class ClientsController < ApplicationController
     current_user.clients
   end
 
+  def build_client
+    @client = client_scope.new(client_params)
+  end
+
   def set_client
-    @client = client_scope.includes(:invoices_chasing, :histories).find(params[:id])
+    @client = client_scope.find(params[:id])
   end
 
   def client_params
-    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
+    params.fetch(:client, {}).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
   end
 end

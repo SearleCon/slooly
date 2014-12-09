@@ -122,7 +122,7 @@ Slooly::Application.routes.draw do
 
   resources :contacts, only: [:new, :create]
 
-  match 'redeem' => 'vouchers#redeem', :as => 'redeem', via: :patch
+  match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
 
   resources :suggestions, except: [:show, :edit, :update]
 
@@ -132,18 +132,16 @@ Slooly::Application.routes.draw do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
     collection do
       get :search
+      get :exists
     end
   end
 
-  resource :client, only: :none do
-    get :duplicate, on: :member
-  end
 
   namespace :clients do
     resources :imports, only: [:new, :create]
   end
 
-  resources :companies, only: [:index, :edit, :update]
+  resource :company, only: [:show, :edit, :update]
 
   resources :invoices do
     collection do
@@ -153,11 +151,12 @@ Slooly::Application.routes.draw do
 
   resources :dashboard, only: :index
 
-  namespace :admin do
-    resources :dashboard, only: :index
-  end
 
   authenticated :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :dashboard, only: :index
+    end
+
     root to: "admin/dashboard#index", as: :admin_root
   end
 

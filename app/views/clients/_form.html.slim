@@ -3,7 +3,7 @@
   .row
     .span5
       - if @client.new_record?
-        = f.input :business_name, autofocus: true, input_html: { data: { rule_remote: duplicate_client_url, msg_remote: 'A client with this business name already exists.' } }
+        = f.input :business_name, autofocus: true, input_html: { data: { rule_remote: exists_clients_url, msg_remote: 'A client with this business name already exists.' } }
       - else
         = f.input :business_name, autofocus: true
       = f.input :contact_person

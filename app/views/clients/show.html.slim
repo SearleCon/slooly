@@ -25,6 +25,8 @@
   ul.inline
     li= link_to  edit_client_path(client) do
       = fa_icon 'edit', text: ' Edit this client'
+    li= link_to client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name), {}, sanitize: false)}, class: 'delete-client' do
+      = fa_icon 'trash', text: 'Delete'
     li= link_to new_client_path do
       = fa_icon 'male', text: ' Add another Client'
     li= link_to new_client_invoice_path(client) do
@@ -43,7 +45,7 @@
       #history.tab-pane.fade.in
         - if client.histories.any?
           p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
-          table.table.table-condensed
+          table.table.table-condensed.sortable
             tr
               th Date Sent
               th Sent To

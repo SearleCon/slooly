@@ -1,9 +1,6 @@
 class Clients::InvoicesController < ApplicationController
   before_action :set_client
-
-  def new
-    @invoice = @client.invoices.build
-  end
+  before_action :build_invoice
 
   def create
     @invoice = @client.invoices.build(invoice_params)
@@ -16,6 +13,10 @@ class Clients::InvoicesController < ApplicationController
 
   def set_client
     @client = Client.find(params[:client_id])
+  end
+
+  def build_invoice
+    @invoice = @client.invoices.build(invoice_params)
   end
 
   def invoice_params

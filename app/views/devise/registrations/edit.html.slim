@@ -1,0 +1,41 @@
+= image_tag 'user.png', class: 'header'
+h2 User Profile
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  = f.input :name
+  = f.input :email, as: :email
+  = f.input :password, as: :password ,autocomplete: :off, hint: "(leave blank if you don't want to change it)"
+  = f.input :password_confirmation, as: :password
+  = f.input :current_password, as: :password, hint: "(we need your current password to confirm your changes)"
+  = f.button :submit, 'Update'
+hr
+
+#subscription_status
+  = render 'subscriptions/subscription_status'
+
+= link_to "Have a Voucher? Click here to redeem it", "#vouchers", data: { toggle: "collapse"}
+#vouchers.collapse
+  = simple_form_for :voucher, url: redeem_path, method: :patch do |f|
+    = f.input :unique_code, label: 'Enter voucher number here:'
+    = f.button :submit, 'Redeem'
+hr
+
+h3 Cancel my account
+
+p
+  | Unhappy?
+  '
+  = link_to "Cancel my account", registration_path(resource_name), data: { confirm: '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete your ENTIRE ACCOUNT!<br><b>NOTE:</b> All related clients and invoices will also be deleted! This cannot be undone!<br><br> Are you sure you want to cancel your account?' }, method: :delete
+p
+  | (We would hate to see you go! Instead, why not #{link_to 'contact us', new_contact_path}, tell us why you are unhappy, and let's first see if we can cater to your needs)
+
+hr
+
+ul.inline
+  li= link_to :back do
+    = fa_icon 'arrow-left', text: 'Back'
+  li= link_to company_path do
+    = fa_icon 'institution', text: 'Company Profile'
+  li= link_to settings_path do
+    = fa_icon 'gears', text: 'Settings'

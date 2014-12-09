@@ -1,13 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :set_company
 
-  def index; end
-
-  def edit; end
-
   def update
-    flash[:notice] = 'Company was successfully updated.'  if @company.update(company_params)
-    respond_with @company, location: companies_url
+    flash[:notice] = "#{@company.name.titleize} was successfully updated." if @company.update(company_params)
+    redirect_to company_url
   end
 
   private
