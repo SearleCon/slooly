@@ -47,7 +47,7 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_scope
-    current_user.invoices.includes(:client)
+    current_user.invoices
   end
 
   def build_invoice
@@ -59,6 +59,6 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.fetch(:invoice, {}).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status_id, :last_date_sent)
+    params.fetch(:invoice, {}).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent)
   end
 end

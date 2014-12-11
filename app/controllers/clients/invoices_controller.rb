@@ -20,6 +20,6 @@ class Clients::InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.fetch(:invoice, {}).permit(:amount, :description, :due_date, :invoice_number, :status_id, :last_date_sent)
+    params.fetch(:invoice, {}).permit(:amount, :description, :due_date, :invoice_number, :status, :last_date_sent)
   end
 end

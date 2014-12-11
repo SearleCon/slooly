@@ -2,10 +2,10 @@
 #
 # Table name: statuses
 #
-#  id          :integer          primary key
+#  id          :integer          not null, primary key
 #  description :string(255)
-#  created_at  :timestamp        not null
-#  updated_at  :timestamp        not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 class Status < ActiveRecord::Base

@@ -3,10 +3,17 @@ require 'rake'
 
 
 describe 'scheduler:send_reminders' do
-  before(:all) do
+
+
+  before do
     Slooly::Application.load_tasks
     @user = create(:user)
     @client = create(:client, user: @user)
+    Invoice.skip_callback(:save, :before, :calculate_dates)
+  end
+
+  after do
+    Invoice.set_callback(:save, :before, :calculate_dates)
   end
 
   it 'creates a history entry for the reminder' do
@@ -15,7 +22,7 @@ describe 'scheduler:send_reminders' do
   end
 
   it 'does not send an email unless an invoice is in chasing or final_demand' do
-    invoice = create(:invoice, status_id: [Invoice::STATUSES[:stop_chasing], Invoice::STATUSES[:paid],  Invoice::STATUSES[:write_off],  Invoice::STATUSES[:delete]].sample)
+    invoice = create(:invoice, status: [:stop_chasing, :paid ,:write_off, :deleted].sample)
     expect { Rake::Task['send_reminders'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
@@ -27,7 +34,7 @@ describe 'scheduler:send_reminders' do
 
   it 'does not send an email for invoices which are due when due reminders is false' do
     invoice = create(:invoice)
-    invoice.user.setting.update(due_reminder: false)
+    allow_any_instance_of(Setting).to receive(:due_reminder).and_return(false)
     expect { Rake::Task['send_reminders'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
@@ -38,7 +45,7 @@ describe 'scheduler:send_reminders' do
 
   it 'does not send an email for invoices which are pre_due when pre_due_reminder is false' do
     invoice = create(:invoice, :pre_due)
-    invoice.user.setting.update(pre_due_reminder: false)
+    allow_any_instance_of(Setting).to receive(:pre_due_reminder).and_return(false)
     expect { Rake::Task['send_reminders'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 

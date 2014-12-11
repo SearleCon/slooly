@@ -1,7 +1,7 @@
 - if invoices.any?
   p
-    | You are currently chasing the following #{strong pluralize(client.invoices_chasing.size, 'invoice')} for
-       #{strong client.business_name} to the value of #{strong client.invoices_chasing.total} (total chasing amount).
+    | You are currently chasing the following #{strong pluralize(invoices.size, 'invoice')} for
+       #{strong client.business_name} to the value of #{strong invoices.total} (total chasing amount).
   table.table.table-condensed.sortable
     tr
       th Age
@@ -15,12 +15,12 @@
     - invoices.each do |invoice|
       - cache invoice do
         = content_tag_for :tr, invoice do
-          td= display_age_badge(invoice)
+          td= invoice.age
           td= link_to invoice.invoice_number, invoice
           td= invoice.due_date
-          td= number_with_precision(invoice.amount, precision: 2)
-          td= display_description(invoice)
-          td= display_status_label(invoice)
+          td= invoice.amount
+          td= invoice.description
+          td= invoice.status
           td= local_time_ago(invoice.created_at)
           td
             ul.inline

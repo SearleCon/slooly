@@ -46,9 +46,9 @@ ul.thumbnails
             = link_to client.business_name, client
           p
             | #{strong 'Invoices: '}
-            span.badge.badge-inverse #{client.invoices_chasing.size}
+            span.badge.badge-inverse #{client.invoices.size}
           p
-            | #{strong 'Total:'} #{client.invoices_chasing.total}
+            | #{strong 'Total:'} #{client.invoices.total}
         table.table.table-striped.table-condensed.sortable
           thead
             tr
@@ -61,13 +61,13 @@ ul.thumbnails
               th Amount
               th Created
           tbody
-          - client.invoices_chasing.each do |invoice|
+          - client.invoices.each do |invoice|
             - cache invoice do
               = content_tag_for :tr, invoice do
-                td= display_age_badge(invoice)
+                td= invoice.age
                 td= link_to invoice.invoice_number, invoice
                 td= invoice.due_date
-                td= number_with_precision(invoice.amount, precision: 2)
+                td= invoice.amount
                 td= local_time_ago(invoice.created_at)
         hr
     .flickr_pagination

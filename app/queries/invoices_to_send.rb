@@ -10,7 +10,7 @@ class InvoicesToSend
   end
 
   def unsent
-    table[:last_date_sent].not_eq(today)
+    table[:last_date_sent].not_eq(today).or(table[:last_date_sent].eq(nil))
   end
 
   def send_today
@@ -42,7 +42,7 @@ class InvoicesToSend
   end
 
   def chasing_or_final_demand
-    table[:status_id].in([Invoice::STATUSES[:chasing], Invoice::STATUSES[:send_final_demand]])
+    table[:status].in([Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
   end
 
   def today

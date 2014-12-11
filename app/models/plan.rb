@@ -2,13 +2,13 @@
 #
 # Table name: plans
 #
-#  id          :integer          primary key
+#  id          :integer          not null, primary key
 #  description :string(255)
 #  duration    :integer
 #  cost        :decimal(, )
 #  active      :boolean
-#  created_at  :timestamp        not null
-#  updated_at  :timestamp        not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #  free        :boolean
 #
 

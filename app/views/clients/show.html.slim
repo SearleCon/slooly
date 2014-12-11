@@ -41,7 +41,7 @@
         a[href="#history" data-toggle="tab"] Chasing History
     .tab-content
       #chasing.tab-pane.fade.in.active
-        = render 'invoices_chasing',  invoices: client.invoices_chasing
+        = render 'invoices_chasing',  invoices: client.invoices
       #history.tab-pane.fade.in
         - if client.histories.any?
           p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).

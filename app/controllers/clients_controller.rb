@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    fresh_when @client
+    # fresh_when @client
   end
 
   def create

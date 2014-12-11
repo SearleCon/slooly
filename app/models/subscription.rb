@@ -2,29 +2,30 @@
 #
 # Table name: subscriptions
 #
-#  id                             :integer          primary key
-#  bought_on                      :timestamp
+#  id                             :integer          not null, primary key
 #  plan_id                        :integer
 #  expiry_date                    :date
-#  time                           :string(255)
 #  active                         :boolean
-#  paypal_id                      :string(255)
 #  user_id                        :integer
-#  created_at                     :timestamp        not null
-#  updated_at                     :timestamp        not null
+#  created_at                     :datetime
+#  updated_at                     :datetime
 #  paypal_customer_token          :string(255)
 #  paypal_recurring_profile_token :string(255)
 #
 
 class Subscription < ActiveRecord::Base
-  belongs_to :plan, touch: true
+  belongs_to :plan
   belongs_to :user, touch: true
 
   attr_accessor :paypal_payment_token
 
+  validates :plan, :user, presence: true
+
   scope :active, -> { where(active: true) }
 
-  after_initialize :setup_defaults, if: :new_record?
+  before_create :set_expiry_date
+
+  delegate :description, :duration, :cost, to: :plan, prefix: true
 
   def paypal
     PaypalPayment.new(self)
@@ -63,9 +64,7 @@ class Subscription < ActiveRecord::Base
 
   private
 
-  def setup_defaults
-    self.bought_on = Time.zone.now
+  def set_expiry_date
     self.expiry_date = Time.zone.now.advance(months: plan.duration)
-    self.time = "#{plan.duration} month(s)"
   end
 end

@@ -2,7 +2,7 @@
 #
 # Table name: histories
 #
-#  id                :integer          primary key
+#  id                :integer          not null, primary key
 #  date_sent         :date
 #  client_id         :integer
 #  user_id           :integer
@@ -14,8 +14,8 @@
 #  email_sent_from   :string(255)
 #  copy_email        :string(255)
 #  email_sent_to     :string(255)
-#  created_at        :timestamp        not null
-#  updated_at        :timestamp        not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #  invoice_number    :string(255)
 #  email_from_name   :string(255)
 #

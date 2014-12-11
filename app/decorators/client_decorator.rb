@@ -1,6 +1,8 @@
 class ClientDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :invoices, scope: :chasing
+
   def business_name
     model.business_name.titleize
   end

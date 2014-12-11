@@ -7,7 +7,7 @@
       = f.input :amount, input_html: { data: { rule_number: true } }
       = f.input :description, as: :text
       = f.input :invoice_number
-      = f.input :status_id, collection: options_for_status, include_blank: false
+      = f.input :status, collection: options_for_status, include_blank: false
     .span6.well
       .media
         .pull-left

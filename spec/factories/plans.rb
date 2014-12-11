@@ -2,13 +2,13 @@
 #
 # Table name: plans
 #
-#  id          :integer          primary key
+#  id          :integer          not null, primary key
 #  description :string(255)
 #  duration    :integer
 #  cost        :decimal(, )
 #  active      :boolean
-#  created_at  :timestamp        not null
-#  updated_at  :timestamp        not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #  free        :boolean
 #
 
@@ -19,13 +19,5 @@ FactoryGirl.define do
     cost       0
     active     false
     free       false
-
-    factory :free_trial do
-      description 'Free Trial'
-      duration    1
-      cost       0
-      active     true
-      free       true
-    end
   end
 end

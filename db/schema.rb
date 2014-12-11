@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203192217) do
+ActiveRecord::Schema.define(version: 20141211110514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20141203192217) do
     t.date     "due_date"
     t.decimal  "amount"
     t.text     "description"
-    t.integer  "status_id"
+    t.integer  "status"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20141203192217) do
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
-  add_index "invoices", ["status_id"], name: "index_invoices_on_status_id", using: :btree
+  add_index "invoices", ["status"], name: "index_invoices_on_status", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
 
   create_table "payment_notifications", force: true do |t|
@@ -171,12 +171,9 @@ ActiveRecord::Schema.define(version: 20141203192217) do
   end
 
   create_table "subscriptions", force: true do |t|
-    t.datetime "bought_on"
     t.integer  "plan_id"
     t.date     "expiry_date"
-    t.string   "time"
     t.boolean  "active"
-    t.string   "paypal_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -2,7 +2,7 @@
 #
 # Table name: settings
 #
-#  id                     :integer          primary key
+#  id                     :integer          not null, primary key
 #  send_from_name         :string(255)
 #  email_copy_to          :string(255)
 #  days_between_chase     :integer
@@ -23,8 +23,8 @@
 #  final_demand_subject   :string(255)
 #  final_demand_message   :text
 #  user_id                :integer
-#  created_at             :timestamp        not null
-#  updated_at             :timestamp        not null
+#  created_at             :datetime
+#  updated_at             :datetime
 #
 
 class Setting < ActiveRecord::Base

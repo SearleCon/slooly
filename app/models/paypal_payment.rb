@@ -1,7 +1,7 @@
 class PaypalPayment
   def initialize(subscription)
     @subscription = subscription
-    @plan = Plan.find(subscription.plan_id)
+    @plan = subcription.plan
   end
 
   def profile_details

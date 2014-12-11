@@ -2,7 +2,7 @@
 #
 # Table name: clients
 #
-#  id             :integer          primary key
+#  id             :integer          not null, primary key
 #  business_name  :string(255)
 #  contact_person :string(255)
 #  address        :string(255)
@@ -12,8 +12,8 @@
 #  fax            :string(255)
 #  email          :string(255)
 #  user_id        :integer
-#  created_at     :timestamp        not null
-#  updated_at     :timestamp        not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 FactoryGirl.define do

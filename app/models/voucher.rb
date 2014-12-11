@@ -2,13 +2,13 @@
 #
 # Table name: vouchers
 #
-#  id             :integer          primary key
+#  id             :integer          not null, primary key
 #  unique_code    :string(255)
 #  redeemed_by    :integer
-#  valid_until    :timestamp
+#  valid_until    :datetime
 #  number_of_days :integer
-#  created_at     :timestamp        not null
-#  updated_at     :timestamp        not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class Voucher < ActiveRecord::Base

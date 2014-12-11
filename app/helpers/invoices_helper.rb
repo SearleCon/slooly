@@ -1,10 +1,10 @@
 module InvoicesHelper
-  STATUS_LABELS = { chasing: 'label label-success',
-                    stop_chasing: 'label label-warning',
-                    paid: 'label label-info',
-                    send_final_demand: 'label label-important',
-                    write_off: 'label label-inverse',
-                    delete: 'label label-default' }
+  LABELS_FOR_STATUS = { chasing: 'label label-success',
+                        stop_chasing: 'label label-warning',
+                        paid: 'label label-info',
+                        send_final_demand: 'label label-important',
+                        write_off: 'label label-inverse',
+                        delete: 'label label-default' }.with_indifferent_access
 
   def display_age_badge(invoice)
     case
@@ -23,14 +23,10 @@ module InvoicesHelper
   end
 
   def display_status_label(invoice)
-    content_tag(:span, invoice.status.to_s.titleize, class: STATUS_LABELS[invoice.status])
+    content_tag(:span, invoice.status.titleize, class: LABELS_FOR_STATUS[invoice.status])
   end
 
   def options_for_status
-    Invoice::STATUSES.transform_keys { |key| key.to_s.titleize }
-  end
-
-  def status
-    Invoice::STATUSES.sort.transform_keys { |key| key.to_s.titleize }
+    Invoice.statuses.keys
   end
 end

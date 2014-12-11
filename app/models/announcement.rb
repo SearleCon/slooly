@@ -2,12 +2,12 @@
 #
 # Table name: announcements
 #
-#  id          :integer          primary key
+#  id          :integer          not null, primary key
 #  headline    :string(255)
 #  description :text
 #  posted_by   :string(255)
-#  created_at  :timestamp        not null
-#  updated_at  :timestamp        not null
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 class Announcement < ActiveRecord::Base

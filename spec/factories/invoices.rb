@@ -2,15 +2,15 @@
 #
 # Table name: invoices
 #
-#  id             :integer          primary key
+#  id             :integer          not null, primary key
 #  invoice_number :string(255)
 #  due_date       :date
 #  amount         :decimal(, )
 #  description    :text
-#  status_id      :integer
+#  status         :integer
 #  client_id      :integer
-#  created_at     :timestamp        not null
-#  updated_at     :timestamp        not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #  user_id        :integer
 #  pd_date        :date
 #  od1_date       :date
@@ -24,7 +24,6 @@ FactoryGirl.define do
   factory :invoice do
     invoice_number { Faker::Number.number(6) }
     amount { Faker::Commerce.price }
-    status_id Invoice::STATUSES[:chasing]
     description { Faker::Lorem.sentence }
     due_date Date.today
     user
@@ -32,7 +31,6 @@ FactoryGirl.define do
 
     trait :pre_due do
       pd_date Date.today
-      due_date Date.tomorrow
     end
 
     trait :over_due1 do
@@ -49,7 +47,7 @@ FactoryGirl.define do
 
     trait :final_demand do
       fd_date Date.today
-      status_id Invoice::STATUSES[:send_final_demand]
+      status :send_final_demand
     end
 
   end

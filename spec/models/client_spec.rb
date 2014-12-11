@@ -2,7 +2,7 @@
 #
 # Table name: clients
 #
-#  id             :integer          primary key
+#  id             :integer          not null, primary key
 #  business_name  :string(255)
 #  contact_person :string(255)
 #  address        :string(255)
@@ -12,8 +12,8 @@
 #  fax            :string(255)
 #  email          :string(255)
 #  user_id        :integer
-#  created_at     :timestamp        not null
-#  updated_at     :timestamp        not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 describe Client do
@@ -23,18 +23,17 @@ describe Client do
   end
 
   it { should belong_to(:user).touch(true) }
-  it { should have_many(:invoices).dependent(:destroy) }
-  it { should have_many(:histories).dependent(:destroy) }
+  it { should have_many(:invoices) }
+  it { should have_many(:histories) }
 
   it { should validate_presence_of(:business_name) }
   it { should validate_presence_of(:email) }
   it { should allow_value('paul@example.com', 'ken.john@fish.com').for(:email) }
 
-  it { should validate_uniqueness_of(:business_name).scoped_to(:user_id) }
-
-  it do
-     create(:client, business_name: "Test")
-     should validate_uniqueness_of(:business_name)
+  it 'should validate uniqueness of business_name scoped to user' do
+    client = create(:client, business_name: 'Client')
+    duplicate = create(:client, business_name: 'Client')
+    should validate_uniqueness_of(:business_name).scoped_to(:user_id)
   end
 
   describe '#normalize_data' do
