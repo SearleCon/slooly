@@ -26,7 +26,7 @@ Slooly::Application.configure do
   config.action_mailer.default charset: "utf-8"
   #  config.action_mailer.default :from => "slooly@example.com"
 
-  config.action_mailer.preview_path = "#{Rails.root}/spec/mailer_previews"
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
 
   #
@@ -56,7 +56,7 @@ Slooly::Application.configure do
   end
 
   # Slim
-  Slim::Engine.set_default_options pretty: true, sort_attrs: false
+  Slim::Engine.set_options pretty: true, sort_attrs: false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

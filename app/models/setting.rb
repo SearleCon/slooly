@@ -48,14 +48,14 @@ class Setting < ActiveRecord::Base
                                     Bank:
                                     Account:
                                     Account Type:
-                                    Branch Code:).strip
+                                    Branch Code:)
     self.pre_due_reminder = true
     self.pre_due_subject = 'Friendly Reminder: Payment due soon'
     self.pre_due_message = %(This is a friendly reminder that payment for the above invoice is due in a couple of days time.\n
                              We really do appreciate your timely payment.
                              Payment can be made by any of the methods listed below.\n
                              We appreciate your support and value you as our customer.\n
-                             Kind regards,).strip
+                             Kind regards,)
 
     self.due_reminder = true
     self.due_subject = 'Payment Due Today'
@@ -64,7 +64,7 @@ class Setting < ActiveRecord::Base
                          Payment can be made by any of the methods listed below.\n
                          If you have already paid, please ignore this email.\n
                          We appreciate your support.\n
-                         Kind regards,).strip
+                         Kind regards,)
 
     self.overdue1_subject = 'Important Reminder: Payment overdue'
     self.overdue1_message = %(Please note that payment for the above invoice is now overdue.\n
@@ -72,7 +72,7 @@ class Setting < ActiveRecord::Base
                               Payment can be made by any of the methods listed below.\n
                               If you have already paid, please email or fax proof of payment to us (our contact details above).
                               We appreciate your support.\n
-                              Kind regards,).strip
+                              Kind regards,)
 
     self.overdue2_subject = 'Second Reminder - Important: Payment is overdue'
     self.overdue2_message = %(Payment for the above invoice is now overdue.\n
@@ -80,7 +80,7 @@ class Setting < ActiveRecord::Base
                               Payment can be made by any of the methods listed below.\n
                               If you have already paid, please email or fax proof of payment to us (our contact details above).\n
                               Thank you.\n
-                              Kind regards,).strip
+                              Kind regards,)
 
     self.overdue3_subject = 'URGENT: Third and Final Reminder: Payment is now way overdue!'
     self.overdue3_message = %(This is your third and final reminder. Payment for the above invoice is now very overdue!\n
@@ -88,7 +88,7 @@ class Setting < ActiveRecord::Base
                               Payment can be made by any of the methods listed below.\n
                               If you have already paid, please email or fax proof of payment to us (our contact details above).
                               If you are not intending on paying, please give us a call or send us an email, so that we can make alternative arrangements if necessary.\n
-                              Kind regards,).strip
+                              Kind regards,)
 
     self.final_demand_subject = 'Notice of Final Demand: Action Required'
     self.final_demand_message = %(Please understand that this is our FINAL NOTICE regarding payment for the above invoice.\n
@@ -97,7 +97,7 @@ class Setting < ActiveRecord::Base
                                   Payment can be made by any of the methods listed below.\n
                                   If you have already paid, please email or fax proof of payment to us (our contact details above).
                                   If you are not intending on paying, or are unable to pay due to unforeseen circumstances, please give us a call or send us an email, so that we can make alternative arrangements if necessary.\n
-                                  Kind regards,).strip
+                                  Kind regards,)
   end
 
   def strip_messages

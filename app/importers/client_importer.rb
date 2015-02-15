@@ -14,4 +14,5 @@ class ClientImporter < ActiveImporter::Base
   fetch_model do
     Client.find_or_initialize_by(business_name: row['BusinessName'], user_id: params[:user_id])
   end
+
 end

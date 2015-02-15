@@ -15,8 +15,6 @@
 
 FactoryGirl.define do
   factory :subscription do
-    bought_on                      Time.zone.now
     expiry_date                    1.month.from_now
-    time                           '1 Month'
   end
 end

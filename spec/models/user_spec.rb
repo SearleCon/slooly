@@ -44,7 +44,7 @@ describe User do
  describe '#current_subscription' do
    it 'should return the current active subscription for a user' do
      user = create(:subscribed_user)
-     expect(user.current_subscription).to_not be_nil
+     expect(user.subscription).to_not be_nil
    end
  end
 end

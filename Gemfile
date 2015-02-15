@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 gem 'rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -72,11 +71,13 @@ gem 'slim-rails'
 gem 'premailer-rails'
 
 
-# Javascript cookie handler
-gem 'rails-assets-jquery-cookie'
+source 'https://rails-assets.org' do
+  # Javascript cookie handler
+  gem 'rails-assets-jquery-cookie'
 
 # Javascript validation
-gem 'rails-assets-jquery-validate'
+  gem 'rails-assets-jquery-validate'
+end
 
 # Foreign Keys
 gem 'foreigner'

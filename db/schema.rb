@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211110514) do
+ActiveRecord::Schema.define(version: 20150214123711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20141211110514) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  add_index "delayed_jobs", ["queue"], name: "index_delayed_jobs_on_queue", using: :btree
 
   create_table "histories", force: true do |t|
     t.date     "date_sent"
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(version: 20141211110514) do
     t.datetime "updated_at"
   end
 
+  Foreigner.load
   add_foreign_key "clients", "users", name: "clients_user_id_fk", dependent: :delete
 
   add_foreign_key "companies", "users", name: "companies_user_id_fk", dependent: :delete

@@ -30,6 +30,7 @@ FactoryGirl.define do
     client
 
     trait :pre_due do
+      due_date Date.tomorrow
       pd_date Date.today
     end
 
