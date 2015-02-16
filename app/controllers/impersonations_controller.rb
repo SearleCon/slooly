@@ -9,14 +9,14 @@ class ImpersonationsController < ApplicationController
     session[:current_admin] = current_user.id
     sign_out current_user
     sign_in @user
-    redirect_to root_url, notice: t('flash.impersonations.destroy', name: @user.name)
+    redirect_to root_url, notice: t('flash.impersonations.create', name: @user.name)
   end
 
   def destroy
     if session[:current_admin].present?
       sign_out current_user if user_signed_in?
       sign_in @admin
-      flash[:notice] = t('flash.impersonations.create')
+      flash[:notice] = t('flash.impersonations.destroy')
     end
     redirect_to root_url
   end

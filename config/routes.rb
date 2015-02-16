@@ -106,7 +106,9 @@ Slooly::Application.routes.draw do
       resources :suggestions, only: [:index, :destroy]
       resources :announcements, except: :show
       resources :plans, except: :show
-      resources :users, only: :index
+      resources :users, only: [:index, :show] do
+        resources :subscriptions, only: [:edit, :update], controller: 'users/subscriptions'
+      end
     end
 
     root to: "admin/dashboard#index", as: :admin_root
@@ -162,7 +164,6 @@ Slooly::Application.routes.draw do
 
   match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
 
-
   resources :settings, only: [:index, :edit, :update]
 
   resources :clients do
@@ -173,16 +174,11 @@ Slooly::Application.routes.draw do
     end
   end
 
-
   namespace :clients do
     resources :imports, only: [:new, :create]
   end
 
   resource :company, only: [:show, :edit, :update]
-
-
-
-
 
   match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 end

@@ -123,6 +123,9 @@ en:
         failed: 'There has been a problem activating your subscription. Please contact support.'
     suggestions:
        create: 'Thank you for your comment. We appreciate it!'
+    users:
+      subscriptions:
+        update: "%{name}'s subscription was successfully updated."
     vouchers:
        redeem:
          success: 'Congratulations! Your voucher was successfully redeemed!'

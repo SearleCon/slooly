@@ -1,0 +1,27 @@
+.page-header
+  .media
+    .pull-left
+      =image_tag('user.png', class: 'media-object')
+    .media-body
+      h2 Edit #{@user.name} Subscription
+      = link_to admin_user_path(@user) do
+        = fa_icon 'arrow-left', text: 'Back'
+
+.well.well-small
+    p
+      strong Plan
+      '
+      = @user.subscription.plan_description
+      p
+        strong Duration
+        '
+        = pluralize(@user.subscription.plan_duration, 'Month')
+      p
+        strong Cost
+        '
+        = number_to_currency(@user.subscription.plan_cost)
+
+= simple_form_for [:admin, @user, @subscription] do |f|
+  = f.input :expiry_date, as: :date_picker
+  .actions
+    = f.button :submit, 'Extend Subscription'
