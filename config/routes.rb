@@ -99,6 +99,41 @@
 #
 
 Slooly::Application.routes.draw do
+
+  authenticated :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :dashboard, only: :index
+      resources :suggestions, only: [:index, :destroy]
+      resources :announcements, except: :show
+      resources :plans, except: :show
+      resources :users, only: :index
+    end
+
+    root to: "admin/dashboard#index", as: :admin_root
+  end
+
+  authenticated :user do
+    root to: 'dashboard#index', as: :authenticated_root
+  end
+  root to: "home#index"
+
+  resources :dashboard, only: :index
+
+  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
+
+  resources :invoices do
+    collection do
+      get :search
+    end
+  end
+
+  resources :impersonations, only: [:create, :destroy]
+
+
+  resources :announcements, only: [:index]
+
+  resources :suggestions, only: [:new, :create]
+
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
 
   resources :subscriptions, only: [:new, :create] do
@@ -145,36 +180,6 @@ Slooly::Application.routes.draw do
 
   resource :company, only: [:show, :edit, :update]
 
-  resources :invoices do
-    collection do
-      get :search
-    end
-  end
-
-  resources :dashboard, only: :index
-
-  authenticated :user, lambda { |u| u.admin? } do
-    namespace :admin do
-      resources :dashboard, only: :index
-      resources :suggestions, only: [:index, :destroy]
-      resources :announcements, except: :show
-      resources :plans, except: :show
-    end
-
-    root to: "admin/dashboard#index", as: :admin_root
-  end
-
-  authenticated :user do
-    root to: 'dashboard#index', as: :authenticated_root
-  end
-  root to: "home#index"
-
-  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
-  resources :users, only: [:show]
-
-  resources :announcements, only: [:index]
-
-  resources :suggestions, only: [:new, :create]
 
 
 

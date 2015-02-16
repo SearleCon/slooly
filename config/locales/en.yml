@@ -103,6 +103,9 @@ en:
        update: "%{resource_name} was successfully updated."
     contacts:
        create: 'Message was successfully sent.'
+    impersonations:
+       create: "Signed in as %{name}"
+       destroy: "Signed back in as admin"
     invoices:
        create: "%{resource_name} was successfully created."
        update: "%{resource_name} was successfully updated."
