@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :history do
-    date_sent         Date.today
+    date_sent         Date.current
     subject           { Faker::Lorem.sentence(3) }
     message           { Faker::Lorem.paragraph }
     reminder_type     'PD'

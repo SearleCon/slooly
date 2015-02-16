@@ -4,7 +4,7 @@
   br
   = image_tag 'secure-paypal-logo.png', style: "float:right"
   br
-  - if current_user.current_subscription_has_expired?
+  - if current_user.subscription_has_expired?
     p Your free trial has expired. To continue using Paying Mantis you need to subscribe:
     p
       | (Note that payment is done through PayPal and is 100% secure)

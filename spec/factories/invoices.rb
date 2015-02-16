@@ -25,29 +25,29 @@ FactoryGirl.define do
     invoice_number { Faker::Number.number(6) }
     amount { Faker::Commerce.price }
     description { Faker::Lorem.sentence }
-    due_date Date.today
+    due_date Date.current
     user
     client
 
     trait :pre_due do
       due_date Date.tomorrow
-      pd_date Date.today
+      pd_date Date.current
     end
 
     trait :over_due1 do
-      od1_date Date.today
+      od1_date Date.current
     end
 
     trait :over_due2 do
-      od2_date Date.today
+      od2_date Date.current
     end
 
     trait :over_due3 do
-      od3_date Date.today
+      od3_date Date.current
     end
 
     trait :final_demand do
-      fd_date Date.today
+      fd_date Date.current
       status :send_final_demand
     end
 

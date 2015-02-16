@@ -26,7 +26,7 @@ describe 'scheduler:send_reminders' do
     Rake::Task['send_reminders'].execute
 
     invoice.reload
-    expect(invoice.last_date_sent).to eq(Date.today)
+    expect(invoice.last_date_sent).to eq(Date.current)
   end
 
   it 'does not send an email unless an invoice is in chasing or final_demand' do

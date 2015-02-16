@@ -16,11 +16,11 @@ module Invoice::Reminders
     end
 
     def subject
-      raise NotImplementedError
+      fail NotImplementedError
     end
 
     def message
-      raise NotImplementedError
+      fail NotImplementedError
     end
 
     def text
@@ -45,11 +45,11 @@ module Invoice::Reminders
     end
 
     def send?
-      raise NotImplementedError
+      fail NotImplementedError
     end
 
     def type
-      raise NotImplementedError
+      fail NotImplementedError
     end
 
     def sender
@@ -83,7 +83,6 @@ module Invoice::Reminders
     def company
       @company ||= invoice.user.company
     end
-
   end
 
   class Due < Base

@@ -6,8 +6,8 @@ class ErrorNotifier < ActionMailer::Base
     @message = message
     @backtrace = backtrace
     mail(
-        to: 'support@searleconsulting.co.za',
-        subject: 'Paying Mantis Error'
+      to: 'support@searleconsulting.co.za',
+      subject: 'Paying Mantis Error'
     )
   end
 end

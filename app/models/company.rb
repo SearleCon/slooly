@@ -31,7 +31,7 @@ class Company < ActiveRecord::Base
   protected
 
   def normalize_data
-    self.email = email.strip
+    email.strip!
   end
 
   def set_defaults

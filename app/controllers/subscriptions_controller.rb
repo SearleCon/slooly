@@ -1,4 +1,6 @@
 class SubscriptionsController < ApplicationController
+  skip_before_action :validate_subscription
+
   before_action :set_plan, only: [:new, :paypal_checkout]
 
   def payment_plans

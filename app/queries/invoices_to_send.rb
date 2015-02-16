@@ -46,6 +46,6 @@ class InvoicesToSend
   end
 
   def today
-    Date.today
+    Date.current
   end
 end

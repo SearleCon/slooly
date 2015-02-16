@@ -2,7 +2,7 @@ class Invoice::Age
   include Comparable
 
   def self.from_due_date(due_date)
-    new((Date.today - due_date.to_date).to_i)
+    new((Date.current - due_date.to_date).to_i)
   end
 
   def initialize(age)

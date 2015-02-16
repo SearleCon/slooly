@@ -9,6 +9,7 @@
 #= require twitter/bootstrap/rails/confirm
 #= require obfuscatejs
 #= require jquery.autosize
+#= require jsTimezoneDetect
 #= require local_time
 #= require turbolinks
 #= require_tree .
@@ -53,6 +54,10 @@ showFlashMessages = ->
         ).appendTo(".messages")
     $.removeCookie(cookieName, { path: '/' })
 
+setTimeZone = ->
+  tz = jstz.determine();
+  $.cookie('timezone', tz.name(), { path: '/' });
+
 pageLoad = ->
   $("form").each ->
     if $(this).data("validate")
@@ -71,6 +76,7 @@ pageLoad = ->
         $(this).datetimepicker('hide')
   $.bootstrapSortable(applyLast=true)
   showFlashMessages()
+  setTimeZone()
 
 $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad

@@ -23,9 +23,9 @@ class Subscription < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
 
-  before_create :set_expiry_date
-
   delegate :description, :duration, :cost, to: :plan, prefix: true
+
+  before_create :set_expiry_date
 
   def paypal
     PaypalPayment.new(self)
@@ -47,11 +47,11 @@ class Subscription < ActiveRecord::Base
   end
 
   def has_expired?
-    Time.zone.now > expiry_date
+    Date.current > expiry_date
   end
 
   def expires_in
-    (expiry_date - Time.zone.today).to_i
+    (expiry_date - Date.current).to_i
   end
 
   def expiring_soon?
@@ -65,6 +65,6 @@ class Subscription < ActiveRecord::Base
   private
 
   def set_expiry_date
-    self.expiry_date = Time.zone.now.advance(months: plan.duration)
+    self.expiry_date = Date.current.advance(months: plan_duration)
   end
 end

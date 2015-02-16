@@ -29,7 +29,7 @@ class Voucher < ActiveRecord::Base
   private
 
   def expired
-    errors.add(:expired, 'has expired.') if valid_until < Date.today
+    errors.add(:expired, 'has expired.') if valid_until < Date.current
   end
 
   def redeemed

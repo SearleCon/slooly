@@ -30,7 +30,7 @@ class Client < ActiveRecord::Base
   protected
 
   def normalize_data
-    self.business_name = business_name.strip
-    self.email = email.strip
+    business_name.strip!
+    email.strip!
   end
 end

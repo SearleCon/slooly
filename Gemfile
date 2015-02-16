@@ -72,11 +72,14 @@ gem 'premailer-rails'
 
 
 source 'https://rails-assets.org' do
-  # Javascript cookie handler
+  # Cookie handler
   gem 'rails-assets-jquery-cookie'
 
-# Javascript validation
+  # Validation
   gem 'rails-assets-jquery-validate'
+
+  # Time zone detection
+  gem 'rails-assets-jsTimezoneDetect'
 end
 
 # Foreign Keys

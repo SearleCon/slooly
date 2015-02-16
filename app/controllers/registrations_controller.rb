@@ -25,7 +25,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
+    devise_parameter_sanitizer.for(:sign_up) << :time_zone
     devise_parameter_sanitizer.for(:sign_up) << :terms_of_service
     devise_parameter_sanitizer.for(:account_update) << :name
+    devise_parameter_sanitizer.for(:account_update) << :time_zone
   end
 end

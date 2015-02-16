@@ -16,11 +16,11 @@ class AdministrationData
   end
 
   def emails_sent_today_count
-    @histories.where('created_at >= ?', DateTime.yesterday).size
+    @histories.where(date_sent: Date.current).size
   end
 
   def emails_sent_last_7_days_count
-    @histories.where('created_at >= ?', seven_days_ago).size
+    @histories.where('date_sent >= ?', 7.days.ago).size
   end
 
   def last_25_emails_sent
@@ -28,7 +28,7 @@ class AdministrationData
   end
 
   def suggestions_last_7_days_count
-    @suggestions.where('created_at >= ?', seven_days_ago).size
+    @suggestions.where('created_at >= ?', 7.days.ago).size
   end
 
   def total_suggestions
@@ -41,11 +41,5 @@ class AdministrationData
 
   def users
     @users
-  end
-
-  private
-
-  def seven_days_ago
-    DateTime.now - 7.days
   end
 end

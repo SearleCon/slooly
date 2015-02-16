@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  name                   :string(255)
 #  role                   :integer          default(0)
+#  time_zone              :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -33,8 +34,7 @@ class User < ActiveRecord::Base
   has_one :setting
 
   validates :terms_of_service, acceptance: true
-
-  after_initialize :set_default_role, if: :new_record?
+  validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
 
   delegate :expiry_date, :expiring_soon?, :expires_in, :has_expired?, to: :subscription, allow_nil: true, prefix: true
 
@@ -51,9 +51,5 @@ class User < ActiveRecord::Base
   def activate_subscription(new_subscription)
     current_subscription.update(active: false) if current_subscription.present?
     new_subscription.active = true
-  end
-
-  def set_default_role
-    self.role ||= :user
   end
 end

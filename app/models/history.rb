@@ -29,7 +29,7 @@ class History < ActiveRecord::Base
   private
 
   def setup_defaults
-    self.date_sent = Date.today
+    self.date_sent = Date.current
     self.sent = false
     self.email_return_code = 'Not yet sent'
   end

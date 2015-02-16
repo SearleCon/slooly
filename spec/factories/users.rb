@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  name                   :string(255)
 #  role                   :integer          default(0)
+#  time_zone              :string(255)
 #
 
 FactoryGirl.define do

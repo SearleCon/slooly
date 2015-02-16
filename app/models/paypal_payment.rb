@@ -40,11 +40,11 @@ class PaypalPayment
 
   def process(action, options = {})
     options = options.reverse_merge(
-        token: @subscription.paypal_payment_token,
-        payer_id: @subscription.paypal_customer_token,
-        description: @plan.description,
-        amount: @plan.cost,
-        currency: 'USD'
+      token: @subscription.paypal_payment_token,
+      payer_id: @subscription.paypal_customer_token,
+      description: @plan.description,
+      amount: @plan.cost,
+      currency: 'USD'
     )
     response = PayPal::Recurring.new(options).send(action)
     fail response.errors.inspect if response.errors.present?

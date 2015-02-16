@@ -33,31 +33,30 @@ class Invoice < ActiveRecord::Base
   before_save :calculate_dates, if: :due_date_changed?
   before_save :set_final_demand, if: :status_changed?
 
-
   delegate :business_name, to: :client, prefix: true
 
   def pre_due?
-    pd_date == DateTime.now.to_date
+    pd_date == Date.current
   end
 
   def due?
-    due_date == DateTime.now.to_date
+    due_date == Date.current
   end
 
   def over_due1?
-    od1_date == DateTime.now.to_date
+    od1_date == Date.current
   end
 
   def over_due2?
-    od2_date == DateTime.now.to_date
+    od2_date == Date.current
   end
 
   def over_due3?
-    od3_date == DateTime.now.to_date
+    od3_date == Date.current
   end
 
   def final_demand?
-    fd_date == DateTime.now.to_date
+    fd_date == Date.current
   end
 
   def age
@@ -82,6 +81,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_final_demand
-    self.fd_date = Date.today.days_since(1) if send_final_demand?
+    self.fd_date = Date.current.days_since(1) if send_final_demand?
   end
 end

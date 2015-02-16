@@ -8,6 +8,7 @@ h2 User Profile
   = f.input :password, as: :password ,autocomplete: :off, hint: "(leave blank if you don't want to change it)"
   = f.input :password_confirmation, as: :password
   = f.input :current_password, as: :password, hint: "(we need your current password to confirm your changes)"
+  = f.input :time_zone, prompt: 'Select your Time Zone'
   = f.button :submit, 'Update'
 hr
 

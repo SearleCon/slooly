@@ -6,7 +6,7 @@ class InvoicesController < ApplicationController
   decorates_assigned :invoices
 
   def index
-    @invoices = invoice_scope.page(params[:page])
+    @invoices = invoice_scope.includes(:client).page(params[:page])
     if @invoices.any?
       fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
     else
@@ -17,11 +17,7 @@ class InvoicesController < ApplicationController
   def search
     @invoices = invoice_scope.search(invoice_number_or_description_cont: params[:q][:keyword]).result.page(params[:page])
     flash[:info] = "#{view_context.pluralize(@invoices.size, 'invoice')} found containing the search string '#{params[:q][:keyword]}' (In their Invoice Number or Description fields)."
-    if @invoices.blank? || @invoices.many?
-      render :index
-    else
-      redirect_to @invoices.take
-    end
+    render :index
   end
 
   def show
@@ -40,7 +36,6 @@ class InvoicesController < ApplicationController
 
   def destroy
     @invoice.destroy
-    flash[:notice] = "#{@invoice.invoice_number} was successfully destroyed." if @invoice.destroyed?
     respond_with(@invoice)
   end
 
