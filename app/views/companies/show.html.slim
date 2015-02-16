@@ -17,13 +17,13 @@
       td= @company.address
     tr
       td City:
-      td @company.city
+      td= @company.city
     tr
       td Postal Code:
       td= @company.post_code
     tr
       td Telephone:
-      td= @company.telephone
+      td=number_to_phone(@company.telephone, area_code: true)
     tr
       td Fax:
       td= @company.fax

@@ -8,21 +8,25 @@ class PlansController < ApplicationController
   end
 
   def create
-    flash[:notice] = 'Plan was successfully created.' if @plan.save
-    respond_with @plan
+    flash[:notice] = t("flash.actions.create", resource_name: @plan.description.titleize) if @plan.save
+    respond_with @plan, location: plans_url
   end
 
   def update
-    flash[:notice] = 'Plan was successfully updated.' if  @plan.update(plan_params)
-    respond_with @plan
+    flash[:notice] = t("flash.plans.update", resource_name: @plan.description.titleize) if  @plan.update(plan_params)
+    respond_with @plan, location: plans_url
   end
 
   def destroy
     @plan.destroy
-    respond_with @plan
+    flash[:notice] = t("flash.plans.destroy", resource_name: @plan.description.titleize) if @plan.destroyed?
+    respond_with @plan, location: plans_url
   end
 
   private
+  def set_flash
+    flash[:notice] = t("flash.actions.#{action_name}", resource_name: @plan.description.titleize)
+  end
 
   def set_plan
     @plan = Plan.find(params[:id])

@@ -21,6 +21,13 @@
 
 en:
   confirmation:
+   plans:
+    destroy: |
+              <span class='label label-important'>WARNING!</span>
+              You are about to delete the plan <strong>%{plan_description}!</strong>
+              <strong>NOTE:</strong> This cannot be undone!
+              Are you sure you want to continue?
+
    clients:
     destroy: |
               <span class='label label-important'>WARNING!</span>
@@ -76,6 +83,49 @@ en:
       overdue3_message: '<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.'
       final_demand_subject: '<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.'
       final_demand_message: '<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.'
+  flash:
+    actions:
+      create: "%{resource_name} was successfully created."
+      update: "%{resource_name} was successfully updated."
+      destroy: "%{resource_name} was successfully destroyed."
+
+    application:
+      unauthorized: 'You are not authorized to perform this action'
+    announcements:
+       create: "%{resource_name} was successfully created."
+       update: "%{resource_name} was successfully updated."
+       destroy: "%{resource_name} was successfully destroyed."
+    clients:
+       create: "%{resource_name} was successfully created."
+       update: "%{resource_name} was successfully updated."
+       search: "%{resource_name} found containing the search string '%{keywords}' (In their Business Name or Contact Person fields)."
+    company:
+       update: "%{resource_name} was successfully updated."
+    contacts:
+       create: 'Message was successfully sent.'
+    invoices:
+       create: "%{resource_name} was successfully created."
+       update: "%{resource_name} was successfully updated."
+       search: "%{resource_name} found containing the search string '%{keywords}' (In their Invoice Number or Description fields)."
+    plans:
+       create: "%{resource_name} was successfully created."
+       update: "%{resource_name} was successfully updated."
+       destroy: "%{resource_name} was successfully destroyed."
+    settings:
+       update: "%{resource_name} was successfully updated."
+    subscriptions:
+      status: "Please note: Your subscription is coming to an end in %{period}. You do not have to do anything, as you will be prompted with options when logging in after the expiry date."
+      activation:
+        success: 'Thank you for supporting us!'
+        failed: 'There has been a problem activating your subscription. Please contact support.'
+    suggestions:
+       create: 'Thank you for your comment. We appreciate it!'
+    vouchers:
+       redeem:
+         success: 'Congratulations! Your voucher was successfully redeemed!'
+         failed: 'This voucher is no longer valid or has already been redeemed'
+
+
 
 
 

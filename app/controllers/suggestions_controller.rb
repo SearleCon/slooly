@@ -9,7 +9,7 @@ class SuggestionsController < ApplicationController
   end
 
   def create
-    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.save
+    flash[:notice] = t("flash.suggestions.create") if @suggestion.save
     respond_with @suggestion, location: root_url
   end
 
@@ -33,6 +33,6 @@ class SuggestionsController < ApplicationController
   end
 
   def authorize
-    redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.admin?
+    redirect_to root_url, alert: t('flash.application.unauthorized') unless current_user.admin?
   end
 end

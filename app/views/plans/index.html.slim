@@ -6,7 +6,7 @@ table.table.table-condensed.table-bordered
     th Duration
     th Cost
     th Active
-    th
+    th Subscriptions
     th
     th
   - @plans.each do |plan|
@@ -15,7 +15,10 @@ table.table.table-condensed.table-bordered
       td= pluralize(plan.duration, 'Month')
       td= number_to_currency(plan.cost)
       td= boolean_to_words(plan.active)
-      td= link_to 'Edit', edit_plan_path(plan)
-      td= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' }
+      td= plan.subscriptions.size
+      td= link_to edit_plan_path(plan) do
+        = fa_icon 'edit', text: ' Edit'
+      td= link_to_unless(plan.subscriptions.any?, fa_icon('trash', text: 'Destroy').html_safe, plan_path(plan), method: :delete, data: { confirm: simple_format(t('confirmation.plans.destroy', plan_description: plan.description), {} ,sanitize: false) }){}
 br
-= link_to 'New Plan', new_plan_path
+= link_to new_plan_path do
+  = fa_icon 'money', text: ' Add a New Plan'

@@ -7,7 +7,6 @@
 #                   edit_plan GET    /plans/:id/edit(.:format)                  plans#edit
 #                        plan PATCH  /plans/:id(.:format)                       plans#update
 #                             PUT    /plans/:id(.:format)                       plans#update
-#                             DELETE /plans/:id(.:format)                       plans#destroy
 #       payment_notifications POST   /payment_notifications(.:format)           payment_notification#create
 # payment_plans_subscriptions GET    /subscriptions/payment_plans(.:format)     subscriptions#payment_plans
 #               subscriptions POST   /subscriptions(.:format)                   subscriptions#create

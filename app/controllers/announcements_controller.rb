@@ -12,23 +12,22 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    flash[:notice] = 'Announcement was successfully created.' if @announcement.save
+    flash[:notice] = t('flash.announcements.create', resource_name: @announcement.headline.titleize) if @announcement.save
     respond_with @announcement
   end
 
   def update
-    flash[:notice] = 'Announcement was successfully updated.' if @announcement.update(announcement_params)
+    flash[:notice] = t('flash.announcements.update', resource_name: @announcement.headline.titleize) if @announcement.update(announcement_params)
     respond_with @announcement
   end
 
   def destroy
     @announcement.destroy
-    flash[:notice] = 'Announcement was successfully destroyed.' if @announcement.destroyed?
+    flash[:notice] = t('flash.announcements.destroy', resource_name: @announcement.headline.titleize) if @announcement.destroyed?
     respond_with @announcement
   end
 
   private
-
   def build_announcement
     @announcement = Announcement.new(announcement_params)
   end
@@ -42,6 +41,6 @@ class AnnouncementsController < ApplicationController
   end
 
   def authorize
-    redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.admin?
+    redirect_to root_url, alert: t('flash.application.unauthorized') unless current_user.admin?
   end
 end

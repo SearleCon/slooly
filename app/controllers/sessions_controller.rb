@@ -2,7 +2,7 @@ class SessionsController < Devise::SessionsController
   skip_before_action :authenticate_user!, :validate_subscription
 
   def create
-    super { |resource|  flash[:info] = "Please note: Your subscription is coming to an end in #{view_context.time_ago_in_words(resource.subscription.expiry_date)}. You do not have to do anything, as you will be prompted with options when logging in after the expiry date.".html_safe }
+    super { |resource|  flash[:info] =  t('flash.subscriptions.status', period: view_context.time_ago_in_words(resource.subscription.expiry_date)) }
   end
 
   protected

@@ -18,12 +18,8 @@ class ClientsController < ApplicationController
 
   def search
     @clients = client_scope.search(business_name_or_contact_person_cont: params[:q][:keyword]).result.page(params[:page])
-    flash[:info] = "#{view_context.pluralize(@clients.size, 'client')} found containing the search string '#{params[:q][:keyword]}' (In their Business Name or Contact Person fields)."
-    if @clients.blank? || @clients.many?
-      render :index
-    else
-      redirect_to @clients.take
-    end
+    flash[:info] = t("flash.clients.search", resource_name: view_context.pluralize(@clients.size, 'client'), keywords: params[:q][:keyword] )
+    respond_with(@clients) { |format| format.html { render :index } }
   end
 
   def show
@@ -31,28 +27,28 @@ class ClientsController < ApplicationController
   end
 
   def create
-    flash[:notice] = "#{@client.business_name.titleize} was successfully created." if  @client.save
+    flash[:notice] = t("flash.clients.create", resource_name: @client.business_name.titleize) if @client.save
     respond_with @client
   end
 
   def update
-    flash[:notice] = "#{@client.business_name.titleize} was successfully updated." if @client.update(client_params)
+    flash[:notice] = t("flash.clients.update", resource_name: @client.business_name.titleize) if @client.update(client_params)
     respond_with @client
   end
 
   def destroy
     @client.destroy
-    flash[:notice] = "#{@client.business_name.titleize} was successfully destroyed." if @client.destroyed?
     respond_with(@client)
   end
 
   def exists
-    respond_with do |format|
-      format.json { render json: !current_user.clients.exists?(client_params) }
-    end
+    respond_with { |format| format.json { render json: !current_user.clients.exists?(client_params) } }
   end
 
   private
+  def set_flash
+    flash[:notice] = t("flash.actions.#{action_name}", resource_name: @client.business_name.titleize)
+  end
 
   def client_scope
     current_user.clients

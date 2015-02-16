@@ -23,9 +23,9 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = current_user.subscriptions.build(subscription_params)
     if @subscription.save_with_paypal_payment
-      flash[:notice] = 'Thank you for supporting us!'
+      flash[:notice] = t('flash.subscriptions.activation.success')
     else
-      flash.now[:alert] = 'There has been a problem activating your subscription. Please contact support.'
+      flash.now[:alert] = t('flash.subscriptions.activation.failed')
       render :new
     end
   end

@@ -8,6 +8,6 @@ class UsersController < ApplicationController
   private
 
   def authorize
-    redirect_to root_url, alert: 'You are not authorized to perform this action' unless current_user.admin?
+    redirect_to root_url, alert: t('flash.application.unauthorized') unless current_user.admin?
   end
 end
