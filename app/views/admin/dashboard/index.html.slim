@@ -1,15 +1,15 @@
 .page-header
   h1 Administration
 .well.well-large
-  - if @administration_data.new_users.any?
-    h3 You have #{pluralize(@administration_data.new_users.size, 'new user')}! (Signed up since Yesterday)
+  - if @dashboard.new_users.any?
+    h3 You have #{pluralize(@dashboard.new_users.size, 'new user')}! (Signed up since Yesterday)
     br
-  h4 Total Users: #{@administration_data.total_users}
-  h4 Total Emails Sent Today: #{@administration_data.emails_sent_today_count}
-  h4 Total Emails Sent in the last 7 days: #{@administration_data.emails_sent_last_7_days_count}
-  h4 Total #{link_to 'Suggestions', suggestions_path}: #{@administration_data.total_suggestions} (#{@administration_data.suggestions_last_7_days_count} in the last 7 days)
-  h4 Total Records in Delayed_Jobs: #{@administration_data.delayed_jobs.count}
-- if @administration_data.delayed_jobs.any?
+  h4 Total Users: #{@dashboard.total_users}
+  h4 Total Emails Sent Today: #{@dashboard.emails_sent_today_count}
+  h4 Total Emails Sent in the last 7 days: #{@dashboard.emails_sent_last_7_days_count}
+  h4 Total #{link_to 'Suggestions', suggestions_path}: #{@dashboard.total_suggestions} (#{@dashboard.suggestions_last_7_days_count} in the last 7 days)
+  h4 Total Records in Delayed_Jobs: #{@dashboard.delayed_jobs.count}
+- if @dashboard.delayed_jobs.any?
   br
   .well.well-large
     h3 WARNING! You have items in the Delayed Jobs Table! Check that there are no errors!
@@ -21,7 +21,7 @@
         th Run At
         th Failed At
         th Created At
-      - @administration_data.delayed_jobs.each do |dj|
+      - @dashboard.delayed_jobs.each do |dj|
         tr
           td= dj.attempts
           td= dj.last_error
@@ -30,7 +30,7 @@
           td= dj.created_at
 br
 .well.well-large
-  h3 Total Users: #{@administration_data.total_users}
+  h3 Total Users: #{@dashboard.total_users}
   br
   table.table
     tr
@@ -41,7 +41,7 @@ br
       th Last Signed in
       th Sign in Count
       th ID
-    - @administration_data.users.each do |user|
+    - @dashboard.users.each do |user|
       tr
         td= link_to user.name, user
         td= link_to user.email, user
@@ -52,7 +52,7 @@ br
         td= link_to user.id, user
   .flickr_pagination
     .page_info
-    = will_paginate @administration_data.users, container: false
+    = will_paginate @dashboard.users, container: false
 br
 .well.well-large
   h3 Last 25 emails sent
@@ -63,7 +63,7 @@ br
       th Sent To
       th Date Sent
       th Subject
-    - @administration_data.last_25_emails_sent.each do |history|
+    - @dashboard.last_25_emails_sent.each do |history|
       tr
         td= history.email_sent_from
         td= history.email_sent_to

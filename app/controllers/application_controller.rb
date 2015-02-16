@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
 
   around_action :with_timezone, if: :user_signed_in?
 
+  def recent_announcements
+    @recent_announcements ||= Announcement.recent
+  end
+  helper_method :recent_announcements
+
   private
 
   def validate_subscription

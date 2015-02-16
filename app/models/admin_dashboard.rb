@@ -1,4 +1,4 @@
-class AdministrationData
+class AdminDashboard
   def initialize(users, new_users, histories, suggestions, jobs)
     @users = users
     @new_users = new_users

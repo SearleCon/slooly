@@ -1,4 +1,5 @@
-- if latest_announcements.any?
-  .breaking-news
-    strong> Breaking News: #{link_to latest_announcement.headline, announcements_path}
-    | (This message will disappear #{local_time_ago(latest_announcement.expiry_date)})
+.breaking-news
+  - recent_announcements.each do |announcement|
+    p
+      strong> Breaking News: #{link_to recent_announcements.first.headline, announcements_path}
+      | (This message will disappear #{local_time_ago(recent_announcements.first.expiry_date)})

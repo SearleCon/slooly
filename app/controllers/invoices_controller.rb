@@ -16,7 +16,7 @@ class InvoicesController < ApplicationController
 
   def search
     @invoices = invoice_scope.search(invoice_number_or_description_cont: params[:q][:keyword]).result.page(params[:page])
-    flash[:info] = t("flash.invoices.search", resource_name: view_context.pluralize(@invoices.size, 'client'), keywords: params[:q][:keyword] )
+    flash[:info] = t("flash.invoices.search", resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q][:keyword] )
     render :index
   end
 

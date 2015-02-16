@@ -15,6 +15,8 @@ class Announcement < ActiveRecord::Base
 
   validates :headline, :description, :posted_by, presence: true
 
+  scope :recent, -> { where('created_at >= ?', 7.days.ago) }
+
   def expiry_date
     @expiry_date ||= created_at.advance(days: 7)
   end
