@@ -1,0 +1,20 @@
+.page-header
+  h1 News Section
+  h6 All the latest product information, offers and general business news
+  = link_to new_admin_announcement_path do
+    = fa_icon 'newspaper-o', text: 'Add News'
+- announcements.each do |announcement|
+  .span11.well
+    = announcement.headline
+    br
+    = announcement.short_description
+    br
+    = announcement.posted_by
+    .pull-right
+      = link_to edit_admin_announcement_path(announcement) do
+        = fa_icon 'edit', text: ' Edit'
+      '
+      = link_to  admin_announcement_path(announcement), method: :delete, data: { confirm: 'Are you sure?' } do
+        = fa_icon 'trash', text: 'Delete'
+
+

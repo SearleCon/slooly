@@ -7,7 +7,7 @@
   h4 Total Users: #{@dashboard.total_users}
   h4 Total Emails Sent Today: #{@dashboard.emails_sent_today_count}
   h4 Total Emails Sent in the last 7 days: #{@dashboard.emails_sent_last_7_days_count}
-  h4 Total #{link_to 'Suggestions', suggestions_path}: #{@dashboard.total_suggestions} (#{@dashboard.suggestions_last_7_days_count} in the last 7 days)
+  h4 Total #{link_to 'Suggestions', admin_suggestions_path}: #{@dashboard.total_suggestions} (#{@dashboard.suggestions_last_7_days_count} in the last 7 days)
   h4 Total Records in Delayed_Jobs: #{@dashboard.delayed_jobs.count}
 - if @dashboard.delayed_jobs.any?
   br

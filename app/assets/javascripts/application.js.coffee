@@ -11,10 +11,13 @@
 #= require jquery.autosize
 #= require jsTimezoneDetect
 #= require local_time
+#= require nprogress
+#= require nprogress-turbolinks
+#= require nprogress-ajax
 #= require turbolinks
 #= require_tree .
 
-Turbolinks.enableProgressBar()
+Turbolinks.enableTransitionCache()
 $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Paying Mantis'
 
 $.validator.setDefaults
@@ -80,6 +83,8 @@ pageLoad = ->
 
 $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad
+
+$(document).on 'ajax:complete', showFlashMessages
 
 $ -> pageLoad()
 

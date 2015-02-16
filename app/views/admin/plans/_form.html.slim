@@ -1,4 +1,4 @@
-= simple_form_for(@plan) do |f|
+= simple_form_for([:admin, @plan]) do |f|
   = errors_for(@plan)
   = f.input :description
   = f.input :duration, as: :integer

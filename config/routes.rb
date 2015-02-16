@@ -7,18 +7,11 @@
 #                   edit_plan GET    /plans/:id/edit(.:format)                  plans#edit
 #                        plan PATCH  /plans/:id(.:format)                       plans#update
 #                             PUT    /plans/:id(.:format)                       plans#update
+#                             DELETE /plans/:id(.:format)                       plans#destroy
 #       payment_notifications POST   /payment_notifications(.:format)           payment_notification#create
 # payment_plans_subscriptions GET    /subscriptions/payment_plans(.:format)     subscriptions#payment_plans
 #               subscriptions POST   /subscriptions(.:format)                   subscriptions#create
 #            new_subscription GET    /subscriptions/new(.:format)               subscriptions#new
-#               announcements GET    /announcements(.:format)                   announcements#index
-#                             POST   /announcements(.:format)                   announcements#create
-#            new_announcement GET    /announcements/new(.:format)               announcements#new
-#           edit_announcement GET    /announcements/:id/edit(.:format)          announcements#edit
-#                announcement GET    /announcements/:id(.:format)               announcements#show
-#                             PATCH  /announcements/:id(.:format)               announcements#update
-#                             PUT    /announcements/:id(.:format)               announcements#update
-#                             DELETE /announcements/:id(.:format)               announcements#destroy
 #                     history GET    /histories/:id(.:format)                   histories#show
 #                        home GET    /home(.:format)                            pages#home
 #                       about GET    /about(.:format)                           pages#about
@@ -35,10 +28,6 @@
 #                    contacts POST   /contacts(.:format)                        contacts#create
 #                 new_contact GET    /contacts/new(.:format)                    contacts#new
 #                      redeem PATCH  /redeem(.:format)                          vouchers#redeem
-#                 suggestions GET    /suggestions(.:format)                     suggestions#index
-#                             POST   /suggestions(.:format)                     suggestions#create
-#              new_suggestion GET    /suggestions/new(.:format)                 suggestions#new
-#                  suggestion DELETE /suggestions/:id(.:format)                 suggestions#destroy
 #                    settings GET    /settings(.:format)                        settings#index
 #                edit_setting GET    /settings/:id/edit(.:format)               settings#edit
 #                     setting PATCH  /settings/:id(.:format)                    settings#update
@@ -72,6 +61,16 @@
 #                             DELETE /invoices/:id(.:format)                    invoices#destroy
 #             dashboard_index GET    /dashboard(.:format)                       dashboard#index
 #       admin_dashboard_index GET    /admin/dashboard(.:format)                 admin/dashboard#index
+#           admin_suggestions GET    /admin/suggestions(.:format)               admin/suggestions#index
+#            admin_suggestion DELETE /admin/suggestions/:id(.:format)           admin/suggestions#destroy
+#         admin_announcements GET    /admin/announcements(.:format)             admin/announcements#index
+#                             POST   /admin/announcements(.:format)             admin/announcements#create
+#      new_admin_announcement GET    /admin/announcements/new(.:format)         admin/announcements#new
+#     edit_admin_announcement GET    /admin/announcements/:id/edit(.:format)    admin/announcements#edit
+#          admin_announcement GET    /admin/announcements/:id(.:format)         admin/announcements#show
+#                             PATCH  /admin/announcements/:id(.:format)         admin/announcements#update
+#                             PUT    /admin/announcements/:id(.:format)         admin/announcements#update
+#                             DELETE /admin/announcements/:id(.:format)         admin/announcements#destroy
 #                  admin_root GET    /                                          admin/dashboard#index
 #          authenticated_root GET    /                                          dashboard#index
 #                        root GET    /                                          home#index
@@ -91,19 +90,20 @@
 #                             PUT    /users(.:format)                           registrations#update
 #                             DELETE /users(.:format)                           registrations#destroy
 #                        user GET    /users/:id(.:format)                       users#show
+#               announcements GET    /announcements(.:format)                   announcements#index
+#                announcement GET    /announcements/:id(.:format)               announcements#show
+#              new_suggestion GET    /suggestions/new(.:format)                 suggestions#new
+#                  suggestion PATCH  /suggestions/:id(.:format)                 suggestions#update
+#                             PUT    /suggestions/:id(.:format)                 suggestions#update
 #                                    (/errors)/:status(.:format)                errors#show {:status=>/\d{3}/}
 #
 
 Slooly::Application.routes.draw do
-  resources :plans, except: :show
-
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
 
   resources :subscriptions, only: [:new, :create] do
     get :payment_plans, on: :collection
   end
-
-  resources :announcements
 
   resources :histories, only: :show
 
@@ -127,7 +127,6 @@ Slooly::Application.routes.draw do
 
   match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
 
-  resources :suggestions, except: [:show, :edit, :update]
 
   resources :settings, only: [:index, :edit, :update]
 
@@ -154,10 +153,12 @@ Slooly::Application.routes.draw do
 
   resources :dashboard, only: :index
 
-
   authenticated :user, lambda { |u| u.admin? } do
     namespace :admin do
       resources :dashboard, only: :index
+      resources :suggestions, only: [:index, :destroy]
+      resources :announcements, except: :show
+      resources :plans, except: :show
     end
 
     root to: "admin/dashboard#index", as: :admin_root
@@ -168,8 +169,14 @@ Slooly::Application.routes.draw do
   end
   root to: "home#index"
 
-  devise_for :users, controllers: {registrations: 'registrations',sessions: "sessions"}
+  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
   resources :users, only: [:show]
+
+  resources :announcements, only: [:index]
+
+  resources :suggestions, only: [:new, :create]
+
+
 
 
   match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all

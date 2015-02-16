@@ -14,7 +14,4 @@ table
       td= suggestion.comment
       td= suggestion.email
       td= link_to 'Show', suggestion
-      td= link_to 'Edit', edit_suggestion_path(suggestion)
       td= link_to 'Destroy', suggestion, method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'New Suggestion', new_suggestion_path

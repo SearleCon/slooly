@@ -2,8 +2,10 @@ class ApplicationController < ActionController::Base
   include UnobtrusiveFlash
   include LayoutRequired
 
-  respond_to :html, :js, :json
   protect_from_forgery
+
+  respond_to :html, :js, :json
+
 
   before_action :authenticate_user!
   before_action :validate_subscription, if: :user_signed_in?

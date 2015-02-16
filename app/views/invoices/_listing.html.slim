@@ -1,0 +1,19 @@
+table.table.table-condensed.table.table-hover.sortable
+  thead
+    tr
+      th Age
+      th Invoice Number
+      th Due Date
+      th Amount
+      th Description
+      th Status
+      th Client
+      th Created
+      th
+      th
+      th
+  tbody= render invoices
+.flickr_pagination
+  .page_info
+  .pagination-links
+    = will_paginate invoices, container: false

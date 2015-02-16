@@ -15,14 +15,12 @@ html
     header.navbar.navbar-fixed-top.navbar-inverse
       nav.navbar-inner
         .container
-          = render 'layouts/navigation'
+          = render 'layouts/admin_navigation'
     #main[role="main"]
       #content.container
-        = render 'layouts/browser_warning'
         .content
           .row
             .span12
               .messages
               = yield
-              = render 'layouts/breaking_news'
         = render 'layouts/footer'

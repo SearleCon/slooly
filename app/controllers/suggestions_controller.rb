@@ -1,38 +1,18 @@
 class SuggestionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:new, :create]
-  before_action :authorize, except: [:new, :create]
-  before_action :set_suggestion, only: [:destroy]
-  before_action :build_suggestion, only: [:new, :create]
+  skip_before_action :authenticate_user!
 
-  def index
-    @suggestions = Suggestion.all
+  def new
+    @suggestion = Suggestion.new(suggestion_params)
   end
 
   def create
+    @suggestion = Suggestion.new(suggestion_params)
     flash[:notice] = t("flash.suggestions.create") if @suggestion.save
     respond_with @suggestion, location: root_url
   end
 
-  def destroy
-    @suggestion.destroy
-    respond_with @suggestion
-  end
-
   private
-
-  def set_suggestion
-    @suggestion = Suggestion.find(params[:id])
-  end
-
-  def build_suggestion
-    @suggestion = Suggestion.new(suggestion_params)
-  end
-
   def suggestion_params
     params.fetch(:suggestion, {}).permit(:comment, :email, :subject)
-  end
-
-  def authorize
-    redirect_to root_url, alert: t('flash.application.unauthorized') unless current_user.admin?
   end
 end

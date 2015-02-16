@@ -150,6 +150,7 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    nprogress-rails (0.1.6.6)
     obfuscatejs (1.1.3)
       jquery-rails
       rails (>= 3.2.11)
@@ -347,6 +348,7 @@ DEPENDENCIES
   launchy
   local_time
   metamagic
+  nprogress-rails
   obfuscatejs
   paypal-recurring
   pg

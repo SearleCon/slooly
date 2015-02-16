@@ -14,6 +14,7 @@ gem 'bootstrap-datetimepicker-rails'
 gem 'twitter-bootstrap-rails-confirm'
 gem "font-awesome-rails"
 gem 'bootstrap_sortable_rails'
+gem 'nprogress-rails'
 
 
 # Decorators

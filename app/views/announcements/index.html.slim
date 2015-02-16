@@ -8,8 +8,4 @@
     = announcement.short_description
     br
     = announcement.posted_by
-    - if current_user.admin?
-      .pull-right
-        = link_to 'Edit', edit_announcement_path(announcement)
-        '
-        = link_to 'Destroy', announcement, method: :delete
+

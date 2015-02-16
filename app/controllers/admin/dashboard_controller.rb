@@ -1,4 +1,4 @@
-class Admin::DashboardController < ApplicationController
+class Admin::DashboardController < Admin::BaseController
   def index
     all_users = User.all
     users = all_users.paginate(page: params[:page]).order(created_at: :desc)
