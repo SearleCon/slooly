@@ -21,23 +21,23 @@
           b
             | Contact Info:
           |  All of the other fields on this form (apart from your company logo) will be shown on the invoice and it is important that you enter correct information here, as this is what the client will use to contact you or to send you payment confirmation etc.
-        li
-          b Logo:
-          | The logo is optional and is not used anywhere on the reminders. For best results, use a PNG file with a size no greater than 200kb, and dimensions of 200 x 50 pixels (width x height)
+      /  li
+      /    b Logo:
+      /    | The logo is optional and is not used anywhere on the reminders. For best results, use a PNG file with a size no greater than 200kb, and dimensions of 200 x 50 pixels (width x height)
       hr
-  h3 Upload or Change your Logo (Optional)
-  h6
-    | (This logo will appear on your emails. If you do not select a logo, the Company Name will be used instead)
-  br
-  br
-  p
-    = f.input :image, label: "Select an image by clicking this button (Formats accepted: .jpg, .jpeg, .png):", hint: '<span class="icon-question-sign"></span> For best results, use a .png file with the dimensions of 50 pixels high x 200 pixels wide. Image size limit is 200kb'.html_safe
-    br
-    = f.input :remote_image_url, label: "or paste an image URL from the web into this box:"
-    br
-    |  Once your logo is selected, click the Update Company button below to save it
-    br
-    |  (Note: Image might be resized automatically, but the aspect ratio will be preserved). 
+  /h3 Upload or Change your Logo (Optional)
+  /h6
+  /  | (This logo will appear on your emails. If you do not select a logo, the Company Name will be used instead)
+  /br
+  /br
+  /p
+  /  = f.input :image, label: "Select an image by clicking this button (Formats accepted: .jpg, .jpeg, .png):", hint: '<span class="icon-question-sign"></span> For best results, use a .png file with the dimensions of 50 pixels high x 200 pixels wide. Image size limit is 200kb'.html_safe
+  /  br
+  /  = f.input :remote_image_url, label: "or paste an image URL from the web into this box:"
+  /  br
+  /  |  Once your logo is selected, click the Update Company button below to save it
+  /  br
+  /  |  (Note: Image might be resized automatically, but the aspect ratio will be preserved).
   hr
   .actions
     = f.button :submit, 'Update'
