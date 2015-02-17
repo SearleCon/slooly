@@ -106,6 +106,9 @@ en:
     impersonations:
        create: "Signed in as %{name}"
        destroy: "Signed back in as admin"
+    jobs:
+      queue: "Job was successfully queued."
+      destroy: "Job was successfully destroyed."
     invoices:
        create: "%{resource_name} was successfully created."
        update: "%{resource_name} was successfully updated."

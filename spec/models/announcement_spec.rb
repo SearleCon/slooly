@@ -16,11 +16,11 @@ describe Announcement do
     expect(announcement).to be_valid
   end
 
-  describe '.last_7_days' do
+  describe '.recent' do
     it 'returns announcements created in the last 7 days' do
       announcement = create(:announcement)
       expected = [announcement]
-      result = Announcement.last_7_days
+      result = Announcement.recent
       expect(expected).to eq(result)
     end
 
@@ -28,7 +28,7 @@ describe Announcement do
       eight_days_ago = Time.zone.now - 8.days
       announcement = create(:announcement, created_at: eight_days_ago)
       expected = []
-      result = Announcement.last_7_days
+      result = Announcement.recent
       expect(expected).to eq(result)
     end
   end

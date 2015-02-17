@@ -11,6 +11,8 @@ module Invoice::Reminders
   end
 
   class Base
+    attr_reader :invoice
+
     def initialize(invoice)
       @invoice = invoice
     end
@@ -69,9 +71,6 @@ module Invoice::Reminders
     end
 
     private
-
-    attr_reader :invoice
-
     def setting
       @setting ||= invoice.user.setting
     end

@@ -27,6 +27,7 @@ FactoryGirl.define do
     password "please123"
     setting
     company
+    time_zone 'Pretoria'
 
 
 

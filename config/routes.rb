@@ -109,6 +109,11 @@ Slooly::Application.routes.draw do
       resources :users, only: [:index, :show] do
         resources :subscriptions, only: [:edit, :update], controller: 'users/subscriptions'
       end
+      resources :jobs, only: [:index, :destroy] do
+        member do
+          patch :queue
+        end
+      end
     end
 
     root to: "admin/dashboard#index", as: :admin_root
