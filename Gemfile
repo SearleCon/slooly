@@ -72,6 +72,16 @@ gem 'slim-rails'
 gem 'premailer-rails'
 
 
+# Foreign Keys
+gem 'foreigner'
+gem 'immigrant'
+
+# Postgres
+gem 'pg'
+
+# Configuration
+gem 'figaro'
+
 
 source 'https://rails-assets.org' do
   # Cookie handler
@@ -84,17 +94,13 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jsTimezoneDetect'
 end
 
-# Foreign Keys
-gem 'foreigner'
-gem 'immigrant'
+# Server
+gem 'puma'
 
-# Postgres
-gem 'pg'
 
 group :production do
   gem 'heroku-deflater'
   gem 'rails_12factor'
-  gem 'unicorn'
 end
 
 group :development, :test do

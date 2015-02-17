@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Slooly::Application.config.secret_key_base = '6acdafa49290b589727e357ac27754c5ff38f2e2f859107c927ff87b4ea7e446c16b3c0a7f4df28dd1601996e3cea08f27cc2959c8a6303ba8221becc9c4e690'
+Slooly::Application.config.secret_key_base = ENV['SECRET_TOKEN']
