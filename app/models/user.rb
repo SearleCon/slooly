@@ -16,13 +16,10 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  role                   :integer          default(0)
 #  time_zone              :string(255)
 #
 
 class User < ActiveRecord::Base
-  enum role: [:user, :admin]
-
   devise :database_authenticatable, :async, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
