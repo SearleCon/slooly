@@ -1,17 +1,12 @@
 .page-header
-  h1 Listing suggestions
-table
-  tr
-    th Subject
-    th Comment
-    th Email
-    th
-    th
-    th
-  - @suggestions.each do |suggestion|
-    tr
-      td= suggestion.subject
-      td= suggestion.comment
-      td= suggestion.email
-      td= link_to 'Show', suggestion
-      td= link_to 'Destroy', suggestion, method: :delete, data: { confirm: 'Are you sure?' }
+  h1 Suggestions
+
+- @suggestions.each do |suggestion|
+  .span11.well
+    h5= suggestion.subject
+    h6= obfuscate_email suggestion.email
+    p.lead= suggestion.comment
+    .pull-right
+      = link_to admin_suggestion_path(suggestion), method: :delete, data: {confirm: 'Are you sure?'} do
+        = fa_icon 'trash', text: 'Destroy'
+

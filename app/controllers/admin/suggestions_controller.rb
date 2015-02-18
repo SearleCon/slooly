@@ -5,11 +5,6 @@ class Admin::SuggestionsController < Admin::BaseController
     @suggestions = Suggestion.all
   end
 
-  def create
-    flash[:notice] = t("flash.suggestions.create") if @suggestion.save
-    respond_with @suggestion, location: root_url
-  end
-
   def destroy
     @suggestion.destroy
     respond_with @suggestion
