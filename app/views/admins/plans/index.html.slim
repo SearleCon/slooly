@@ -1,0 +1,24 @@
+.page-header
+  h1 Plans
+  = link_to new_admins_plan_path do
+    = fa_icon 'money', text: ' Add a New Plan'
+table.table.table-condensed
+  tr
+    th Description
+    th Duration
+    th Cost
+    th Active
+    th Subscriptions
+    th
+    th
+  - @plans.each do |plan|
+    = content_tag_for(:tr, plan) do
+      td= plan.description
+      td= pluralize(plan.duration, 'Month')
+      td= number_to_currency(plan.cost)
+      td= boolean_to_words(plan.active)
+      td= plan.subscriptions.size
+      td= link_to edit_admins_plan_path(plan) do
+        = fa_icon 'edit', text: ' Edit'
+      td= link_to_unless(plan.subscriptions.any?, fa_icon('trash', text: 'Destroy').html_safe, admins_plan_path(plan), method: :delete, data: { confirm: simple_format(t('confirmation.plans.destroy', plan_description: plan.description), {} ,sanitize: false) }){}
+

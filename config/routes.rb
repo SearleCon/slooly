@@ -100,8 +100,9 @@
 
 Slooly::Application.routes.draw do
 
-  authenticated :user, lambda { |u| u.admin? } do
-    namespace :admin do
+  devise_for :admins, controllers: { sessions: 'admins/sessions' }
+  authenticated :admin do
+    namespace :admins do
       resources :dashboard, only: :index
       resources :suggestions, only: [:index, :destroy]
       resources :announcements, except: :show
@@ -116,17 +117,20 @@ Slooly::Application.routes.draw do
       end
     end
 
-    root to: "admin/dashboard#index", as: :admin_root
+    root to: "admins/dashboard#index", as: :admin_root
   end
 
+  get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
+
+
+
+  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
   authenticated :user do
-    root to: 'dashboard#index', as: :authenticated_root
+    root to: 'dashboard#index', as: :user_root
   end
   root to: "home#index"
 
   resources :dashboard, only: :index
-
-  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
 
   resources :invoices do
     collection do

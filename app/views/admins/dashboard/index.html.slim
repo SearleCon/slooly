@@ -1,0 +1,85 @@
+.page-header
+  .media
+    .pull-left=image_tag('home.png', class: 'media-object')
+    .media-body
+      h2 Home
+
+
+ul.thumbnails
+  li.span3
+    .thumbnail
+      h4.text-center
+        = link_to admins_users_path do
+          = fa_icon 'users', text: 'Users'
+
+  li.span2
+    .thumbnail
+      h4.text-center
+        = link_to admins_jobs_path do
+          = fa_icon 'tasks', text: 'Jobs'
+
+  li.span2
+    .thumbnail
+      h4.text-center
+        = link_to admins_plans_path do
+          = fa_icon 'money', text: 'Plans'
+
+  li.span2
+    .thumbnail
+      h4.text-center
+        = link_to admins_announcements_path do
+          = fa_icon 'newspaper-o', text: 'News'
+
+  li.span3
+    .thumbnail
+      h4.text-center
+        = link_to admins_suggestions_path do
+          = fa_icon 'comments', text: 'Suggestions'
+
+
+.well.well-small
+  h3 Summary
+  h5 Total Users: #{@dashboard.total_users}
+  h5 Total Emails Sent Today: #{@dashboard.emails_sent_today_count}
+  h5 Total Emails Sent in the last 7 days: #{@dashboard.emails_sent_last_7_days_count}
+  h5 Recent Suggestions: #{@dashboard.total_suggestions} (#{@dashboard.suggestions_last_7_days_count} in the last 7 days)
+  h5 Total Jobs: #{@dashboard.delayed_jobs.count}
+
+
+.well.well-small
+  h4 New Users (Since yesterday)
+  - if @dashboard.new_users.any?
+    table.table.table-condensed.table-bordered
+      tr
+        th Name
+        th Email
+        th Last Signed in
+        th Subscription Plan
+        th Subscription Expires
+      - @dashboard.new_users.each do |user|
+        tr
+          td=link_to user.name, admins_user_path(user)
+          td=user.email
+          td= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero?
+          td= user.subscription.plan_description if user.subscription.present?
+          td= local_time_ago(user.subscription.expiry_date) if user.subscription.present?
+          td= link_to impersonations_path(id: user.id), method: :post do
+            = fa_icon 'sign-in', text: 'Sign in as this user'
+  - else
+    p.lead No users signed up since yesterday
+
+
+.well.well-small
+  h4 Last 25 emails sent
+  table.table.table-condensed.table-bordered
+    tr
+      th From
+      th To
+      th Date Sent
+      th Subject
+    - @dashboard.last_25_emails_sent.each do |history|
+      tr
+        td= history.email_sent_from
+        td= history.email_sent_to
+        td= local_time_ago(history.date_sent)
+        td= history.subject

@@ -1,20 +1,13 @@
 = link_to "Paying Mantis - Get paid on time!", root_path, class: 'brand'
 ul.nav.pull-right
   li= link_to 'Home', root_path
-  - if session[:current_admin].present?
-    li=link_to "Sign in as admin", impersonation_path('revert'), method: :delete
+  li= link_to_if(session[:current_admin].present?, "Back to Admin Page", impersonation_path('revert'), method: :delete){}
   - if user_signed_in?
-    - if current_user.admin?
-      li= link_to 'News', admin_announcements_path
-      li= link_to 'Plans', admin_plans_path
-      li= link_to 'Suggestions', admin_suggestions_path
-    - else
-
-      li= link_to 'Clients', clients_path
-      li= link_to 'Invoices', invoices_path
-      li= link_to 'Add Client', new_client_path
-      li= link_to 'Add Invoice', new_invoice_path
-      li= link_to 'Reports', reports_path
+    li= link_to 'Clients', clients_path
+    li= link_to 'Invoices', invoices_path
+    li= link_to 'Add Client', new_client_path
+    li= link_to 'Add Invoice', new_invoice_path
+    li= link_to 'Reports', reports_path
     li#fat-menu.dropdown
       a.dropdown-toggle[href="#" data-toggle="dropdown"]
         = "Account (#{current_user.name})"

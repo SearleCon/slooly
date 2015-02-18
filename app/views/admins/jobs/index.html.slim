@@ -1,0 +1,92 @@
+.page-header
+  h2 Jobs
+  h4 Background jobs
+.breakdown
+  ul.nav.nav-tabs
+    li.active
+      a[href='#working' data-toggle='tab']
+        span.label.label-success Working #{@working.size}
+    li
+      a[href='#pending' data-toggle='tab']
+        span.label.label-info Pending #{@pending.size}
+    li
+      a[href='#failed' data-toggle='tab']
+        span.label.label-warning Failed #{@failed.size}
+  .tab-content
+    .tab-pane.active#working
+      - if @working.any?
+        table.table.table-condensed.sortable
+          thead
+            tr
+              th Priority
+              th Attempts
+              th Last Error
+              th Run
+              th Created
+          tbody
+            - @working.each do |item|
+              tr
+                td= item.priority
+                td= item.attempts
+                td= truncate(item.last_error, length: 30 )
+                td= local_time_ago(item.run_at)
+                td= local_time_ago(item.created_at)
+      - else
+        p.lead No working jobs currently
+    .tab-pane#pending
+      - if @pending.any?
+        table.table.table-condensed.sortable
+          thead
+            tr
+              th Priority
+              th Attempts
+              th Last Error
+              th Run
+              th Created
+              th Actions
+          tbody
+            - @pending.each do |item|
+              tr
+                td= item.priority
+                td= item.attempts
+                td= truncate(item.last_error, length: 30 )
+                td= local_time_ago(item.run_at)
+                td= local_time_ago(item.created_at)
+                td
+                  = link_to queue_admins_job_path(item, job: {}), class: 'btn btn-info', method: :patch do
+                    = fa_icon 'flag', text: ' Run Now'
+                td
+                  = link_to admins_job_path(item), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} do
+                    = fa_icon 'trash', text: ' Cancel'
+
+      - else
+        p.lead No pending jobs currently
+
+    .tab-pane#failed
+      - if @failed.any?
+        table.table.table-condensed.sortable
+          thead
+            tr
+              th Priority
+              th Attempts
+              th Last Error
+              th Run
+              th Created
+              th Actions
+          tbody
+            - @failed.each do |item|
+              tr
+                td= item.priority
+                td= item.attempts
+                td=  truncate(item.last_error, length: 30 )
+                td= local_time_ago(item.run_at)
+                td= local_time_ago(item.created_at)
+                td
+                  = link_to  queue_admins_job_path(item), class: 'btn btn-info', method: :patch do
+                    = fa_icon 'flag', text: ' Run Now'
+                td
+                  = link_to admins_job_path(item), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } do
+                    = fa_icon 'trash', text: ' Cancel'
+      - else
+        p.lead No failed jobs currently
+
