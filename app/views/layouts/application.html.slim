@@ -22,7 +22,7 @@ html
         .content
           .row
             .span12
-              = render 'layouts/breaking_news'
+              = render 'layouts/breaking_news' unless user_signed_in?
               .messages
               = yield
         = render 'layouts/footer'
