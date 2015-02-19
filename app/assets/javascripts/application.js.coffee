@@ -61,6 +61,8 @@ setTimeZone = ->
   tz = jstz.determine();
   $.cookie('timezone', tz.name(), { path: '/' });
 
+
+
 pageLoad = ->
   $("form").each ->
     if $(this).data("validate")
@@ -80,6 +82,8 @@ pageLoad = ->
   $.bootstrapSortable(applyLast=true)
   showFlashMessages()
   setTimeZone()
+  $('.hide-breaking-news').on 'click', ->
+     $('.breaking-news').slideUp('slow').remove()
 
 $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad

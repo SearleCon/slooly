@@ -1,5 +1,9 @@
-.breaking-news
+.breaking-news.well.well-small
+  p.pull-right.text-center
+    =link_to 'javascript:void(0)', class: 'hide-breaking-news' do
+      = fa_icon 'remove', text: 'Hide'
   - recent_announcements.each do |announcement|
     p
-      strong> Breaking News: #{link_to recent_announcements.first.headline, announcements_path}
-      | (This message will disappear #{local_time_ago(recent_announcements.first.expiry_date)})
+      strong> Breaking News: #{link_to announcement.headline, announcements_path}
+      | (This message will disappear #{local_time_ago(announcement.expiry_date)})
+      '
