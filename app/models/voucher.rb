@@ -16,23 +16,23 @@ class Voucher < ActiveRecord::Base
 
   belongs_to :redeemer, class_name: 'User', foreign_key: :redeemed_by
 
-  validate :expired, :redeemed
+  def redeemed?
+    redeemed_by.present?
+  end
 
-  def redeem_for(user)
-    Voucher.transaction do
-      user.subscription.expiry_date += number_of_days
-      user.subscription.save!
-      update!(redeemed_by: user)
+  def expired?
+    valid_until < Date.current
+  end
+
+  def redeem(redeemer)
+    return false if redeemed? || expired?
+
+    redeemed = false
+    transaction do
+      self.redeemer = redeemer
+      redeemed = redeemer.subscription.extend_by(number_of_days) && save
+      raise ActiveRecord::Rollback unless redeemed
     end
-  end
-
-  private
-
-  def expired
-    errors.add(:expired, 'has expired.') if valid_until < Date.current
-  end
-
-  def redeemed
-    errors.add(:redeemed, 'has already been redeemed.') if redeemer.present?
+    redeemed
   end
 end

@@ -62,6 +62,11 @@ class Subscription < ActiveRecord::Base
     paypal_payment_token.present?
   end
 
+  def extend_by(days)
+    self.expiry_date = expiry_date.advance(days: days)
+    save
+  end
+
   private
 
   def set_expiry_date
