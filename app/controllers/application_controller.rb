@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   around_action :with_timezone, if: :user_signed_in?
 
   def recent_announcements
-    @recent_announcements ||= Announcement.recent
+    @recent_announcements ||= Announcement.recent.where.not(id: cookies.signed[:hidden_announcement_ids])
   end
   helper_method :recent_announcements
 

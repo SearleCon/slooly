@@ -1,13 +1,21 @@
 module Invoice::Reminders
   def self.new(invoice)
-    reminder = nil
-    reminder = PreDue.new(invoice) if invoice.pre_due?
-    reminder = Due.new(invoice) if invoice.due?
-    reminder = FirstOverDue.new(invoice)  if invoice.over_due1?
-    reminder = SecondOverDue.new(invoice)  if invoice.over_due2?
-    reminder = ThirdOverDue.new(invoice)  if invoice.over_due3?
-    reminder = FinalDemand.new(invoice)  if invoice.final_demand?
-    reminder
+    case
+      when invoice.pre_due?
+        return PreDue.new(invoice)
+      when invoice.due?
+        return Due.new(invoice)
+      when invoice.over_due1?
+        return FirstOverDue.new(invoice)
+      when invoice.over_due2?
+        return SecondOverDue.new(invoice)
+      when invoice.over_due3?
+        return ThirdOverDue.new(invoice)
+      when invoice.final_demand?
+        return FinalDemand.new(invoice)
+      else
+        return nil
+    end
   end
 
   class Base
@@ -27,23 +35,23 @@ module Invoice::Reminders
 
     def text
       %(Attention: #{client.contact_person}\r
-      #{client.business_name.gsub(/['"]/, '')}\r
-      #{client.address}\r
-      #{client.city}\r
-      #{client.post_code}\r\n
-                      Reference : #{invoice.invoice_number}\r
-                      Due Date  : #{invoice.due_date}\r
-                      Amount Due: #{invoice.amount}\r\n
-      #{message}\r
-      #{company.name}\r\n
-      #{company.address}\r
-      #{company.city}\r
-      #{company.post_code}\r
-                      Tel  : #{company.telephone}\r
-                      Fax  : #{company.fax}\r
-                      Email: #{company.email}\r\n
-                      Payment Options: \r
-      #{setting.payment_method_message}).squish
+        #{client.business_name.gsub(/['"]/, '')}\r
+        #{client.address}\r
+        #{client.city}\r
+        #{client.post_code}\r\n
+        Reference : #{invoice.invoice_number}\r
+        Due Date  : #{invoice.due_date}\r
+        Amount Due: #{invoice.amount}\r\n
+        #{message}\r
+        #{company.name}\r\n
+        #{company.address}\r
+        #{company.city}\r
+        #{company.post_code}\r
+        Tel  : #{company.telephone}\r
+        Fax  : #{company.fax}\r
+        Email: #{company.email}\r\n
+        Payment Options: \r
+        #{setting.payment_method_message}).squish
     end
 
     def send?

@@ -1,10 +1,7 @@
-- if recent_announcements.any?
-  .breaking-news.well.well-small
-    p.pull-right.text-center
-      =link_to 'javascript:void(0)', class: 'hide-breaking-news' do
-        = fa_icon 'remove', text: 'Hide'
-    - recent_announcements.each do |announcement|
-      p
-        strong> Breaking News: #{link_to announcement.headline, announcements_path}
-        | (This message will disappear #{local_time_ago(announcement.expiry_date)})
-        '
+- recent_announcements.each do |announcement|
+  = div_for announcement, class: 'breaking-news' do
+    strong> Breaking News: #{link_to announcement.headline, announcements_path}
+    | (This message will disappear #{local_time_ago(announcement.expiry_date)})
+    '
+    =link_to hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true do
+      = fa_icon 'remove', text: 'hide'

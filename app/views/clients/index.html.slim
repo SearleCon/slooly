@@ -4,16 +4,18 @@
       =image_tag('clients.png', class: 'media-object')
     .media-body
       h1 Clients
-      .pagination-details= page_entries_info clients, model: 'clients'
+      .pagination-details
+        h4= page_entries_info clients, model: 'clients'
+      .actions
+        = link_to new_clients_import_path, class: 'btn btn-info' do
+          = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'
 
   .search-form.pull-right
     = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get }, remote: true do |f|
       span
-        = f.input_field :keyword, as: :search_box,  class: 'input-medium'
-        span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
+        = f.input :keyword, wrapper: :append, class: :inline do
+          =  f.input_field :keyword, as: :search_box, class: 'input-medium', data: { provide: 'typeahead', source: contact_and_business_names }
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 .clients-listing
   = render 'clients/listing', locals: { clients: clients }
-.actions
-  = link_to new_clients_import_path, class: 'btn btn-info' do
-    = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'
   hr

@@ -1,4 +1,11 @@
-class SendRemindersJob < Struct.new(:invoice_id, :history_id)
+class SendRemindersJob
+  attr_reader :invoice_id, :history_id
+
+  def initialize(invoice_id, history_id)
+    @invoice_id = invoice_id
+    @history_id = history_id
+  end
+
   def perform
     UserMailer.send_it(history).deliver
   end

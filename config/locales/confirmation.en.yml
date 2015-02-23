@@ -1,0 +1,21 @@
+en:
+  confirmation:
+     plans:
+      destroy: |
+                <span class='label label-important'>WARNING!</span>
+                You are about to delete the plan <strong>%{plan_description}!</strong>
+                <strong>NOTE:</strong> This cannot be undone!
+                Are you sure you want to continue?
+
+     clients:
+      destroy: |
+                <span class='label label-important'>WARNING!</span>
+                You are about to delete the client <strong>%{business_name}!</strong>
+                <strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!
+                Are you sure you want to continue?
+     invoices:
+      destroy: |
+                <span class='label label-important'>WARNING!</span>
+                You are about to delete the invoice <strong>%{invoice_number}!</strong>
+                <strong>NOTE:</strong> This cannot be undone!
+                Are you sure you want to continue?

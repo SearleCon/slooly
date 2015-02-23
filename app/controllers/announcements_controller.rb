@@ -8,8 +8,12 @@ class AnnouncementsController < ApplicationController
     @announcements = Announcement.recent
   end
 
-  def show
-    @announcement = Announcement.find(params[:id])
-    fresh_when @announcement
+  def hide
+    ids = [params[:id], *cookies.signed[:hidden_announcement_ids]]
+    cookies.permanent.signed[:hidden_announcement_ids] = ids
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { head :ok }
+    end
   end
 end

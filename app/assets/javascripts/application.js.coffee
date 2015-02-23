@@ -82,8 +82,9 @@ pageLoad = ->
   $.bootstrapSortable(applyLast=true)
   showFlashMessages()
   setTimeZone()
-  $('.hide-breaking-news').on 'click', ->
-     $('.breaking-news').slideUp('slow').remove()
+  $(document).on 'ajax:success', '.announcement', ->
+    $(this).remove()
+
 
 $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad

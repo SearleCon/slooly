@@ -151,7 +151,9 @@ Slooly::Application.routes.draw do
   resources :impersonations, only: [:create, :destroy]
 
 
-  resources :announcements, only: [:index]
+  resources :announcements, only: [:index] do
+    get :hide, on: :member
+  end
 
   resources :suggestions, only: [:new, :create]
 

@@ -1,0 +1,52 @@
+en:
+ defaults:
+    settings:
+      payment_method_message: |
+                                (Deposit or Transfer to:
+                                Bank:
+                                Account:
+                                Account Type:
+                                Branch Code:)
+      pre_due_message: |
+                         This is a friendly reminder that payment for the above invoice is due in a couple of days time.
+                         We really do appreciate your timely payment.
+                         Payment can be made by any of the methods listed below.
+                         We appreciate your support and value you as our customer.
+                         Kind regards,
+      due_message: |
+                         This is a friendly reminder that payment for the above invoice is due today.
+                         We really do appreciate your timely payment.
+                         Payment can be made by any of the methods listed below.
+                         If you have already paid, please ignore this email.
+                         We appreciate your support.
+                         Kind regards,
+      overdue1_message: |
+                          Please note that payment for the above invoice is now overdue.
+                          We really do appreciate your business and timeous payment.
+                          Payment can be made by any of the methods listed below.
+                          If you have already paid, please email or fax proof of payment to us (our contact details above).
+                          We appreciate your support.
+                          Kind regards,
+      overdue2_message: |
+                          Payment for the above invoice is now overdue.
+                          Please make the payment as soon as possible.
+                          Payment can be made by any of the methods listed below.
+                          If you have already paid, please email or fax proof of payment to us (our contact details above).
+                          Thank you.
+                          Kind regards,
+      overdue3_message: |
+                          This is your third and final reminder. Payment for the above invoice is now very overdue!\n
+                          Please make payment urgently.
+                          Payment can be made by any of the methods listed below.
+                          If you have already paid, please email or fax proof of payment to us (our contact details above).
+                          If you are not intending on paying, please give us a call or send us an email, so that we can make alternative arrangements if necessary.
+                          Kind regards,
+      final_demand_message: |
+                               Please understand that this is our FINAL NOTICE regarding payment for the above invoice.
+                               Please make payment immediately.
+                               If we do not receive full payment within 3 days, we will have no alternative but to hand your account over to a collection agency (Interest and collection fees will also be added to your owing amount in this case).
+                               Payment can be made by any of the methods listed below.
+                               If you have already paid, please email or fax proof of payment to us (our contact details above).
+                               If you are not intending on paying, or are unable to pay due to unforeseen circumstances, please give us a call or send us an email, so that we can make alternative arrangements if necessary.
+                               Kind regards,
+
