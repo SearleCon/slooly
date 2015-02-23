@@ -71,6 +71,7 @@ module Invoice::Reminders
     end
 
     private
+
     def setting
       @setting ||= invoice.user.setting
     end

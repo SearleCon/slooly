@@ -26,6 +26,7 @@ class Admins::AnnouncementsController < Admins::BaseController
   end
 
   private
+
   def build_announcement
     @announcement = Announcement.new(announcement_params)
   end

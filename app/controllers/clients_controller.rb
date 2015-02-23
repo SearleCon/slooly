@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
 
   def search
     @clients = client_scope.search(business_name_or_contact_person_cont: params[:q][:keyword]).result.page(params[:page])
-    flash.now[:info] = t("flash.clients.search", resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q][:keyword] )
+    flash.now[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q][:keyword])
     respond_with @clients
   end
 
@@ -27,12 +27,12 @@ class ClientsController < ApplicationController
   end
 
   def create
-    flash[:notice] = t("flash.clients.create", resource_name: @client.business_name.titleize) if @client.save
+    flash[:notice] = t('flash.clients.create', resource_name: @client.business_name.titleize) if @client.save
     respond_with @client
   end
 
   def update
-    flash[:notice] = t("flash.clients.update", resource_name: @client.business_name.titleize) if @client.update(client_params)
+    flash[:notice] = t('flash.clients.update', resource_name: @client.business_name.titleize) if @client.update(client_params)
     respond_with @client
   end
 
@@ -46,6 +46,7 @@ class ClientsController < ApplicationController
   end
 
   private
+
   def set_flash
     flash[:notice] = t("flash.actions.#{action_name}", resource_name: @client.business_name.titleize)
   end

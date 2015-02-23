@@ -31,7 +31,7 @@ class Voucher < ActiveRecord::Base
     transaction do
       self.redeemer = redeemer
       redeemed = redeemer.subscription.extend_by(number_of_days) && save
-      raise ActiveRecord::Rollback unless redeemed
+      fail ActiveRecord::Rollback unless redeemed
     end
     redeemed
   end

@@ -16,7 +16,7 @@ class InvoicesController < ApplicationController
 
   def search
     @invoices = invoice_scope.search(invoice_number_or_description_cont: params[:q][:keyword]).result.page(params[:page])
-    flash.now[:info] = t("flash.invoices.search", resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q][:keyword] )
+    flash.now[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q][:keyword])
     respond_with @invoices
   end
 
@@ -25,12 +25,12 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    flash[:notice] = t("flash.invoices.create", resource_name: @invoice.invoice_number) if @invoice.save
+    flash[:notice] = t('flash.invoices.create', resource_name: @invoice.invoice_number) if @invoice.save
     respond_with @invoice
   end
 
   def update
-    flash[:notice] = t("flash.invoices.update", resource_name: @invoice.invoice_number) if @invoice.update(invoice_params)
+    flash[:notice] = t('flash.invoices.update', resource_name: @invoice.invoice_number) if @invoice.update(invoice_params)
     respond_with(@invoice)
   end
 
@@ -40,6 +40,7 @@ class InvoicesController < ApplicationController
   end
 
   private
+
   def invoice_scope
     current_user.invoices
   end

@@ -3,7 +3,6 @@ class Admins::Users::SubscriptionsController < Admins::BaseController
   before_action :set_subscription
 
   def edit
-
   end
 
   def update
@@ -12,6 +11,7 @@ class Admins::Users::SubscriptionsController < Admins::BaseController
   end
 
   private
+
   def set_user
     @user = User.find(params[:user_id])
   end

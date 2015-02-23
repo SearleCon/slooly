@@ -2,7 +2,7 @@ class SettingsController < ApplicationController
   before_action :set_settings
 
   def update
-    flash[:notice] = t("flash.settings.update", resource_name: 'Settings') if @settings.update(settings_params)
+    flash[:notice] = t('flash.settings.update', resource_name: 'Settings') if @settings.update(settings_params)
     respond_with @settings, location: settings_url
   end
 

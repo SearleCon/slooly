@@ -11,6 +11,7 @@ class Admins::SuggestionsController < Admins::BaseController
   end
 
   private
+
   def set_suggestion
     @suggestion = Suggestion.find(params[:id])
   end

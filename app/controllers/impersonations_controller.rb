@@ -4,7 +4,6 @@ class ImpersonationsController < ApplicationController
   before_action :set_user, only: :create
   before_action :set_admin, only: :destroy
 
-
   def create
     session[:current_admin] = current_admin.id
     sign_out current_admin
@@ -13,7 +12,7 @@ class ImpersonationsController < ApplicationController
   end
 
   def destroy
-    sign_out(current_user)if user_signed_in?
+    sign_out(current_user) if user_signed_in?
     if session[:current_admin].present?
       sign_in(:admin, @admin)
       session.delete(:current_admin)
@@ -21,8 +20,8 @@ class ImpersonationsController < ApplicationController
     redirect_to admin_root_url, notice: t('flash.impersonations.destroy')
   end
 
-
   private
+
   def set_user
     @user = User.find(params[:id])
   end

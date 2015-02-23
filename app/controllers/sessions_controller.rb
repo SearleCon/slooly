@@ -5,7 +5,6 @@ class SessionsController < Devise::SessionsController
     super { |resource|  flash[:info] =  t('flash.subscriptions.status', period: view_context.time_ago_in_words(resource.subscription.expiry_date))  }
   end
 
-
   protected
 
   def after_sign_in_path_for(_resource)

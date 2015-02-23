@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :js, :json
 
-
   before_action :authenticate_user!
   before_action :validate_subscription, if: :user_signed_in?
 
