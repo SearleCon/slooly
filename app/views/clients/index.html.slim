@@ -14,7 +14,7 @@
     = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get }, remote: true do |f|
       span
         = f.input :keyword, wrapper: :append, class: :inline do
-          =  f.input_field :keyword, as: :search_box, data: { provide: 'typeahead', source: contact_and_business_names }
+          =  f.input_field :keyword, as: :search_box
           span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 .clients-listing
   = render 'clients/listing', locals: { clients: clients }

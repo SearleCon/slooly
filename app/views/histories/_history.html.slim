@@ -2,9 +2,7 @@
   = content_tag_for(:tr, history) do
     td= link_to history.date_sent, history
     td= history.email_sent_to
-    td= display_reminder_badge(history)
+    td= history.reminder_badge
     td= history.invoice_number
-    td= truncate(history.subject, length: 50)
-    td= truncate(history.message, length: 70)
-    td: i.icon-eye-open[rel='popover' data-title="Email Message (Ref: #{history.invoice_number})" data-content="#{simple_format(history.message)}" data-placement= 'left']
-
+    td= history.short_subject
+    td[rel='popover' data-title="Email Message (Ref: #{history.invoice_number})" data-content=history.message  data-placement='left' data-trigger='hover focus']= history.short_message

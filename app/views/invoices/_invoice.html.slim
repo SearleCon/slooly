@@ -7,7 +7,7 @@
     td= invoice.description
     td= invoice.status
     td= link_to invoice.client_business_name, invoice.client
-    td= local_time_ago(invoice.created_at)
+    td= invoice.created_at
     td
       = link_to invoice do
         = fa_icon 'play-circle-o', text: 'Show'
