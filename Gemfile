@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.1.9'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails',   '~> 4.0.0'
@@ -29,7 +29,7 @@ gem 'devise-async'
 gem "carrierwave"
 
 # Pagination
-gem 'will_paginate', '~> 3.0'
+gem 'will_paginate', '~> 3.0.6'
 
 # Background Processing
 gem 'delayed_job_active_record'

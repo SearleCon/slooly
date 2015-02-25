@@ -9,12 +9,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = client_scope.page(params[:page])
-    if @clients.any?
-      render :index
-    # fresh_when etag: [@clients, params[:page]], last_modified: @clients.maximum(:updated_at)
-    else
-      render :dashboard
-    end
+    render (@clients.any? ? :index : :dashboard)
   end
 
   def search
@@ -47,11 +42,6 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def set_flash
-    flash[:notice] = t("flash.actions.#{action_name}", resource_name: @client.business_name.titleize)
-  end
-
   def client_scope
     current_user.clients
   end

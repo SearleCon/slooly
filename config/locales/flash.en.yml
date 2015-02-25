@@ -15,6 +15,10 @@ en:
          create: "%{resource_name} was successfully created."
          update: "%{resource_name} was successfully updated."
          search: "%{resource_name} found containing the search string '%{keywords}' (In their Business Name or Contact Person fields)."
+         imports:
+           create: "%{resource_name} clients were imported successfully."
+         invoices:
+            create: "Invoice was successfully created for %{resource_name}."
       company:
          update: "%{resource_name} was successfully updated."
       contacts:

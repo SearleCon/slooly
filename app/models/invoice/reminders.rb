@@ -51,7 +51,7 @@ module Invoice::Reminders
         Fax  : #{company.fax}\r
         Email: #{company.email}\r\n
         Payment Options: \r
-        #{setting.payment_method_message}).squish
+        #{setting.payment_method_message})
     end
 
     def send?

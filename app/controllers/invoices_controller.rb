@@ -7,11 +7,7 @@ class InvoicesController < ApplicationController
 
   def index
     @invoices = invoice_scope.includes(:client).page(params[:page])
-    if @invoices.any?
-      fresh_when etag: [@invoices, params[:page]], last_modified: @invoices.maximum(:updated_at)
-    else
-      render :dashboard
-    end
+    render (@invoices.any? ? :index : :dashboard)
   end
 
   def search

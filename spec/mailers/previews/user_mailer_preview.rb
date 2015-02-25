@@ -10,7 +10,13 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def send_it
-    history = History.last
+    invoice = Invoice.last
+    reminder = Invoice::Reminders.new(invoice)
+    history = History.new(subject: reminder.subject,
+                          message: reminder.text,
+                          email_sent_from: reminder.sender,
+                          copy_email: reminder.cc,
+                          email_sent_to: reminder.recipient)
     UserMailer.send_it(history)
   end
 end

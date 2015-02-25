@@ -1,8 +1,8 @@
 class Clients::ImportsController < ApplicationController
   def create
     importer.import
-    redirect_to clients_url, notice: "#{importer.row_success_count} clients were imported successfully."
-  rescue StandardError => e
+    redirect_to clients_url, notice: t('flash.clients.imports.create', resouce_name: importer.row_success_count)
+  rescue => e
     flash.now[:alert] = e.message
     render :new
   end

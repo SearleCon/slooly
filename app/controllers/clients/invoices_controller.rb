@@ -5,7 +5,7 @@ class Clients::InvoicesController < ApplicationController
   def create
     @invoice = @client.invoices.build(invoice_params)
     @invoice.user = current_user
-    flash[:notice] = "Invoice was successfully created for #{@client.business_name}." if @invoice.save
+    flash[:notice] = t('flash.clients.invoices.create', resource_name: @client.business_name.titleize) if @invoice.save
     respond_with @invoice, location: client_url(@client)
   end
 
