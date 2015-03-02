@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.9'
+gem 'rails', '~> 4.1.10.rc2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails',   '~> 4.0.0'
@@ -82,6 +82,9 @@ gem 'pg'
 # Configuration
 gem 'figaro'
 
+# Coupon Codes
+gem 'coupon_code'
+
 
 source 'https://rails-assets.org' do
   # Cookie handler
@@ -119,6 +122,7 @@ group :development do
   gem 'rails_apps_testing'
   gem 'rubocop', require: false
   gem 'bullet'
+  gem 'filter_decrufter'
 end
 
 group :test do
