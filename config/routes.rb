@@ -108,7 +108,7 @@
 #                                      (/errors)/:status(.:format)                             errors#show {:status=>/\d{3}/}
 #
 
-Slooly::Application.routes.draw do
+Rails.application.routes.draw do
 
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
   authenticated :admin do
