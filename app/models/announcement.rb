@@ -11,13 +11,15 @@
 #
 
 class Announcement < ActiveRecord::Base
+  EXPIRY_PERIOD = 7
+
   default_scope { order(created_at: :desc) }
 
   validates :headline, :description, :posted_by, presence: true
 
-  scope :recent, -> { where('created_at >= ?', 7.days.ago) }
+  scope :recent, -> { where('created_at >= ?', EXPIRY_PERIOD.days.ago) }
 
   def expiry_date
-    @expiry_date ||= created_at.advance(days: 7)
+    @expiry_date ||= created_at.days_since(EXPIRY_PERIOD)
   end
 end
