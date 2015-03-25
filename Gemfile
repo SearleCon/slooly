@@ -22,9 +22,7 @@ gem 'nprogress-rails'
 gem 'draper', '~> 1.3'
 
 # Authentication
-gem 'devise', '~> 3.2.4'
-gem 'devise-async'
-
+gem 'devise'
 
 # File uploads
 gem "carrierwave"
@@ -72,10 +70,6 @@ gem 'slim-rails'
 # Email css
 gem 'premailer-rails'
 
-
-# Foreign Keys
-gem 'immigrant'
-
 # Postgres
 gem 'pg'
 
@@ -84,6 +78,10 @@ gem 'figaro'
 
 # Coupon Codes
 gem 'coupon_code'
+
+
+# Memcached client
+gem 'dalli'
 
 
 source 'https://rails-assets.org' do
@@ -99,7 +97,6 @@ end
 
 # Server
 gem 'puma'
-
 
 group :production do
   gem 'heroku-deflater'

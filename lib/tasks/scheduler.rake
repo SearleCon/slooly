@@ -17,23 +17,21 @@ task send_reminders: :environment do
 
   invoices = InvoicesToSend.new.invoices
 
-  #  Reminders to be sent
   reminders_to_send = invoices.map {|i| Invoice::Reminders.new(i) }.select(&:send?)
 
   reminders_to_send.each do |reminder|
-       history = History.create do |history|
-          history.client = reminder.invoice.client
-          history.user = reminder.invoice.user
-          history.invoice_number = reminder.invoice.invoice_number
-          history.subject = reminder.subject
-          history.message = reminder.text
-          history.reminder_type = reminder.type
-          history.email_sent_from = reminder.sender
-          history.copy_email = reminder.cc
-          history.email_sent_to = reminder.recipient
-          history.email_from_name = reminder.sender_name
-       end
-       Delayed::Job.enqueue SendRemindersJob.new(reminder.invoice.id, history.id)
+     history = History.create do |history|
+        history.client = reminder.invoice.client
+        history.user = reminder.invoice.user
+        history.invoice_number = reminder.invoice.invoice_number
+        history.subject = reminder.subject
+        history.message = reminder.text
+        history.reminder_type = reminder.type
+        history.email_sent_from = reminder.sender
+        history.copy_email = reminder.cc
+        history.email_sent_to = reminder.recipient
+        history.email_from_name = reminder.sender_name
+     end
+     SendRemindersJob.perform_later(reminder.invoice, history)
   end
-  puts "Sending Invoices #{invoices.size} complete"
 end

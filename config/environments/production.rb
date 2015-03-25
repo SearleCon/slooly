@@ -101,6 +101,6 @@ Rails.application.configure do
 
   config.active_record.dump_schema_after_migration = false
 
-
+  config.cache_store = :dalli_store, nil, {namespace: 'PAYING_MANTIS', expires_in: 1.day, compress: true}
 
 end
