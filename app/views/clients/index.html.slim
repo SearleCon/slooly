@@ -11,11 +11,9 @@
           = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'
 
   .search-form.pull-right
-    = simple_form_for :q, url: search_clients_path, defaults: { required: false, label: false }, html: { class: 'form-inline', method: :get }, remote: true do |f|
-      span
-        = f.input :keyword, wrapper: :append, class: :inline do
-          =  f.input_field :keyword, as: :search_box
-          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
+    = form_tag clients_path, method: :get, class: 'form-search' do
+      = text_field_tag :q, params[:q] ,class: 'search-query input-medium', placeholder: 'Search'
+      span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 .clients-listing
   = render 'clients/listing', locals: { clients: clients }
   hr

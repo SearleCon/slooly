@@ -13,7 +13,21 @@
 #
 
 class Plan < ActiveRecord::Base
+  to_param :description
+
   has_many :subscriptions
 
   scope :active, -> { where(active: true) }
+
+  def self.free_trial
+    Rails.cache.fetch('free_trial_plan', expires_in: 8.hours) do
+      Plan.active.where(free: true).first
+    end
+  end
+
+  def self.available
+    Rails.cache.fetch('commercial_plans', expires_in: 8.hours) do
+      Plan.active.where(free: false)
+    end
+  end
 end

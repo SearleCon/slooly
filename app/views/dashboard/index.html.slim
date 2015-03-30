@@ -41,35 +41,36 @@ ul.thumbnails
     hr
     ul.unstyled
       - clients.each do |client|
-        li
-          h4
-            = link_to client.business_name, client
-          p
-            | #{strong 'Invoices: '}
-            span.badge.badge-inverse #{client.invoices.size}
-          p
-            | #{strong 'Total:'} #{client.invoices.total}
-        table.table.table-striped.table-condensed.sortable
-          thead
-            tr
-              th
-                | Age
-                '
-                i.icon-question-sign[rel='popover' data-title="Invoice Age" data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green' data-placement= 'top']
-              th Invoice Number
-              th Due date
-              th Amount
-              th Created
-          tbody
-          - client.invoices.each do |invoice|
-            - cache invoice do
-              = content_tag_for :tr, invoice do
-                td= invoice.age
-                td= link_to invoice.invoice_number, invoice
-                td= invoice.due_date
-                td= invoice.amount
-                td= local_time_ago(invoice.created_at)
-        hr
+        - cache client do
+          li
+            h4
+              = link_to client.business_name, client
+            p
+              | #{strong 'Invoices: '}
+              span.badge.badge-inverse #{client.invoices.size}
+            p
+              | #{strong 'Total:'} #{client.invoices.total}
+          table.table.table-striped.table-condensed.sortable
+            thead
+              tr
+                th
+                  | Age
+                  '
+                  i.icon-question-sign[rel='popover' data-title="Invoice Age" data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green' data-placement= 'top']
+                th Invoice Number
+                th Due date
+                th Amount
+                th Created
+            tbody
+            - client.invoices.each do |invoice|
+              - cache invoice do
+                = content_tag_for :tr, invoice do
+                  td= invoice.age
+                  td= link_to invoice.invoice_number, invoice
+                  td= invoice.due_date
+                  td= invoice.amount
+                  td= local_time_ago(invoice.created_at)
+          hr
     .flickr_pagination
       .page_info
       .pagination-links

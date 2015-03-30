@@ -13,7 +13,10 @@ h2 User Profile
 hr
 
 #subscription_status
-  = render 'subscriptions/subscription_status'
+  = image_tag('expired.png', class: 'header')
+  p
+    | #{strong 'Note:'} Your current subscription is valid until: #{strong l(current_user.subscription.expiry_date)}<br>
+      (You will be prompted to renew when logging in after this date)
 
 = link_to "Have a Voucher? Click here to redeem it", "#vouchers", data: { toggle: "collapse"}
 #vouchers.collapse

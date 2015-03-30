@@ -8,18 +8,16 @@ class ClientsController < ApplicationController
   decorates_assigned :clients
 
   def index
-    @clients = client_scope.page(params[:page])
-    render (@clients.any? ? :index : :dashboard)
+    @clients = client_scope.search(business_name_or_contact_person_cont: params[:q]).result.page(params[:page])
+    flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
+    if stale?(etag: [@clients.cache_key, params[:q], params[:page]].compact)
+      render (@clients.any? ? :index : :dashboard)
+    end
   end
 
-  def search
-    @clients = client_scope.search(business_name_or_contact_person_cont: params[:q][:keyword]).result.page(params[:page])
-    flash.now[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q][:keyword])
-    respond_with @clients
-  end
 
   def show
-   # fresh_when @client
+   fresh_when @client
   end
 
   def create

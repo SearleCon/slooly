@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218084055) do
+ActiveRecord::Schema.define(version: 20150325061513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,17 +126,6 @@ ActiveRecord::Schema.define(version: 20150218084055) do
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
   add_index "invoices", ["status"], name: "index_invoices_on_status", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
-
-  create_table "payment_notifications", force: :cascade do |t|
-    t.text     "params"
-    t.integer  "user_id"
-    t.string   "status",         limit: 255
-    t.string   "transaction_id", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "payment_notifications", ["user_id"], name: "index_payment_notifications_on_user_id", using: :btree
 
   create_table "plans", force: :cascade do |t|
     t.string   "description", limit: 255

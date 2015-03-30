@@ -16,9 +16,8 @@
       td Price
       td
     - @plans.each do |plan|
-      - unless plan.free
-        tr
-          td: strong= plan.description
-          td= pluralize(plan.duration, 'Month')
-          td= number_to_currency(plan.cost, precision: 2)
-          td.text-center= link_to 'Place Order', new_subscription_path(plan_id: plan.id), class: "btn btn-primary"
+      tr
+        td: strong= plan.description
+        td= pluralize(plan.duration, 'Month')
+        td= number_to_currency(plan.cost, precision: 2)
+        td.text-center= link_to 'Place Order', payment_order_path(plan), class: "btn btn-primary"

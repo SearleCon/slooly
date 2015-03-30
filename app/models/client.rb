@@ -27,6 +27,11 @@ class Client < ActiveRecord::Base
 
   before_save :normalize_data
 
+
+  def self.cache_key
+    pluck("COUNT(*)", "MAX(updated_at)").flatten.map(&:to_i).join("-")
+  end
+
   protected
 
   def normalize_data

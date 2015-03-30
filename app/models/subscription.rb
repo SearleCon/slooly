@@ -25,7 +25,10 @@ class Subscription < ActiveRecord::Base
 
   delegate :description, :duration, :cost, to: :plan, prefix: true
 
+
+  after_initialize :expire, unless: :new_record?
   before_create :set_expiry_date
+
 
   def paypal
     PaypalPayment.new(self)
@@ -33,29 +36,8 @@ class Subscription < ActiveRecord::Base
 
   def save_with_paypal_payment
     response = paypal.request_payment
+    self.active = true
     response.approved? && response.success? && save
-  end
-
-  def cancel
-    response = paypal.cancel
-    response.success?
-  end
-
-  def reactivate
-    response = paypal.reactivate
-    response.success?
-  end
-
-  def has_expired?
-    Date.current > expiry_date
-  end
-
-  def expires_in
-    (expiry_date - Date.current).to_i
-  end
-
-  def expiring_soon?
-    expires_in <= 3
   end
 
   def payment_provided?
@@ -63,6 +45,9 @@ class Subscription < ActiveRecord::Base
   end
 
   private
+  def expire
+    update(active: false) if active? && Date.current > expiry_date
+  end
 
   def set_expiry_date
     self.expiry_date = Date.current.advance(months: plan_duration)

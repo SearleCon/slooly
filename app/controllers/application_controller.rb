@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  include UnobtrusiveFlash
-  include LayoutRequired
+  include UnobtrusiveFlash, LayoutRequired
 
   protect_from_forgery
 
@@ -19,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def validate_subscription
-    redirect_to payment_plans_subscriptions_url if current_user.subscription_has_expired?
+    redirect_to new_order_url unless current_user.subscribed?
   end
 
   def with_timezone

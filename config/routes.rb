@@ -157,7 +157,14 @@ Rails.application.routes.draw do
 
   resources :suggestions, only: [:new, :create]
 
-  resources :payment_notifications, controller: 'payment_notification',  only: [:create]
+  resources :orders, only: [:new] do
+    member do
+      get :confirm
+      get :payment
+      post :checkout
+      post :complete
+    end
+  end
 
   resources :subscriptions, only: [:new, :create] do
     get :payment_plans, on: :collection
@@ -166,7 +173,6 @@ Rails.application.routes.draw do
   resources :histories, only: :show
 
   controller :pages do
-    get :home
     get :about
     get :ie_warning
     get :faq
@@ -179,8 +185,6 @@ Rails.application.routes.draw do
     get :privacy
   end
 
-  get "paypal/checkout", to: "subscriptions#paypal_checkout"
-
   resources :contacts, only: [:new, :create]
 
   match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
@@ -190,7 +194,6 @@ Rails.application.routes.draw do
   resources :clients do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
     collection do
-      get :search
       get :exists
     end
   end

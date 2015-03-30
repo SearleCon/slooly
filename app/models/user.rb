@@ -25,28 +25,25 @@ class User < ActiveRecord::Base
 
   has_many :clients
   has_many :invoices
-  has_many :subscriptions, before_add: :activate_subscription
   has_many :histories
   has_one :company
   has_one :setting
 
+  has_many :subscriptions
+
+
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
-
-  delegate :expiry_date, :expiring_soon?, :expires_in, :has_expired?, to: :subscription, allow_nil: true, prefix: true
 
   def timeout_in
     2.hours
   end
 
   def subscription
-    subscriptions.active.first
+    subscriptions.active.take
   end
 
-  protected
-
-  def activate_subscription(new_subscription)
-    current_subscription.update(active: false) if current_subscription.present?
-    new_subscription.active = true
+  def subscribed?
+    subscription.present?
   end
 end

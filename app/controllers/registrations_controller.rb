@@ -7,17 +7,13 @@ class RegistrationsController < Devise::RegistrationsController
       resource.transaction do
         resource.create_company!
         resource.create_setting!
-        resource.subscriptions.create!(plan: free_trial, active: true)
+        resource.subscriptions.create!(plan: Plan.free_trial, active: true)
       end
       UserMailer.delay.registration_confirmation(resource)
     end
   end
 
   protected
-
-  def free_trial
-    @free_trial ||= Plan.find_by(free: true)
-  end
 
   def after_sign_up_path_for(_resource)
     initial_setup_path

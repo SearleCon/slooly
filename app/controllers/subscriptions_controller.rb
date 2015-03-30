@@ -3,21 +3,24 @@ class SubscriptionsController < ApplicationController
 
   before_action :set_plan, only: [:new, :paypal_checkout]
 
-  def payment_plans
-    @plans = Plan.active.where.not(free: true)
-  end
-
-  def paypal_checkout
-    subscription = current_user.subscriptions.build(plan_id: @plan.id)
-    redirect_to subscription.paypal.checkout_url(return_url: new_subscription_url(plan_id: plan.id), cancel_url: root_url, ipn_url: payment_notifications_url)
-  end
+  # def payment_plans
+  #   @plans = Plan.active.where.not(free: true)
+  # end
+  #
+  # def paypal_checkout
+  #   subscription = current_user.subscriptions.build(plan_id: @plan.id)
+  #   redirect_to subscription.paypal.checkout_url(return_url: new_subscription_url(plan_id: plan.id), cancel_url: root_url)
+  # end
 
   def new
-    @subscription = current_user.subscriptions.build(plan_id: @plan.id)
     if params[:PayerID]
+      @subscription = current_user.subscriptions.build(plan_id: @plan.id)
       @subscription.paypal_customer_token = params[:PayerID]
       @subscription.paypal_payment_token = params[:token]
+    else
+      redirect_to new_order_url(@plan.id)
     end
+
   end
 
   def create

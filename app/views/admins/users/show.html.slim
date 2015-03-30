@@ -47,7 +47,7 @@
     p
       strong Expires
       '
-      = local_time_ago(@user.subscription_expiry_date)
+      = local_time_ago(@user.subscription.expiry_date)
     = link_to edit_admins_user_subscription_path(@user, @user.subscription) do
       = fa_icon 'clock-o', text: ' Extend'
   - else
