@@ -6,8 +6,12 @@ class InvoicesController < ApplicationController
   decorates_assigned :invoices
 
   def index
-    @invoices = invoice_scope.includes(:client).search(invoice_number_or_description_cont: params[:q]).result.page(params[:page])
-    flash.now[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q]) if params[:q]
+    if params[:q].present?
+      @invoices = invoice_scope.includes(:client).search(params[:q]).page(params[:page])
+      flash[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q])
+    else
+      @invoices = invoice_scope.includes(:client).page(params[:page])
+    end
     if stale?(etag: [@invoices.cache_key, params[:q], params[:page]].compact)
       render (@invoices.any? ? :index : :dashboard)
     end

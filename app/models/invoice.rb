@@ -35,6 +35,8 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client, prefix: true
 
+  scope :search, ->(query) { where(arel_table[:description].matches("%#{query}%").or(arel_table[:invoice_number].matches("%#{query}%")))  }
+
   def pre_due?
     pd_date == Date.current
   end
@@ -70,6 +72,8 @@ class Invoice < ActiveRecord::Base
   def self.cache_key
     "#{count}-#{maximum(:updated_at).to_i}"
   end
+
+
 
   protected
 

@@ -49,9 +49,6 @@ gem 'honeypot-captcha'
 # Obfuscate emails
 gem 'obfuscatejs'
 
-# Searching
-gem "ransack"
-
 # Resize text areas
 gem 'autosize-rails'
 
@@ -61,8 +58,6 @@ gem 'local_time'
 # import from excel
 gem 'active_importer'
 
-# Form builder
-gem 'simple_form', '~> 3.0.0'
 
 # Templating
 gem 'slim-rails'

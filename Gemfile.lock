@@ -167,8 +167,6 @@ GEM
       ast (>= 1.1, < 3.0)
     paypal-recurring (1.1.0)
     pg (0.18.1)
-    polyamorous (1.2.0)
-      activerecord (>= 3.0)
     powerpack (0.1.0)
     premailer (1.8.4)
       css_parser (>= 1.3.6)
@@ -221,12 +219,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    ransack (1.6.6)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      activesupport (>= 3.0)
-      i18n
-      polyamorous (~> 1.2)
     request_store (1.1.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -280,9 +272,6 @@ GEM
     session (3.2.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
-    simple_form (3.0.3)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     slim (3.0.3)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -381,7 +370,6 @@ DEPENDENCIES
   rails-assets-jsTimezoneDetect!
   rails_12factor
   rails_apps_testing
-  ransack
   responders (~> 2.0)
   rspec
   rspec-rails
@@ -389,7 +377,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   selenium-webdriver
   shoulda-matchers
-  simple_form (~> 3.0.0)
   slim-rails
   spring
   turbolinks

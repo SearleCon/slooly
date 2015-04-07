@@ -8,8 +8,13 @@ class ClientsController < ApplicationController
   decorates_assigned :clients
 
   def index
-    @clients = client_scope.search(business_name_or_contact_person_cont: params[:q]).result.page(params[:page])
-    flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
+    if params[:q].present?
+      @clients = client_scope.search(params[:q]).page(params[:page])
+      flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
+    else
+      @clients = client_scope.page(params[:page])
+    end
+
     if stale?(etag: [@clients.cache_key, params[:q], params[:page]].compact)
       render (@clients.any? ? :index : :dashboard)
     end

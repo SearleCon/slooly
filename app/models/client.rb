@@ -27,6 +27,8 @@ class Client < ActiveRecord::Base
 
   before_save :normalize_data
 
+  scope :search, ->(query) { where(arel_table[:business_name].matches("%#{query}%").or(arel_table[:contact_person].matches("%#{query}%")))  }
+
 
   def self.cache_key
     "#{count}-#{maximum(:updated_at).to_i}"
