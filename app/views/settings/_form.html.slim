@@ -1,5 +1,4 @@
-= simple_form_for(@settings) do |f|
-  = errors_for(@settings)
+= form_for @settings, builder: BootstrapFormBuilder do |f|
   br
   br
   .tabbable.tabs-left
@@ -23,11 +22,11 @@
         h3 General Settings
         .row
           .span5
-            = f.input :send_from_name
-            = f.input :email_copy_to
-            = f.input :days_between_chase
-            = f.input :days_before_pre_due
-            = f.input :payment_method_message, as: :text
+            = f.text_field :send_from_name
+            = f.text_field :email_copy_to
+            = f.text_field :days_between_chase
+            = f.text_field :days_before_pre_due
+            = f.text_area :payment_method_message
           .span4.well
             .media
               .pull-left
@@ -45,9 +44,9 @@
         h3 Pre-Due Reminder
         .row
           .span5
-            = f.input :pre_due_reminder, as: :boolean
-            = f.input :pre_due_subject
-            = f.input :pre_due_message, as: :text
+            = f.check_box :pre_due_reminder, label: 'Send pre due reminder'
+            = f.text_field :pre_due_subject
+            = f.text_area :pre_due_message
           .span4.well
             .media
               .pull-left
@@ -64,9 +63,9 @@
         h3 Due Reminder
         .row
           .span5
-            = f.input :due_reminder, as: :boolean
-            = f.input :due_subject
-            = f.input :due_message, as: :text
+            = f.check_box :due_reminder, label: 'Send due reminder'
+            = f.text_field :due_subject
+            = f.text_area :due_message
           .span4.well
             .media
               .pull-left
@@ -82,8 +81,8 @@
         h3 First Overdue Reminder
         .row
           .span5
-            = f.input :overdue1_subject
-            = f.input :overdue1_message, as: :text
+            = f.text_field :overdue1_subject
+            = f.text_area :overdue1_message
           .span4.well
             .media
               .pull-left
@@ -97,8 +96,8 @@
         h3 Second Overdue Reminder
         .row
           .span5
-            = f.input :overdue2_subject
-            = f.input :overdue2_message, as: :text
+            = f.text_field :overdue2_subject
+            = f.text_area :overdue2_message
           .span4.well
             .media
               .pull-left
@@ -112,8 +111,8 @@
         h3 Third Overdue Reminder
         .row
           .span5
-            = f.input :overdue3_subject
-            = f.input :overdue3_message, as: :text
+            = f.text_field :overdue3_subject
+            = f.text_area :overdue3_message
           .span4.well
             .media
               .pull-left
@@ -127,8 +126,8 @@
         h3 Final Demand
         .row
           .span5
-            = f.input :final_demand_subject
-            = f.input :final_demand_message, as: :text
+            = f.text_field :final_demand_subject
+            = f.text_area :final_demand_message
           .span4.well
             .media
               .pull-left
@@ -140,4 +139,4 @@
               li=simple_format(t('forms.notes.settings.final_demand_message'))
   hr
   .actions
-    = f.button :submit, 'Save your Settings'
+    = f.submit 'Save your Settings'

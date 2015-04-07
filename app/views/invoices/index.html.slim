@@ -7,10 +7,9 @@
       .pagination-details = page_entries_info invoices
 
   .search-form.pull-right
-    = simple_form_for :q, url: search_invoices_path, defaults: {required: false, label: false}, html: {class: 'form-inline', method: :get}, remote: true  do |f|
-      span
-        = f.input_field :keyword, as: :search_box, class: 'input-medium'
-        span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
+    = form_tag invoices_path, method: :get, class: 'form-search' do
+      = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search'
+      span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
 
 .invoices-listing= render 'invoices/listing', locals: { invoices: invoices }
 

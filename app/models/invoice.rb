@@ -67,6 +67,10 @@ class Invoice < ActiveRecord::Base
     sum(:amount)
   end
 
+  def self.cache_key
+    "#{count}-#{maximum(:updated_at).to_i}"
+  end
+
   protected
 
   def set_defaults

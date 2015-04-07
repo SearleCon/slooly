@@ -6,15 +6,15 @@
       = link_to @client do
         = fa_icon 'arrow-left', text: 'Back'
 
-= simple_form_for [@client, @invoice], html: { data: { validate: true } } do |f|
-  = errors_for(@invoice)
+
+= form_for [@client, @invoice], builder: BootstrapFormBuilder, data: {validate: true} do |f|
   .row
     .span5
-      = f.input :due_date, as: :date_picker, input_html: {data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}}
-      = f.input :amount, input_html: { data: { rule_number: true } }
-      = f.input :description, as: :text
-      = f.input :invoice_number
-      = f.input :status, collection:  Invoice.statuses.keys, include_blank: false
+      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}
+      = f.number_field :amount, data: { rule_number: true }
+      = f.text_area :description
+      = f.text_field :invoice_number
+      = f.select :status, Invoice.statuses.keys, { include_blank: false}
     .span6.well
       .media
         .pull-left
@@ -28,6 +28,4 @@
         li= simple_format(t('forms.notes.invoices.settings'))
         li= simple_format(t('forms.notes.invoices.old_invoices'))
 
-      hr
-  .actions
-    = f.button :submit, 'Save Invoice'
+  = f.submit 'Save Invoice'

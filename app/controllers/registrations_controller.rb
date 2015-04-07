@@ -4,12 +4,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super do
-      resource.transaction do
-        resource.create_company!
-        resource.create_setting!
-        resource.subscriptions.create!(plan: Plan.free_trial, active: true)
+      if resource.valid?
+        resource.transaction do
+          resource.create_company!
+          resource.create_setting!
+          resource.subscriptions.create!(plan: Plan.free_trial, active: true)
+        end
+        UserMailer.delay.registration_confirmation(resource)
       end
-      UserMailer.delay.registration_confirmation(resource)
     end
   end
 

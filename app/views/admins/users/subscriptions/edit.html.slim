@@ -20,8 +20,6 @@
         strong Cost
         '
         = number_to_currency(@user.subscription.plan_cost)
-
-= simple_form_for [:admins, @user, @subscription] do |f|
-  = f.input :expiry_date, as: :date_picker
-  .actions
-    = f.button :submit, 'Extend Subscription'
+= form_for [:admins, @user, @subscription], builder: BootstrapFormBuilder do |f|
+  = f.date_picker :expiry_date
+  = f.submit 'Extend Subscription'

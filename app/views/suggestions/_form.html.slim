@@ -1,6 +1,5 @@
-= simple_form_for(@suggestion) do |f|
-  = errors_for(@suggestion)
-  = f.input :email, placeholder: "Optional email"
-  = f.input :subject
-  = f.input :comment, as: :text
-  = f.button :submit
+= form_for @suggestion, builder: BootstrapFormBuilder do |f|
+  = f.email_field :email, placeholder: "Optional email"
+  = f.text_field :subject
+  = f.text_area :comment
+  = f.submit 'Submit'

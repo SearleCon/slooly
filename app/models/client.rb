@@ -29,7 +29,7 @@ class Client < ActiveRecord::Base
 
 
   def self.cache_key
-    pluck("COUNT(*)", "MAX(updated_at)").flatten.map(&:to_i).join("-")
+    "#{count}-#{maximum(:updated_at).to_i}"
   end
 
   protected

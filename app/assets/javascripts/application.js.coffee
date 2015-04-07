@@ -25,17 +25,26 @@ $.validator.setDefaults
 
   errorElement: 'span'
 
-  errorPlacement: (error, element) ->
-   error.appendTo( element.closest('div.controls'))
+  onkeyup: (element) ->
+    return $(element).valid()
 
+  onfocusin: false
+
+  onfocusout: (element) ->
+    return $(element).valid()
+
+  errorPlacement: (error, element) ->
+   error.appendTo( $(element).closest('div.controls'))
+   return
 
   highlight: (element) ->
     $(element).closest(".control-group").removeClass("success").addClass "error"
     return
 
-  success: (element) ->
-    $(element).closest(".control-group").removeClass("error").addClass "success"
+  unhighlight: (element) ->
+    $(element).closest(".control-group").removeClass("error")
     return
+
 
   errorClass: "help-block"
 
@@ -84,6 +93,9 @@ pageLoad = ->
   setTimeZone()
   $(document).on 'ajax:success', '.announcement', ->
     $(this).remove()
+
+  $('input[id=upload-clients]').change ->
+     $('#upload-clients-file').val($(this).val().split('\\').pop());
 
 
 $(document).on 'page:load', pageLoad

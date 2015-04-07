@@ -1,13 +1,13 @@
-= simple_form_for @invoice,  html: { data: {validate: true }} do |f|
+= form_for @invoice, builder: BootstrapFormBuilder, data: {validate: true } do |f|
   = errors_for(@invoice)
   .row
     .span5
-      = f.association :client, hint: "#{link_to '(Add New Client)', new_client_path}".html_safe, prompt: "Choose a Client", collection: current_user.clients.order(:business_name), label_method: :business_name
-      = f.input :due_date, as: :date_picker
-      = f.input :amount, input_html: { data: { rule_number: true } }
-      = f.input :description, as: :text
-      = f.input :invoice_number
-      = f.input :status, collection:  Invoice.statuses.keys, include_blank: false
+      = f.collection_select :client_id, current_user.clients.order(:business_name) , :id, :business_name, prompt: "Choose a Client", label: "#{link_to 'Add New Client', new_client_path}".html_safe
+      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}
+      = f.number_field :amount, data: {rule_number: true}
+      = f.text_area :description
+      = f.text_field :invoice_number
+      = f.select :status, Invoice.statuses.keys, {include_blank: false}
     .span6.well
       .media
         .pull-left
@@ -23,4 +23,4 @@
 
       hr
   .actions
-    = f.button :submit, 'Save Invoice'
+    = f.submit 'Save Invoice'

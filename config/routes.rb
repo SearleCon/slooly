@@ -142,11 +142,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: :index
 
-  resources :invoices do
-    collection do
-      get :search
-    end
-  end
+  resources :invoices
 
   resources :impersonations, only: [:create, :destroy]
 

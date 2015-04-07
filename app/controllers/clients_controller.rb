@@ -15,7 +15,6 @@ class ClientsController < ApplicationController
     end
   end
 
-
   def show
    fresh_when @client
   end

@@ -1,6 +1,5 @@
-= simple_form_for([:admins, @announcement]) do |f|
-  = errors_for(@announcement)
-  = f.input :headline
-  = f.input :description, as: :text
-  = f.input :posted_by
-  = f.button :submit
+= form_for([:admins, @announcement], builder: BootstrapFormBuilder) do |f|
+  = f.text_field :headline
+  = f.text_area :description
+  = f.text_field :posted_by
+  = f.submit 'Save'

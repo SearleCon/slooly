@@ -7,10 +7,13 @@
       = link_to clients_path do
         = fa_icon 'arrow-left', text: 'Back'
 
-= simple_form_for :client, url: clients_imports_path, html: {multipart: true} do |f|
+= form_tag clients_imports_path, multipart: true do |f|
   .row
     .span5
-      = f.input :file, as: :file
+      = file_field_tag :file, style: 'display:none;', id: 'upload-clients'
+      .input-append
+        = text_field_tag nil, nil, class: 'input-large', id: 'upload-clients-file'
+        a[class="btn" onclick="$('input[id=upload-clients]').click();"] Browse
     .span6.well
       .media
         .pull-left
@@ -32,4 +35,4 @@
             li #{strong 'Fax:'} The fax number of the client. (This field is optional)
         li When the records are imported, the system will check whether the business name exists and if so update the existing client.
   hr
-  = f.button :submit, 'Import Clients'
+  = submit_tag 'Import Clients', class: 'btn btn-primary'
