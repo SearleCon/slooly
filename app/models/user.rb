@@ -24,11 +24,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
+  has_one :company
+  has_one :setting
+
   has_many :clients
   has_many :invoices
   has_many :histories
-  has_one :company
-  has_one :setting
 
   has_many :subscriptions
 
@@ -44,6 +45,6 @@ class User < ActiveRecord::Base
   end
 
   def subscribed?
-    subscription.present?
+    subscription.present? && !subscription.expired?
   end
 end

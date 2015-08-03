@@ -35,6 +35,10 @@ class Subscription < ActiveRecord::Base
     expiry_date.past?
   end
 
+  def deactivate!
+    update!(active: false)
+  end
+
   private
   def set_expiry_date
     self.expiry_date = plan_duration.months.from_now

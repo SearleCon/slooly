@@ -1,6 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   skip_before_action :authenticate_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def create
     super do
@@ -21,11 +20,11 @@ class RegistrationsController < Devise::RegistrationsController
     initial_setup_path
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name
-    devise_parameter_sanitizer.for(:sign_up) << :time_zone
-    devise_parameter_sanitizer.for(:sign_up) << :terms_of_service
-    devise_parameter_sanitizer.for(:account_update) << :name
-    devise_parameter_sanitizer.for(:account_update) << :time_zone
+  def sign_up_params
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :terms_of_service, :time_zone)
+  end
+
+  def account_update_params
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :current_password, :time_zone)
   end
 end
