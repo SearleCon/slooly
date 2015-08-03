@@ -1,14 +1,8 @@
 h2 Sign in
-/
-/= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-/  = f.input :email, as: :email
-/  = f.input :password, as: :password
-/  - if devise_mapping.rememberable?
-/    = f.input :remember_me, label: false, inline_label: 'Remember Me', as: :boolean
-/  = f.button :submit, 'Sign In'
 
 
-= form_for(resource, as: resource_name, url: session_path(resource_name), builder: BootstrapFormBuilder) do |f|
+
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   = f.email_field :email
   = f.password_field :password
   - if devise_mapping.rememberable?

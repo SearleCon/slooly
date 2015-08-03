@@ -27,5 +27,3 @@ class PagesController < ApplicationController
     fresh_when 'tutorial', last_modified: 1.year.ago
   end
 end
-
-

@@ -11,7 +11,7 @@
           = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'
 
   .search-form.pull-right
-    = form_tag clients_path, method: :get, class: 'form-search' do
+    = form_tag search_clients_path, method: :get, class: 'form-search' do
       = text_field_tag :q, params[:q] ,class: 'search-query input-medium', placeholder: 'Search'
       span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 .clients-listing

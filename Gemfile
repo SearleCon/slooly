@@ -17,7 +17,6 @@ gem "font-awesome-rails"
 gem 'bootstrap_sortable_rails'
 gem 'nprogress-rails'
 
-
 # Decorators
 gem 'draper', '~> 1.3'
 
@@ -58,7 +57,6 @@ gem 'local_time'
 # import from excel
 gem 'active_importer'
 
-
 # Templating
 gem 'slim-rails'
 
@@ -74,10 +72,8 @@ gem 'figaro'
 # Coupon Codes
 gem 'coupon_code'
 
-
 # Memcached client
 gem 'dalli'
-
 
 source 'https://rails-assets.org' do
   # Cookie handler
@@ -113,7 +109,6 @@ group :development do
   gem 'rails_apps_testing'
   gem 'rubocop', require: false
   gem 'bullet'
-  gem 'filter_decrufter'
 end
 
 group :test do

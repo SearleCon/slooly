@@ -1,5 +1,5 @@
 - cache client do
-  = content_tag_for(:tr, client) do
+  tr data-client-id=client.id
     td= link_to client.business_name, client
     td= client.contact_person
     td= client.telephone

@@ -21,6 +21,11 @@
 #
 
 class Invoice < ActiveRecord::Base
+  include CollectionCacheable
+
+  OVERDUE2_MODIFIER = 2
+  OVERDUE3_MODIFIER = 3
+
   enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7 }
 
   belongs_to :client, touch: true
@@ -38,27 +43,27 @@ class Invoice < ActiveRecord::Base
   scope :search, ->(query) { where(arel_table[:description].matches("%#{query}%").or(arel_table[:invoice_number].matches("%#{query}%")))  }
 
   def pre_due?
-    pd_date == Date.current
+    pd_date.today?
   end
 
   def due?
-    due_date == Date.current
+    due_date.today?
   end
 
   def over_due1?
-    od1_date == Date.current
+    od1_date.today?
   end
 
   def over_due2?
-    od2_date == Date.current
+    od2_date.today?
   end
 
   def over_due3?
-    od3_date == Date.current
+    od3_date.today?
   end
 
   def final_demand?
-    fd_date == Date.current
+    fd_date.today?
   end
 
   def age
@@ -69,12 +74,6 @@ class Invoice < ActiveRecord::Base
     sum(:amount)
   end
 
-  def self.cache_key
-    "#{count}-#{maximum(:updated_at).to_i}"
-  end
-
-
-
   protected
 
   def set_defaults
@@ -82,13 +81,22 @@ class Invoice < ActiveRecord::Base
   end
 
   def calculate_dates
-    self.pd_date = due_date.days_ago(user.setting.days_before_pre_due)
-    self.od1_date = due_date.days_since(user.setting.days_between_chase)
-    self.od2_date = due_date.days_since(user.setting.days_between_chase * 2)
-    self.od3_date = due_date.days_since(user.setting.days_between_chase * 3)
+    self.pd_date = days_before_pre_due.days.ago
+    self.od1_date = days_between_chase.days.from_now
+    self.od2_date = (days_between_chase * OVERDUE2_MODIFIER).days.from_now
+    self.od3_date = (days_between_chase * OVERDUE3_MODIFIER).days.from_now
   end
 
   def set_final_demand
-    self.fd_date = Date.current.days_since(1) if send_final_demand?
+    self.fd_date = 1.day.from_now if send_final_demand?
+  end
+
+
+  def days_between_chase
+    user.setting.days_between_chase
+  end
+
+  def days_before_pre_due
+    user.setting.days_before_pre_due
   end
 end

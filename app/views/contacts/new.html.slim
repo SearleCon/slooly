@@ -18,7 +18,7 @@ script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElemen
 hr
 h6 Let us get back to you:
 
-= form_for @message, builder: BootstrapFormBuilder, url: contacts_path, html: { honeypot: true } do |f|
+= form_for @message, url: contacts_path, html: { honeypot: true } do |f|
   = f.text_field :name
   = f.email_field :email
   = f.text_field :subject

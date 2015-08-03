@@ -2,16 +2,15 @@ class OrdersController < ApplicationController
   skip_before_action :validate_subscription
   before_action :set_plan, except: :new
 
-
   def new
     @plans = Plan.available
   end
 
   def confirm
-   redirect_to payment_order_path(@plan) unless params[:PayerID]
+    redirect_to payment_order_path(@plan) unless params[:PayerID]
   end
 
-  def payment;end
+  def payment; end
 
   def checkout
     response = paypal.checkout
@@ -24,8 +23,8 @@ class OrdersController < ApplicationController
 
   def complete
     response = paypal.request_payment
-    subscription = @plan.subscriptions.build(user: current_user, paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID], active: true)
-    if response.approved? && response.completed? && subscription.save
+    if response.approved? && response.completed?
+      @plan.subscriptions.create!(user: current_user, paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID], active: true)
       flash[:notice] = t('flash.subscriptions.activation.success')
     else
       flash[:alert] = t('flash.subscriptions.activation.failed')
@@ -34,6 +33,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def set_plan
     @plan = Plan.find(params[:id])
   end

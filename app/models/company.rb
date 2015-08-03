@@ -24,16 +24,14 @@ class Company < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
   after_initialize :set_defaults, if: :new_record?
-  before_save :normalize_data
 
   mount_uploader :image, ImageUploader
 
-  protected
-
-  def normalize_data
-    email.strip!
+  def email=(value)
+    super(value.strip)
   end
 
+  protected
   def set_defaults
     self.name = 'Your Company Name'
     self.address = '44 Street Name, Suburb'

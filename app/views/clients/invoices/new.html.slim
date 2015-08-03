@@ -7,7 +7,7 @@
         = fa_icon 'arrow-left', text: 'Back'
 
 
-= form_for [@client, @invoice], builder: BootstrapFormBuilder, data: {validate: true} do |f|
+= form_for [@client, @invoice], html: {data: {validate: true} } do |f|
   .row
     .span5
       = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}

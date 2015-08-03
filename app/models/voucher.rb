@@ -12,7 +12,6 @@
 #
 
 class Voucher < ActiveRecord::Base
-
   attr_readonly :unique_code, :valid_until, :number_of_days
 
   belongs_to :redeemer, class_name: 'User', foreign_key: :redeemed_by
@@ -26,17 +25,18 @@ class Voucher < ActiveRecord::Base
   before_update :extend_redeemer_subscription
 
   def redeemed?
-   errors.add(:redeemed_by, 'is not blank') if redeemed_by_changed? && redeemed_by_was.present?
+    errors.add(:redeemed_by, 'is not blank') if redeemed_by_changed? && redeemed_by_was.present?
   end
 
   def expired?
-    errors.add(:valid_until, 'date has already passed.') if  valid_until < Date.current
+    errors.add(:valid_until, 'date has already passed.') if  valid_until.past?
   end
 
   private
+
   def set_defaults
-   self.valid_until = 1.month.from_now
-   self.number_of_days = 30
+    self.valid_until = 1.month.from_now
+    self.number_of_days = 30
   end
 
   def generate_code

@@ -6,17 +6,18 @@ class InvoicesController < ApplicationController
   decorates_assigned :invoices
 
   def index
-    if params[:q].present?
-      @invoices = invoice_scope.includes(:client).search(params[:q]).page(params[:page])
-      flash[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q])
-    else
-      @invoices = invoice_scope.includes(:client).page(params[:page])
-    end
-    if stale?(etag: [@invoices.cache_key, params[:q], params[:page]].compact)
+    @invoices = invoice_scope.includes(:client).page(params[:page])
+
+    if stale?(@invoices)
       render (@invoices.any? ? :index : :dashboard)
     end
   end
 
+  def search
+    @invoices = invoice_scope.includes(:client).search(params[:q]).page(params[:page])
+    flash[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q])
+    render :index
+  end
 
   def show
     fresh_when @invoice

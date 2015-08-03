@@ -53,4 +53,25 @@ describe Client do
       expect(client.email).to eq(expected)
     end
   end
+
+
+  describe '.search' do
+    it 'searches on business_name' do
+      client = create(:client, business_name: 'Shell')
+      another_client = create(:client, business_name: 'Haliburton')
+
+      result = Client.search('shell')
+
+      expect(result).to eq [client]
+    end
+
+    it 'searches on contact_person' do
+      client = create(:client, contact_person: 'Peter')
+      another_client = create(:client, contact_person: 'Paul')
+
+      result = Client.search('peter')
+
+      expect(result).to eq [client]
+    end
+  end
 end

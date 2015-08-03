@@ -20,6 +20,7 @@
 #
 
 class User < ActiveRecord::Base
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
@@ -30,7 +31,6 @@ class User < ActiveRecord::Base
   has_one :setting
 
   has_many :subscriptions
-
 
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }

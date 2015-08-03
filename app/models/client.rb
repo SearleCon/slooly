@@ -17,6 +17,8 @@
 #
 
 class Client < ActiveRecord::Base
+  include CollectionCacheable
+
   belongs_to :user, touch: true
   has_many :invoices
   has_many :histories, -> { order(date_sent: :desc) }
@@ -25,19 +27,13 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
-  before_save :normalize_data
-
   scope :search, ->(query) { where(arel_table[:business_name].matches("%#{query}%").or(arel_table[:contact_person].matches("%#{query}%")))  }
 
-
-  def self.cache_key
-    "#{count}-#{maximum(:updated_at).to_i}"
+  def business_name=(value)
+    super(value.strip)
   end
 
-  protected
-
-  def normalize_data
-    business_name.strip!
-    email.strip!
+  def email=(value)
+    super(value.strip)
   end
 end

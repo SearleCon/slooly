@@ -4,7 +4,7 @@ class HistoryDecorator < Draper::Decorator
                                 OD1: 'badge badge-inverse',
                                 OD2: 'badge badge-warning',
                                 OD3: 'badge badge-important',
-                                FD: 'badge'}.with_indifferent_access
+                                FD: 'badge' }.with_indifferent_access
 
   delegate_all
 

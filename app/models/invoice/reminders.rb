@@ -189,7 +189,7 @@ module Invoice::Reminders
     end
 
     def message
-      setting.final_demand_subject_message
+      setting.final_demand_message
     end
 
     def type

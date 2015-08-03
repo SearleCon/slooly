@@ -1,11 +1,10 @@
 class InvoiceDecorator < Draper::Decorator
   STATUS_LABELS = { chasing: 'label label-success',
-                        stop_chasing: 'label label-warning',
-                        paid: 'label label-info',
-                        send_final_demand: 'label label-important',
-                        write_off: 'label label-inverse',
-                        delete: 'label label-default' }.with_indifferent_access
-
+                    stop_chasing: 'label label-warning',
+                    paid: 'label label-info',
+                    send_final_demand: 'label label-important',
+                    write_off: 'label label-inverse',
+                    delete: 'label label-default' }.with_indifferent_access
 
   delegate_all
 
@@ -26,15 +25,15 @@ class InvoiceDecorator < Draper::Decorator
   end
 
   def description
-    h.content_tag(:a, h.truncate(model.description, length: 20), rel: 'popover', title: 'Invoice Description', data: {content: h.simple_format(model.description)}) if model.description.present?
+    h.content_tag(:a, h.truncate(model.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: h.simple_format(model.description) }) if model.description.present?
   end
 
   def status
     h.content_tag(:span, model.status.titleize, class: STATUS_LABELS[model.status])
   end
 
-
   private
+
   def age_badge
     type = case
              when model.age.due? then  'badge badge-important'

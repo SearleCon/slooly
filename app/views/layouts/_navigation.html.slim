@@ -1,13 +1,19 @@
 = link_to "Paying Mantis - Get paid on time!", root_path, class: 'brand'
 ul.nav.pull-right
-  li= link_to 'Home', root_path
+  li class=('active' if current_page?(root_path))
+    = link_to 'Home', root_path
   li= link_to_if(session[:current_admin].present?, "Back to Admin Page", impersonation_path('revert'), method: :delete){}
   - if user_signed_in?
-    li= link_to 'Clients', clients_path
-    li= link_to 'Invoices', invoices_path
-    li= link_to 'Add Client', new_client_path
-    li= link_to 'Add Invoice', new_invoice_path
-    li= link_to 'Reports', reports_path
+    li class=('active' if current_page?(clients_path))
+      = link_to 'Clients', clients_path
+    li class=('active' if current_page?(invoices_path))
+      = link_to 'Invoices', invoices_path
+    li class=('active' if current_page?(new_client_path))
+      = link_to 'Add Client', new_client_path
+    li class=('active' if current_page?(new_invoice_path))
+      = link_to 'Add Invoice', new_invoice_path
+    li class=('active' if current_page?(reports_path))
+      = link_to 'Reports', reports_path
     li#fat-menu.dropdown
       a.dropdown-toggle[href="#" data-toggle="dropdown"]
         = "Account (#{current_user.name})"
