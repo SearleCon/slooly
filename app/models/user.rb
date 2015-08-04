@@ -36,12 +36,22 @@ class User < ActiveRecord::Base
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
 
+  after_create do
+    create_company!
+    create_setting!
+    subscriptions.create!(plan: Plan.free_trial, active: true)
+  end
+
+  after_commit on: :create do
+    UserMailer.delay.registration_confirmation(self)
+  end
+
   def timeout_in
     2.hours
   end
 
   def subscription
-    subscriptions.active.take
+    subscriptions.active.first
   end
 
   def subscribed?

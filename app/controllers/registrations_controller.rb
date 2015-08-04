@@ -1,18 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-  skip_before_action :authenticate_user!
-
-  def create
-    super do
-      if resource.valid?
-        resource.transaction do
-          resource.create_company!
-          resource.create_setting!
-          resource.subscriptions.create!(plan: Plan.free_trial, active: true)
-        end
-        UserMailer.delay.registration_confirmation(resource)
-      end
-    end
-  end
 
   protected
 

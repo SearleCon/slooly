@@ -106,7 +106,6 @@ group :development do
   gem 'spring'
   gem 'annotate'
   gem 'quiet_assets'
-  gem 'rails_apps_testing'
   gem 'rubocop', require: false
   gem 'bullet'
 end
