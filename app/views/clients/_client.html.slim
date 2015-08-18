@@ -12,5 +12,5 @@
       = link_to edit_client_path(client) do
         = fa_icon 'edit', text: ' Edit'
     td
-      = link_to client, method: :delete, data: { confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name),{}, sanitize: false) }, class:'delete-client', remote: true do
+      = link_to client, method: :delete, data: { confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name),{}, sanitize: false) } do
         = fa_icon 'trash', text: 'Delete'

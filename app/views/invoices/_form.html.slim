@@ -3,10 +3,10 @@
   .row
     .span5
       = f.collection_select :client_id, current_user.clients.order(:business_name) , :id, :business_name, prompt: "Choose a Client", label: "#{link_to 'Add New Client', new_client_path}".html_safe
-      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}
-      = f.number_field :amount, data: {rule_number: true}
-      = f.text_area :description
-      = f.text_field :invoice_number
+      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}, placeholder: 'Due date'
+      = f.number_field :amount, data: {rule_number: true}, placeholder: 'Amount'
+      = f.text_area :description, placeholder: 'Description'
+      = f.text_field :invoice_number, placeholder: 'Invoice number'
       = f.select :status, Invoice.statuses.keys, {include_blank: false}
     .span6.well
       .media

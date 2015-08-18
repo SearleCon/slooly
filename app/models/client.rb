@@ -19,7 +19,9 @@
 class Client < ActiveRecord::Base
   include CollectionCacheable
 
-  belongs_to :user, touch: true
+  to_param :business_name
+
+  belongs_to :user
   has_many :invoices
   has_many :histories, -> { order(date_sent: :desc) }
 
@@ -27,7 +29,7 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
-  scope :search, ->(query) { where(arel_table[:business_name].matches("%#{query}%").or(arel_table[:contact_person].matches("%#{query}%")))  }
+  scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
 
   def business_name=(value)
     super(value.strip)

@@ -17,7 +17,6 @@
 #= require turbolinks
 #= require_tree .
 
-Turbolinks.enableTransitionCache()
 $.fn.twitter_bootstrap_confirmbox.defaults.title = 'Paying Mantis'
 
 $.validator.setDefaults
@@ -25,8 +24,7 @@ $.validator.setDefaults
 
   errorElement: 'span'
 
-  onkeyup: (element) ->
-    return $(element).valid()
+  onkeyup: false
 
   onfocusin: false
 
@@ -45,9 +43,10 @@ $.validator.setDefaults
     $(element).closest(".control-group").removeClass("error")
     return
 
-
   errorClass: "help-block"
 
+escapeHTML = (html) ->
+ return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
 
 showFlashMessages = ->
   alert_types =
@@ -59,17 +58,17 @@ showFlashMessages = ->
   cookie = $.cookie(cookieName)
   if cookie?
     flashMessages = JSON.parse(cookie)
-    for type, message of flashMessages
+    for type, messages of flashMessages
       if alert_types.hasOwnProperty(type)
-        $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", text: message }).prepend(
-          $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
-        ).appendTo(".messages")
+        $.each $.makeArray(messages), (i, value)->
+          $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", html: value }).prepend(
+            $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
+          ).appendTo(".messages")
     $.removeCookie(cookieName, { path: '/' })
 
 setTimeZone = ->
   tz = jstz.determine();
   $.cookie('timezone', tz.name(), { path: '/' });
-
 
 
 pageLoad = ->
@@ -92,7 +91,7 @@ pageLoad = ->
   showFlashMessages()
   setTimeZone()
   $(document).on 'ajax:success', '.announcement', ->
-    $(this).remove()
+    $(this).closest('.alert').remove()
 
   $('input[id=upload-clients]').change ->
      $('#upload-clients-file').val($(this).val().split('\\').pop());

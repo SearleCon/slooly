@@ -23,13 +23,15 @@
 class Invoice < ActiveRecord::Base
   include CollectionCacheable
 
+  to_param :invoice_number
+
   OVERDUE2_MODIFIER = 2
   OVERDUE3_MODIFIER = 3
 
   enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7 }
 
   belongs_to :client, touch: true
-  belongs_to :user, touch: true
+  belongs_to :user
 
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
@@ -40,7 +42,8 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client, prefix: true
 
-  scope :search, ->(query) { where(arel_table[:description].matches("%#{query}%").or(arel_table[:invoice_number].matches("%#{query}%")))  }
+  scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
+
 
   def pre_due?
     pd_date.today?

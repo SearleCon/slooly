@@ -1,7 +1,6 @@
-- recent_announcements.each do |announcement|
-  = div_for announcement, class: 'breaking-news' do
-    strong> Breaking News: #{link_to announcement.headline, announcements_path}
-    | (This message will disappear #{local_time_ago(announcement.expiry_date)})
-    '
-    =link_to hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true do
-      = fa_icon 'remove', text: 'hide'
+.announcement
+  strong> Breaking News: #{link_to announcement.headline, announcements_path}
+  | (This message will disappear #{local_time_ago(announcement.expiry_date)})
+  '
+  =link_to hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true do
+    = fa_icon 'remove', text: 'hide'

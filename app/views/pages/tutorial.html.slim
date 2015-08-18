@@ -5,8 +5,11 @@ p
   br
   |  If you do not find the answers you are looking for on this page, here are more resources you can have a look at:
 
-p= link_to 'Frequently Ask Questions', faq_path
-p= link_to 'About Paying Mantis', about_path
+
+p= link_to faq_path do
+  = fa_icon 'question-circle', text: 'Frequently Ask Questions'
+p= link_to about_path do
+  = fa_icon 'exclamation-circle', text: 'About Paying Mantis'
 p And if you still need help, you can contact us #{link_to 'here', new_contact_path}.
 
 .row

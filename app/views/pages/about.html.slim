@@ -76,14 +76,8 @@ br
 h3 Already have an account?
 = link_to 'Login here', new_user_session_path
 h3 Watch the Tutorial Video
-a[href="#videoModal" data-toggle="modal"] View Video
+a[href="#tutorial_video" data-toggle="modal"] View Video
 hr
 p  Check out the #{link_to 'Frequently Asked Questions', faq_path} page for more information.
 
-#videoModal.modal.hide.fade[tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true"]
-  .modal-header
-    button.close[type="button" data-dismiss="modal" aria-hidden="true"] ×
-    h3#videoModalLabel Quick overview of how Paying Mantis works
-  .modal-body: iframe[width="530" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" frameborder="0" allowfullscreen]
-  .modal-footer
-    button.btn[data-dismiss="modal" aria-hidden="true"] Close
+= render 'layouts/tutorial_video'

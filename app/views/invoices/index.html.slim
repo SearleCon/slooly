@@ -7,10 +7,11 @@
       .pagination-details = page_entries_info invoices
 
   .search-form.pull-right
+    small
+      em.muted Search on invoice number or description
     = form_tag search_invoices_path, method: :get, class: 'form-search' do
       = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search'
       span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
-
 .invoices-listing= render 'invoices/listing', locals: { invoices: invoices }
 
 hr

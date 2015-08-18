@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, :set_announcements
 
   decorates_assigned :announcements
   decorates_assigned :announcement

@@ -10,8 +10,10 @@ class ClientsController < ApplicationController
   def index
     @clients = client_scope.page(params[:page])
 
-    if stale?(@clients)
-      render (@clients.any? ? :index : :dashboard)
+    if @clients.any?
+      fresh_when @clients
+    else
+      render :dashboard
     end
   end
 
