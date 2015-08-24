@@ -56,7 +56,7 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bootstrap_sortable_rails (1.8.0)
-    browser (0.9.1)
+    browser (1.0.0)
     builder (3.2.2)
     bullet (4.14.7)
       activesupport (>= 3.0.0)
@@ -208,7 +208,7 @@ GEM
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.3)
+    rails_stdout_logging (0.0.4)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)

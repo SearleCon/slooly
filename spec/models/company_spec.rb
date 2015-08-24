@@ -28,14 +28,11 @@ describe Company do
   it { should validate_presence_of(:email) }
   it { should allow_value('paul@example.com', 'ken.john@fish.com').for(:email) }
 
-  describe '#normalize_data' do
-    it 'strips whitespaces from email' do
-      company = build(:company)
-      company.email = '  jim@example.com '
-      expected = 'jim@example.com'
-      company.send(:normalize_data)
-      expect(company.email).to eq(expected)
-    end
+  it 'strips whitespaces from email' do
+    company = build(:company)
+    company.email = '  jim@example.com '
+    expected = 'jim@example.com'
+    expect(company.email).to eq(expected)
   end
 
   describe '#set_defaults' do
@@ -51,9 +48,4 @@ describe Company do
       expect(company.email).to eq('you@example.com')
     end
   end
-
-
-
-
-
 end

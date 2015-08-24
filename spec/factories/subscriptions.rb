@@ -16,5 +16,6 @@
 FactoryGirl.define do
   factory :subscription do
     expiry_date   1.month.from_now
+    active true
   end
 end

@@ -33,9 +33,6 @@ FactoryGirl.define do
     email_sent_to      { Faker::Internet.email }
     invoice_number    '1'
     email_from_name    { Faker::Name.name }
-    client
-    user
-
   end
 end
 

@@ -28,13 +28,9 @@ FactoryGirl.define do
     company
     time_zone 'Pretoria'
 
-
-
-    factory :subscribed_user do
-      after(:create) do |user, evaluator|
-        plan = create(:free_trial)
-        create(:subscription, plan: plan, user: user, active: true)
-      end
+    after(:create) do |user, evaluator|
+      plan = create(:free_trial)
+      create(:subscription, plan: plan, user: user, active: true)
     end
   end
 end

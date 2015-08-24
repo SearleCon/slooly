@@ -32,10 +32,12 @@ class Client < ActiveRecord::Base
   scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
 
   def business_name=(value)
-    super(value.strip)
+    value.strip! if value
+    super(value)
   end
 
   def email=(value)
-    super(value.strip)
+    value.strip! if value
+    super(value)
   end
 end

@@ -21,12 +21,16 @@
 #
 
 describe History do
-  it 'has a valid factory' do
-    history = build(:history)
-    expect(history).to be_valid
-  end
-
-  it { should belong_to(:user).touch(:true) }
   it { should belong_to(:client).touch(:true) }
+
+  describe '#set_defaults' do
+    it 'sets default values' do
+      history = build(:history)
+      history.send(:set_defaults)
+      expect(history.date_sent).to eq(Date.current)
+      expect(history.sent).to eq(false)
+      expect(history.email_return_code).to eq('Not yet sent')
+    end
+  end
 
 end

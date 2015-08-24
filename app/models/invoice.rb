@@ -27,6 +27,7 @@ class Invoice < ActiveRecord::Base
 
   OVERDUE2_MODIFIER = 2
   OVERDUE3_MODIFIER = 3
+  FINAL_DEMAND_PERIOD = 1
 
   enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7 }
 
@@ -91,7 +92,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_final_demand
-    self.fd_date = 1.day.from_now if send_final_demand?
+    self.fd_date = FINAL_DEMAND_PERIOD.day.from_now if send_final_demand?
   end
 
 

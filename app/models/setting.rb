@@ -37,31 +37,38 @@ class Setting < ActiveRecord::Base
   after_initialize :set_defaults, if: :new_record?
 
   def payment_method_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def pre_due_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def due_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def overdue1_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def overdue2_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def overdue3_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   def final_demand_message=(value)
-    super(value.strip.squeeze(' '))
+    value = value.strip.squeeze(' ') if value
+    super(value)
   end
 
   protected

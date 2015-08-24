@@ -17,12 +17,23 @@
 #
 
 describe Client do
+
+
+  before do
+    User.skip_callback(:create, :after, :setup)
+  end
+
+  after do
+    User.set_callback(:create, :after, :setup)
+  end
+
+
   it 'should have a valid factory' do
     client = build(:client)
     expect(client).to be_valid
   end
 
-  it { should belong_to(:user).touch(true) }
+  it { should belong_to(:user) }
   it { should have_many(:invoices) }
   it { should have_many(:histories) }
 
@@ -36,22 +47,18 @@ describe Client do
     should validate_uniqueness_of(:business_name).scoped_to(:user_id)
   end
 
-  describe '#normalize_data' do
-    it 'strips whitespaces from business_name' do
-      client = build(:client)
-      client.business_name = '  Test Business '
-      expected = 'Test Business'
-      client.send(:normalize_data)
-      expect(client.business_name).to eq(expected)
-    end
+  it 'strips whitespaces from business_name' do
+    client = build(:client)
+    client.business_name = '  Test Business '
+    expected = 'Test Business'
+    expect(client.business_name).to eq(expected)
+  end
 
-    it 'strips whitespaces from email' do
-      client = build(:client)
-      client.email = '  jim@example.com '
-      expected = 'jim@example.com'
-      client.send(:normalize_data)
-      expect(client.email).to eq(expected)
-    end
+  it 'strips whitespaces from email' do
+    client = build(:client)
+    client.email = '  jim@example.com '
+    expected = 'jim@example.com'
+    expect(client.email).to eq(expected)
   end
 
 

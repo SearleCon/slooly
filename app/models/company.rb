@@ -18,7 +18,7 @@
 #
 
 class Company < ActiveRecord::Base
-  belongs_to :user, touch: true
+  belongs_to :user
 
   validates :email, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
@@ -28,7 +28,8 @@ class Company < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def email=(value)
-    super(value.strip)
+    value.strip! if value
+    super(value)
   end
 
   protected
