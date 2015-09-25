@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
-  respond_to :html, :js, :json
-
   protect_from_forgery
 
-  layout proc { !!request.xhr? }
+  layout proc { false if request.xhr? }
 
 
   before_action :authenticate_user!

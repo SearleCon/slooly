@@ -25,19 +25,17 @@ class Subscription < ActiveRecord::Base
 
   delegate :description, :duration, :cost, to: :plan, prefix: true
 
-  after_initialize :deactivate, unless: :new_record?
   before_create :set_expiry_date
+
+  def deactivate!
+    update(active: false)
+  end
 
   def expired?
     expiry_date.past?
   end
 
   private
-
-  def deactivate
-    update(active: false) if expired?
-  end
-
   def set_expiry_date
     self.expiry_date = plan_duration.months.from_now
   end

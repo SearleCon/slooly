@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def subscription
-    Subscription.active.last
+    subscriptions.active.last
   end
 
   def subscribed?
