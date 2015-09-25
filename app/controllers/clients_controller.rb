@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  etag { current_user.try :id }
+
 
   before_action :set_client, only: [:show, :edit, :update, :destroy]
   before_action :build_client, only: [:new, :create]

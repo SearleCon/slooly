@@ -1,5 +1,4 @@
 class DashboardController < ApplicationController
-  etag  { current_user.try :id }
 
   decorates_assigned :clients
 

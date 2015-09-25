@@ -65,9 +65,6 @@ gem 'premailer-rails'
 # Postgres
 gem 'pg'
 
-# Configuration
-gem 'figaro'
-
 # Coupon Codes
 gem 'coupon_code'
 

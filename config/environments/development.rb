@@ -18,17 +18,9 @@ Rails.application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = {host: 'localhost'}
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {  address: ENV["GMAIL_ADDRESS"],
-                                          port: ENV["GMAIL_PORT"],
-                                          authentication: "plain",
-                                          enable_starttls_auto: true,
-                                          user_name: ENV["GMAIL_USER_NAME"],
-                                          password: ENV["GMAIL_PASSWORD"] }
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: "utf-8"
-  #  config.action_mailer.default :from => "slooly@example.com"
 
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
@@ -39,14 +31,7 @@ Rails.application.configure do
     Delayed::Job.scaler = :null
 
     Bullet.enable = true
-    Bullet.alert = false
-    Bullet.bullet_logger = false
-    Bullet.console = true
-    Bullet.growl = false
     Bullet.rails_logger = true
-    Bullet.bugsnag = false
-    Bullet.airbrake = false
-    Bullet.add_footer = true
   end
 
   # Slim

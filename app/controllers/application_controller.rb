@@ -1,14 +1,19 @@
 class ApplicationController < ActionController::Base
+  respond_to :html, :js, :json
 
   protect_from_forgery
 
-  respond_to :html, :js, :json
+  layout proc { !!request.xhr? }
+
 
   before_action :authenticate_user!
   before_action :validate_subscription, if: :user_signed_in?
   before_action :set_announcements
 
   around_action :with_timezone, if: :user_signed_in?
+
+
+  etag { [current_user.try(:id), flash] }
 
   private
   def set_announcements
