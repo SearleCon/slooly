@@ -17,7 +17,7 @@ task send_reminders: :environment do
 
   invoices = InvoicesToSend.new.invoices
 
-  reminders_to_send = invoices.map {|i| Invoice::Reminders.new(i) }.select(&:send?)
+  reminders_to_send = invoices.map {|invoice| Invoice::Reminders.new(invoice) }.select(&:send?)
 
   reminders_to_send.each do |reminder|
      history = History.create do |history|

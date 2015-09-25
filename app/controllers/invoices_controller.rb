@@ -8,10 +8,10 @@ class InvoicesController < ApplicationController
   def index
     @invoices = invoice_scope.includes(:client).page(params[:page])
 
-    if @invoices.any?
-      fresh_when @invoices
-    else
+    if @invoices.empty?
       render :dashboard
+    else
+      fresh_when @invoices
     end
   end
 

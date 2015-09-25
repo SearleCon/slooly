@@ -10,12 +10,10 @@ class ClientsController < ApplicationController
   def index
     @clients = client_scope.page(params[:page])
 
-    if @clients.any?
-      respond_to do |format|
-        format.json { render json: @clients.to_json }
-      end
-    else
+    if @clients.empty?
       render :dashboard
+    else
+      fresh_when @clients
     end
   end
 

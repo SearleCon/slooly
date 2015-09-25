@@ -45,5 +45,7 @@ module Slooly
     config.after_initialize do
       ActionView::Base.default_form_builder = BootstrapFormBuilder
     end
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

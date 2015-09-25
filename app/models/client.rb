@@ -17,7 +17,6 @@
 #
 
 class Client < ActiveRecord::Base
-  include CollectionCacheable
 
   to_param :business_name
 

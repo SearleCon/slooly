@@ -21,8 +21,6 @@
 #
 
 class Invoice < ActiveRecord::Base
-  include CollectionCacheable
-
   to_param :invoice_number
 
   OVERDUE2_MODIFIER = 2
