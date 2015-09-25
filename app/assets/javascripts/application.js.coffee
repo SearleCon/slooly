@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui
-#= require jquery-cookie
 #= require jquery-validate
 #= require bootstrap
 #= require bootstrap-datetimepicker
@@ -45,27 +44,6 @@ $.validator.setDefaults
 
   errorClass: "help-block"
 
-escapeHTML = (html) ->
- return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
-
-showFlashMessages = ->
-  alert_types =
-    notice: 'success'
-    alert: 'error'
-    info: 'info'
-    warning: 'warning'
-  cookieName = 'flash_messages'
-  cookie = $.cookie(cookieName)
-  if cookie?
-    flashMessages = JSON.parse(cookie)
-    for type, messages of flashMessages
-      if alert_types.hasOwnProperty(type)
-        $.each $.makeArray(messages), (i, value)->
-          $("<div>", { class: "alert alert-" + alert_types[type] + " fade in", html: value }).prepend(
-            $("<button>", { class: 'close', type: 'button', 'data-dismiss': 'alert', text: 'x'})
-          ).appendTo(".messages")
-    $.removeCookie(cookieName, { path: '/' })
-
 setTimeZone = ->
   tz = jstz.determine();
   $.cookie('timezone', tz.name(), { path: '/' });
@@ -87,8 +65,9 @@ pageLoad = ->
   $('.datepicker').datetimepicker({pickTime: false, autoclose: true}).on 'changeDate', (e) ->
      if $(this).data('datetimepicker').viewMode == 0
         $(this).datetimepicker('hide')
+
+
   $.bootstrapSortable(applyLast=true)
-  showFlashMessages()
   setTimeZone()
   $(document).on 'ajax:success', '.announcement', ->
     $(this).closest('.alert').remove()
@@ -96,11 +75,19 @@ pageLoad = ->
   $('input[id=upload-clients]').change ->
      $('#upload-clients-file').val($(this).val().split('\\').pop());
 
+  clients = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: 'http://localhost:3000/clients.json'
+    remote: {
+      url: 'http://localhost:3000/clients.json',
+    }
+  });
+
+
 
 $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad
-
-$(document).on 'ajax:complete', showFlashMessages
 
 $ -> pageLoad()
 

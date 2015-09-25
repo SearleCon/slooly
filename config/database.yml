@@ -79,7 +79,7 @@ production:
   encoding: unicode
   url:  <%= ENV["DATABASE_URL"] %>
   pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
-  reaping_frequency: <%= ENV["REAP_FREQ"] || 10 %>
+  reaping_frequency: <%= ENV["DB_REAP_FREQ"] || 10 %>
 #
 
 

@@ -72,13 +72,13 @@ Rails.application.configure do
   #  config.action_mailer.default :from => "slooly@example.com"
 
   config.action_mailer.smtp_settings = {
-      address: ENV["EMAIL_SMTP_ADDRESS"],
+      address: Rails.application.secrets.email_smtp_address,
       port: 587,
       #domain: "www.payingmantis.com",
       authentication: "plain",
       enable_starttls_auto: true,
-      user_name: ENV["EMAIL_USERNAME"],
-      password: ENV["EMAIL_PASSWORD"]
+      user_name: Rails.application.secrets.email_username,
+      password:  Rails.application.secrets.email_password
   }
   # Delayed Job Scaling
   config.after_initialize do

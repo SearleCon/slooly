@@ -10,6 +10,8 @@ Bundler.require(*Rails.groups)
 module Slooly
   class Application < Rails::Application
 
+    config.middleware.use Rack::Deflater
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
@@ -19,6 +21,8 @@ module Slooly
         controller_specs: false,
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.assets = false
+      g.helper = false
     end
 
     config.exceptions_app = routes

@@ -11,7 +11,9 @@ class ClientsController < ApplicationController
     @clients = client_scope.page(params[:page])
 
     if @clients.any?
-      fresh_when @clients
+      respond_to do |format|
+        format.json { render json: @clients.to_json }
+      end
     else
       render :dashboard
     end

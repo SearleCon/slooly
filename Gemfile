@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.1'
+gem 'rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'sass-rails',   '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 gem 'jbuilder'
-gem 'responders', '~> 2.0'
 
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
@@ -76,9 +75,6 @@ gem 'coupon_code'
 gem 'dalli'
 
 source 'https://rails-assets.org' do
-  # Cookie handler
-  gem 'rails-assets-jquery-cookie'
-
   # Validation
   gem 'rails-assets-jquery-validate'
 
@@ -90,7 +86,7 @@ end
 gem 'puma'
 
 group :production do
-  gem 'heroku-deflater'
+  gem "rack-timeout"
   gem 'rails_12factor'
 end
 
@@ -106,7 +102,6 @@ group :development do
   gem 'spring'
   gem 'annotate'
   gem 'quiet_assets'
-  gem 'rubocop', require: false
   gem 'bullet'
 end
 

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include UnobtrusiveFlash, LayoutRequired
 
   protect_from_forgery
 
