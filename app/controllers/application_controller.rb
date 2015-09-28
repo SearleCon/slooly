@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  respond_to :html, :js, :json
+
   protect_from_forgery
 
   layout proc { false if request.xhr? }

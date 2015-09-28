@@ -2,8 +2,8 @@ class Clients::ImportsController < ApplicationController
   def create
     importer.import
     redirect_to clients_url, notice: t('flash.clients.imports.create', resouce_name: importer.row_success_count)
-  rescue => e
-    flash.now[:alert] = e.message
+  rescue => error
+    flash.now[:alert] = error.message
     render :new
   end
 

@@ -25,6 +25,8 @@ class Company < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
+  before_save :normalize
+
   mount_uploader :image, ImageUploader
 
   def email=(value)
@@ -41,5 +43,9 @@ class Company < ActiveRecord::Base
     self.telephone = '555 345 6789'
     self.fax = 'People still fax?'
     self.email	= 'you@example.com'
+  end
+
+  def normalize
+    self.email = email.strip
   end
 end

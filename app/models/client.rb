@@ -30,13 +30,11 @@ class Client < ActiveRecord::Base
 
   scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
 
-  def business_name=(value)
-    value.strip! if value
-    super(value)
-  end
+  before_save :normalize
 
-  def email=(value)
-    value.strip! if value
-    super(value)
+  private
+  def normalize
+    self.business_name = business_name.strip
+    self.email = email.strip
   end
 end

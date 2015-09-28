@@ -25,7 +25,7 @@ class InvoiceDecorator < Draper::Decorator
   end
 
   def description
-    h.content_tag(:a, h.truncate(model.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: h.simple_format(model.description) }) if model.description.present?
+    h.content_tag(:a, h.truncate(model.description, length: 20), rel: 'popover', title: 'Invoice Description', data: { content: h.simple_format(model.description), trigger: 'hover', animation: true })
   end
 
   def status
