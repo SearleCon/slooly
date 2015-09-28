@@ -26,12 +26,11 @@ class User < ActiveRecord::Base
 
   has_one :company
   has_one :setting
+  has_one :subscription, -> { where(active: true) }, dependent: :destroy
 
   has_many :clients
   has_many :invoices
   has_many :histories
-
-  has_many :subscriptions
 
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
@@ -46,18 +45,10 @@ class User < ActiveRecord::Base
     2.hours
   end
 
-  def subscription
-    subscriptions.active.last
-  end
-
-  def subscribed?
-    subscription.present? && !subscription.expired?
-  end
-
   private
   def setup
     create_company!
     create_setting!
-    subscriptions.create!(plan: Plan.free_trial, active: true)
+    create_subscription!(plan: Plan.free_trial)
   end
 end

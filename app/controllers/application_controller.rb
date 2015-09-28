@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  respond_to :html, :js, :json
+  respond_to :html, :ks
 
   protect_from_forgery
 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_subscription
-    redirect_to new_order_url unless current_user.subscribed?
+    redirect_to new_order_url unless current_user.subscription.expired?
   end
 
   def with_timezone

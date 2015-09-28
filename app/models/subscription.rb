@@ -27,8 +27,12 @@ class Subscription < ActiveRecord::Base
 
   before_create :set_expiry_date
 
-  def deactivate!
-    update(active: false)
+
+
+  def destroy
+    run_callbacks :destroy do
+      self.update(active: false)
+    end
   end
 
   def expired?
@@ -39,4 +43,5 @@ class Subscription < ActiveRecord::Base
   def set_expiry_date
     self.expiry_date = plan_duration.months.from_now
   end
+
 end
