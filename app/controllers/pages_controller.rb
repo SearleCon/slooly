@@ -6,26 +6,38 @@ class PagesController < ApplicationController
   end
 
   def about
-    fresh_when(['about', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
   def privacy
-    fresh_when(['privacy', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
   def tos
-    fresh_when(['tos', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
   def pricing
-    fresh_when(['pricing', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
   def faq
-    fresh_when(['faq', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
   def tutorial
-    fresh_when(['tutorial', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 end
