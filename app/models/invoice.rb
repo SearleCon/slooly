@@ -40,7 +40,7 @@ class Invoice < ActiveRecord::Base
   before_save :set_final_demand, if: :status_changed?
   before_update :reschedule_reminder, if: :recurring?
 
-  delegate :business_name, to: :client, prefix: true
+  delegate :business_name, to: :client
 
   scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
 

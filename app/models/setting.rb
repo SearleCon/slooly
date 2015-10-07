@@ -35,41 +35,7 @@ class Setting < ActiveRecord::Base
   validates :days_before_pre_due, inclusion: { in: 1..31, message: 'can only be between 0 and 31.' }
 
   after_initialize :set_defaults, if: :new_record?
-
-  def payment_method_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def pre_due_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def due_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def overdue1_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def overdue2_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def overdue3_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
-
-  def final_demand_message=(value)
-    value = value.strip.squeeze(' ') if value
-    super(value)
-  end
+  before_save :normalize
 
   protected
 
@@ -98,5 +64,15 @@ class Setting < ActiveRecord::Base
 
     self.final_demand_subject = 'Notice of Final Demand: Action Required'
     self.final_demand_message = I18n.t('defaults.settings.final_demand_message')
+  end
+
+  def normalize
+    self.payment_method_message = payment_method_message.strip.squeeze(' ')
+    self.pre_due_message = pre_due_message.strip.squeeze(' ')
+    self.due_message = due_message.strip.squeeze(' ')
+    self.overdue1_message = overdue1_message.strip.squeeze(' ')
+    self.overdue2_message = overdue2_message.strip.squeeze(' ')
+    self.overdue3_message = overdue3_message.strip.squeeze(' ')
+    self.final_demand_message = final_demand_message.strip.squeeze(' ')
   end
 end

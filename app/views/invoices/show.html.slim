@@ -9,7 +9,7 @@
         = link_to invoices_path do
           = fa_icon 'arrow-left', text: 'Back'
 
-  p Invoice For: #{strong(link_to invoice.client_business_name, invoice.client)}
+  p Invoice For: #{strong(link_to invoice.business_name, invoice.client)}
   p Invoice Number: #{invoice.invoice_number}
   p Due Date: #{invoice.due_date}
   p Amount: #{invoice.amount}

@@ -6,7 +6,7 @@
     td= invoice.amount
     td= invoice.description
     td= invoice.status
-    td= link_to invoice.client_business_name, invoice.client
+    td= link_to invoice.business_name, invoice.client
     td= invoice.created_at
     td
       = link_to invoice do
