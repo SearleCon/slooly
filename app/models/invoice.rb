@@ -27,7 +27,7 @@ class Invoice < ActiveRecord::Base
   OVERDUE3_MODIFIER = 3
   FINAL_DEMAND_PERIOD = 1
 
-  enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7 }
+  enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7, recurring: 8 }
 
   belongs_to :client, touch: true
   belongs_to :user
@@ -36,13 +36,13 @@ class Invoice < ActiveRecord::Base
   validates :amount, numericality: true
 
   after_initialize :set_defaults, if: :new_record?
-  before_save :calculate_dates, if: :due_date_changed?
+  before_save :calculate_dates, if: :due_date_changed?, unless: :recurring?
   before_save :set_final_demand, if: :status_changed?
+  before_update :reschedule_reminder, if: :recurring?
 
   delegate :business_name, to: :client, prefix: true
 
   scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
-
 
   def pre_due?
     pd_date.today?
@@ -79,7 +79,7 @@ class Invoice < ActiveRecord::Base
   protected
 
   def set_defaults
-    self.status = :chasing
+    self.status ||= :chasing
   end
 
   def calculate_dates
@@ -90,7 +90,13 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_final_demand
-    self.fd_date = FINAL_DEMAND_PERIOD.day.from_now if send_final_demand?
+    self.fd_date = FINAL_DEMAND_PERIOD.days.from_now if send_final_demand?
+  end
+
+  def reschedule_reminder
+    if last_date_sent_changed?
+      self.due_date = due_date + 1.month
+    end
   end
 
 

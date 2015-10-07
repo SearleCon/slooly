@@ -9,11 +9,6 @@ describe 'scheduler:send_reminders' do
     Slooly::Application.load_tasks
     @user = create(:user)
     @client = create(:client, user: @user)
-    Invoice.skip_callback(:save, :before, :calculate_dates)
-  end
-
-  after do
-    Invoice.set_callback(:save, :before, :calculate_dates)
   end
 
   it 'creates a history entry for the reminder' do
@@ -31,7 +26,7 @@ describe 'scheduler:send_reminders' do
     expect(invoice.last_date_sent).to eq(Date.current)
   end
 
-  it 'does not send an email unless an invoice is in chasing or final_demand' do
+  it 'does not send an email unless an invoice is in chasing or final_demand or recurring' do
     invoice = create(:invoice, status: [:stop_chasing, :paid ,:write_off, :deleted].sample)
     expect { Rake::Task['send_reminders'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end

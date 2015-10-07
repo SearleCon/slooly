@@ -17,8 +17,6 @@ class Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :user, touch: true
 
-  attr_accessor :paypal_payment_token
-
   validates :plan, :user, presence: true
 
   scope :active, -> { where(active: true) }

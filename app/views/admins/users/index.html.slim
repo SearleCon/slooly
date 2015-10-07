@@ -18,7 +18,7 @@ table.table
       td= local_time_ago(user.created_at)
       td= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero?
       td= user.sign_in_count
-      td= user.subscription.plan_description if user.subscription.present?
+      td= user.subscription.plan_description
       td= local_time_ago(user.subscription.expiry_date) if user.subscription.present?
       td= link_to impersonations_path(id: user.id), method: :post do
         = fa_icon 'sign-in', text: 'Sign in as this user'

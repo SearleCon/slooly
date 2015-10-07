@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_subscription
-    redirect_to new_order_url unless current_user.subscription.expired?
+    redirect_to new_order_url if current_user.subscription.expired?
   end
 
   def with_timezone

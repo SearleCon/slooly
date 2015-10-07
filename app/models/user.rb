@@ -37,9 +37,8 @@ class User < ActiveRecord::Base
 
   after_create :setup
 
-  after_commit on: :create do
-    UserMailer.delay.registration_confirmation(self)
-  end
+  after_commit :send_registration_confirmation, on: :create
+
 
   def timeout_in
     2.hours
@@ -50,5 +49,9 @@ class User < ActiveRecord::Base
     create_company!
     create_setting!
     create_subscription!(plan: Plan.free_trial)
+  end
+
+  def send_registration_confirmation
+    UserMailer.delay.registration_confirmation(self)
   end
 end
