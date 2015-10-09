@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
 
   def self.search(query)
     if query.present?
-      where('description LIKE :query or invoice_number LIKE :query', query: "%#{query.downcase}%")
+      where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%")
     else
       none
     end

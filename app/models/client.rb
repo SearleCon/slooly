@@ -33,7 +33,7 @@ class Client < ActiveRecord::Base
 
   def self.search(query)
     if query.present?
-      where('business_name LIKE :query or contact_person LIKE :query', query: "%#{query.downcase}%")
+      where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%")
     else
       none
     end

@@ -3,4 +3,3 @@ class EnablePgtrgm < ActiveRecord::Migration
     execute "create extension pg_trgm;"
   end
 end
-m
