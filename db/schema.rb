@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325061513) do
+ActiveRecord::Schema.define(version: 20151009105511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",               limit: 255, default: "", null: false
@@ -48,6 +49,8 @@ ActiveRecord::Schema.define(version: 20150325061513) do
     t.datetime "updated_at"
   end
 
+  add_index "clients", ["business_name"], name: "business_name_idx", using: :gist
+  add_index "clients", ["contact_person"], name: "contact_person_idx", using: :gist
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
@@ -124,6 +127,8 @@ ActiveRecord::Schema.define(version: 20150325061513) do
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+  add_index "invoices", ["description"], name: "description_idx", using: :gist
+  add_index "invoices", ["invoice_number"], name: "invoice_number_idx", using: :gist
   add_index "invoices", ["status"], name: "index_invoices_on_status", using: :btree
   add_index "invoices", ["user_id"], name: "index_invoices_on_user_id", using: :btree
 

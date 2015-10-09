@@ -18,6 +18,7 @@
 
 class Client < ActiveRecord::Base
 
+
   to_param :business_name
 
   belongs_to :user
@@ -28,7 +29,7 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
-  scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
+  scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "%#{query}%") }
 
   before_save :normalize
 
