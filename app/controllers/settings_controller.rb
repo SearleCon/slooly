@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
   private
 
   def set_settings
-    @settings = current_user.setting
+    @settings = Setting.find_by(user_id: current_user.id)
   end
 
   def settings_params

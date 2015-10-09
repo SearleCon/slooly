@@ -2,13 +2,12 @@ class ClientsController < ApplicationController
 
 
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :build_client, only: [:new, :create]
 
   decorates_assigned :client
   decorates_assigned :clients
 
   def index
-    @clients = client_scope.page(params[:page])
+    @clients = current_user.clients.page(params[:page])
 
     if @clients.empty?
       render :dashboard
@@ -18,7 +17,7 @@ class ClientsController < ApplicationController
   end
 
   def search
-    @clients = client_scope.search(params[:q]).page(params[:page])
+    @clients = current_user.clients.search(params[:q]).page(params[:page])
     flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
     render :index
   end
@@ -27,7 +26,12 @@ class ClientsController < ApplicationController
     fresh_when @client
   end
 
+  def new
+    @client = Client.new
+  end
+
   def create
+    @client = Client.new(client_params)
     flash[:notice] = t('flash.clients.create', resource_name: @client.business_name.titleize) if @client.save
     respond_with @client
   end
@@ -47,20 +51,11 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def client_scope
-    current_user.clients
-  end
-
-  def build_client
-    @client = client_scope.new(client_params)
-  end
-
   def set_client
-    @client = client_scope.find(params[:id])
+    @client = Client.find(params[:id])
   end
 
   def client_params
-    params.fetch(:client, {}).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
+    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone).merge(user: current_user)
   end
 end

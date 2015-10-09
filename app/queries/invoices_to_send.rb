@@ -42,7 +42,7 @@ class InvoicesToSend
   end
 
   def chasing_or_final_demand
-    table[:status].in([Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand], Invoice.statuses[:recurring]])
+    table[:status].in([Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
   end
 
   def today

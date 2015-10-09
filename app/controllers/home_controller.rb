@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-   fresh_when(['homepage', flash], public: true)
+    http_cache_forever(public: true) do
+      render
+    end
   end
 end

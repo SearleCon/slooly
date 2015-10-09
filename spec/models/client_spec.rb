@@ -47,21 +47,6 @@ describe Client do
     should validate_uniqueness_of(:business_name).scoped_to(:user_id)
   end
 
-  it 'strips whitespaces from business_name' do
-    client = build(:client)
-    client.business_name = '  Test Business '
-    expected = 'Test Business'
-    expect(client.business_name).to eq(expected)
-  end
-
-  it 'strips whitespaces from email' do
-    client = build(:client)
-    client.email = '  jim@example.com '
-    expected = 'jim@example.com'
-    expect(client.email).to eq(expected)
-  end
-
-
   describe '.search' do
     it 'searches on business_name' do
       client = create(:client, business_name: 'Shell')
@@ -79,6 +64,20 @@ describe Client do
       result = Client.search('peter')
 
       expect(result).to eq [client]
+    end
+  end
+
+  describe '#normalize' do
+    let(:client) { build(:client) }
+
+    it 'strips whitespaces from business_name' do
+      client.business_name = '  Test Business '
+      expect { client.send(:normalize) }.to change(client, :business_name).to('Test Business')
+    end
+
+    it 'strips whitespaces from email' do
+      client.email = '  jim@example.com '
+      expect { client.send(:normalize) }.to change(client, :email).to('jim@example.com')
     end
   end
 end

@@ -27,10 +27,11 @@ describe User do
 
  it { should have_many(:clients) }
  it { should have_many(:invoices) }
- it { should have_many(:subscriptions) }
  it { should have_many(:histories) }
  it { should have_one(:company) }
  it { should have_one(:setting) }
+ it { should have_one(:subscription).conditions(active: true).dependent(:destroy) }
+
 
  it { should validate_acceptance_of(:terms_of_service) }
 
@@ -38,13 +39,6 @@ describe User do
    it 'should be 2 hours' do
      user = build(:user)
      expect(user.timeout_in).to eq(2.hours)
-   end
- end
-
- describe '#current_subscription' do
-   it 'should return the current active subscription for a user' do
-     user = create(:subscribed_user)
-     expect(user.subscription).to_not be_nil
    end
  end
 end

@@ -91,22 +91,6 @@ describe Invoice do
     end
   end
 
-  describe '#reschedule reminders' do
-    context 'last date sent has changed' do
-      it 'sets the invoice due date forward a month if the last_date_sent has changed' do
-        invoice =  build(:invoice, due_date: Date.current, last_date_sent: Date.today)
-        expect { invoice.send(:reschedule_reminder) }.to change(invoice, :due_date).to(1.month.from_now.to_date)
-      end
-    end
-
-    context 'last date sent has not changed' do
-      it 'does not change the due date' do
-        invoice = build(:invoice, due_date: Date.current, last_date_sent: nil)
-        expect { invoice.send(:reschedule_reminder) }.to_not change(invoice, :due_date)
-      end
-    end
-  end
-
   describe '#set_final_demand' do
     context 'invoice has a status of send_final_demand' do
       it 'sets a final demand date to the next day' do

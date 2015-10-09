@@ -26,7 +26,7 @@ describe 'scheduler:send_reminders' do
     expect(invoice.last_date_sent).to eq(Date.current)
   end
 
-  it 'does not send an email unless an invoice is in chasing or final_demand or recurring' do
+  it 'does not send an email unless an invoice is in chasing or final_demand' do
     invoice = create(:invoice, status: [:stop_chasing, :paid ,:write_off, :deleted].sample)
     expect { Rake::Task['send_reminders'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end

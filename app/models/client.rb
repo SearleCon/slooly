@@ -34,7 +34,7 @@ class Client < ActiveRecord::Base
 
   private
   def normalize
-    self.business_name = business_name.strip
-    self.email = email.strip
+    self.business_name = business_name.strip.squish
+    self.email = email.strip.squish
   end
 end
