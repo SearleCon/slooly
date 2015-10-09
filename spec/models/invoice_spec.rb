@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: invoices
+#
+#  id             :integer          not null, primary key
+#  invoice_number :string(255)
+#  due_date       :date
+#  amount         :decimal(, )
+#  description    :text
+#  status         :integer
+#  client_id      :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  user_id        :integer
+#  pd_date        :date
+#  od1_date       :date
+#  od2_date       :date
+#  od3_date       :date
+#  last_date_sent :date
+#  fd_date        :date
+#
+
 describe Invoice do
 
   before do
@@ -53,11 +75,11 @@ describe Invoice do
     end
 
     it 'sets the predue date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :pd_date).to(Date.yesterday)
+      expect { invoice.send(:calculate_dates) }.to change(invoice, :pd_date).to(1.day.ago.to_date)
     end
 
     it 'sets the overdue1 date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :od1_date).to(Date.tomorrow)
+      expect { invoice.send(:calculate_dates) }.to change(invoice, :od1_date).to(1.day.from_now.to_date)
     end
 
     it 'sets the overdue2 date' do

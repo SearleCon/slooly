@@ -60,15 +60,19 @@
 #                               DELETE /invoices/:id(.:format)                                 invoices#destroy
 #                impersonations POST   /impersonations(.:format)                               impersonations#create
 #                 impersonation DELETE /impersonations/:id(.:format)                           impersonations#destroy
+#             hide_announcement GET    /announcements/:id/hide(.:format)                       announcements#hide
 #                 announcements GET    /announcements(.:format)                                announcements#index
 #                   suggestions POST   /suggestions(.:format)                                  suggestions#create
 #                new_suggestion GET    /suggestions/new(.:format)                              suggestions#new
-#         payment_notifications POST   /payment_notifications(.:format)                        payment_notification#create
+#                 confirm_order GET    /orders/:id/confirm(.:format)                           orders#confirm
+#                 payment_order GET    /orders/:id/payment(.:format)                           orders#payment
+#                checkout_order POST   /orders/:id/checkout(.:format)                          orders#checkout
+#                complete_order POST   /orders/:id/complete(.:format)                          orders#complete
+#                     new_order GET    /orders/new(.:format)                                   orders#new
 #   payment_plans_subscriptions GET    /subscriptions/payment_plans(.:format)                  subscriptions#payment_plans
 #                 subscriptions POST   /subscriptions(.:format)                                subscriptions#create
 #              new_subscription GET    /subscriptions/new(.:format)                            subscriptions#new
 #                       history GET    /histories/:id(.:format)                                histories#show
-#                          home GET    /home(.:format)                                         pages#home
 #                         about GET    /about(.:format)                                        pages#about
 #                    ie_warning GET    /ie_warning(.:format)                                   pages#ie_warning
 #                           faq GET    /faq(.:format)                                          pages#faq
@@ -79,7 +83,6 @@
 #                           tos GET    /tos(.:format)                                          pages#tos
 #                      tutorial GET    /tutorial(.:format)                                     pages#tutorial
 #                       privacy GET    /privacy(.:format)                                      pages#privacy
-#               paypal_checkout GET    /paypal/checkout(.:format)                              subscriptions#paypal_checkout
 #                      contacts POST   /contacts(.:format)                                     contacts#create
 #                   new_contact GET    /contacts/new(.:format)                                 contacts#new
 #                        redeem PATCH  /redeem(.:format)                                       vouchers#redeem
@@ -89,8 +92,8 @@
 #                               PUT    /settings/:id(.:format)                                 settings#update
 #               client_invoices POST   /clients/:client_id/invoices(.:format)                  clients/invoices#create
 #            new_client_invoice GET    /clients/:client_id/invoices/new(.:format)              clients/invoices#new
-#                search_clients GET    /clients/search(.:format)                               clients#search
 #                exists_clients GET    /clients/exists(.:format)                               clients#exists
+#                search_clients GET    /clients/search(.:format)                               clients#search
 #                       clients GET    /clients(.:format)                                      clients#index
 #                               POST   /clients(.:format)                                      clients#create
 #                    new_client GET    /clients/new(.:format)                                  clients#new

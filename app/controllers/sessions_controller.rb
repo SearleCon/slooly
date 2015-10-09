@@ -2,7 +2,7 @@ class SessionsController < Devise::SessionsController
   skip_before_action :authenticate_user!, :validate_subscription
 
   def create
-    super { |user|  flash[:info] =  t('flash.subscriptions.status', period: view_context.local_time_ago(user.subscription.expiry_date)) unless user.subscription.expired?  }
+    super { |user|  flash[:info] =  t('flash.subscriptions.status', period: view_context.time_ago_in_words(user.subscription.expiry_date)) unless user.subscription.expired?  }
   end
 
   protected

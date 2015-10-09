@@ -183,6 +183,8 @@ GEM
     rails-assets-jquery (2.1.4)
     rails-assets-jquery-validate (1.14.0)
       rails-assets-jquery (>= 1.7.2)
+    rails-assets-jquery.cookie (1.4.1)
+      rails-assets-jquery (>= 1.2)
     rails-assets-jsTimezoneDetect (1.0.6)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -240,7 +242,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (2.47.1)
+    selenium-webdriver (2.48.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -335,6 +337,7 @@ DEPENDENCIES
   rack-timeout
   rails
   rails-assets-jquery-validate!
+  rails-assets-jquery.cookie!
   rails-assets-jsTimezoneDetect!
   rails_12factor
   rspec

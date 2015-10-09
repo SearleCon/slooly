@@ -75,6 +75,9 @@ source 'https://rails-assets.org' do
   # Validation
   gem 'rails-assets-jquery-validate'
 
+  # Jquery.cookie
+  gem 'rails-assets-jquery.cookie'
+
   # Time zone detection
   gem 'rails-assets-jsTimezoneDetect'
 end

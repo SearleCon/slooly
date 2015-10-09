@@ -8,6 +8,7 @@
 #= require twitter/bootstrap/rails/confirm
 #= require obfuscatejs
 #= require jquery.autosize
+#= require jquery.cookie
 #= require jsTimezoneDetect
 #= require local_time
 #= require nprogress
@@ -74,16 +75,6 @@ pageLoad = ->
 
   $('input[id=upload-clients]').change ->
      $('#upload-clients-file').val($(this).val().split('\\').pop());
-
-  clients = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.whitespace,
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: 'http://localhost:3000/clients.json'
-    remote: {
-      url: 'http://localhost:3000/clients.json',
-    }
-  });
-
 
 
 $(document).on 'page:load', pageLoad
