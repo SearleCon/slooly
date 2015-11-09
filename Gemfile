@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 4.2.5.rc2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
@@ -84,6 +84,7 @@ end
 
 # Server
 gem 'puma'
+
 
 group :production do
   gem "rack-timeout"

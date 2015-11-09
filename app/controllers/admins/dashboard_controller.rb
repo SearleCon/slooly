@@ -6,6 +6,6 @@ class Admins::DashboardController < Admins::BaseController
     histories =  History.order(created_at: :desc)
     suggestions = Suggestion.all
     jobs = Delayed::Job.all
-    @dashboard = AdminDashboard.new(users, new_users, histories, suggestions, jobs)
+    @dashboard = Admin::Dashboard.new(users, new_users, histories, suggestions, jobs)
   end
 end

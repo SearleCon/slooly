@@ -1,16 +1,12 @@
 class OrdersController < ApplicationController
+
   skip_before_action :validate_subscription
   before_action :set_plan, except: :new
+
 
   def new
     @plans = Plan.available
   end
-
-  def confirm
-    redirect_to payment_order_path(@plan) unless params[:PayerID]
-  end
-
-  def payment; end
 
   def checkout
     response = paypal.checkout
@@ -40,7 +36,7 @@ class OrdersController < ApplicationController
 
   def paypal
     @paypal ||= PayPal::Recurring.new(return_url: confirm_order_url(@plan),
-                                      cancel_url: root_url,
+                                      cancel_url: payment_order_url(@plan),
                                       token: params[:token],
                                       payer_id: params[:PayerID],
                                       description: @plan.description,

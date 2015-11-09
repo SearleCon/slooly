@@ -12,8 +12,25 @@
     = form_tag search_invoices_path, method: :get, class: 'form-search' do
       = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search'
       span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
-.invoices-listing= render 'invoices/listing', locals: { invoices: invoices }
-
+table.table.table-condensed.table.table-hover.sortable
+  thead
+    tr
+      th Age
+      th Invoice Number
+      th Due Date
+      th Amount
+      th Description
+      th Status
+      th Client
+      th Created
+      th
+      th
+      th
+  tbody= render invoices
+.flickr_pagination
+  .page_info
+  .pagination-links
+    = will_paginate invoices, container: false
 hr
 .actions
   = link_to new_invoice_path do
