@@ -4,10 +4,12 @@
   br
   = image_tag 'secure-paypal-logo.png', style: "float:right"
   br
-  - unless current_user.subscribed?
-    p Your subscription has expired. To continue using Paying Mantis you need to subscribe:
-    p
-      | (Note that payment is done through PayPal and is 100% secure)
+  p Your subscription has expired. To continue using Paying Mantis you need to subscribe:
+  p
+    | (Note that payment is done through PayPal and is 100% secure)
+
+  p
+    strong Please select one of the payment plans below:
   br
   table.table.table-bordered
     tr

@@ -3,9 +3,10 @@ class SessionsController < Devise::SessionsController
 
   def create
     super do |user|
-      flash[:info] = t('flash.subscriptions.status', period: view_context.time_ago_in_words(user.subscription.expiry_date))
       if user.subscription.expired?
         redirect_to new_order_url and return
+      else
+        flash[:info] = t('flash.subscriptions.status', period: view_context.time_ago_in_words(user.subscription.expiry_date))
       end
     end
   end

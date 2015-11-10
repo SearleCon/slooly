@@ -39,7 +39,6 @@ class User < ActiveRecord::Base
 
   after_commit :send_registration_confirmation, on: :create
 
-
   def timeout_in
     2.hours
   end
