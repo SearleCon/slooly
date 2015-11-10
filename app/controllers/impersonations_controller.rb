@@ -1,5 +1,5 @@
 class ImpersonationsController < ApplicationController
-  skip_before_action :authenticate_user!, :validate_subscription
+  skip_before_action :authenticate_user!
   before_action :authenticate_admin!, only: :create
   before_action :set_user, only: :create
   before_action :set_admin, only: :destroy

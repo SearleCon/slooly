@@ -1,8 +1,5 @@
 class OrdersController < ApplicationController
-
-  skip_before_action :validate_subscription
   before_action :set_plan, except: :new
-
 
   def new
     @plans = Plan.available

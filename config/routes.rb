@@ -169,10 +169,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptions, only: [:new, :create] do
-    get :payment_plans, on: :collection
-  end
-
   resources :histories, only: :show
 
   controller :pages do
