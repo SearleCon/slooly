@@ -5,10 +5,8 @@ class ApplicationController < ActionController::Base
 
   layout proc { false if request.xhr? }
 
-
   before_action :authenticate_user!
-  before_action :validate_subscription, if: :user_signed_in?
-  before_action :set_announcements
+  before_action :set_announcement
 
   around_action :with_timezone, if: :user_signed_in?
 
@@ -22,18 +20,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def set_announcements
-    recent_announcements = Announcement.recent.where.not(id: cookies.signed[:hidden_announcement_ids]).to_a
-    if recent_announcements.any?
-      flash[:warning] = []
-      recent_announcements.each do |announcement|
-        flash[:warning] << render_to_string(partial: 'layouts/breaking_news', locals: { announcement: announcement })
-      end
-    end
-  end
-
-  def validate_subscription
-    redirect_to new_order_url if current_user.subscription.expired?
+  def set_announcement
+    announcement = Announcement.recent.where.not(id: cookies.signed[:hidden_announcement_ids]).first
+    flash[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
   end
 
   def with_timezone

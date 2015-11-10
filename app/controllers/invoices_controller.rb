@@ -46,7 +46,7 @@ class InvoicesController < ApplicationController
 
   private
   def set_invoice
-    @invoice = invoice_scope.find(params[:id])
+    @invoice = Invoice.find(params[:id])
   end
 
   def invoice_params

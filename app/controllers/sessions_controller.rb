@@ -1,8 +1,13 @@
 class SessionsController < Devise::SessionsController
-  skip_before_action :authenticate_user!, :validate_subscription
+  skip_before_action :authenticate_user!
 
   def create
-    super { |user|  flash[:info] =  t('flash.subscriptions.status', period: view_context.time_ago_in_words(user.subscription.expiry_date)) unless user.subscription.expired?  }
+    super do |user|
+      flash[:info] = t('flash.subscriptions.status', period: view_context.time_ago_in_words(user.subscription.expiry_date))
+      if user.subscription.expired?
+        redirect_to new_order_url and return
+      end
+    end
   end
 
   protected
