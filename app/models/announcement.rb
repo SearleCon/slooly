@@ -18,6 +18,7 @@ class Announcement < ActiveRecord::Base
   validates :headline, :description, :posted_by, presence: true
 
   scope :recent, -> { where('created_at >= ?', EXPIRY_PERIOD.days.ago) }
+  scope :unread, ->(ids) { recent.where.not(id: ids)}
 
   def expiry_date
     @expiry_date ||= created_at.days_since(EXPIRY_PERIOD)

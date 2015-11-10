@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   private
   def set_announcement
-    announcement = Announcement.recent.where.not(id: cookies.signed[:hidden_announcement_ids]).first
+    announcement = Announcement.unread(cookies.signed[:hidden_announcement_ids]).first
     flash[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
   end
 
