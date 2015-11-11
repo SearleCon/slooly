@@ -28,9 +28,10 @@ class User < ActiveRecord::Base
   has_one :setting
   has_one :subscription, -> { where(active: true) }, dependent: :destroy
 
+  has_many :vouchers, dependent: :delete_all, foreign_key: :redeemed_by
+
   has_many :clients
   has_many :invoices
-  has_many :histories
 
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }

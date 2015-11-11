@@ -21,7 +21,6 @@
 #
 
 class History < ActiveRecord::Base
-  belongs_to :user, inverse_of: :histories
   belongs_to :client, inverse_of: :histories, touch: true
 
   after_initialize :set_defaults, if: :new_record?
