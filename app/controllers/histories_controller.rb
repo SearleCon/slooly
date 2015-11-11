@@ -1,4 +1,9 @@
 class HistoriesController < ApplicationController
+
+
+  before_action :authenticate_user!
+  before_action :confirm_subscription!
+
   decorates_assigned :history
 
   def show

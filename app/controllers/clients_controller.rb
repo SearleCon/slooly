@@ -1,6 +1,8 @@
 class ClientsController < ApplicationController
 
 
+  before_action :authenticate_user!
+  before_action :confirm_subscription!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   decorates_assigned :client

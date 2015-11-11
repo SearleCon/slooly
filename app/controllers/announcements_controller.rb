@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  skip_before_action :authenticate_user!, :set_announcements
+  skip_before_action  :set_announcement
 
   decorates_assigned :announcements
   decorates_assigned :announcement
@@ -9,7 +9,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def hide
-    ids = [params[:id], *cookies.signed[:hidden_announcement_ids]]
+    ids = [params[:id], *cookies.permanent.signed[:hidden_announcement_ids]]
     cookies.permanent.signed[:hidden_announcement_ids] = ids
     respond_to do |format|
       format.html { redirect_to :back }

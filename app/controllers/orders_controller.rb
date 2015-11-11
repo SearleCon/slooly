@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+  before_action :authenticate_user!
+
   before_action :set_plan, except: :new
 
   def new

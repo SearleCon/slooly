@@ -1,4 +1,7 @@
 class InvoicesController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :confirm_subscription!
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   decorates_assigned :invoice

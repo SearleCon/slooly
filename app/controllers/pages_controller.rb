@@ -1,11 +1,11 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, except: [:reports, :tutorial]
-
-  def reports
-    @summary_report = SummaryReport.new(current_user.invoices.chasing)
+  def about
+    http_cache_forever(public: true) do
+      render
+    end
   end
 
-  def about
+  def supported_browsers
     http_cache_forever(public: true) do
       render
     end

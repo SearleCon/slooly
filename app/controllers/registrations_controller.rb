@@ -1,10 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
-  skip_before_action :authenticate_user!
-
   protected
 
   def after_sign_up_path_for(_resource)
-    initial_setup_path
+    welcome_path
   end
 
   def sign_up_params

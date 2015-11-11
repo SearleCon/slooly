@@ -1,4 +1,7 @@
 class SettingsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :confirm_subscription!
+
   before_action :set_settings
 
   def update

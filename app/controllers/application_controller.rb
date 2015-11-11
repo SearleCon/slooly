@@ -5,24 +5,26 @@ class ApplicationController < ActionController::Base
 
   layout proc { false if request.xhr? }
 
-  before_action :authenticate_user!
-  before_action :set_announcement
+  before_action :set_announcement, if: :user_signed_in?
 
   around_action :with_timezone, if: :user_signed_in?
 
-
   etag { [current_user.try(:id), flash] }
 
-
   def http_cache_forever(public: false, version: 'v1')
-         expires_in 100.years, public: public
-         yield if stale?(etag: "#{version}-#{request.fullpath}-#{flash.to_a.join(',')}", last_modified: Time.parse('2011-01-01').utc, public: public)
+   expires_in 100.years, public: public
+   yield if stale?(etag: "#{version}-#{request.fullpath}-#{flash.to_a.join(',')}", last_modified: Time.parse('2011-01-01').utc, public: public)
   end
 
   private
+
   def set_announcement
-    announcement = Announcement.unread(cookies.signed[:hidden_announcement_ids]).first
+    announcement = Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first
     flash[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
+  end
+
+  def confirm_subscription!
+    redirect_to new_order_url if current_user.subscription.expired?
   end
 
   def with_timezone

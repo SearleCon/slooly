@@ -113,7 +113,11 @@
 
 Rails.application.routes.draw do
 
-  devise_for :admins, controllers: { sessions: 'admins/sessions' }
+  # Admin
+
+  get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
+
+  devise_for :admins, controllers: {sessions: 'admins/sessions'}
   authenticated :admin do
     namespace :admins do
       resources :dashboard, only: :index
@@ -133,62 +137,13 @@ Rails.application.routes.draw do
     root to: "admins/dashboard#index", as: :admin_root
   end
 
-  get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
-
-
+  # Users
 
   devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
+
   authenticated :user do
     root to: 'dashboard#index', as: :user_root
   end
-  root to: "home#index"
-
-  resources :dashboard, only: :index
-
-  resources :invoices do
-    collection do
-      get :search
-    end
-  end
-
-  resources :impersonations, only: [:create, :destroy]
-
-
-  resources :announcements, only: [:index] do
-    get :hide, on: :member
-  end
-
-  resources :suggestions, only: [:new, :create]
-
-  resources :orders, only: [:new] do
-    member do
-      get :confirm
-      get :payment
-      post :checkout
-      post :complete
-    end
-  end
-
-  resources :histories, only: :show
-
-  controller :pages do
-    get :about
-    get :ie_warning
-    get :faq
-    get :news
-    get :reports
-    get :initial_setup
-    get :pricing
-    get :tos
-    get :tutorial
-    get :privacy
-  end
-
-  resources :contacts, only: [:new, :create]
-
-  match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
-
-  resources :settings, only: [:index, :edit, :update]
 
   resources :clients do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
@@ -204,5 +159,55 @@ Rails.application.routes.draw do
 
   resource :company, only: [:show, :edit, :update]
 
-  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
+  resources :dashboard, only: :index
+
+  resources :invoices do
+    collection do
+      get :search
+    end
+  end
+
+  resources :histories, only: :show
+
+  match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
+
+  resources :settings, only: [:index, :edit, :update]
+  root to: "home#index"
+
+  resources :impersonations, only: [:create, :destroy]
+
+
+  resources :announcements, only: [:index] do
+    get :hide, on: :member
+  end
+
+  resources :orders, only: [:new] do
+    member do
+      get :confirm
+      get :payment
+      post :checkout
+      post :complete
+    end
+  end
+
+  resources :reports, only: :index
+  resources :welcome, only: :index
+
+  # Public
+  resources :suggestions, only: [:new, :create]
+
+  controller :pages do
+    get :about
+    get :supported_browsers
+    get :faq
+    get :pricing
+    get :tos
+    get :tutorial
+    get :privacy
+  end
+
+  resources :contacts, only: [:new, :create]
+
+  # Errors
+  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
 end

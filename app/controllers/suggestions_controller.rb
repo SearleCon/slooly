@@ -1,5 +1,4 @@
 class SuggestionsController < ApplicationController
-  skip_before_action :authenticate_user!
 
   def new
     @suggestion = Suggestion.new(suggestion_params)

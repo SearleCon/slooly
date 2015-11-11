@@ -1,5 +1,8 @@
 class DashboardController < ApplicationController
 
+  before_action :authenticate_user!
+  before_action :confirm_subscription!
+
   decorates_assigned :clients
 
   def index
