@@ -1,5 +1,5 @@
 class ErrorNotifier < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'exceptions@payingmantis.com'
 
   def notify(exception_name, message, backtrace)
     @exception_name = exception_name
