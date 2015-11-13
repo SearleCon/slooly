@@ -1,45 +1,34 @@
 class Admin::Dashboard
-  def initialize(users, new_users, histories, suggestions, jobs)
-    @users = users
-    @new_users = new_users
-    @histories = histories
-    @suggestions = suggestions
-    @jobs = jobs
-  end
 
-  def delayed_jobs
-    @jobs
+  def delayed_jobs_count
+    @delayed_jobs_count ||= Delayed::Job.count
   end
 
   def new_users
-    @new_users
+    @new_users || User.includes(subscription: :plan).where('created_at >= ?', DateTime.yesterday)
   end
 
   def emails_sent_today_count
-    @histories.where(date_sent: Date.current).size
+    @emails_sent_today_count ||= History.where(date_sent: Date.current).count
   end
 
   def emails_sent_last_7_days_count
-    @histories.where('date_sent >= ?', 7.days.ago).size
+    @emails_sent_last_7_days_count ||= History.where('date_sent >= ?', 7.days.ago).count
   end
 
   def last_25_emails_sent
-    @histories.limit(25)
+    @last_25_emails_sent ||= History.last(25)
   end
 
   def suggestions_last_7_days_count
-    @suggestions.where('created_at >= ?', 7.days.ago).size
+    @suggestions_last_7_days_count ||= Suggestion.where('created_at >= ?', 7.days.ago).count
   end
 
   def total_suggestions
-    @suggestions.size
+   @total_suggestions ||= Suggestion.count
   end
 
   def total_users
-    @users.total_entries
-  end
-
-  def users
-    @users
+    @total_users ||= User.count
   end
 end
