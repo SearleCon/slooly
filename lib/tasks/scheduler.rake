@@ -22,7 +22,6 @@ task send_reminders: :environment do
   reminders_to_send.each do |reminder|
      history = History.create do |history|
         history.client = reminder.invoice.client
-        history.user = reminder.invoice.user
         history.invoice_number = reminder.invoice.invoice_number
         history.subject = reminder.subject
         history.message = reminder.text

@@ -6,4 +6,4 @@
   table.table.table-bordered
     tr
       td Grant me full access to the site for the next #{pluralize(@plan.duration, 'month')} - Plan: #{@plan.description} at the cost of #{number_to_currency(@plan.cost, precision: 0)}.
-  = link_to 'Complete My Order', complete_subscription_path(@plan, {token: params[:token], PayerID: params[:PayerID]}), method: :post, class: 'btn btn-primary'
+  = link_to 'Complete My Order', complete_order_path(@plan, {token: params[:token], PayerID: params[:PayerID]}), method: :post, class: 'btn btn-primary'

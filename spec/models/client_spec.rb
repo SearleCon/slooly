@@ -66,18 +66,4 @@ describe Client do
       expect(result).to eq [client]
     end
   end
-
-  describe '#normalize' do
-    let(:client) { build(:client) }
-
-    it 'strips whitespaces from business_name' do
-      client.business_name = '  Test Business '
-      expect { client.send(:normalize) }.to change(client, :business_name).to('Test Business')
-    end
-
-    it 'strips whitespaces from email' do
-      client.email = '  jim@example.com '
-      expect { client.send(:normalize) }.to change(client, :email).to('jim@example.com')
-    end
-  end
 end

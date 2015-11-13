@@ -17,11 +17,12 @@
 #
 
 class Client < ActiveRecord::Base
+  include AttributeNormalizer
 
 
   to_param :business_name
 
-  belongs_to :user
+  belongs_to :user, required: true
   has_many :invoices
   has_many :histories, -> { order(date_sent: :desc) }
 
@@ -29,19 +30,11 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
-  before_save :normalize
-
   def self.search(query)
     if query.present?
       where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%")
     else
       none
     end
-  end
-
-  private
-  def normalize
-    self.business_name = business_name.strip.squish
-    self.email = email.strip.squish
   end
 end

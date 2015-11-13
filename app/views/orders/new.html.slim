@@ -22,4 +22,4 @@
         td: strong= plan.description
         td= pluralize(plan.duration, 'Month')
         td= number_to_currency(plan.cost, precision: 2)
-        td.text-center= link_to 'Place Order', payment_subscription_path(plan), class: "btn btn-primary"
+        td.text-center= link_to 'Place Order', payment_order_path(plan), class: "btn btn-primary"

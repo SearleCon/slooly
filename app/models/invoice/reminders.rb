@@ -51,7 +51,7 @@ module Invoice::Reminders
         Fax  : #{company.fax}\r
         Email: #{company.email}\r\n
         Payment Options: \r
-        #{setting.payment_method_message})
+        #{settings.payment_method_message})
     end
 
     def send?
@@ -67,11 +67,11 @@ module Invoice::Reminders
     end
 
     def sender_name
-      setting.send_from_name
+      settings.send_from_name
     end
 
     def cc
-      setting.email_copy_to
+      settings.email_copy_to
     end
 
     def recipient
@@ -80,8 +80,8 @@ module Invoice::Reminders
 
     private
 
-    def setting
-      @setting ||= invoice.user.setting
+    def settings
+      @settings ||= invoice.user.setting
     end
 
     def client
@@ -95,11 +95,11 @@ module Invoice::Reminders
 
   class Due < Base
     def subject
-      setting.due_subject
+      settings.due_subject
     end
 
     def message
-      setting.due_message
+      settings.due_message
     end
 
     def type
@@ -107,17 +107,17 @@ module Invoice::Reminders
     end
 
     def send?
-      setting.due_reminder
+      settings.due_reminder
     end
   end
 
   class PreDue < Base
     def subject
-      setting.pre_due_subject
+      settings.pre_due_subject
     end
 
     def message
-      setting.pre_due_message
+      settings.pre_due_message
     end
 
     def type
@@ -125,17 +125,17 @@ module Invoice::Reminders
     end
 
     def send?
-      setting.pre_due_reminder
+      settings.pre_due_reminder
     end
   end
 
   class FirstOverDue < Base
     def subject
-      setting.overdue1_subject
+      settings.overdue1_subject
     end
 
     def message
-      setting.overdue1_message
+      settings.overdue1_message
     end
 
     def type
@@ -149,11 +149,11 @@ module Invoice::Reminders
 
   class SecondOverDue < Base
     def subject
-      setting.overdue2_subject
+      settings.overdue2_subject
     end
 
     def message
-      setting.overdue2_message
+      settings.overdue2_message
     end
 
     def type
@@ -167,11 +167,11 @@ module Invoice::Reminders
 
   class ThirdOverDue < Base
     def subject
-      setting.overdue3_subject
+      settings.overdue3_subject
     end
 
     def message
-      setting.overdue3_message
+      settings.overdue3_message
     end
 
     def type
@@ -185,11 +185,11 @@ module Invoice::Reminders
 
   class FinalDemand < Base
     def subject
-      setting.final_demand_subject
+      settings.final_demand_subject
     end
 
     def message
-      setting.final_demand_message
+      settings.final_demand_message
     end
 
     def type

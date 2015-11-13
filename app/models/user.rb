@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   has_many :invoices
 
   validates :terms_of_service, acceptance: true
-  validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
+  validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
 
   after_create :setup
 

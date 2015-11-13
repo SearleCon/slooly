@@ -1,19 +1,18 @@
-- cache invoice do
-  = content_tag_for :tr, invoice do
-    td= invoice.age
-    td= link_to invoice.invoice_number, invoice
-    td= invoice.due_date
-    td= invoice.amount
-    td= invoice.description
-    td= invoice.status
-    td= link_to invoice.business_name, invoice.client
-    td= invoice.created_at
-    td
-      = link_to invoice do
-        = fa_icon 'play-circle-o', text: 'Show'
-    td
-      = link_to edit_invoice_path(invoice) do
-        = fa_icon 'edit', text: ' Edit'
-    td
-      = link_to invoice, method: :delete, data: {confirm: simple_format(t('confirmation.invoices.destroy', invoice_number: invoice.invoice_number),{}, sanitize: false)}, remote: true do
-        = fa_icon 'trash', text: 'Delete'
+= content_tag_for :tr, invoice do
+  td= invoice.age
+  td= link_to invoice.invoice_number, invoice
+  td= invoice.due_date
+  td= invoice.amount
+  td= invoice.description
+  td= invoice.status
+  td= link_to invoice.business_name, invoice.client
+  td= invoice.created_at
+  td
+    = link_to invoice do
+      = fa_icon 'play-circle-o', text: 'Show'
+  td
+    = link_to edit_invoice_path(invoice) do
+      = fa_icon 'edit', text: ' Edit'
+  td
+    = link_to invoice, method: :delete, data: {confirm: simple_format(t('confirmation.invoices.destroy', invoice_number: invoice.invoice_number),{}, sanitize: false)}, remote: true do
+      = fa_icon 'trash', text: 'Delete'

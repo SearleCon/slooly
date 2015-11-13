@@ -33,13 +33,13 @@ FactoryGirl.define do
     name "Test User"
     email { Faker::Internet.email }
     password "please123"
-    setting
-    company
     time_zone 'Pretoria'
 
     after(:create) do |user, evaluator|
       plan = create(:free_trial)
       create(:subscription, plan: plan, user: user, active: true)
+      create(:company, user: user)
+      create(:setting, user: user)
     end
   end
 end

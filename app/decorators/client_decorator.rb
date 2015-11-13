@@ -9,7 +9,7 @@ class ClientDecorator < Draper::Decorator
   end
 
   def contact_person
-    model.contact_person.titleize if model.contact_person.present?
+    model.contact_person.try(:titleize)
   end
 
   def telephone

@@ -1,16 +1,15 @@
-- cache client do
-  tr data-client-id=client.id
-    td= link_to client.business_name, client
-    td= client.contact_person
-    td= client.telephone
-    td=  client.email
-    td= local_time_ago(client.created_at)
-    td
-      = link_to client do
-        = fa_icon 'play-circle-o', text: 'Show'
-    td
-      = link_to edit_client_path(client) do
-        = fa_icon 'edit', text: ' Edit'
-    td
-      = link_to client, method: :delete, data: { confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name),{}, sanitize: false) } do
-        = fa_icon 'trash', text: 'Delete'
+tr data-client-id=client.id
+  td= link_to client.business_name, client
+  td= client.contact_person
+  td= client.telephone
+  td=  client.email
+  td= local_time_ago(client.created_at)
+  td
+    = link_to client do
+      = fa_icon 'play-circle-o', text: 'Show'
+  td
+    = link_to edit_client_path(client) do
+      = fa_icon 'edit', text: ' Edit'
+  td
+    = link_to client, method: :delete, data: { confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name),{}, sanitize: false) } do
+      = fa_icon 'trash', text: 'Delete'

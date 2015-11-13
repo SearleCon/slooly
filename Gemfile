@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-gem 'rails', '~> 4.2.5.rc2'
+gem 'rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
@@ -70,8 +70,10 @@ gem 'pg'
 # Coupon Codes
 gem 'coupon_code'
 
-# Memcached client
+# Caching
 gem 'dalli'
+gem 'multi_fetch_fragments'
+
 
 source 'https://rails-assets.org' do
   # Validation

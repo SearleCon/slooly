@@ -1,6 +1,6 @@
 class Admins::UsersController < Admins::BaseController
   def index
-    @users = User.all.page(params[:page])
+    @users = User.includes(subscription: :plan).all.order(last_sign_in_at: :desc).page(params[:page])
   end
 
   def show
