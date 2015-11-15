@@ -9,7 +9,7 @@
     br
     = simple_format(truncate(announcement.description, length: 600) { h.link_to 'Read full article', announcement })
     br
-    = content_tag :div, "Posted by #{announcement.posted_by} #{h.local_time_ago(announcement.created_at)}".html_safe, class: 'muted'
+    = content_tag :div, "Posted by #{announcement.posted_by} #{time_ago_in_words(announcement.created_at)} ago".html_safe, class: 'muted'
     .pull-right
       = link_to edit_admins_announcement_path(announcement) do
         = fa_icon 'edit', text: ' Edit'

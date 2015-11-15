@@ -10,7 +10,6 @@
 #= require jquery.autosize
 #= require jquery.cookie
 #= require jsTimezoneDetect
-#= require local_time
 #= require nprogress
 #= require nprogress-turbolinks
 #= require nprogress-ajax

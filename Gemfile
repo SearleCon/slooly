@@ -49,9 +49,6 @@ gem 'obfuscatejs'
 # Resize text areas
 gem 'autosize-rails'
 
-# relative time display
-gem 'local_time'
-
 # import from excel
 gem 'active_importer'
 
@@ -70,7 +67,6 @@ gem 'coupon_code'
 # Caching
 gem 'dalli'
 gem 'multi_fetch_fragments'
-
 
 source 'https://rails-assets.org' do
   # Validation

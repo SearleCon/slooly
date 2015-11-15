@@ -3,7 +3,7 @@ tr data-client-id=client.id
   td= client.contact_person.try(:titleize)
   td= number_to_phone(client.telephone, area_code: true)
   td=  obfuscate_email client.email if client.email.present?
-  td= local_time_ago(client.created_at)
+  td= "#{time_ago_in_words(client.created_at)} ago"
   td
     = link_to client do
       = fa_icon 'play-circle-o', text: 'Show'

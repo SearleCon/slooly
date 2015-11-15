@@ -28,9 +28,9 @@ ul.thumbnails
           = fa_icon 'gears', text: 'Change your settings.'
 
 .well
-  - if clients.any?
-    h3 Currently chasing #{strong(pluralize(clients.total_entries, 'client'))}
-    = page_entries_info clients
+  - if @clients.any?
+    h3 Currently chasing #{strong(pluralize(@clients.total_entries, 'client'))}
+    = page_entries_info @clients
     p.pull-right
       strong Note:
       | This page only shows invoices with a status of
@@ -40,7 +40,7 @@ ul.thumbnails
       | For all invoices, click #{link_to 'here', invoices_path} or on the Invoices menu item in the Navigation bar
     hr
     ul.unstyled
-      - clients.each do |client|
+      - @clients.each do |client|
         - cache client do
           li
             h4
@@ -69,12 +69,12 @@ ul.thumbnails
                   td= link_to invoice.invoice_number, invoice
                   td= invoice.due_date
                   td= invoice.amount
-                  td= local_time_ago(invoice.created_at)
+                  td= "#{time_ago_in_words(invoice.created_at)} ago"
           hr
     .flickr_pagination
       .page_info
       .pagination-links
-        = will_paginate clients, container: false
+        = will_paginate @clients, container: false
   - else
     .hero-unit
       p.lead

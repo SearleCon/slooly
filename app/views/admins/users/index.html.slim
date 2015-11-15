@@ -15,11 +15,11 @@ table.table
     tr
       td=link_to user.name, admins_user_path(user)
       td=user.email
-      td= local_time_ago(user.created_at)
-      td= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero?
+      td="#{time_ago_in_words(user.created_at)} ago"
+      td="#{time_ago_in_words(user.last_sign_in_at)} ago" unless user.sign_in_count.zero?
       td= user.sign_in_count
       td= user.subscription.plan_description
-      td= local_time_ago(user.subscription.expiry_date) if user.subscription.present?
+      td= "#{time_ago_in_words(user.subscription.expiry_date)} ago"
       td= link_to impersonations_path(id: user.id), method: :post do
         = fa_icon 'sign-in', text: 'Sign in as this user'
   .flickr_pagination

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def set_announcement
     announcement = Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first
-    flash[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
+    flash.now[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
   end
 
   def confirm_subscription!

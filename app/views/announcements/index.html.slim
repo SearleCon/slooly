@@ -3,10 +3,10 @@
   h6 All the latest product information, offers and general business news
 - @announcements.each do |announcement|
   .span11.well
-    =  image_tag('news.png', class: 'header').concat(h.content_tag :h3, announcement.headline)
+    =  image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline)
     br
     = simple_format(announcement.description)
     br
-    = content_tag :div, "Posted by #{announcement.posted_by} #{h.local_time_ago(announcement.created_at)}".html_safe, class: 'muted'
+    p.muted= "Posted by #{announcement.posted_by} #{time_ago_in_words(announcement.created_at)} ago".html_safe
 
 

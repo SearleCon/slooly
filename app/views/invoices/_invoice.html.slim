@@ -1,12 +1,12 @@
 = content_tag_for :tr, invoice do
   td= age_badge(invoice.age)
   td= link_to invoice.invoice_number, invoice
-  td= l invoice.due_date, format: :long
+  td= time_tag(invoice.due_date)
   td= number_with_precision(invoice.amount, precision: 2)
   td= content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: {content: simple_format(invoice.description), trigger: 'hover', animation: true})
   td= status_label(invoice.status)
   td= link_to invoice.business_name, invoice.client
-  td= local_time_ago(invoice.created_at)
+  td= "#{time_ago_in_words(invoice.created_at)} ago"
   td
     = link_to invoice do
       = fa_icon 'play-circle-o', text: 'Show'

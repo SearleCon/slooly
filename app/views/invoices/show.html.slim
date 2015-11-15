@@ -11,7 +11,7 @@
 
   p Invoice For: #{strong(link_to @invoice.business_name, @invoice.client)}
   p Invoice Number: #{@invoice.invoice_number}
-  p Due Date: #{l @invoice.due_date, format: :long}
+  p Due Date: #{strong time_tag(@invoice.due_date)}
   p Amount: #{number_with_precision(@invoice.amount, precision: 2)}
   p Status: #{status_label(@invoice.status)}
   p Description: #{simple_format(@invoice.description)}
@@ -24,10 +24,10 @@
       .media-body
         h4 Reminder Email Dates:
         ol
-          li Pre-Due Reminder (if applicable): #{strong @invoice.pd_date }
-          li First Overdue Reminder: #{strong @invoice.od1_date}
-          li Second Overdue Reminder: #{strong @invoice.od2_date}
-          li Third Overdue Reminder: #{strong @invoice.od3_date}
+          li Pre-Due Reminder (if applicable): #{strong time_tag(@invoice.pd_date) }
+          li First Overdue Reminder: #{strong time_tag(@invoice.od1_date)}
+          li Second Overdue Reminder: #{strong time_tag(@invoice.od2_date)}
+          li Third Overdue Reminder: #{strong time_tag(@invoice.od3_date)}
 
 hr
 ul.inline

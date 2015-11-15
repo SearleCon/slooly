@@ -29,8 +29,8 @@
                 td= item.priority
                 td= item.attempts
                 td= truncate(item.last_error, length: 30 )
-                td= local_time_ago(item.run_at)
-                td= local_time_ago(item.created_at)
+                td= "#{time_ago_in_words(item.run_at)} ago"
+                td= "#{time_ago_in_words(item.created_at)} ago"
       - else
         p.lead No working jobs currently
     .tab-pane#pending
@@ -50,8 +50,8 @@
                 td= item.priority
                 td= item.attempts
                 td= truncate(item.last_error, length: 30 )
-                td= local_time_ago(item.run_at)
-                td= local_time_ago(item.created_at)
+                td= "#{time_ago_in_words(item.run_at)} ago"
+                td= "#{time_ago_in_words(item.created_at)} ago"
                 td
                   = link_to queue_admins_job_path(item, job: {}), class: 'btn btn-info', method: :patch do
                     = fa_icon 'flag', text: ' Run Now'
@@ -79,8 +79,8 @@
                 td= item.priority
                 td= item.attempts
                 td=  truncate(item.last_error, length: 30 )
-                td= local_time_ago(item.run_at)
-                td= local_time_ago(item.created_at)
+                td= "#{time_ago_in_words(item.run_at)} ago"
+                td= "#{time_ago_in_words(item.created_at)} ago"
                 td
                   = link_to  queue_admins_job_path(item), class: 'btn btn-info', method: :patch do
                     = fa_icon 'flag', text: ' Run Now'
