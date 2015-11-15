@@ -5,7 +5,7 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @invoices = decorate(current_user.invoices.includes(:client).page(params[:page]))
+    @invoices = current_user.invoices.includes(:client).page(params[:page])
 
     if @invoices.empty?
       render :dashboard
@@ -15,13 +15,12 @@ class InvoicesController < ApplicationController
   end
 
   def search
-    @invoices =  decorate(current_user.invoices.includes(:client).search(params[:q]).page(params[:page]))
+    @invoices =  current_user.invoices.includes(:client).search(params[:q]).page(params[:page])
     flash[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q])
     render :index
   end
 
   def show
-    @invoice = decorate(@invoice)
     fresh_when @invoice
   end
 

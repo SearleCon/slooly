@@ -11,10 +11,10 @@
 
   p Invoice For: #{strong(link_to @invoice.business_name, @invoice.client)}
   p Invoice Number: #{@invoice.invoice_number}
-  p Due Date: #{@invoice.due_date}
-  p Amount: #{@invoice.amount}
-  p Status: #{@invoice.status}
-  p Description: #{@invoice.description}
+  p Due Date: #{l @invoice.due_date, format: :long}
+  p Amount: #{number_with_precision(@invoice.amount, precision: 2)}
+  p Status: #{status_label(@invoice.status)}
+  p Description: #{simple_format(@invoice.description)}
 
   - if @invoice.chasing?
     hr
@@ -22,7 +22,7 @@
       .pull-left
         =image_tag('calendarbig.png', class: 'media-object')
       .media-body
-        h4 Reminder Email Dates for Invoice #{@invoice.invoice_number}:
+        h4 Reminder Email Dates:
         ol
           li Pre-Due Reminder (if applicable): #{strong @invoice.pd_date }
           li First Overdue Reminder: #{strong @invoice.od1_date}

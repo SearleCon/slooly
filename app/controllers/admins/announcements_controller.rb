@@ -3,7 +3,7 @@ class Admins::AnnouncementsController < Admins::BaseController
   before_action :build_announcement, only: [:new, :create]
 
   def index
-    @announcements = decorate(Announcement.all)
+    @announcements = Announcement.all
   end
 
   def create

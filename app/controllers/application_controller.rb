@@ -16,19 +16,10 @@ class ApplicationController < ActionController::Base
    yield if stale?(etag: "#{version}-#{request.fullpath}-#{flash.to_a.join(',')}", last_modified: Time.parse('2011-01-01').utc, public: public)
   end
 
-
-  def decorate(object)
-    if object.respond_to?(:each)
-      CollectionDecorator.decorate(object, view_context)
-    else
-      "#{object.klass}Decorator".constantize.decorate(object, view_context)
-    end
-  end
-
   private
 
   def set_announcement
-    announcement = decorate(Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first)
+    announcement = Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first
     flash[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
   end
 

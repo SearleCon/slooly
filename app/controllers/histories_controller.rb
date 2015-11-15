@@ -5,7 +5,7 @@ class HistoriesController < ApplicationController
   before_action :confirm_subscription!
 
   def show
-    @history = decorate(History.find(params[:id]))
+    @history = History.find(params[:id])
     fresh_when @history
   end
 end

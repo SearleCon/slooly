@@ -5,11 +5,11 @@
     = fa_icon 'newspaper-o', text: 'Add News'
 - @announcements.each do |announcement|
   .span11.well
-    = announcement.headline
+    =   image_tag('news.png', class: 'header').concat(h.content_tag :h3, announcement.headline)
     br
-    = announcement.short_description
+    = simple_format(truncate(announcement.description, length: 600) { h.link_to 'Read full article', announcement })
     br
-    = announcement.posted_by
+    = content_tag :div, "Posted by #{announcement.posted_by} #{h.local_time_ago(announcement.created_at)}".html_safe, class: 'muted'
     .pull-right
       = link_to edit_admins_announcement_path(announcement) do
         = fa_icon 'edit', text: ' Edit'

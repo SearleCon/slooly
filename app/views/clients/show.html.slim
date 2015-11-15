@@ -1,18 +1,18 @@
-- cache client do
+- cache @client do
   .page-header
     .media
       .pull-left
         =image_tag('clients.png', class: 'media-object')
       .media-body
         h1 Client Details
-        h3=@client.business_name
+        h3=@client.business_name.titleize
         = link_to clients_path do
           = fa_icon 'arrow-left', text: 'Back'
-  p Business Name: #{strong @client.business_name}
-  p Contact Person: #{@client.contact_person}
-  p Telephone: #{@client.telephone}
-  p Fax:  #{@client.fax}
-  p Email: #{@client.email}
+  p Business Name: #{strong @client.business_name.titleize}
+  p Contact Person: #{@client.contact_person.try(:titleize) }
+  p Telephone: #{number_to_phone(@client.telephone, area_code: true)}
+  p Fax:  #{number_to_phone(@client.fax, area_code: true)}
+  p Email: #{obfuscate_email @client.email if @client.email.present? }
   address
     strong Address
     br
@@ -23,13 +23,13 @@
     | #{@client.post_code}
 
   ul.inline
-    li= link_to  edit_client_path(client) do
+    li= link_to  edit_client_path(@client) do
       = fa_icon 'edit', text: ' Edit this client'
-    li= link_to client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: @client.business_name), {}, sanitize: false)}, class: 'delete-client' do
+    li= link_to @client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: @client.business_name), {}, sanitize: false)}, class: 'delete-client' do
       = fa_icon 'trash', text: 'Delete'
     li= link_to new_client_path do
       = fa_icon 'male', text: ' Add another Client'
-    li= link_to new_client_invoice_path(client) do
+    li= link_to new_client_invoice_path(@client) do
       = fa_icon 'file-text', text: ' Add invoice for this client'
 
   hr
@@ -44,7 +44,7 @@
         - if @client.invoices.any?
           p
             | You are currently chasing the following #{strong pluralize(@client.invoices.size, 'invoice')} for
-               #{strong @client.business_name} to the value of #{strong @client.invoices.total} (total chasing amount).
+               #{strong @client.business_name.titleize} to the value of #{strong @client.invoices.total} (total chasing amount).
           table.table.table-condensed.sortable
             thead
               tr
@@ -59,10 +59,10 @@
                 th
             tbody= render @client.invoices, cache: true
         - else
-          p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
+          p You are #{strong 'not'} chasing any invoices for #{@client.business_name.titleize}.
       #history.tab-pane.fade.in
         - if @client.histories.any?
-          p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
+          p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name.titleize} (Newest to Oldest).
           table.table.table-condensed.sortable
             tr
               th Date Sent
@@ -73,5 +73,5 @@
               th Message
             = render @client.histories, cache: true
         - else
-          p You have #{strong 'no'} chasing history for #{@client.business_name}.
+          p You have #{strong 'no'} chasing history for #{@client.business_name.titleize}.
     hr
