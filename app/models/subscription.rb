@@ -25,14 +25,6 @@ class Subscription < ActiveRecord::Base
 
   before_create :set_expiry_date
 
-
-
-  def destroy
-    run_callbacks :destroy do
-      self.update(active: false)
-    end
-  end
-
   def expired?
     expiry_date.past?
   end

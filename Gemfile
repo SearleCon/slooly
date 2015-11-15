@@ -18,9 +18,6 @@ gem "font-awesome-rails"
 gem 'bootstrap_sortable_rails'
 gem 'nprogress-rails'
 
-# Decorators
-gem 'draper', '~> 1.3'
-
 # Authentication
 gem 'devise'
 

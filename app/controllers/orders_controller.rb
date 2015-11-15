@@ -20,7 +20,10 @@ class OrdersController < ApplicationController
   def complete
     response = paypal.request_payment
     if response.approved? && response.completed?
-      current_user.create_subscription!(plan: @plan, paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID])
+      Subscription.transaction do
+        current_user.subscription.update!(active: false)
+        current_user.create_subscription!(plan: @plan, paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID])
+      end
       flash[:notice] = t('flash.subscriptions.activation.success')
     else
       flash[:alert] = t('flash.subscriptions.activation.failed')

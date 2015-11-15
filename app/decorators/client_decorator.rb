@@ -1,8 +1,13 @@
-class ClientDecorator < Draper::Decorator
-  delegate_all
+class ClientDecorator < Decorators::BaseDecorator
 
-  decorates_association :invoices, scope: :chasing
-  decorates_association :histories
+def histories
+    @invoices ||= HistoriesDecorator.decorate(histories, h)
+  end
+
+
+  def invoices
+   @invoices ||= InvoicesDecorator.decorate(invoices.chasing, h)
+  end
 
   def business_name
     model.business_name.titleize

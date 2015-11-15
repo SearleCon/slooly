@@ -5,11 +5,8 @@ class ClientsController < ApplicationController
   before_action :confirm_subscription!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
-  decorates_assigned :client
-  decorates_assigned :clients
-
   def index
-    @clients = current_user.clients.page(params[:page])
+    @clients = decorate(current_user.clients.page(params[:page]))
 
     if @clients.empty?
       render :dashboard
@@ -19,12 +16,13 @@ class ClientsController < ApplicationController
   end
 
   def search
-    @clients = current_user.clients.search(params[:q]).page(params[:page])
+    @clients = decorate(current_user.clients.search(params[:q]).page(params[:page]))
     flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
     render :index
   end
 
   def show
+    @client = decorate(@client)
     fresh_when @client
   end
 

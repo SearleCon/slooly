@@ -1,20 +1,20 @@
-- cache invoice do
+- cache @invoice do
   .page-header
     .media
       .pull-left
         =image_tag('invoices.png', class: 'media-object')
       .media-body
         h1 Invoice Details
-        h3=invoice.invoice_number
+        h3=@invoice.invoice_number
         = link_to invoices_path do
           = fa_icon 'arrow-left', text: 'Back'
 
-  p Invoice For: #{strong(link_to invoice.business_name, invoice.client)}
-  p Invoice Number: #{invoice.invoice_number}
-  p Due Date: #{invoice.due_date}
-  p Amount: #{invoice.amount}
-  p Status: #{invoice.status}
-  p Description: #{invoice.description}
+  p Invoice For: #{strong(link_to @invoice.business_name, @invoice.client)}
+  p Invoice Number: #{@invoice.invoice_number}
+  p Due Date: #{@invoice.due_date}
+  p Amount: #{@invoice.amount}
+  p Status: #{@invoice.status}
+  p Description: #{@invoice.description}
 
   - if @invoice.chasing?
     hr
@@ -22,18 +22,18 @@
       .pull-left
         =image_tag('calendarbig.png', class: 'media-object')
       .media-body
-        h4 Reminder Email Dates for Invoice #{invoice.invoice_number}:
+        h4 Reminder Email Dates for Invoice #{@invoice.invoice_number}:
         ol
-          li Pre-Due Reminder (if applicable): #{strong invoice.pd_date }
-          li First Overdue Reminder: #{strong invoice.od1_date}
-          li Second Overdue Reminder: #{strong invoice.od2_date}
-          li Third Overdue Reminder: #{strong invoice.od3_date}
+          li Pre-Due Reminder (if applicable): #{strong @invoice.pd_date }
+          li First Overdue Reminder: #{strong @invoice.od1_date}
+          li Second Overdue Reminder: #{strong @invoice.od2_date}
+          li Third Overdue Reminder: #{strong @invoice.od3_date}
 
 hr
 ul.inline
-  li= link_to  edit_invoice_path(invoice) do
+  li= link_to  edit_invoice_path(@invoice) do
     = fa_icon 'edit', text: ' Edit this invoice'
-  li= link_to invoice, method: :delete, data: {confirm: simple_format(t('confirmation.invoices.destroy', invoice_number: invoice.invoice_number), {}, sanitize: false)} do
+  li= link_to @invoice, method: :delete, data: {confirm: simple_format(t('confirmation.invoices.destroy', invoice_number: @invoice.invoice_number), {}, sanitize: false)} do
     = fa_icon 'trash', text: 'Delete'
   li= link_to new_invoice_path do
     = fa_icon 'file-text-o', text: ' Add another invoice'

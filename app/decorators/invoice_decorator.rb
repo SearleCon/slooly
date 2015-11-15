@@ -1,12 +1,10 @@
-class InvoiceDecorator < Draper::Decorator
-  STATUS_LABELS = { chasing: 'label label-success',
+class InvoiceDecorator < Decorators::BaseDecorator
+STATUS_LABELS = { chasing: 'label label-success',
                     stop_chasing: 'label label-warning',
                     paid: 'label label-info',
                     send_final_demand: 'label label-important',
                     write_off: 'label label-inverse',
                     delete: 'label label-default' }.with_indifferent_access
-
-  delegate_all
 
   def created_at
     h.local_time_ago(model.created_at)
@@ -14,6 +12,7 @@ class InvoiceDecorator < Draper::Decorator
 
   def due_date
     l model.due_date, format: :long
+    h.mail_to
   end
 
   def age

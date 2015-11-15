@@ -1,12 +1,10 @@
-class HistoryDecorator < Draper::Decorator
-  BADGES_FOR_REMINDER_TYPES = { Pre: 'badge badge-success',
+class HistoryDecorator < Decorators::BaseDecorator
+BADGES_FOR_REMINDER_TYPES = { Pre: 'badge badge-success',
                                 Due: 'badge badge-info',
                                 OD1: 'badge badge-inverse',
                                 OD2: 'badge badge-warning',
                                 OD3: 'badge badge-important',
                                 FD: 'badge' }.with_indifferent_access
-
-  delegate_all
 
   def date_sent
     h.local_time_ago(model.date_sent)

@@ -1,11 +1,8 @@
 class AnnouncementsController < ApplicationController
   skip_before_action  :set_announcement
 
-  decorates_assigned :announcements
-  decorates_assigned :announcement
-
   def index
-    @announcements = Announcement.recent
+    @announcements = decorate(Announcement.recent)
   end
 
   def hide

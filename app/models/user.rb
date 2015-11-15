@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
 
   has_one :company
   has_one :setting
-  has_one :subscription, -> { where(active: true) }, dependent: :destroy
+  has_one :subscription, -> { where(active: true) }
 
-  has_many :vouchers, dependent: :delete_all, foreign_key: :redeemed_by
+  has_many :vouchers, foreign_key: :redeemed_by
 
   has_many :clients
   has_many :invoices

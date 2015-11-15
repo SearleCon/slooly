@@ -3,7 +3,7 @@
   h6 All the latest product information, offers and general business news
   = link_to new_admins_announcement_path do
     = fa_icon 'newspaper-o', text: 'Add News'
-- announcements.each do |announcement|
+- @announcements.each do |announcement|
   .span11.well
     = announcement.headline
     br

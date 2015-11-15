@@ -5,27 +5,27 @@
         =image_tag('clients.png', class: 'media-object')
       .media-body
         h1 Client Details
-        h3=client.business_name
+        h3=@client.business_name
         = link_to clients_path do
           = fa_icon 'arrow-left', text: 'Back'
-  p Business Name: #{strong client.business_name}
-  p Contact Person: #{client.contact_person}
-  p Telephone: #{client.telephone}
-  p Fax:  #{client.fax}
-  p Email: #{client.email}
+  p Business Name: #{strong @client.business_name}
+  p Contact Person: #{@client.contact_person}
+  p Telephone: #{@client.telephone}
+  p Fax:  #{@client.fax}
+  p Email: #{@client.email}
   address
     strong Address
     br
-    | #{client.address}
+    | #{@client.address}
     br
-    | #{client.city}
+    | #{@client.city}
     br
-    | #{client.post_code}
+    | #{@client.post_code}
 
   ul.inline
     li= link_to  edit_client_path(client) do
       = fa_icon 'edit', text: ' Edit this client'
-    li= link_to client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: client.business_name), {}, sanitize: false)}, class: 'delete-client' do
+    li= link_to client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: @client.business_name), {}, sanitize: false)}, class: 'delete-client' do
       = fa_icon 'trash', text: 'Delete'
     li= link_to new_client_path do
       = fa_icon 'male', text: ' Add another Client'
@@ -41,10 +41,10 @@
         a[href="#history" data-toggle="tab"] Chasing History
     .tab-content
       #chasing.tab-pane.fade.in.active
-        - if client.invoices.any?
+        - if @client.invoices.any?
           p
-            | You are currently chasing the following #{strong pluralize(client.invoices.size, 'invoice')} for
-               #{strong client.business_name} to the value of #{strong client.invoices.total} (total chasing amount).
+            | You are currently chasing the following #{strong pluralize(@client.invoices.size, 'invoice')} for
+               #{strong @client.business_name} to the value of #{strong @client.invoices.total} (total chasing amount).
           table.table.table-condensed.sortable
             thead
               tr
@@ -57,11 +57,11 @@
                 th Client
                 th Created
                 th
-            tbody= render client.invoices, cache: true
+            tbody= render @client.invoices, cache: true
         - else
-          p You are #{strong 'not'} chasing any invoices for #{client.business_name}.
+          p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
       #history.tab-pane.fade.in
-        - if client.histories.any?
+        - if @client.histories.any?
           p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
           table.table.table-condensed.sortable
             tr
@@ -71,7 +71,7 @@
               th Reference
               th Subject
               th Message
-            = render client.histories, cache: true
+            = render @client.histories, cache: true
         - else
           p You have #{strong 'no'} chasing history for #{@client.business_name}.
     hr

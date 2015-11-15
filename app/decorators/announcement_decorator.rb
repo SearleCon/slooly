@@ -1,7 +1,5 @@
-class AnnouncementDecorator < Draper::Decorator
+class AnnouncementDecorator < BaseDecorator
   SHORT_DESCRIPTION_LENGTH = 600
-
-  delegate_all
 
   def headline
     h.image_tag('news.png', class: 'header').concat(h.content_tag :h3, model.headline)

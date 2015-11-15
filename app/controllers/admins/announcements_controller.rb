@@ -2,11 +2,8 @@ class Admins::AnnouncementsController < Admins::BaseController
   before_action :set_announcement, only: [:edit, :update, :destroy]
   before_action :build_announcement, only: [:new, :create]
 
-  decorates_assigned :announcements
-  decorates_assigned :announcement
-
   def index
-    @announcements = Announcement.all
+    @announcements = decorate(Announcement.all)
   end
 
   def create

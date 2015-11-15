@@ -4,7 +4,7 @@
       =image_tag('invoices.png', class: 'media-object')
     .media-body
       h1 Invoices
-      .pagination-details = page_entries_info invoices
+      .pagination-details = page_entries_info @invoices
 
   .search-form.pull-right
     small
@@ -26,11 +26,11 @@ table.table.table-condensed.table.table-hover.sortable
       th
       th
       th
-  tbody= render invoices
+  tbody= render @invoices
 .flickr_pagination
   .page_info
   .pagination-links
-    = will_paginate invoices, container: false
+    = will_paginate @invoices, container: false
 hr
 .actions
   = link_to new_invoice_path do
