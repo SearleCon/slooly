@@ -1,17 +1,16 @@
 #= require jquery
-#= require jquery_ujs
+#= require jquery-ujs
 #= require jquery-validate
 #= require bootstrap
-#= require bootstrap-datetimepicker
+#= require bootstrap-datepicker
 #= require obfuscatejs
 #= require jquery.autosize
-#= require jquery.cookie
-#= require jsTimezoneDetect
-#= require nprogress
-#= require nprogress-turbolinks
-#= require nprogress-ajax
+#= require sortable
 #= require turbolinks
 #= require_tree .
+
+Turbolinks.enableProgressBar();
+
 
 $.rails.allowAction = (element) ->
   # The message is something like "Are you sure?"
@@ -80,12 +79,10 @@ $.validator.setDefaults
 
   errorClass: "help-block"
 
-setTimeZone = ->
-  tz = jstz.determine();
-  $.cookie('timezone', tz.name(), { path: '/' });
 
 
 pageLoad = ->
+  Sortable.init()
   $("form").each ->
     if $(this).data("validate")
       $(this).validate(
@@ -98,12 +95,20 @@ pageLoad = ->
   $("[rel=tooltip]").tooltip()
   $("[rel=popover]").popover({html : true})
   $('textarea').autosize()
-  $('.datepicker').datetimepicker({pickTime: false, autoclose: true}).on 'changeDate', (e) ->
-     if $(this).data('datetimepicker').viewMode == 0
-        $(this).datetimepicker('hide')
+
+  $('[data-behaviour~=datepicker]').datepicker(
+    {
+      autoclose: true,
+      format: 'dd MM yyyy',
+      orientation: 'bottom',
+      title: 'Due Date'
+    }
+  ).on 'change', ->
+    $(this).valid();
 
 
-  setTimeZone()
+
+
   $(document).on 'ajax:success', '.announcement', ->
     $(this).closest('.alert').remove()
 

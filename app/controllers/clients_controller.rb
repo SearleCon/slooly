@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
   end
 
   def exists
-    respond_with { |format| format.json { render json: !current_user.clients.where("lower(business_name) = ?",client_params[:business_name].downcase).exists? } }
+    respond_with { |format| format.json { render json: !current_user.clients.where("lower(business_name) = ?", client_params[:business_name].downcase).exists? } }
   end
 
   private

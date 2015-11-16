@@ -11,7 +11,7 @@
   p
     strong Please select one of the payment plans below:
   br
-  table.table.table-bordered
+  table.table.table-bordered[data-sortable=true]
     tr
       td Package
       td Subscription Duration
@@ -20,6 +20,6 @@
     - @plans.each do |plan|
       tr
         td: strong= plan.description
-        td= pluralize(plan.duration, 'Month')
+        td[data-value=plan.duration]= pluralize(plan.duration, 'Month')
         td= number_to_currency(plan.cost, precision: 2)
         td.text-center= link_to 'Place Order', payment_order_path(plan), class: "btn btn-primary"

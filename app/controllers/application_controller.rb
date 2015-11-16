@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_announcement
 
-  around_action :with_timezone, if: :user_signed_in?
+  around_action :with_timezone
 
   etag { [current_user.try(:id), flash] }
 
@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
     redirect_to new_order_url if current_user.subscription.expired?
   end
 
-  def with_timezone
-    timezone = current_user.time_zone || Time.find_zone(cookies[:timezone])
-    Time.use_zone(timezone) { yield }
+  def with_timezone(&block)
+    timezone = current_user.try(:time_zone) || 'UTC'
+    Time.use_zone(timezone, &block)
   end
 end

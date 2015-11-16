@@ -16,7 +16,7 @@
     = form_tag search_clients_path, method: :get, class: 'form-search' do
       = text_field_tag :q, params[:q] ,class: 'search-query input-medium', placeholder: 'Search'
       span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
-table.table.table-hover.sortable#clients-table
+table.table.table-hover#clients-table[data-sortable=true]
   thead
     tr
       = content_tag :th, 'Business Name'

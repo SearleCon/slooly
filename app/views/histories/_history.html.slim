@@ -1,5 +1,5 @@
 = content_tag_for(:tr, history) do
-  td= link_to "#{time_ago_in_words(history.date_sent)} ago", history
+  td[data-value=history.date_sent]= link_to "#{time_ago_in_words(history.date_sent)} ago", history
   td= history.email_sent_to
   td= reminder_badge(history.reminder_type)
   td= history.invoice_number

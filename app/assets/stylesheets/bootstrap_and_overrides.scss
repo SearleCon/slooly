@@ -1,13 +1,19 @@
 @import "bootstrap";
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
-@import 'bootstrap-datetimepicker';
+@import "bootstrap-datepicker";
+@import "sortable/sass/sortable-theme-bootstrap";
 
-$nprogress-height: 5px;
-@import "nprogress";
-@import "nprogress-bootstrap";
 
-@import "font-awesome";
+
+html.turbolinks-progress-bar::before {
+  height: 5px !important;
+}
+
+/* tables */
+table{
+  @extend .sortable-theme-bootstrap;
+}
 
 
 /* footer */

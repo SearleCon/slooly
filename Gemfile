@@ -3,17 +3,13 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 gem 'rails', '~> 4.2'
-gem 'jquery-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-gem 'jbuilder'
 
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
-gem 'bootstrap-datetimepicker-rails'
 gem "font-awesome-rails"
-gem 'nprogress-rails'
 
 # Authentication
 gem 'devise'
@@ -65,14 +61,10 @@ gem 'dalli'
 gem 'multi_fetch_fragments'
 
 source 'https://rails-assets.org' do
-  # Validation
-  gem 'rails-assets-jquery-validate'
-
-  # Jquery.cookie
-  gem 'rails-assets-jquery.cookie'
-
-  # Time zone detection
-  gem 'rails-assets-jsTimezoneDetect'
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-jquery-ujs'
+  gem 'rails-assets-bootstrap-datepicker'
+  gem 'rails-assets-sortable'
 end
 
 # Server

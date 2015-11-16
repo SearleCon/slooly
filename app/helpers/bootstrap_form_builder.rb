@@ -24,20 +24,14 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  # TODO Clean up this code
   def date_picker(attribute, options = {})
-    options[:data] = options.fetch(:data, {}).merge(format: 'dd/MM/yyyy')
+    options[:data] = options.fetch(:data, {}).merge(behaviour: 'datepicker')
     value = options[:value]
     value ||= object.send(attribute) if object.respond_to? attribute
     options[:value] = value.to_date.strftime('%d/%m/%Y') if value.present?
     control_group(attribute) do
       concat(control_label(attribute, options.delete(:label)))
-      concat(controls do
-        concat(content_tag(:div, class: 'input-append datepicker') do
-          concat(ActionView::Helpers::FormBuilder.instance_method(:text_field).bind(self).call(attribute, options))
-          concat(content_tag(:span, content_tag(:i, nil, data: { date_icon: 'icon-calendar', data_time_icon: 'icon-time' }), class: 'add-on'))
-        end)
-      end)
+      concat(controls { ActionView::Helpers::FormBuilder.instance_method(:text_field).bind(self).call(attribute, options) })
     end
   end
 

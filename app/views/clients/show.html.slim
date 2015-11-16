@@ -45,7 +45,7 @@
           p
             | You are currently chasing the following #{strong pluralize(@client.invoices.size, 'invoice')} for
                #{strong @client.business_name} to the value of #{strong @client.invoices.total} (total chasing amount).
-          table.table.table-condensed.sortable
+          table.table.table-condensed[data-sortable=true]
             thead
               tr
                 th Age
@@ -63,7 +63,7 @@
       #history.tab-pane.fade.in
         - if @client.histories.any?
           p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
-          table.table.table-condensed.sortable
+          table.table.table-condensed[data-sortable=true]
             tr
               th Date Sent
               th Sent To

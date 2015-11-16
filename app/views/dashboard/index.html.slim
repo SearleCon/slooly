@@ -50,7 +50,7 @@ ul.thumbnails
               span.badge.badge-inverse #{client.invoices.size}
             p
               | #{strong 'Total:'} #{client.invoices.total}
-          table.table.table-striped.table-condensed.sortable
+          table.table.table-striped.table-condensed[data-sortable=true]
             thead
               tr
                 th
@@ -67,9 +67,9 @@ ul.thumbnails
                 = content_tag_for :tr, invoice do
                   td= invoice.age
                   td= link_to invoice.invoice_number, invoice
-                  td= invoice.due_date
+                  td[data-value=invoice.due_date]= time_tag(invoice.due_date)
                   td= invoice.amount
-                  td= "#{time_ago_in_words(invoice.created_at)} ago"
+                  td[data-value=invoice.created_at]= "#{time_ago_in_words(invoice.created_at)} ago"
           hr
     .flickr_pagination
       .page_info

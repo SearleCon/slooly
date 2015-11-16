@@ -49,7 +49,7 @@ ul.thumbnails
 .well.well-small
   h4 New Users (Since yesterday)
   - if @dashboard.new_users.any?
-    table.table.table-condensed.table-bordered
+    table.table.table-condensed.table-bordered[data-sortable=true]
       tr
         th Name
         th Email
@@ -60,9 +60,9 @@ ul.thumbnails
         tr
           td=link_to user.name, admins_user_path(user)
           td=user.email
-          td= "#{time_ago_in_words(user.last_sign_in_at)} ago" unless user.sign_in_count.zero?
+          td[data-value=user.last_sign_in_at]= "#{time_ago_in_words(user.last_sign_in_at)} ago" unless user.sign_in_count.zero?
           td= user.subscription.plan_description
-          td= "#{time_ago_in_words(user.subscription.expiry_date)} ago"
+          td[data-value=subscription.expiry_date]= "#{time_ago_in_words(user.subscription.expiry_date)} ago"
           td= link_to impersonations_path(id: user.id), method: :post do
             = fa_icon 'sign-in', text: 'Sign in as this user'
   - else
@@ -71,7 +71,7 @@ ul.thumbnails
 
 .well.well-small
   h4 Last 25 emails sent
-  table.table.table-condensed.table-bordered
+  table.table.table-condensed.table-bordered[data-sortable=true]
     tr
       th From
       th To
@@ -81,5 +81,5 @@ ul.thumbnails
       tr
         td= history.email_sent_from
         td= history.email_sent_to
-        td= "#{time_ago_in_words(history.date_sent)} ago"
+        td[data-value=history.date_sent]= "#{time_ago_in_words(history.date_sent)} ago"
         td= history.subject

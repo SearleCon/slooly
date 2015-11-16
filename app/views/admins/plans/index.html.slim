@@ -2,7 +2,7 @@
   h1 Plans
   = link_to new_admins_plan_path do
     = fa_icon 'money', text: ' Add a New Plan'
-table.table.table-condensed
+table.table.table-condensed[data-sortable=true]
   tr
     th Description
     th Duration
@@ -14,9 +14,9 @@ table.table.table-condensed
   - @plans.each do |plan|
     = content_tag_for(:tr, plan) do
       td= plan.description
-      td= pluralize(plan.duration, 'Month')
-      td= number_to_currency(plan.cost)
-      td= boolean_to_words(plan.active)
+      td[data-value=plan.duration]= pluralize(plan.duration, 'Month')
+      td[data-value=plan.cost]= number_to_currency(plan.cost)
+      td[data-value=plan.active]= boolean_to_words(plan.active)
       td= plan.subscriptions.size
       td= link_to edit_admins_plan_path(plan) do
         = fa_icon 'edit', text: ' Edit'
