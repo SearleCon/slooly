@@ -29,7 +29,7 @@ describe User do
  it { should have_many(:invoices) }
  it { should have_one(:company) }
  it { should have_one(:setting) }
- it { should have_one(:subscription).conditions(active: true).dependent(:destroy) }
+ it { should have_one(:subscription).conditions(active: true) }
 
 
  it { should validate_acceptance_of(:terms_of_service) }

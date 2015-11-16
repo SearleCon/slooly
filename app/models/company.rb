@@ -18,6 +18,8 @@
 #
 
 class Company < ActiveRecord::Base
+  include AttributeNormalizer
+
   belongs_to :user, touch: true
 
   validates :email, presence: true
@@ -25,14 +27,11 @@ class Company < ActiveRecord::Base
 
   after_initialize :set_defaults, if: :new_record?
 
-  before_save :normalize
+  before_save do
+    self.name = name.try(:titleize)
+  end
 
   mount_uploader :image, ImageUploader
-
-  def email=(value)
-    value.strip! if value
-    super(value)
-  end
 
   protected
   def set_defaults
@@ -43,9 +42,5 @@ class Company < ActiveRecord::Base
     self.telephone = '555 345 6789'
     self.fax = 'People still fax?'
     self.email	= 'you@example.com'
-  end
-
-  def normalize
-    self.email = email.strip
   end
 end

@@ -4,7 +4,6 @@ ruby '2.2.3'
 
 gem 'rails', '~> 4.2'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
@@ -13,9 +12,7 @@ gem 'jbuilder'
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-datetimepicker-rails'
-gem 'twitter-bootstrap-rails-confirm'
 gem "font-awesome-rails"
-gem 'bootstrap_sortable_rails'
 gem 'nprogress-rails'
 
 # Authentication
@@ -41,7 +38,6 @@ gem "paypal-recurring"
 gem "browser"
 gem 'metamagic'
 gem 'honeypot-captcha'
-
 
 # Obfuscate emails
 gem 'obfuscatejs'

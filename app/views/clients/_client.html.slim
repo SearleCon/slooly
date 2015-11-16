@@ -1,6 +1,6 @@
 tr data-client-id=client.id
-  td= link_to client.business_name.titleize, client
-  td= client.contact_person.try(:titleize)
+  td= link_to client.business_name, client
+  td= client.contact_person
   td= number_to_phone(client.telephone, area_code: true)
   td=  obfuscate_email client.email if client.email.present?
   td= "#{time_ago_in_words(client.created_at)} ago"

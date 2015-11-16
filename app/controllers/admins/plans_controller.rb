@@ -7,18 +7,18 @@ class Admins::PlansController < Admins::BaseController
   end
 
   def create
-    flash[:notice] = t('flash.actions.create', resource_name: @plan.description.titleize) if @plan.save
+    flash[:notice] = t('flash.actions.create', resource_name: @plan.description) if @plan.save
     respond_with @plan, location: admins_plans_url
   end
 
   def update
-    flash[:notice] = t('flash.plans.update', resource_name: @plan.description.titleize) if  @plan.update(plan_params)
+    flash[:notice] = t('flash.plans.update', resource_name: @plan.description) if  @plan.update(plan_params)
     respond_with @plan, location: admins_plans_url
   end
 
   def destroy
     @plan.destroy
-    flash[:notice] = t('flash.plans.destroy', resource_name: @plan.description.titleize) if @plan.destroyed?
+    flash[:notice] = t('flash.plans.destroy', resource_name: @plan.description) if @plan.destroyed?
     respond_with @plan, location: admins_plans_url
   end
 

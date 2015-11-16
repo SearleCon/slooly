@@ -11,6 +11,8 @@
 #
 
 class Announcement < ActiveRecord::Base
+  include AttributeNormalizer
+
   EXPIRY_PERIOD = 7
 
   default_scope { order(created_at: :desc) }
@@ -19,6 +21,10 @@ class Announcement < ActiveRecord::Base
 
   scope :recent, -> { where('created_at >= ?', EXPIRY_PERIOD.days.ago) }
   scope :unread, ->(ids) { where.not(id: ids)}
+
+  before_save do
+    self.headline = headline.titleize
+  end
 
   def expiry_date
     @expiry_date ||= created_at.days_since(EXPIRY_PERIOD)

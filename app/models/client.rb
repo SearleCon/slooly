@@ -30,6 +30,11 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
+  before_save do
+    self.business_name = business_name.titleize
+    self.contact_person = contact_person.try(:titleize)
+  end
+
   def self.search(query)
     if query.present?
       where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%")

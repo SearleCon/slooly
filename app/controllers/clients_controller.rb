@@ -31,12 +31,12 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    flash[:notice] = t('flash.clients.create', resource_name: @client.business_name.titleize) if @client.save
+    flash[:notice] = t('flash.clients.create', resource_name: @client.business_name) if @client.save
     respond_with @client
   end
 
   def update
-    flash[:notice] = t('flash.clients.update', resource_name: @client.business_name.titleize) if @client.update(client_params)
+    flash[:notice] = t('flash.clients.update', resource_name: @client.business_name) if @client.update(client_params)
     respond_with @client
   end
 
@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
   end
 
   def exists
-    respond_with { |format| format.json { render json: !current_user.clients.exists?(client_params) } }
+    respond_with { |format| format.json { render json: !current_user.clients.where("lower(business_name) = ?",client_params[:business_name].downcase).exists? } }
   end
 
   private

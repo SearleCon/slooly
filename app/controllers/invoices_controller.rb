@@ -41,7 +41,9 @@ class InvoicesController < ApplicationController
 
   def destroy
     @invoice.destroy
-    respond_with(@invoice)
+    respond_with(@invoice) do |format|
+      format.html { redirect_to :back }
+    end
   end
 
   private

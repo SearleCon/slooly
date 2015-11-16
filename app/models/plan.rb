@@ -13,9 +13,17 @@
 #
 
 class Plan < ActiveRecord::Base
+  include AttributeNormalizer
+
   to_param :description
 
   has_many :subscriptions
+
+  validates :description, :duration, :cost, presence: true
+
+  before_save do
+    self.description = description.try(:titleize)
+  end
 
   def self.free_trial
     Rails.cache.fetch('free_trial_plan', expires_in: 8.hours) do

@@ -6,7 +6,7 @@ class CompaniesController < ApplicationController
   before_action :set_company
 
   def update
-    flash[:notice] = t('flash.company.update', resource_name: @company.name.titleize) if @company.update(company_params)
+    flash[:notice] = t('flash.company.update', resource_name: @company.name) if @company.update(company_params)
     respond_with @company, location: company_url
   end
 
