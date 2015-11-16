@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   layout proc { false if request.xhr? }
 
-  before_action :set_announcement, if: :user_signed_in?
+  before_action :set_announcement
 
   around_action :with_timezone, if: :user_signed_in?
 
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def set_announcement
     announcement = Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first
-    flash.now[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement
+    flash.now[:warning] = render_to_string(partial: 'layouts/breaking_news', locals: {announcement: announcement}) if announcement.present?
   end
 
   def confirm_subscription!
