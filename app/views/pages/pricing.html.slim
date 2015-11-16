@@ -18,24 +18,46 @@ br
 h3
   | We have a plan to fit any business, and budget! 
   = link_to "Sign up Now!", new_user_registration_path
-.section1
-  h3 Pay Monthly - $12 p/m
-  h4 First Month Free
-  | Every User starts off free! Only pay if you are happy with our service and only after month 1.
-.section2
-  h3 Bronze - $30 (3 Months)
-  h4 16% Discount!
-  | Get 16% discount by paying for 3 months up front, essentially $10 per month instead of $12!
-  '
-  strong
-    | (Our Most Popular Plan)
-.section3
-  h3 Silver - $48 (6 Months)
-  h4 33% Discount!
-  | Get 33% discount by paying for 6 months up front, essentially only paying $8 per month instead of $12!
-.section4
-  h3 Gold - $72 (For 1 year)
-  h4 50% Discount!
-  | Get 50% discount by paying for 1 year up front, essentially only paying $6 per month instead of $12!
-  br
+
+.container
+  .row-fluid.pricing-table.pricing-three-column
+    .span4.plan
+      .plan-name-bronze
+        h2 Bronze
+        span $8.99 / Month
+      ul
+        li.plan-feature 10 Users
+        li.plan-feature 5TB Disk Space
+        li.plan-feature
+          a.btn.btn-primary.btn-plan-select href="#"
+            i.icon-white.icon-ok
+            | Select
+    .span4.plan
+      .plan-name-silver
+        h2
+          | Silver
+          span.badge.badge-warning Popular
+        span
+          strike $10.99
+          font color="red"
+            | $9.99 -
+            span.label.label-warning Sale
+      ul
+        li.plan-feature 50 Users
+        li.plan-feature 10TB Disk Space
+        li.plan-feature
+          a.btn.btn-primary.btn-plan-select href="#"
+            i.icon-white.icon-ok
+            | Select
+    .span4.plan
+      .plan-name-gold
+        h2 Gold
+        span $15.99 / Month
+      ul
+        li.plan-feature Unlimited Users
+        li.plan-feature Unlimited Space
+        li.plan-feature
+          a.btn.btn-primary.btn-plan-select href="#"
+            i.icon-white.icon-ok
+            | Select
 = image_tag 'secure-paypal-logo.png'

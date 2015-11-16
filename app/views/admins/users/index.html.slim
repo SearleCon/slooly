@@ -22,6 +22,5 @@ table.table.table-condensed[data-sortable=true]
       td[data-value=user.subscription.expiry_date]= "#{time_ago_in_words(user.subscription.expiry_date)} ago"
       td= link_to impersonations_path(id: user.id), method: :post do
         = fa_icon 'sign-in', text: 'Sign in as this user'
-  .flickr_pagination
-    .page_info
-    = will_paginate @users, container: false
+
+  = paginate @users

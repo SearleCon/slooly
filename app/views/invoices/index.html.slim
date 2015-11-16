@@ -27,10 +27,7 @@ table.table.table-condensed.table.table-hover[data-sortable=true]
       th
       th
   tbody= render @invoices
-.flickr_pagination
-  .page_info
-  .pagination-links
-    = will_paginate @invoices, container: false
+  = paginate @invoices
 hr
 .actions
   = link_to new_invoice_path do

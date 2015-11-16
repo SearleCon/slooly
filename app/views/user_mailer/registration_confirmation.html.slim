@@ -1,38 +1,26 @@
-.registration_confirmation
-  table#background(width="100%" border="0" cellpadding="0" cellspacing="0")
-    tr
-      td(align="center" valign="top")
-        table#main(width="650" border="0" cellpadding="0" cellspacing="20")
-          tr
-            td#header(colspan="2")
-              h3 Welcome to Paying Mantis, #{@user.name}
-              h4 The site that makes chasing your debtors easier!
-          tr
-            td.divider(colspan="2" bgcolor="#555555" height="2")
-          tr.episode
-            td
-            td(valign="top")
-              h3
-                | Your registration details
-              p
-                |  Email: 
-                = @user.email
-                |  (Log in with this)
-                br
-                |  Username: 
-                = @user.name
-                br
-                br
-              p
-                span.duration
-                  |  For security purposes, we will not send you your password.
-                  br
-                  |  If you ever forget it, simply go to the login page at www.PayingMantis.com/users/sign_in, 
-                  br
-                  | click on forgot password, enter in the above email address, and we will send you instructions on resetting the password. 
-          tr
-            td.divider(colspan="2" bgcolor="#555555" height="2")
-          tr
-            td#footer(colspan="2" align="center")
-              p
-                | ©2013 Searle Consulting - All rights reserved
+.hero-unit.text-center
+  h2 Welcome to Paying Mantis, #{@user.name}
+  h4 The site that makes chasing your debtors easier!
+
+  h3
+    | Your registration details
+  p
+    |  Email:
+    '
+    = @user.email
+    |  (Log in with this)
+    br
+    |  Username:
+    '
+    = @user.name
+    br
+    br
+  p
+    |  For security purposes, we will not send you your password.
+    br
+    |  If you ever forget it, simply go to the login page at www.PayingMantis.com/users/sign_in,
+    br
+    | click on forgot password, enter in the above email address, and we will send you instructions on resetting the password.
+
+  p
+    | ©2015 Searle Consulting - All rights reserved

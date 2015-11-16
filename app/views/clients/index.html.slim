@@ -28,8 +28,5 @@ table.table.table-hover#clients-table[data-sortable=true]
       th
       th
   tbody= render @clients, cache: true
-.flickr_pagination
-  .page_info
-  .pagination-links
-    = will_paginate @clients, container: false
+  = paginate @clients
 hr

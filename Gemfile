@@ -18,7 +18,7 @@ gem 'devise'
 gem "carrierwave"
 
 # Pagination
-gem 'will_paginate', '~> 3.0.6'
+gem 'kaminari'
 
 # Background Processing
 gem 'delayed_job_active_record'

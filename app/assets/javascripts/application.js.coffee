@@ -105,9 +105,6 @@ pageLoad = ->
   ).on 'change', ->
     $(this).valid();
 
-
-
-
   $(document).on 'ajax:success', '.announcement', ->
     $(this).closest('.alert').remove()
 

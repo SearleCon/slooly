@@ -5,13 +5,13 @@
         = f.text_field :business_name, autofocus: true, data: {rule_required: true, rule_remote: exists_clients_url, msg_remote: 'A client with this business name already exists.' }, placeholder: 'Business name'
       - else
         = f.text_field :business_name, autofocus: true, placeholder: 'Business name'
+      = f.email_field :email, data: {rule_email: true, rule_required: true}, placeholder: 'Email'
       = f.text_field :contact_person, placeholder: 'Contact person'
       = f.text_field :address, placeholder: 'Address'
       = f.text_field :city, placeholder: 'City'
       = f.text_field :post_code, label:  'Zip / Post Code', placeholder: 'Post code'
       = f.telephone_field :telephone, placeholder: 'Telephone'
       = f.telephone_field :fax, placeholder: 'Fax'
-      = f.email_field :email, data: {rule_email: true, rule_required: true}, placeholder: 'Email'
     .span6.well
       .media
         .pull-left

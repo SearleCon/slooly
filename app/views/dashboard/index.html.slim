@@ -71,10 +71,7 @@ ul.thumbnails
                   td= invoice.amount
                   td[data-value=invoice.created_at]= "#{time_ago_in_words(invoice.created_at)} ago"
           hr
-    .flickr_pagination
-      .page_info
-      .pagination-links
-        = will_paginate @clients, container: false
+    = paginate @clients
   - else
     .hero-unit
       p.lead
