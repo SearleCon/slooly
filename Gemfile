@@ -64,6 +64,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-bootstrap-datepicker'
+  gem 'rails-assets-jquery-validate'
   gem 'rails-assets-sortable'
 end
 

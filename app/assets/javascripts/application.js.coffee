@@ -100,8 +100,7 @@ pageLoad = ->
     {
       autoclose: true,
       format: 'dd MM yyyy',
-      orientation: 'bottom',
-      title: 'Due Date'
+      orientation: 'auto'
     }
   ).on 'change', ->
     $(this).valid();
