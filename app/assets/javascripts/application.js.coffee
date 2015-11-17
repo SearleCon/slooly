@@ -104,7 +104,7 @@ pageLoad = ->
     {
       autoclose: true,
       format: 'dd MM yyyy',
-      orientation: 'auto'
+      orientation: 'right'
     }
   ).on 'change', ->
     $(this).valid();
