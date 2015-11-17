@@ -82,8 +82,6 @@ $.validator.setDefaults
 
   errorClass: "help-block"
 
-
-
 pageLoad = ->
   Sortable.init()
   $('.timeago').timeago()
@@ -104,7 +102,7 @@ pageLoad = ->
     {
       autoclose: true,
       format: 'dd MM yyyy',
-      orientation: 'right'
+      orientation: 'bottom'
     }
   ).on 'change', ->
     $(this).valid();
