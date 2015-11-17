@@ -36,6 +36,16 @@ body
   padding-bottom: 70px;
 }
 
+/* Forms */
+input{
+  @extend .input-xlarge;
+}
+textarea{
+  @extend .input-xlarge;
+  height: 6em;
+}
+
+
 /* tables */
 table{
   @extend .sortable-theme-bootstrap;

@@ -10,11 +10,11 @@
 = form_for [@client, @invoice], html: {data: {validate: true} } do |f|
   .row
     .span5
-      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}, placeholder: 'Due date', class: 'input-xlarge'
-      = f.number_field :amount, data: { rule_number: true }, placeholder: 'Amount', class: 'input-xlarge'
-      = f.text_area :description, placeholder: 'Description', class: 'input-xlarge', rows: 6
-      = f.text_field :invoice_number, placeholder: 'Invoice number', data: { rule_required: true }, class: 'input-xlarge'
-      = f.select :status, Invoice.statuses.keys, { include_blank: false}, class: 'input-xlarge'
+      = f.date_picker :due_date, data: {rule_required: true, msg_required: 'Please choose a due date for the invoice.'}, placeholder: 'Due date'
+      = f.number_field :amount, data: { rule_number: true }, placeholder: 'Amount'
+      = f.text_area :description, placeholder: 'Description', class: 'input-xlarge'
+      = f.text_field :invoice_number, placeholder: 'Invoice number', data: { rule_required: true }
+      = f.select :status, Invoice.statuses.keys, { include_blank: false}
     .span6.well
       .media
         .pull-left

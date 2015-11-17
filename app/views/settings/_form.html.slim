@@ -22,11 +22,11 @@
         h3 General Settings
         .row
           .span5
-            = f.text_field :send_from_name, class: 'input-xlarge'
-            = f.text_field :email_copy_to, class: 'input-xlarge'
-            = f.text_field :days_between_chase, class: 'input-xlarge'
-            = f.text_field :days_before_pre_due, class: 'input-xlarge'
-            = f.text_area :payment_method_message, class: 'input-xlarge', rows: 6
+            = f.text_field :send_from_name
+            = f.text_field :email_copy_to
+            = f.text_field :days_between_chase
+            = f.text_field :days_before_pre_due
+            = f.text_area :payment_method_message
           .span4.well
             .media
               .pull-left
@@ -44,9 +44,9 @@
         h3 Pre-Due Reminder
         .row
           .span5
-            = f.check_box :pre_due_reminder, label: 'Send pre due reminder', class: 'input-xlarge'
-            = f.text_field :pre_due_subject, class: 'input-xlarge'
-            = f.text_area :pre_due_message, class: 'input-xlarge', rows: 6
+            = f.check_box :pre_due_reminder, label: 'Send pre due reminder'
+            = f.text_field :pre_due_subject
+            = f.text_area :pre_due_message
           .span4.well
             .media
               .pull-left
@@ -63,9 +63,9 @@
         h3 Due Reminder
         .row
           .span5
-            = f.check_box :due_reminder, label: 'Send due reminder', class: 'input-xlarge'
-            = f.text_field :due_subject, class: 'input-xlarge'
-            = f.text_area :due_message, class: 'input-xlarge', rows: 6
+            = f.check_box :due_reminder, label: 'Send due reminder'
+            = f.text_field :due_subject
+            = f.text_area :due_message
           .span4.well
             .media
               .pull-left
@@ -81,8 +81,8 @@
         h3 First Overdue Reminder
         .row
           .span5
-            = f.text_field :overdue1_subject, class: 'input-xlarge'
-            = f.text_area :overdue1_message, class: 'input-xlarge', rows: 6
+            = f.text_field :overdue1_subject
+            = f.text_area :overdue1_message
           .span4.well
             .media
               .pull-left
@@ -96,8 +96,8 @@
         h3 Second Overdue Reminder
         .row
           .span5
-            = f.text_field :overdue2_subject, class: 'input-xlarge'
-            = f.text_area :overdue2_message, class: 'input-xlarge', rows: 6
+            = f.text_field :overdue2_subject
+            = f.text_area :overdue2_message
           .span4.well
             .media
               .pull-left
@@ -111,8 +111,8 @@
         h3 Third Overdue Reminder
         .row
           .span5
-            = f.text_field :overdue3_subject, class: 'input-xlarge'
-            = f.text_area :overdue3_message, class: 'input-xlarge', rows: 6
+            = f.text_field :overdue3_subject
+            = f.text_area :overdue3_message
           .span4.well
             .media
               .pull-left
@@ -126,8 +126,8 @@
         h3 Final Demand
         .row
           .span5
-            = f.text_field :final_demand_subject, class: 'input-xlarge'
-            = f.text_area :final_demand_message, class: 'input-xlarge', rows: 6
+            = f.text_field :final_demand_subject
+            = f.text_area :final_demand_message
           .span4.well
             .media
               .pull-left

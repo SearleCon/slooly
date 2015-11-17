@@ -19,9 +19,9 @@ hr
 h6 Let us get back to you:
 
 = form_for @message, url: contacts_path, html: { honeypot: true } do |f|
-  = f.text_field :name, class: 'input-xlarge'
-  = f.email_field :email, class: 'input-xlarge'
-  = f.text_field :subject, class: 'input-xlarge'
-  = f.text_area :body, class: 'input-xlarge', rows: 6
+  = f.text_field :name
+  = f.email_field :email
+  = f.text_field :subject
+  = f.text_area :body
   hr
   = f.submit  "Send Enquiry", class: 'btn btn-primary'
