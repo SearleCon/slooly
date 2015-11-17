@@ -33,7 +33,7 @@ h3 Cancel my account
 p
   | Unhappy?
   '
-  = link_to "Cancel my account", registration_path(resource_name), data: { confirm: '<span class="label label-important">WARNING!</span><br><br>'+'You are about to delete your ENTIRE ACCOUNT!<br><b>NOTE:</b> All related clients and invoices will also be deleted! This cannot be undone!<br><br> Are you sure you want to cancel your account?' }, method: :delete
+  = link_to "Cancel my account", registration_path(resource_name), data: { confirm: simple_format(t('confirmation.accounts.cancel'), {}, sanitize: false) }, method: :delete
 p
   | (We would hate to see you go! Instead, why not #{link_to 'contact us', new_contact_path}, tell us why you are unhappy, and let's first see if we can cater to your needs)
 

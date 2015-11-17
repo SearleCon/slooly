@@ -49,7 +49,7 @@ ul.thumbnails
 .well.well-small
   h4 New Users (Since yesterday)
   - if @dashboard.new_users.any?
-    table.table.table-condensed.table-bordered[data-sortable=true]
+    table[data-sortable=true]
       tr
         th Name
         th Email
@@ -71,7 +71,7 @@ ul.thumbnails
 
 .well.well-small
   h4 Last 25 emails sent
-  table.table.table-condensed.table-bordered[data-sortable=true]
+  table[data-sortable=true]
     tr
       th From
       th To

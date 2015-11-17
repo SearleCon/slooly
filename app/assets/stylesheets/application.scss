@@ -16,7 +16,7 @@ $paginationActiveBackground: darkgray;
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "bootstrap-datepicker";
-@import "sortable/sass/sortable-theme-bootstrap";
+@import "sortable/sass/sortable-theme-minimal";
 
 @import "font-awesome";
 
@@ -48,7 +48,10 @@ textarea{
 
 /* tables */
 table{
-  @extend .sortable-theme-bootstrap;
+  @extend .table;
+  @extend .table-condensed;
+  @extend .table-hover;
+  @extend .sortable-theme-minimal !optional;
 }
 
 

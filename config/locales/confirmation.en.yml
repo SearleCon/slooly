@@ -1,5 +1,12 @@
 en:
   confirmation:
+     accounts:
+      cancel: |
+                <span class='label label-important'>WARNING!</span>
+                You are about to delete your <strong>ENTIRE ACCOUNT!</strong>
+                <strong>NOTE:</strong> All related clients and invoices will also be deleted! This cannot be undone!
+                Are you sure you want to cancel your account?
+
      plans:
       destroy: |
                 <span class='label label-important'>WARNING!</span>

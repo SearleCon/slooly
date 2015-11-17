@@ -15,7 +15,7 @@
   .tab-content
     .tab-pane.active#working
       - if @working.any?
-        table.table.table-condensed[data-sortable=true]
+        table[data-sortable=true]
           thead
             tr
               th Priority
@@ -35,7 +35,7 @@
         p.lead No working jobs currently
     .tab-pane#pending
       - if @pending.any?
-        table.table.table-condensed[data-sortable=true]
+        table[data-sortable=true]
           thead
             tr
               th Priority
@@ -64,7 +64,7 @@
 
     .tab-pane#failed
       - if @failed.any?
-        table.table.table-condensed[data-sortable=true]
+        table[data-sortable=true]
           thead
             tr
               th Priority
