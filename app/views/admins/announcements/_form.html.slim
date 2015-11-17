@@ -1,5 +1,5 @@
 = form_for([:admins, @announcement]) do |f|
-  = f.text_field :headline
-  = f.text_area :description
-  = f.text_field :posted_by
+  = f.text_field :headline, class: 'input-xlarge'
+  = f.text_area :description, class: 'input-xlarge', rows: 6
+  = f.text_field :posted_by, class: 'input-xlarge'
   = f.submit 'Save'

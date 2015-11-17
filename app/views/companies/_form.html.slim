@@ -1,13 +1,13 @@
 = form_for @company, url: company_path do |f|
   .row
     .span5
-      = f.text_field :name
-      = f.text_field :address
-      = f.text_field :city
-      = f.text_field :post_code, label: 'Zip / Post Code'
-      = f.telephone_field :telephone
-      = f.telephone_field :fax
-      = f.email_field :email
+      = f.text_field :name, class: 'input-xlarge'
+      = f.text_field :address, class: 'input-xlarge'
+      = f.text_field :city, class: 'input-xlarge'
+      = f.text_field :post_code, label: 'Zip / Post Code', class: 'input-xlarge'
+      = f.telephone_field :telephone, class: 'input-xlarge'
+      = f.telephone_field :fax, class: 'input-xlarge'
+      = f.email_field :email, class: 'input-xlarge'
     .span6.well
       = image_tag('tip.png', class: 'header')
       h3 Notes:

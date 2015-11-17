@@ -29,8 +29,7 @@ describe Company do
   it { should allow_value('paul@example.com', 'ken.john@fish.com').for(:email) }
 
   it 'strips whitespaces from email' do
-    company = build(:company)
-    company.email = '  jim@example.com '
+    company = create(:company, email: '  jim@example.com ')
     expected = 'jim@example.com'
     expect(company.email).to eq(expected)
   end

@@ -12,7 +12,7 @@ module AttributeNormalizer
       if value.blank?
         write_attribute(column.name, nil)
       else
-        write_attribute(column.name, column.type == :text ? value.strip.squeeze(' ') : value.squish)
+        write_attribute(column.name, ((column.type == :text) ? value.strip.squeeze(' ') : value.squish))
       end
     end
   end

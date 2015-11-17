@@ -2,7 +2,6 @@ class Admins::JobsController < Admins::BaseController
   before_action :set_job, except: :index
 
   def index
-    @all_jobs = jobs_scope
     @failed = jobs_scope.where.not(last_error: nil)
     @pending = jobs_scope.where(attempts: 0, locked_at: nil)
     @working = jobs_scope.where.not(locked_at: nil)
