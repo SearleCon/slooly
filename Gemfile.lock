@@ -177,6 +177,8 @@ GEM
     rails-assets-jquery-validate (1.14.0)
       rails-assets-jquery (>= 1.7.2)
     rails-assets-sortable (0.8.0)
+    rails-assets-timeago (1.4.3)
+      rails-assets-jquery (>= 1.4)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -323,6 +325,7 @@ DEPENDENCIES
   rails-assets-jquery-ujs!
   rails-assets-jquery-validate!
   rails-assets-sortable!
+  rails-assets-timeago!
   rails_12factor
   rspec
   rspec-rails

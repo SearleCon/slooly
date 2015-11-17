@@ -14,7 +14,7 @@
   = @history.subject
   br
   .muted Date:
-  = "#{time_ago_in_words(history.date_sent)} ago"
+  = timeago(history.date_sent)
   br
   .muted To:
   = @history.email_sent_to

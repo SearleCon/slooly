@@ -66,6 +66,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-datepicker'
   gem 'rails-assets-jquery-validate'
   gem 'rails-assets-sortable'
+  gem 'rails-assets-timeago'
 end
 
 # Server

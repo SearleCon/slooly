@@ -29,8 +29,8 @@
                 td= item.priority
                 td= item.attempts
                 td= truncate(item.last_error, length: 30 )
-                td[data-value=item.run_at]= "#{time_ago_in_words(item.run_at)} ago"
-                td[data-value=item.created_at]= "#{time_ago_in_words(item.created_at)} ago"
+                td[data-value=item.run_at]= timeago(item.run_at)
+                td[data-value=item.created_at]= timeago(item.created_at)
       - else
         p.lead No working jobs currently
     .tab-pane#pending
@@ -50,8 +50,8 @@
                 td= item.priority
                 td= item.attempts
                 td= truncate(item.last_error, length: 30 )
-                td[data-value=item.run_at]= "#{time_ago_in_words(item.run_at)} ago"
-                td[data-value=item.created_at]= "#{time_ago_in_words(item.created_at)} ago"
+                td[data-value=item.run_at]= timeago(item.run_at)
+                td[data-value=item.created_at]= timeago(item.created_at)
                 td
                   = link_to queue_admins_job_path(item, job: {}), class: 'btn btn-info', method: :patch do
                     = fa_icon 'flag', text: ' Run Now'
@@ -79,8 +79,8 @@
                 td= item.priority
                 td= item.attempts
                 td=  truncate(item.last_error, length: 30 )
-                td[data-value=item.run_at]= "#{time_ago_in_words(item.run_at)} ago"
-                td[data-value=item.created_at]= "#{time_ago_in_words(item.created_at)} ago"
+                td[data-value=item.run_at]= timeago(item.run_at)
+                td[data-value=item.created_at]= timeago(item.created_at)
                 td
                   = link_to  queue_admins_job_path(item), class: 'btn btn-info', method: :patch do
                     = fa_icon 'flag', text: ' Run Now'

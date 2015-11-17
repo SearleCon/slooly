@@ -6,7 +6,7 @@
   td= content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: {content: simple_format(invoice.description), trigger: 'hover', animation: true})
   td= status_label(invoice.status)
   td= link_to invoice.business_name, invoice.client
-  td[data-value=invoice.created_at]= "#{time_ago_in_words(invoice.created_at)} ago"
+  td[data-value=invoice.created_at]= timeago(invoice.created_at)
   td
     = link_to invoice do
       = fa_icon 'play-circle-o', text: 'Show'

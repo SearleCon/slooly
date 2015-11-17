@@ -7,7 +7,6 @@ class ClientsController < ApplicationController
 
   def index
     @clients = current_user.clients.page(params[:page])
-    @clients = Client.limit(40).page(params[:page])
 
     if @clients.empty?
       render :dashboard

@@ -60,9 +60,9 @@ ul.thumbnails
         tr
           td=link_to user.name, admins_user_path(user)
           td=user.email
-          td[data-value=user.last_sign_in_at]= "#{time_ago_in_words(user.last_sign_in_at)} ago" unless user.sign_in_count.zero?
+          td[data-value=user.last_sign_in_at]= timeago(user.last_sign_in_at) unless user.sign_in_count.zero?
           td= user.subscription.plan_description
-          td[data-value=subscription.expiry_date]= "#{time_ago_in_words(user.subscription.expiry_date)} ago"
+          td[data-value=subscription.expiry_date]= timeago(user.subscription.expiry_date)
           td= link_to impersonations_path(id: user.id), method: :post do
             = fa_icon 'sign-in', text: 'Sign in as this user'
   - else
@@ -81,5 +81,5 @@ ul.thumbnails
       tr
         td= history.email_sent_from
         td= history.email_sent_to
-        td[data-value=history.date_sent]= "#{time_ago_in_words(history.date_sent)} ago"
+        td[data-value=history.date_sent]= timeago(history.date_sent)
         td= history.subject

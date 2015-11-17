@@ -6,6 +6,7 @@
 #= require obfuscatejs
 #= require jquery.autosize
 #= require sortable
+#= require timeago
 #= require turbolinks
 #= require_tree .
 
@@ -83,6 +84,7 @@ $.validator.setDefaults
 
 pageLoad = ->
   Sortable.init()
+  $('.timeago').timeago()
   $("form").each ->
     if $(this).data("validate")
       $(this).validate(

@@ -69,7 +69,7 @@ ul.thumbnails
                   td= link_to invoice.invoice_number, invoice
                   td[data-value=invoice.due_date]= time_tag(invoice.due_date)
                   td= invoice.amount
-                  td[data-value=invoice.created_at]= "#{time_ago_in_words(invoice.created_at)} ago"
+                  td[data-value=invoice.created_at]= timeago(invoice.created_at)
           hr
     = paginate @clients
   - else
