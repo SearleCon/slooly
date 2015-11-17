@@ -21,18 +21,18 @@
         .media-body
           h3.media-heading Notes:
       ul.form-notes
-        li #{strong 'File:'} Use the browse button to select the spreadsheet you wish to import.
+        li <strong>File:</strong> Use the browse button to select the spreadsheet you wish to import.
         li
-          | #{strong 'Format:'} The first row of the spreadsheet needs to contain the following headers:
+          | <strong>Format:</strong>  The first row of the spreadsheet needs to contain the following headers:
           ul
-            li #{strong 'BusinessName:'} The business name of the client. (This field is not optional)
-            li #{strong 'Email:'} The email of the client. (This field is not optional)
-            li #{strong 'ContactPerson:'} The email of the client. (This field is optional)
-            li #{strong 'Address:'} The address of the client. (This field is optional)
-            li #{strong 'City:'} The city of the client. (This field is optional)
-            li #{strong 'PostCode:'} The post code of the client. (This field is optional)
-            li #{strong 'Telephone:'} The telephone number of the client. (This field is optional)
-            li #{strong 'Fax:'} The fax number of the client. (This field is optional)
+            li <strong>BusinessName:</strong>  The business name of the client. (This field is not optional)
+            li <strong>Email:</strong>  The email of the client. (This field is not optional)
+            li <strong>ContactPerson:</strong>  The email of the client. (This field is optional)
+            li <strong>Address:</strong>  The address of the client. (This field is optional)
+            li <strong>City:</strong>  The city of the client. (This field is optional)
+            li <strong>PostCode:</strong>  The post code of the client. (This field is optional)
+            li <strong>Telephone:</strong>  The telephone number of the client. (This field is optional)
+            li <strong>Fax:</strong>  The fax number of the client. (This field is optional)
         li When the records are imported, the system will check whether the business name exists and if so update the existing client.
   hr
   = submit_tag 'Import Clients', class: 'btn btn-primary'

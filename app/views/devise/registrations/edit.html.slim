@@ -14,8 +14,10 @@ hr
 #subscription_status
   = image_tag('expired.png', class: 'header')
   p
-    | #{strong 'Note:'} Your current subscription is valid until #{content_tag :span, local_date(current_user.subscription.expiry_date), class: 'label label-info'}<br>
-      (You will be prompted to renew when logging in after this date)
+    strong> Note:
+    ' Your current subscription is valid until #{content_tag :span, time_tag(current_user.subscription.expiry_date), class: 'label label-info'}
+    br
+    ' (You will be prompted to renew when logging in after this date)
 
 = link_to "Have a Voucher? Click here to redeem it", "#vouchers", data: { toggle: "collapse"}
 #vouchers.collapse[style="margin-top: 5px;"]

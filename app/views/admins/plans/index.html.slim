@@ -16,7 +16,7 @@ table.table.table-condensed[data-sortable=true]
       td= plan.description
       td[data-value=plan.duration]= pluralize(plan.duration, 'Month')
       td[data-value=plan.cost]= number_to_currency(plan.cost)
-      td[data-value=plan.active]= boolean_to_words(plan.active)
+      td[data-value=plan.active]= plan.active? ? 'YES' : 'NO'
       td= plan.subscriptions.size
       td= link_to edit_admins_plan_path(plan) do
         = fa_icon 'edit', text: ' Edit'

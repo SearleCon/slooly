@@ -8,7 +8,9 @@
         h3=@client.business_name
         = link_to clients_path do
           = fa_icon 'arrow-left', text: 'Back'
-  p Business Name: #{strong @client.business_name}
+  p
+    ' Business Name:
+    strong=@client.business_name
   p Contact Person: #{@client.contact_person }
   p Telephone: #{number_to_phone(@client.telephone, area_code: true)}
   p Fax:  #{number_to_phone(@client.fax, area_code: true)}
@@ -43,8 +45,8 @@
       #chasing.tab-pane.fade.in.active
         - if @client.invoices.any?
           p
-            | You are currently chasing the following #{strong pluralize(@client.invoices.size, 'invoice')} for
-               #{strong @client.business_name} to the value of #{strong @client.invoices.total} (total chasing amount).
+            | You are currently chasing the following <strong>#{pluralize(@client.invoices.size, 'invoice')}</strong> for
+               <strong>#{ @client.business_name}</strong> to the value of <strong>#{@client.invoices.total}</strong> (total chasing amount).
           table.table.table-condensed[data-sortable=true]
             thead
               tr
@@ -59,10 +61,10 @@
                 th
             tbody= render @client.invoices, cache: true
         - else
-          p You are #{strong 'not'} chasing any invoices for #{@client.business_name}.
+          p You are <strong>not</strong> chasing any invoices for #{@client.business_name}.
       #history.tab-pane.fade.in
         - if @client.histories.any?
-          p  Here are the emails you have #{strong 'already sent'} to #{strong @client.business_name} (Newest to Oldest).
+          p  Here are the emails you have <strong>already sent</strong> to <strong>#{@client.business_name}</strong> (Newest to Oldest).
           table.table.table-condensed[data-sortable=true]
             tr
               th Date Sent
@@ -73,5 +75,5 @@
               th Message
             = render @client.histories, cache: true
         - else
-          p You have #{strong 'no'} chasing history for #{@client.business_name}.
+          p You have <strong>no</strong> chasing history for #{@client.business_name}.
     hr

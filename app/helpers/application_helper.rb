@@ -1,9 +1,5 @@
 module ApplicationHelper
-  def boolean_to_words(value)
-    value ? 'Yes' : 'No'
-  end
-
-  def strong(text)
-    content_tag :strong, text
+  def alert_class_for(type)
+    { notice: 'alert alert-success', alert: 'alert alert-error', info: 'alert alert-info', warning: 'alert' }[type.to_sym]
   end
 end

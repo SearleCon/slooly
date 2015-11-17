@@ -29,7 +29,7 @@ ul.thumbnails
 
 .well
   - if @clients.any?
-    h3 Currently chasing #{strong(pluralize(@clients.total_count, 'client'))}
+    h3 Currently chasing <strong>#{pluralize(@clients.total_count, 'client')}</strong>
     = page_entries_info @clients
     p.pull-right
       strong Note:
@@ -46,10 +46,11 @@ ul.thumbnails
             h4
               = link_to client.business_name, client
             p
-              | #{strong 'Invoices: '}
+              strong Invoices:
               span.badge.badge-inverse #{client.invoices.size}
             p
-              | #{strong 'Total:'} #{client.invoices.total}
+              strong Total:
+              ' #{client.invoices.total}
           table.table.table-condensed[data-sortable=true]
             thead
               tr
@@ -78,7 +79,8 @@ ul.thumbnails
         | You currenly have no clients with invoices being chased at the moment...
         = image_tag('sadface.png', size: '15x15')
         |  Let's fix that right away!
-      p #{strong "Why don't we get started:"}
+      p
+        strong Why don't we get started:
       h3
         = link_to new_invoice_path do
           = fa_icon 'file-text', text: ' Add a new Invoice'

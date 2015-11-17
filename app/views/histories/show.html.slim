@@ -4,7 +4,7 @@
     ' The following reminder email was sent to
     strong #{@history.email_sent_to}.
     br
-    | (Reminder type: #{reminder_badge(@history.reminder_type)} )
+    ' (Reminder type: #{reminder_badge(@history.reminder_type)} )
   = link_to 'Back', :back
 .span11.well
   .muted From:
@@ -14,7 +14,7 @@
   = @history.subject
   br
   .muted Date:
-  = timeago(history.date_sent)
+  = timeago(@history.date_sent)
   br
   .muted To:
   = @history.email_sent_to

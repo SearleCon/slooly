@@ -42,7 +42,7 @@
       h3 Pre-Due Reminder
       br
       h5 Send Pre-Due reminder:
-      = boolean_to_words(@settings.pre_due_reminder).upcase
+      = @settings.pre_due_reminder? ? "YES" : "NO"
       br
       h5 Pre-Due Email Subject line:
       = @settings.pre_due_subject
@@ -52,7 +52,7 @@
     #due.tab-pane.fade
       h3 Due Reminder
       h5 Send Due reminder:
-      = boolean_to_words(@settings.due_reminder).upcase
+      = @settings.due_reminder? ? "YES" : "NO"
       br
       h5 Email Subject Line:
       = @settings.due_subject

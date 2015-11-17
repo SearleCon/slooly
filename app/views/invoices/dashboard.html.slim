@@ -11,12 +11,14 @@
     | But at the moment, you don't have any...
     = image_tag('sadface.png', size: '15x15')
     |  Let's fix that right away!
-  p #{strong "Why don't we get started:"}
+  p
+    strong Why don't we get started:
   h2
     = link_to new_invoice_path do
       = fa_icon 'file-text', text: ' Add a New Invoice'
 
-  p #{strong "Other options available are:"}
+  p
+    strong "Other options available are:
   ul.unstyled
     li[style="margin:1em;"]
       = link_to new_client_path do
