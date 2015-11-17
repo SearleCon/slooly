@@ -1,6 +1,8 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include HttpCacheForever
+
   self.responder = ApplicationResponder
   respond_to :html, :js, :json
 
@@ -10,15 +12,9 @@ class ApplicationController < ActionController::Base
 
   before_action :set_announcement, :check_browser_version
 
-
   around_action :with_timezone
 
   etag { [current_user.try(:id), flash] }
-
-  def http_cache_forever(public: false, version: 'v1')
-   expires_in 100.years, public: public
-   yield if stale?(etag: "#{version}-#{request.fullpath}-#{flash.to_a.join(',')}", last_modified: Time.parse('2011-01-01').utc, public: public)
-  end
 
   private
   def check_browser_version
@@ -44,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def confirm_subscription!
+  def authorize_user!
     redirect_to new_order_url if current_user.subscription.expired?
   end
 

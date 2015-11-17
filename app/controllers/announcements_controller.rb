@@ -1,6 +1,4 @@
 class AnnouncementsController < ApplicationController
-  skip_before_action  :set_announcement
-
   def index
     @announcements = Announcement.recent
   end

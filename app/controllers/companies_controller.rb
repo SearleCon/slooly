@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
 
   before_action :set_company
 

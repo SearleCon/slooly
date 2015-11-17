@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-  protected
 
+  protected
   def after_sign_up_path_for(_resource)
     welcome_index_path
   end

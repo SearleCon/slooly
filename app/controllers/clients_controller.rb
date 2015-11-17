@@ -1,8 +1,7 @@
 class ClientsController < ApplicationController
 
 
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index

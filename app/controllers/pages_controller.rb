@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+
   def about
     http_cache_forever(public: true) do
       render

@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
 
   def index
     @clients = current_user.clients.includes(:invoices)

@@ -1,6 +1,5 @@
 class VouchersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
 
   def redeem
     voucher = Voucher.find_by(unique_code: params[:unique_code])

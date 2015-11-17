@@ -1,4 +1,3 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
 end

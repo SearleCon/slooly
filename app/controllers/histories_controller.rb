@@ -1,8 +1,7 @@
 class HistoriesController < ApplicationController
 
 
-  before_action :authenticate_user!
-  before_action :confirm_subscription!
+  before_action :authenticate_user!, :authorize_user!
 
   def show
     @history = History.find(params[:id])
