@@ -24,9 +24,9 @@ class PagesController < ApplicationController
   end
 
   def pricing
-    http_cache_forever(public: true) do
-      render
-    end
+    # http_cache_forever(public: true) do
+    #   render
+    # end
   end
 
   def faq

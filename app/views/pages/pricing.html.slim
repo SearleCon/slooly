@@ -1,5 +1,6 @@
 .page-header
   h1 30-day fully functional Free Trial
+  .pull-right= image_tag 'secure-paypal-logo.png'
 h4 NO credit card required for signup and first month!
 br
 h5
@@ -20,44 +21,32 @@ h3
   = link_to "Sign up Now!", new_user_registration_path
 
 .container
-  .row-fluid.pricing-table.pricing-three-column
-    .span4.plan
+  .row-fluid.pricing-table
+    .span3.plan
+      .plan-name-monthly
+        h2 Monthly
+        span $12 / Month
+      ul
+        li.plan-feature First Month Free
+        li.plan-feature Every User starts off free! Only pay if you are happy with our service and only after month 1.
+    .span3.plan
       .plan-name-bronze
         h2 Bronze
-        span $8.99 / Month
+        span $30 (3 Months)
       ul
-        li.plan-feature 10 Users
-        li.plan-feature 5TB Disk Space
-        li.plan-feature
-          a.btn.btn-primary.btn-plan-select href="#"
-            i.icon-white.icon-ok
-            | Select
-    .span4.plan
+        li.plan-feature 16% Discount!
+        li.plan-feature Get 16% discount by paying for 3 months up front, essentially $10 per month instead of $12! <strong>(Our Most Popular Plan)</strong>
+    .span3.plan
       .plan-name-silver
-        h2
-          | Silver
-          span.badge.badge-warning Popular
-        span
-          strike $10.99
-          font color="red"
-            | $9.99 -
-            span.label.label-warning Sale
+        h2 Silver
+        span $48 (6 Months)
       ul
-        li.plan-feature 50 Users
-        li.plan-feature 10TB Disk Space
-        li.plan-feature
-          a.btn.btn-primary.btn-plan-select href="#"
-            i.icon-white.icon-ok
-            | Select
-    .span4.plan
+        li.plan-feature 33% Discount!
+        li.plan-feature Get 33% discount by paying for 6 months up front, essentially only paying $8 per month instead of $12!
+    .span3.plan
       .plan-name-gold
         h2 Gold
-        span $15.99 / Month
+        span $72 (1 Year)
       ul
-        li.plan-feature Unlimited Users
-        li.plan-feature Unlimited Space
-        li.plan-feature
-          a.btn.btn-primary.btn-plan-select href="#"
-            i.icon-white.icon-ok
-            | Select
-= image_tag 'secure-paypal-logo.png'
+        li.plan-feature 50% Discount!
+        li.plan-feature Get 50% discount by paying for 1 year up front, essentially only paying $6 per month instead of $12!

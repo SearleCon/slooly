@@ -29,7 +29,7 @@ ul.thumbnails
 
 .well
   - if @clients.any?
-    h3 Currently chasing #{strong(pluralize(@clients.total_entries, 'client'))}
+    h3 Currently chasing #{strong(pluralize(@clients.total_count, 'client'))}
     = page_entries_info @clients
     p.pull-right
       strong Note:
@@ -50,7 +50,7 @@ ul.thumbnails
               span.badge.badge-inverse #{client.invoices.size}
             p
               | #{strong 'Total:'} #{client.invoices.total}
-          table.table.table-striped.table-condensed[data-sortable=true]
+          table.table.table-condensed[data-sortable=true]
             thead
               tr
                 th
