@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
     @message = Message.new(params[:message])
     if @message.valid?
       UserMailer.delay.new_message(@message)
-      redirect_to root_url, notice: t('flash.contacts.create')
+      redirect_to root_url, notice: 'Message was successfully sent.'
     else
       render :new
     end

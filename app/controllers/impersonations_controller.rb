@@ -8,7 +8,7 @@ class ImpersonationsController < ApplicationController
     session[:current_admin] = current_admin.id
     sign_out current_admin
     sign_in :user, @user
-    redirect_to user_root_url, notice: t('flash.impersonations.create', name: @user.name)
+    redirect_to user_root_url, notice: "Signed in as #{@user.name}"
   end
 
   def destroy
@@ -17,7 +17,7 @@ class ImpersonationsController < ApplicationController
       sign_in(:admin, @admin)
       session.delete(:current_admin)
     end
-    redirect_to admin_root_url, notice: t('flash.impersonations.destroy')
+    redirect_to admin_root_url, notice: "Signed back in as admin"
   end
 
   private

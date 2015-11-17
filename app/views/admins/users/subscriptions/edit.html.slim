@@ -12,14 +12,16 @@
       strong Plan
       '
       = @user.subscription.plan_description
-      p
-        strong Duration
-        '
-        = pluralize(@user.subscription.plan_duration, 'Month')
-      p
-        strong Cost
-        '
-        = number_to_currency(@user.subscription.plan_cost)
-= form_for [:admins, @user, @subscription] do |f|
+    p
+      strong Duration
+      '
+      = pluralize(@user.subscription.plan_duration, 'Month')
+    p
+      strong Cost
+      '
+      = number_to_currency(@user.subscription.plan_cost)
+
+
+= form_for([:admins, @user, @subscription], html: { data: { validate: true }}) do |f|
   = f.date_picker :expiry_date
   = f.submit 'Extend Subscription'

@@ -27,7 +27,7 @@
   ul.inline
     li= link_to  edit_client_path(@client) do
       = fa_icon 'edit', text: ' Edit this client'
-    li= link_to @client, method: :delete, data: {confirm: simple_format(t('confirmation.clients.destroy', business_name: @client.business_name), {}, sanitize: false)}, class: 'delete-client' do
+    li= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do
       = fa_icon 'trash', text: 'Delete'
     li= link_to new_client_path do
       = fa_icon 'male', text: ' Add another Client'

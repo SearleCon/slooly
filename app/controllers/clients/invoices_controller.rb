@@ -6,13 +6,15 @@ class Clients::InvoicesController < ApplicationController
   end
 
   def create
-    @invoice = @client.invoices.build(invoice_params)
-    @invoice.user = current_user
-    flash[:notice] = t('flash.clients.invoices.create', resource_name: @client.business_name) if @invoice.save
+    @invoice = @client.invoices.create(invoice_params)
     respond_with([@client, @invoice], location: client_url(@client))
   end
 
   private
+
+  def interpolation_options
+    { resource_name: @invoice.invoice_number }
+  end
 
   def set_client
     @client = Client.find(params[:client_id])
@@ -20,6 +22,6 @@ class Clients::InvoicesController < ApplicationController
 
 
   def invoice_params
-    params.fetch(:invoice, {}).permit(:amount, :description, :due_date, :invoice_number, :status, :last_date_sent)
+    params.fetch(:invoice).permit(:amount, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
   end
 end

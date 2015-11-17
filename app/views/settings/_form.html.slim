@@ -33,12 +33,12 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.send_from_name'))
-              li=simple_format(t('forms.notes.settings.email_copy_to'))
-              li=simple_format(t('forms.notes.settings.days_between_chase'))
-              li=simple_format(t('forms.notes.settings.days_before_pre_due'))
-              li=simple_format(t('forms.notes.settings.payment_method_message'))
+                ul
+                  li=simple_format("<strong>Send From Name:</strong> This name will be used at the end of the reminder email.")
+                  li=simple_format("<strong>Email Copy To:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will not see this email address))")
+                  li=simple_format("<strong>Days Between Chase:</strong> The number of days between the reminder emails (Default starts 7 days from the due date)")
+                  li=simple_format("<strong>Days Before Pre-Due:</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)")
+                  li=simple_format("<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.")
 
       #predue.tab-pane.fade
         h3 Pre-Due Reminder
@@ -53,10 +53,10 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.pre_due_reminder_checkbox'))
-              li=simple_format(t('forms.notes.settings.pre_due_subject'))
-              li=simple_format(t('forms.notes.settings.pre_due_message'))
+                ul
+                  li=simple_format("<strong>Pre-Due Reminder Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).")
+                  li=simple_format("<strong>Pre-Due Subject:</strong> This will be used as the subject line of the pre-due reminder email.")
+                  li=simple_format("<strong>Pre-Due Message:</strong> This will be used as the message body for the pre-due reminder email.")
 
 
       #due.tab-pane.fade
@@ -72,10 +72,10 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.due_reminder_checkbox'))
-              li=simple_format(t('forms.notes.settings.due_subject'))
-              li=simple_format(t('forms.notes.settings.due_message'))
+                ul
+                  li=simple_format("<strong>Due Reminder Checkbox:</strong> Uncheck this to NOT send a due reminder message (Default is on).")
+                  li=simple_format("<strong>Due Subject:</strong> This will be used as the subject line of the due reminder email.")
+                  li=simple_format("<strong>Due Message:</strong> This will be used as the message body for the due reminder email.")
 
       #od1.tab-pane.fade
         h3 First Overdue Reminder
@@ -89,9 +89,9 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.overdue1_subject'))
-              li=simple_format(t('forms.notes.settings.overdue1_message'))
+                ul
+                  li=simple_format("<strong>Overdue 1 Subject</strong> This will be used as the subject line of the first overdue reminder email.")
+                  li=simple_format("<strong>Overdue 1 Message:</strong> This will be used as the message body for the first overdue reminder email.")
       #od2.tab-pane.fade
         h3 Second Overdue Reminder
         .row
@@ -104,9 +104,9 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.overdue2_subject'))
-              li=simple_format(t('forms.notes.settings.overdue2_message'))
+                ul
+                  li=simple_format("<strong>Overdue 2 Subject</strong> This will be used as the subject line of the second overdue reminder email.")
+                  li=simple_format("<strong>Overdue 2 Message:</strong> This will be used as the message body for the second overdue reminder email.")
       #od3.tab-pane.fade
         h3 Third Overdue Reminder
         .row
@@ -119,9 +119,9 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.overdue3_subject'))
-              li=simple_format(t('forms.notes.settings.overdue3_message'))
+                ul
+                  li=simple_format("<strong>Overdue 3 Subject</strong> This will be used as the subject line of the third overdue reminder email.")
+                  li=simple_format("<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.")
       #fd.tab-pane.fade
         h3 Final Demand
         .row
@@ -134,9 +134,9 @@
                 =image_tag('tip.png', class: 'media-object')
               .media-body
                 h3.media-heading Notes:
-            ul
-              li=simple_format(t('forms.notes.settings.final_demand_subject'))
-              li=simple_format(t('forms.notes.settings.final_demand_message'))
+                ul
+                  li=simple_format("<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.")
+                  li=simple_format("<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.")
   hr
   .actions
     = f.submit 'Save your Settings'

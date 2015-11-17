@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
+  to_param :name
+
   has_one :company
   has_one :setting
   has_one :subscription, -> { where(active: true) }
@@ -36,22 +38,17 @@ class User < ActiveRecord::Base
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
 
-  after_create :setup
-
-  after_commit :send_registration_confirmation, on: :create
-
-  def timeout_in
-    2.hours
-  end
-
-  private
-  def setup
+  after_create do
     create_company!
     create_setting!
     create_subscription!(plan: Plan.free_trial)
   end
 
-  def send_registration_confirmation
+  after_commit on: :create do
     UserMailer.delay.registration_confirmation(self)
+  end
+
+  def timeout_in
+    2.hours
   end
 end

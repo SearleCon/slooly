@@ -16,7 +16,7 @@ class InvoicesController < ApplicationController
 
   def search
     @invoices =  current_user.invoices.includes(:client).search(params[:q]).page(params[:page])
-    flash[:info] = t('flash.invoices.search', resource_name: view_context.pluralize(@invoices.total_entries, 'invoice'), keywords: params[:q])
+    flash.now[:info]= "#{@invoices.total_entries} found containing the search string '#{params[:q]}' (In their Invoice Number or Description fields)." if params[:q]
     render :index
   end
 
@@ -29,29 +29,32 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    @invoice = Invoice.new(invoice_params)
-    flash[:notice] = t('flash.invoices.create', resource_name: @invoice.invoice_number) if @invoice.save
+    @invoice = Invoice.create(invoice_params)
     respond_with @invoice
   end
 
   def update
-    flash[:notice] = t('flash.invoices.update', resource_name: @invoice.invoice_number) if @invoice.update(invoice_params)
+    @invoice.update(invoice_params)
     respond_with(@invoice)
   end
 
   def destroy
     @invoice.destroy
-    respond_with(@invoice) do |format|
-      format.html { redirect_to :back }
-    end
+    respond_with(@invoice, location: -> { request.referer })
   end
 
   private
+
+  def interpolation_options
+    { resource_name: @invoice.invoice_number }
+  end
+
+
   def set_invoice
     @invoice = Invoice.find(params[:id])
   end
 
   def invoice_params
-    params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user: current_user)
+    params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
   end
 end

@@ -18,9 +18,9 @@
           =image_tag('tip.png', class: 'media-object')
         .media-body
           h3.media-heading Notes:
-      ul.form-notes
-        li=simple_format(t('forms.notes.clients.email'))
-        li=simple_format(t('forms.notes.clients.other'))
+          ul
+            li=simple_format("<strong>Email:</strong> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.")
+            li=simple_format("<strong>Other:</strong> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.")
 
   hr
   = f.submit 'Save Client', class: 'btn btn-primary'

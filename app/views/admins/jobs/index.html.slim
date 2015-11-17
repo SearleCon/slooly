@@ -53,7 +53,7 @@
                 td[data-value=item.run_at]= timeago(item.run_at)
                 td[data-value=item.created_at]= timeago(item.created_at)
                 td
-                  = link_to queue_admins_job_path(item, job: {}), class: 'btn btn-info', method: :patch do
+                  = link_to queue_admins_job_path(item), class: 'btn btn-info', method: :patch do
                     = fa_icon 'flag', text: ' Run Now'
                 td
                   = link_to admins_job_path(item), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} do

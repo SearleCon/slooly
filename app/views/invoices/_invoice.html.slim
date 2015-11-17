@@ -14,5 +14,5 @@
     = link_to edit_invoice_path(invoice) do
       = fa_icon 'edit', text: ' Edit'
   td
-    = link_to invoice, method: :delete, data: {confirm: simple_format(t('confirmation.invoices.destroy', invoice_number: invoice.invoice_number), {} ,sanitize: false)} do
+    = link_to invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do
       = fa_icon 'trash', text: 'Delete'

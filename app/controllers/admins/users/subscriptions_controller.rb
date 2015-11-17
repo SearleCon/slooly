@@ -6,18 +6,21 @@ class Admins::Users::SubscriptionsController < Admins::BaseController
   end
 
   def update
-    flash[:notice] = t('flash.users.subscriptions.update', name: @user.name) if @subscription.update(subscription_params)
-    respond_with @subscription, location: admin_user_url(@user)
+    @subscription.update(subscription_params)
+    respond_with(:admins, @user, @subscription, location: admins_user_url(@user))
   end
 
   private
+  def interpolation_options
+    { resource_name: @user.name }
+  end
 
   def set_user
     @user = User.find(params[:user_id])
   end
 
   def set_subscription
-    @subscription = @user.subscriptions.find(params[:id])
+    @subscription = Subscription.find(@user.subscription.id)
   end
 
   def subscription_params

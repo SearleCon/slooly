@@ -1,31 +1,34 @@
 class Admins::AnnouncementsController < Admins::BaseController
+  responders :collection
+
   before_action :set_announcement, only: [:edit, :update, :destroy]
-  before_action :build_announcement, only: [:new, :create]
 
   def index
     @announcements = Announcement.all
   end
 
+  def new
+    @announcement = Announcement.new
+  end
+
   def create
-    flash[:notice] = t('flash.announcements.create', resource_name: @announcement.headline.titleize) if @announcement.save
-    respond_with @announcement, location: admins_announcements_url
+    @announcement = Announcement.create(announcement_params)
+    respond_with(:admins, @announcement)
   end
 
   def update
-    flash[:notice] = t('flash.announcements.update', resource_name: @announcement.headline.titleize) if @announcement.update(announcement_params)
-    respond_with @announcement, location: admins_announcements_url
+    @announcement.update(announcement_params)
+    respond_with(:admins, @announcement)
   end
 
   def destroy
     @announcement.destroy
-    flash[:notice] = t('flash.announcements.destroy', resource_name: @announcement.headline.titleize) if @announcement.destroyed?
-    respond_with @announcement, location: admins_announcements_url
+    respond_with(:admins, @announcement)
   end
 
   private
-
-  def build_announcement
-    @announcement = Announcement.new(announcement_params)
+  def interpolation_options
+    { resource_name: @announcement.headline }
   end
 
   def set_announcement

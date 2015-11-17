@@ -20,5 +20,5 @@ table[data-sortable=true]
       td= plan.subscriptions.size
       td= link_to edit_admins_plan_path(plan) do
         = fa_icon 'edit', text: ' Edit'
-      td= link_to_unless(plan.subscriptions.any?, fa_icon('trash', text: 'Destroy').html_safe, admins_plan_path(plan), method: :delete, data: { confirm: simple_format(t('confirmation.plans.destroy', plan_description: plan.description), {} ,sanitize: false) }){}
+      td= link_to_unless(plan.subscriptions.any?, fa_icon('trash', text: 'Destroy').html_safe, admins_plan_path(plan), method: :delete, data: { confirm: "Are you sure you wish to delete this plan?" }) {}
 

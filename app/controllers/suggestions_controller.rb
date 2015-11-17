@@ -6,7 +6,7 @@ class SuggestionsController < ApplicationController
 
   def create
     @suggestion = Suggestion.new(suggestion_params)
-    flash[:notice] = t('flash.suggestions.create') if @suggestion.save
+    flash[:notice] = 'Thank you for your comment. We appreciate it!' if @suggestion.save
     respond_with @suggestion, location: root_url
   end
 

@@ -24,9 +24,9 @@ class OrdersController < ApplicationController
         current_user.subscription.update!(active: false)
         current_user.create_subscription!(plan: @plan, paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID])
       end
-      flash[:notice] = t('flash.subscriptions.activation.success')
+      flash[:notice] = 'Thank you for supporting us!'
     else
-      flash[:alert] = t('flash.subscriptions.activation.failed')
+      flash[:alert] = 'There has been a problem activating your subscription. Please contact support.'
       render :confirm
     end
   end

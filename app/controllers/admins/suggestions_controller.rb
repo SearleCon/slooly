@@ -1,4 +1,6 @@
 class Admins::SuggestionsController < Admins::BaseController
+  responders :collection
+
   before_action :set_suggestion, except: :index
 
   def index
@@ -7,7 +9,7 @@ class Admins::SuggestionsController < Admins::BaseController
 
   def destroy
     @suggestion.destroy
-    respond_with @suggestion, location: admins_suggestions_url
+    respond_with :admins, @suggestion
   end
 
   private

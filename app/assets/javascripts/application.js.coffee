@@ -11,6 +11,7 @@
 #= require_tree .
 
 Turbolinks.enableProgressBar();
+jQuery.timeago.settings.allowFuture = true;
 
 
 $.rails.allowAction = (element) ->
@@ -38,7 +39,8 @@ $.rails.allowAction = (element) ->
                    <h4>Paying Mantis</h4>
                  </div>
                  <div class="modal-body">
-                   <p>#{message}</p>
+                   <h5><span class='label label-important'>WARNING!</span></h5>
+                   <div>#{message}</div>
                  </div>
                  <div class="modal-footer">
                    <a data-dismiss="modal" class="btn">Cancel</a>

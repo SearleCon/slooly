@@ -17,7 +17,7 @@ class ClientsController < ApplicationController
 
   def search
     @clients = current_user.clients.search(params[:q]).page(params[:page])
-    flash[:info] = t('flash.clients.search', resource_name: view_context.pluralize(@clients.total_entries, 'client'), keywords: params[:q]) if params[:q]
+    flash.now[:info] = "#{@clients.total_entries} results found containing the search string '#{params[:q]}' (In their Business Name or Contact Person fields)." if params[:q]
     render :index
   end
 
@@ -30,13 +30,12 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(client_params)
-    flash[:notice] = t('flash.clients.create', resource_name: @client.business_name) if @client.save
+    @client = Client.create(client_params)
     respond_with @client
   end
 
   def update
-    flash[:notice] = t('flash.clients.update', resource_name: @client.business_name) if @client.update(client_params)
+    @client.update(client_params)
     respond_with @client
   end
 
@@ -55,6 +54,12 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone).merge(user: current_user)
+    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone).merge(user_id: current_user.id)
   end
+
+
+  def interpolation_options
+    { resource_name: @client.business_name }
+  end
+
 end
