@@ -40,4 +40,24 @@ describe User do
      expect(user.timeout_in).to eq(2.hours)
    end
  end
+
+ describe '#setup' do
+   it 'should create a company' do
+     user = build(:user)
+     user.save
+     expect(user.company).to_not be_nil
+   end
+
+   it 'should create settings' do
+     user = build(:user)
+     user.save
+     expect(user.setting).to_not be_nil
+   end
+
+   it 'should create subscription' do
+     user = build(:user)
+     user.save
+     expect(user.subscription).to_not be_nil
+   end
+ end
 end
