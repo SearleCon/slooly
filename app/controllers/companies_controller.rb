@@ -20,6 +20,6 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:address, :city, :email, :fax, :logo_path, :name, :post_code, :telephone, :image, :remote_image_url).merge(user_id: current_user.id)
+    params.require(:company).permit(:address, :city, :email, :fax, :name, :post_code, :telephone).merge(user_id: current_user.id)
   end
 end

@@ -1,13 +1,6 @@
 - cache @company do
   .page-header
     h1 Company Profile
-
-  /.company-logo
-  /  - if @company.image_url
-  /    = image_tag @company.image_url.to_s
-  /  - else
-  /    = link_to image_tag('your_logo_here.gif'), edit_company_path(@company)
-  br
   table
     tr
       td Name:

@@ -1,6 +1,7 @@
 # == Route Map
 #
 #                        Prefix Verb   URI Pattern                                             Controller#Action
+#                   admins_home GET    /admins(.:format)                                       redirect(301, /admins/sign_in)
 #             new_admin_session GET    /admins/sign_in(.:format)                               admins/sessions#new
 #                 admin_session POST   /admins/sign_in(.:format)                               admins/sessions#create
 #         destroy_admin_session DELETE /admins/sign_out(.:format)                              admins/sessions#destroy
@@ -30,7 +31,6 @@
 #                   admins_jobs GET    /admins/jobs(.:format)                                  admins/jobs#index
 #                    admins_job DELETE /admins/jobs/:id(.:format)                              admins/jobs#destroy
 #                    admin_root GET    /                                                       admins/dashboard#index
-#                   admins_home GET    /admins(.:format)                                       redirect(301, /admins/sign_in)
 #              new_user_session GET    /users/sign_in(.:format)                                sessions#new
 #                  user_session POST   /users/sign_in(.:format)                                sessions#create
 #          destroy_user_session DELETE /users/sign_out(.:format)                               sessions#destroy
@@ -47,49 +47,6 @@
 #                               PUT    /users(.:format)                                        registrations#update
 #                               DELETE /users(.:format)                                        registrations#destroy
 #                     user_root GET    /                                                       dashboard#index
-#                          root GET    /                                                       home#index
-#               dashboard_index GET    /dashboard(.:format)                                    dashboard#index
-#               search_invoices GET    /invoices/search(.:format)                              invoices#search
-#                      invoices GET    /invoices(.:format)                                     invoices#index
-#                               POST   /invoices(.:format)                                     invoices#create
-#                   new_invoice GET    /invoices/new(.:format)                                 invoices#new
-#                  edit_invoice GET    /invoices/:id/edit(.:format)                            invoices#edit
-#                       invoice GET    /invoices/:id(.:format)                                 invoices#show
-#                               PATCH  /invoices/:id(.:format)                                 invoices#update
-#                               PUT    /invoices/:id(.:format)                                 invoices#update
-#                               DELETE /invoices/:id(.:format)                                 invoices#destroy
-#                impersonations POST   /impersonations(.:format)                               impersonations#create
-#                 impersonation DELETE /impersonations/:id(.:format)                           impersonations#destroy
-#             hide_announcement GET    /announcements/:id/hide(.:format)                       announcements#hide
-#                 announcements GET    /announcements(.:format)                                announcements#index
-#                   suggestions POST   /suggestions(.:format)                                  suggestions#create
-#                new_suggestion GET    /suggestions/new(.:format)                              suggestions#new
-#                 confirm_order GET    /orders/:id/confirm(.:format)                           orders#confirm
-#                 payment_order GET    /orders/:id/payment(.:format)                           orders#payment
-#                checkout_order POST   /orders/:id/checkout(.:format)                          orders#checkout
-#                complete_order POST   /orders/:id/complete(.:format)                          orders#complete
-#                     new_order GET    /orders/new(.:format)                                   orders#new
-#   payment_plans_subscriptions GET    /subscriptions/payment_plans(.:format)                  subscriptions#payment_plans
-#                 subscriptions POST   /subscriptions(.:format)                                subscriptions#create
-#              new_subscription GET    /subscriptions/new(.:format)                            subscriptions#new
-#                       history GET    /histories/:id(.:format)                                histories#show
-#                         about GET    /about(.:format)                                        pages#about
-#                    ie_warning GET    /ie_warning(.:format)                                   pages#ie_warning
-#                           faq GET    /faq(.:format)                                          pages#faq
-#                          news GET    /news(.:format)                                         pages#news
-#                       reports GET    /reports(.:format)                                      pages#reports
-#                 initial_setup GET    /initial_setup(.:format)                                pages#initial_setup
-#                       pricing GET    /pricing(.:format)                                      pages#pricing
-#                           tos GET    /tos(.:format)                                          pages#tos
-#                      tutorial GET    /tutorial(.:format)                                     pages#tutorial
-#                       privacy GET    /privacy(.:format)                                      pages#privacy
-#                      contacts POST   /contacts(.:format)                                     contacts#create
-#                   new_contact GET    /contacts/new(.:format)                                 contacts#new
-#                        redeem PATCH  /redeem(.:format)                                       vouchers#redeem
-#                      settings GET    /settings(.:format)                                     settings#index
-#                  edit_setting GET    /settings/:id/edit(.:format)                            settings#edit
-#                       setting PATCH  /settings/:id(.:format)                                 settings#update
-#                               PUT    /settings/:id(.:format)                                 settings#update
 #               client_invoices POST   /clients/:client_id/invoices(.:format)                  clients/invoices#create
 #            new_client_invoice GET    /clients/:client_id/invoices/new(.:format)              clients/invoices#new
 #                exists_clients GET    /clients/exists(.:format)                               clients#exists
@@ -108,6 +65,44 @@
 #                       company GET    /company(.:format)                                      companies#show
 #                               PATCH  /company(.:format)                                      companies#update
 #                               PUT    /company(.:format)                                      companies#update
+#               dashboard_index GET    /dashboard(.:format)                                    dashboard#index
+#               search_invoices GET    /invoices/search(.:format)                              invoices#search
+#                      invoices GET    /invoices(.:format)                                     invoices#index
+#                               POST   /invoices(.:format)                                     invoices#create
+#                   new_invoice GET    /invoices/new(.:format)                                 invoices#new
+#                  edit_invoice GET    /invoices/:id/edit(.:format)                            invoices#edit
+#                       invoice GET    /invoices/:id(.:format)                                 invoices#show
+#                               PATCH  /invoices/:id(.:format)                                 invoices#update
+#                               PUT    /invoices/:id(.:format)                                 invoices#update
+#                               DELETE /invoices/:id(.:format)                                 invoices#destroy
+#                       history GET    /histories/:id(.:format)                                histories#show
+#                        redeem PATCH  /redeem(.:format)                                       vouchers#redeem
+#                      settings GET    /settings(.:format)                                     settings#index
+#                  edit_setting GET    /settings/:id/edit(.:format)                            settings#edit
+#                       setting PATCH  /settings/:id(.:format)                                 settings#update
+#                               PUT    /settings/:id(.:format)                                 settings#update
+#                          root GET    /                                                       home#index
+#                impersonations POST   /impersonations(.:format)                               impersonations#create
+#                 impersonation DELETE /impersonations/:id(.:format)                           impersonations#destroy
+#             hide_announcement GET    /announcements/:id/hide(.:format)                       announcements#hide
+#                 announcements GET    /announcements(.:format)                                announcements#index
+#                         plans GET    /plans(.:format)                                        plans#index
+#              paypal_checkouts POST   /paypal/checkouts(.:format)                             paypal/checkouts#create
+#                 subscriptions POST   /subscriptions(.:format)                                subscriptions#create
+#              new_subscription GET    /subscriptions/new(.:format)                            subscriptions#new
+#                       reports GET    /reports(.:format)                                      reports#index
+#                 welcome_index GET    /welcome(.:format)                                      welcome#index
+#                   suggestions POST   /suggestions(.:format)                                  suggestions#create
+#                new_suggestion GET    /suggestions/new(.:format)                              suggestions#new
+#                         about GET    /about(.:format)                                        pages#about
+#            supported_browsers GET    /supported_browsers(.:format)                           pages#supported_browsers
+#                           faq GET    /faq(.:format)                                          pages#faq
+#                       pricing GET    /pricing(.:format)                                      pages#pricing
+#                           tos GET    /tos(.:format)                                          pages#tos
+#                      tutorial GET    /tutorial(.:format)                                     pages#tutorial
+#                       privacy GET    /privacy(.:format)                                      pages#privacy
+#                      contacts POST   /contacts(.:format)                                     contacts#create
+#                   new_contact GET    /contacts/new(.:format)                                 contacts#new
 #                                      (/errors)/:status(.:format)                             errors#show {:status=>/\d{3}/}
 #
 

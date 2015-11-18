@@ -5,10 +5,10 @@
 #  id                             :integer          not null, primary key
 #  plan_id                        :integer
 #  expiry_date                    :date
-#  active                         :boolean
+#  active                         :boolean          default(TRUE)
 #  user_id                        :integer
-#  created_at                     :datetime
-#  updated_at                     :datetime
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
 #  paypal_customer_token          :string(255)
 #  paypal_recurring_profile_token :string(255)
 #

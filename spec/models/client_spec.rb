@@ -12,8 +12,8 @@
 #  fax            :string(255)
 #  email          :string(255)
 #  user_id        :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 describe Client do

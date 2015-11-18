@@ -6,8 +6,8 @@
 #  headline    :string(255)
 #  description :text
 #  posted_by   :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 FactoryGirl.define do

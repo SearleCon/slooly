@@ -9,8 +9,8 @@
 #  description    :text
 #  status         :integer
 #  client_id      :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #  user_id        :integer
 #  pd_date        :date
 #  od1_date       :date

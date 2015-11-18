@@ -14,8 +14,6 @@ gem "font-awesome-rails"
 # Authentication
 gem 'devise'
 
-# File uploads
-gem "carrierwave"
 
 # Pagination
 gem 'kaminari'
