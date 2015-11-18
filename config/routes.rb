@@ -113,6 +113,7 @@
 
 Rails.application.routes.draw do
 
+
   # Admin
 
   get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
@@ -181,14 +182,13 @@ Rails.application.routes.draw do
     get :hide, on: :member
   end
 
-  resources :orders, only: [:new] do
-    member do
-      get :confirm
-      get :payment
-      post :checkout
-      post :complete
-    end
+  resources :plans, only: :index
+
+  namespace :paypal do
+    resources :checkouts, only: :create
   end
+
+  resources :subscriptions, only: [:new, :create]
 
   resources :reports, only: :index
   resources :welcome, only: :index

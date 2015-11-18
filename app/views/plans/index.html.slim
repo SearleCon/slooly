@@ -2,7 +2,7 @@
   = image_tag 'expired.png', class: 'header'
   h2 Please Subscribe
   br
-  = image_tag 'secure-paypal-logo.png', style: "float:right"
+  .pull-right= image_tag 'secure-paypal-logo.png'
   br
   p Your subscription has expired. To continue using Paying Mantis you need to subscribe:
   p
@@ -11,15 +11,16 @@
   p
     strong Please select one of the payment plans below:
   br
-  table[data-sortable=true]
+  table
     tr
-      td Package
-      td Subscription Duration
-      td Price
-      td
+      th Package
+      th Duration
+      th Price
+      th
     - @plans.each do |plan|
       tr
-        td: strong= plan.description
-        td[data-value=plan.duration]= pluralize(plan.duration, 'Month')
+        td
+          strong= plan.description
+        td= pluralize(plan.duration, 'Month')
         td= number_to_currency(plan.cost, precision: 2)
-        td.text-center= link_to 'Place Order', payment_order_path(plan), class: "btn btn-primary"
+        td.text-center= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkouts_path(plan_id: plan.id), method: :post

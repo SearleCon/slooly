@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user!
-    redirect_to new_order_url if current_user.subscription.expired?
+    redirect_to plans_url unless current_user.subscribed?
   end
 
   def with_timezone(&block)

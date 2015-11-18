@@ -22,11 +22,9 @@
 FactoryGirl.define do
   before(:create) do
     User.skip_callback(:create, :after, :setup)
-    User.skip_callback(:commit, :after, :send_registration_confirmation)
   end
   after(:create) do
     User.set_callback(:create, :after, :setup)
-    User.set_callback(:commit, :after,  :send_registration_confirmation)
   end
 
   factory :user do

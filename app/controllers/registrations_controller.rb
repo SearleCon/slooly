@@ -1,6 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def create
+    super do |user|
+      UserMailer.delay.registration_confirmation(user)
+    end
+  end
+
+
   protected
+
   def after_sign_up_path_for(_resource)
     welcome_index_path
   end
