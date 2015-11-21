@@ -3,6 +3,7 @@ class SettingsController < ApplicationController
 
   before_action :set_settings
 
+
   def update
     @settings.update(settings_params)
     respond_with @settings, location: settings_url

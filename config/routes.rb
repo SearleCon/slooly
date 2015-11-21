@@ -167,7 +167,7 @@ Rails.application.routes.draw do
 
   match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
 
-  resources :settings, only: [:index, :edit, :update]
+  resource :settings, only: [:show, :edit, :update]
   root to: "home#index"
 
   resources :impersonations, only: [:create, :destroy]

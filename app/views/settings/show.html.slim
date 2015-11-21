@@ -92,7 +92,7 @@
       h5 Email Message Content:
       = simple_format(@settings.final_demand_message)
 hr
-h5= link_to  edit_setting_path(@settings) do
+h5= link_to  edit_settings_path do
   = fa_icon 'edit', text: 'Edit your settings'
 h5
   | (Above is how the messages will appear on your reminder emails)
