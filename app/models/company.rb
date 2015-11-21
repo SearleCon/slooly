@@ -23,20 +23,8 @@ class Company < ActiveRecord::Base
   validates :email, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
-  after_initialize :set_defaults, if: :new_record?
-
   before_save do
     self.name = name.try(:titleize)
   end
 
-  protected
-  def set_defaults
-    self.name = 'Your Company Name'
-    self.address = '44 Street Name, Suburb'
-    self.city	= 'Best City'
-    self.post_code = '1234'
-    self.telephone = '555 345 6789'
-    self.fax = 'People still fax?'
-    self.email	= 'you@example.com'
-  end
 end

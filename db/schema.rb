@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121131430) do
+ActiveRecord::Schema.define(version: 20151121144837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,16 +54,16 @@ ActiveRecord::Schema.define(version: 20151121131430) do
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "address",    limit: 255
-    t.string   "city",       limit: 255
-    t.string   "post_code",  limit: 255
-    t.string   "telephone",  limit: 255
-    t.string   "fax",        limit: 255
-    t.string   "email",      limit: 255
+    t.string   "name",       limit: 255, default: "Your Company Name"
+    t.string   "address",    limit: 255, default: "44 Street Name, Suburb"
+    t.string   "city",       limit: 255, default: "Best City"
+    t.string   "post_code",  limit: 255, default: "1234"
+    t.string   "telephone",  limit: 255, default: "555 345 6789"
+    t.string   "fax",        limit: 255, default: "People still fax?"
+    t.string   "email",      limit: 255, default: "you@example.com"
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
   end
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
@@ -86,18 +86,18 @@ ActiveRecord::Schema.define(version: 20151121131430) do
   add_index "delayed_jobs", ["queue"], name: "index_delayed_jobs_on_queue", using: :btree
 
   create_table "histories", force: :cascade do |t|
-    t.date     "date_sent"
+    t.date     "date_sent",                     default: '2015-11-21'
     t.integer  "client_id"
     t.string   "subject",           limit: 255
     t.text     "message"
     t.string   "reminder_type",     limit: 255
-    t.boolean  "sent"
-    t.string   "email_return_code", limit: 255
+    t.boolean  "sent",                          default: false
+    t.string   "email_return_code", limit: 255, default: "Not yet sent"
     t.string   "email_sent_from",   limit: 255
     t.string   "copy_email",        limit: 255
     t.string   "email_sent_to",     limit: 255
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.string   "invoice_number",    limit: 255
     t.string   "email_from_name",   limit: 255
   end
@@ -109,10 +109,10 @@ ActiveRecord::Schema.define(version: 20151121131430) do
     t.date     "due_date"
     t.decimal  "amount"
     t.text     "description"
-    t.integer  "status"
+    t.integer  "status",                     default: 2
     t.integer  "client_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "user_id"
     t.date     "pd_date"
     t.date     "od1_date"
@@ -217,9 +217,9 @@ ActiveRecord::Schema.define(version: 20151121131430) do
     t.string   "unique_code",    limit: 255
     t.integer  "redeemed_by"
     t.datetime "valid_until"
-    t.integer  "number_of_days"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "number_of_days",             default: 30
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_foreign_key "clients", "users", on_delete: :cascade

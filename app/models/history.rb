@@ -21,14 +21,4 @@
 
 class History < ActiveRecord::Base
   belongs_to :client, inverse_of: :histories, touch: true
-
-  after_initialize :set_defaults, if: :new_record?
-
-  private
-
-  def set_defaults
-    self.date_sent = Date.current
-    self.sent = false
-    self.email_return_code = 'Not yet sent'
-  end
 end

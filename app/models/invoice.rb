@@ -35,7 +35,6 @@ class Invoice < ActiveRecord::Base
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
 
-  after_initialize :set_defaults, if: :new_record?
   before_save :calculate_dates, if: :due_date_changed?
   before_save :set_final_demand, if: :status_changed?
 
@@ -82,10 +81,6 @@ class Invoice < ActiveRecord::Base
   end
 
   protected
-
-  def set_defaults
-    self.status ||= :chasing
-  end
 
   def calculate_dates
     self.pd_date = days_before_pre_due.days.ago

@@ -18,9 +18,7 @@ class Voucher < ActiveRecord::Base
 
   validate :expired?, :redeemed?, on: :update
 
-  after_initialize :set_defaults, if: :new_record?
-
-  before_create :generate_code
+  before_create :generate_code, :set_valid_until
 
   before_update :extend_redeemer_subscription
 
@@ -34,9 +32,8 @@ class Voucher < ActiveRecord::Base
 
   private
 
-  def set_defaults
+  def set_valid_until
     self.valid_until = 1.month.from_now
-    self.number_of_days = 30
   end
 
   def generate_code
