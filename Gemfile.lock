@@ -218,7 +218,7 @@ GEM
       rspec-expectations (~> 3.4.0)
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
-    rspec-support (3.4.0)
+    rspec-support (3.4.1)
     rubyzip (1.1.7)
     rush (0.6.8)
       session

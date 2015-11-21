@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118185022) do
+ActiveRecord::Schema.define(version: 20151121131430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,28 +139,28 @@ ActiveRecord::Schema.define(version: 20151118185022) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string   "send_from_name",         limit: 255
-    t.string   "email_copy_to",          limit: 255
-    t.integer  "days_between_chase"
-    t.integer  "days_before_pre_due"
-    t.text     "payment_method_message"
-    t.boolean  "pre_due_reminder"
-    t.string   "pre_due_subject",        limit: 255
-    t.text     "pre_due_message"
-    t.boolean  "due_reminder"
-    t.string   "due_subject",            limit: 255
-    t.text     "due_message"
-    t.string   "overdue1_subject",       limit: 255
-    t.text     "overdue1_message"
-    t.string   "overdue2_subject",       limit: 255
-    t.text     "overdue2_message"
-    t.string   "overdue3_subject",       limit: 255
-    t.text     "overdue3_message"
-    t.string   "final_demand_subject",   limit: 255
-    t.text     "final_demand_message"
+    t.string   "send_from_name",         limit: 255, default: "Your Business"
+    t.string   "email_copy_to",          limit: 255, default: "copy@example.com"
+    t.integer  "days_between_chase",                 default: 7
+    t.integer  "days_before_pre_due",                default: 2
+    t.text     "payment_method_message",             default: "(Deposit or Transfer to:\n                                                                 Bank:\n                                                                 Account:\n                                                                 Account Type:\n                                                                 Branch Code:)"
+    t.boolean  "pre_due_reminder",                   default: true
+    t.string   "pre_due_subject",        limit: 255, default: "Friendly Reminder: Payment due soon"
+    t.text     "pre_due_message",                    default: "This is a friendly reminder that payment for the above invoice is due in a couple of days time.\n                                                         We really do appreciate your timely payment.\n\n                                                         Payment can be made by any of the methods listed below.\n\n                                                         We appreciate your support and value you as our customer.\n\n                                                         Kind regards,\n                                                        "
+    t.boolean  "due_reminder",                       default: true
+    t.string   "due_subject",            limit: 255, default: "Payment Due Today"
+    t.text     "due_message",                        default: "This is a friendly reminder that payment for the above invoice is due today.\n                                                     We really do appreciate your timely payment.\n\n                                                     Payment can be made by any of the methods listed below.\n                                                     If you have already paid, please ignore this email.\n\n                                                     We appreciate your support.\n\n                                                     Kind regards,\n                                                    "
+    t.string   "overdue1_subject",       limit: 255, default: "Important Reminder: Payment overdue"
+    t.text     "overdue1_message",                   default: "Please note that payment for the above invoice is now overdue.\n                                                          We really do appreciate your business and timeous payment.\n\n                                                          Payment can be made by any of the methods listed below.\n                                                          If you have already paid, please email or fax proof of payment to us (our contact details above).\n\n                                                          We appreciate your support.\n\n                                                          Kind regards,\n                                                         "
+    t.string   "overdue2_subject",       limit: 255, default: "Second Reminder - Important: Payment is overdue"
+    t.text     "overdue2_message",                   default: "Payment for the above invoice is now overdue.\n                                                          Please make the payment as soon as possible.\n\n                                                          Payment can be made by any of the methods listed below.\n                                                          If you have already paid, please email or fax proof of payment to us (our contact details above).\n\n                                                          Thank you.\n\n                                                          Kind regards,\n                                                          "
+    t.string   "overdue3_subject",       limit: 255, default: "URGENT: Third and Final Reminder: Payment is now way overdue!"
+    t.text     "overdue3_message",                   default: "This is your third and final reminder. Payment for the above invoice is now very overdue!\n                                                          Please make payment urgently.\n\n                                                          Payment can be made by any of the methods listed below.\n                                                          If you have already paid, please email or fax proof of payment to us (our contact details above).\n\n                                                          If you are not intending on paying, please give us a call or send us an email, so that we can make alternative arrangements if necessary.\n\n                                                          Kind regards,\n                                                         "
+    t.string   "final_demand_subject",   limit: 255, default: "Notice of Final Demand: Action Required"
+    t.text     "final_demand_message",               default: "Please understand that this is our FINAL NOTICE regarding payment for the above invoice.\n                                                              Please make payment immediately.\n\n                                                              If we do not receive full payment within 3 days, we will have no alternative but to hand your account over to a collection agency (Interest and collection fees will also be added to your owing amount in this case).\n\n                                                              Payment can be made by any of the methods listed below.\n                                                              If you have already paid, please email or fax proof of payment to us (our contact details above).\n\n                                                              If you are not intending on paying, or are unable to pay due to unforeseen circumstances, please give us a call or send us an email, so that we can make alternative arrangements if necessary.\n\n                                                              Kind regards,\n                                                             "
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               null: false
+    t.datetime "updated_at",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               null: false
   end
 
   add_index "settings", ["user_id"], name: "index_settings_on_user_id", using: :btree
