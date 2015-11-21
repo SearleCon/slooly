@@ -21,7 +21,7 @@ class Subscription < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
 
-  delegate :description, :duration, :cost, to: :plan, prefix: true
+  delegate :description, :duration, :cost, to: :plan
 
   before_create :set_expiry_date
 
@@ -31,7 +31,7 @@ class Subscription < ActiveRecord::Base
 
   private
   def set_expiry_date
-    self.expiry_date = plan_duration.months.from_now
+    self.expiry_date = duration.months.from_now
   end
 
 end

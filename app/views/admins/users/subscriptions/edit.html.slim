@@ -11,15 +11,15 @@
     p
       strong Plan
       '
-      = @user.subscription.plan_description
+      = @user.subscription.description
     p
       strong Duration
       '
-      = pluralize(@user.subscription.plan_duration, 'Month')
+      = pluralize(@user.subscription.duration, 'Month')
     p
       strong Cost
       '
-      = number_to_currency(@user.subscription.plan_cost)
+      = number_to_currency(@user.subscription.cost)
 
 
 = form_for([:admins, @user, @subscription], html: { data: { validate: true }}) do |f|

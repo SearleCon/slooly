@@ -36,6 +36,6 @@ class Admins::AnnouncementsController < Admins::BaseController
   end
 
   def announcement_params
-    params.fetch(:announcement, {}).permit(:description, :headline, :posted_by)
+    params.fetch(:announcement).permit(:description, :headline, :posted_by)
   end
 end

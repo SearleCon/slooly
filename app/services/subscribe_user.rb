@@ -20,7 +20,7 @@ class SubscribeUser
   attr_reader :user, :subscription, :current_subscription
 
   def request_payment
-    response = PayPal::Recurring.new(token: subscription.paypal_customer_token, payer_id: subscription.paypal_recurring_profile_token, description: subscription.plan_description, amount: subscription.plan_cost, currency: 'USD').request_payment
+    response = PayPal::Recurring.new(token: subscription.paypal_customer_token, payer_id: subscription.paypal_recurring_profile_token, description: subscription.description, amount: subscription.cost, currency: 'USD').request_payment
     response.approved? && response.completed?
   end
 end

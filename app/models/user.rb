@@ -38,8 +38,6 @@ class User < ActiveRecord::Base
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
 
-
-
   after_create :setup
 
   def subscribed?

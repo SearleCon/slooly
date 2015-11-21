@@ -1,7 +1,7 @@
 .hero-unit
   h2 Welcome back!
   h3 And finally, to unlock Paying Mantis, please confirm and complete your order:
-  h4 Grant me full access to the site for the next #{pluralize(@subscription.plan_duration, 'month')} - #{@subscription.plan_description} at the cost of #{number_to_currency(@subscription.plan_cost, precision: 0)}.
+  h4 Grant me full access to the site for the next #{pluralize(@subscription.duration, 'month')} - #{@subscription.description} at the cost of #{number_to_currency(@subscription.cost, precision: 0)}.
   = form_for @subscription do |f|
     = f.hidden_field :plan_id
     = f.hidden_field :paypal_customer_token
