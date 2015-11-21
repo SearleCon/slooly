@@ -12,10 +12,9 @@
 #
 
 class Voucher < ActiveRecord::Base
-  attr_readonly :unique_code, :valid_until, :number_of_days
-
   belongs_to :redeemer, class_name: 'User', foreign_key: :redeemed_by
 
+  validates :number_of_days, :valid_until, presence: true, on: :create
   validate :expired?, :redeemed?, on: :update
 
   before_create :generate_code, :set_valid_until
