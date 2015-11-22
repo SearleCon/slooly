@@ -58,6 +58,7 @@ gem 'coupon_code'
 gem 'dalli'
 gem 'multi_fetch_fragments'
 
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ujs'
