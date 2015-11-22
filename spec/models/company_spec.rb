@@ -32,17 +32,4 @@ describe Company do
     expect(company.email).to eq(expected)
   end
 
-  describe '#set_defaults' do
-    it 'sets default values' do
-      company = build(:company)
-      company.send(:set_defaults)
-      expect(company.name).to eq("Your Company Name")
-      expect(company.address).to eq("44 Street Name, Suburb")
-      expect(company.city).to eq("Best City")
-      expect(company.post_code).to eq("1234")
-      expect(company.telephone).to eq("555 345 6789")
-      expect(company.fax).to eq("People still fax?")
-      expect(company.email).to eq('you@example.com')
-    end
-  end
 end

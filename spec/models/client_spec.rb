@@ -17,17 +17,6 @@
 #
 
 describe Client do
-
-
-  before do
-    User.skip_callback(:create, :after, :setup)
-  end
-
-  after do
-    User.set_callback(:create, :after, :setup)
-  end
-
-
   it 'should have a valid factory' do
     client = build(:client)
     expect(client).to be_valid

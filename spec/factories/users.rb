@@ -20,13 +20,6 @@
 #
 
 FactoryGirl.define do
-  before(:create) do
-    User.skip_callback(:create, :after, :setup)
-  end
-  after(:create) do
-    User.set_callback(:create, :after, :setup)
-  end
-
   factory :user do
     name "Test User"
     email { Faker::Internet.email }

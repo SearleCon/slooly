@@ -55,15 +55,6 @@ describe Invoice do
     expect(invoice.age).to be_an_instance_of(Invoice::Age)
   end
 
-  describe '#set_defaults' do
-    it 'sets a default status of chasing' do
-      invoice = build(:invoice)
-      invoice.send(:set_defaults)
-      expect(invoice.chasing?).to be_truthy
-    end
-  end
-
-
   describe '#calculate_dates' do
     let (:invoice) { build(:invoice, due_date: Date.current)  }
 

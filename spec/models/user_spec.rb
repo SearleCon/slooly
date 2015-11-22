@@ -20,10 +20,11 @@
 #
 
 describe User do
- it 'should have a valid factory' do
-  user = build(:user)
-  expect(user).to be_valid
- end
+
+  it 'should have a valid factory' do
+    user = build(:user)
+    expect(user).to be_valid
+  end
 
  it { should have_many(:clients) }
  it { should have_many(:invoices) }
@@ -42,21 +43,26 @@ describe User do
  end
 
  describe '#setup' do
+
+   before do
+     allow(Plan).to receive(:free_trial).and_return(build(:free_trial))
+   end
+
    it 'should create a company' do
      user = build(:user)
-     user.save
+     user.send(:setup)
      expect(user.company).to_not be_nil
    end
 
    it 'should create settings' do
      user = build(:user)
-     user.save
+     user.send(:setup)
      expect(user.setting).to_not be_nil
    end
 
    it 'should create subscription' do
      user = build(:user)
-     user.save
+     user.send(:setup)
      expect(user.subscription).to_not be_nil
    end
  end
