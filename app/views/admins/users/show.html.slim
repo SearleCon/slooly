@@ -27,7 +27,7 @@
   p
     strong Last Sign In
     '
-    = timeago(@user.last_sign_in_at) unless @user.sign_in_count.zero?
+    = local_time_ago(@user.last_sign_in_at) unless @user.sign_in_count.zero?
 
 .well.well-small
   h4 Subscription Information
@@ -47,7 +47,7 @@
     p
       strong Expires
       '
-      = timeago(@user.subscription.expiry_date)
+      = local_time_ago(@user.subscription.expiry_date)
     = link_to edit_admins_user_subscription_path(@user, @user.subscription) do
       = fa_icon 'clock-o', text: ' Extend'
   - else

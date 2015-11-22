@@ -13,20 +13,13 @@
   .search-form.pull-right
     small
       em.muted Search on business name or contact person
-    = form_tag search_clients_path, method: :get, class: 'form-search' do
-      = text_field_tag :q, params[:q] ,class: 'search-query input-medium', placeholder: 'Search'
-      span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
-table[data-sortable=true]
-  thead
-    tr
-      = content_tag :th, 'Business Name'
-      = content_tag :th, 'Contact Person'
-      = content_tag :th, 'Telephone'
-      = content_tag :th, 'Email'
-      = content_tag :th, 'Created'
-      th
-      th
-      th
-  tbody= render @clients, cache: true
-  = paginate @clients
+    = form_tag clients_path, method: :get, class: 'form-search', remote: true, data: { validate: true } do
+      .control-group
+        .controls
+          = text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: { rule_minlength: 3 }
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
+
+#clients= render 'clients'
 hr
+= link_to new_client_path do
+  = fa_icon 'male', text: ' Add a New Client'

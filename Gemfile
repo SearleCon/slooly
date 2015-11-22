@@ -6,9 +6,11 @@ gem 'rails', '~> 4.2'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+gem 'jquery-rails'
 
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-datepicker-rails'
 gem "font-awesome-rails"
 
 # Authentication
@@ -58,15 +60,12 @@ gem 'coupon_code'
 gem 'dalli'
 gem 'multi_fetch_fragments'
 
+# Jquery validation
+gem "jquery-validation-rails"
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery'
-  gem 'rails-assets-jquery-ujs'
-  gem 'rails-assets-bootstrap-datepicker'
-  gem 'rails-assets-jquery-validate'
-  gem 'rails-assets-sortable'
-  gem 'rails-assets-timeago'
-end
+# Time ago
+gem 'local_time'
+
 
 # Server
 gem 'puma'

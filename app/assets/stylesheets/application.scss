@@ -16,7 +16,6 @@ $paginationActiveBackground: darkgray;
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "bootstrap-datepicker";
-@import "sortable/sass/sortable-theme-minimal";
 
 @import "font-awesome";
 
@@ -51,7 +50,6 @@ table{
   @extend .table;
   @extend .table-condensed;
   @extend .table-hover;
-  @extend .sortable-theme-minimal !optional;
 }
 
 

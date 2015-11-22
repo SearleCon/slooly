@@ -1,0 +1,13 @@
+table
+  thead
+    tr
+      th Business Name
+      th Contact Person
+      th Telephone
+      th Email
+      th Created
+      th
+      th
+      th
+  tbody= render @clients, cache: true
+  = paginate @clients, remote: true

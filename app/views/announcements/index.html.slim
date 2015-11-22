@@ -7,6 +7,6 @@
     br
     = simple_format(announcement.description)
     br
-    p.muted= "Posted by #{announcement.posted_by} #{timeago(announcement.created_at)} ago".html_safe
+    p.muted= "Posted by #{announcement.posted_by} #{local_time_ago(announcement.created_at)} ago".html_safe
 
 

@@ -5,19 +5,12 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = current_user.clients.page(params[:page])
-
-    if @clients.empty?
-      render :dashboard
-    else
+    if Client.any?
+      @clients = Client.search(params[:q]).page(params[:page])
       fresh_when @clients
+    else
+      render :dashboard
     end
-  end
-
-  def search
-    @clients = current_user.clients.search(params[:q]).page(params[:page])
-    flash.now[:info] = "#{@clients.total_entries} results found containing the search string '#{params[:q]}' (In their Business Name or Contact Person fields)." if params[:q]
-    render :index
   end
 
   def show

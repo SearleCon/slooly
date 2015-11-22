@@ -12,7 +12,7 @@
     = form_tag search_invoices_path, method: :get, class: 'form-search' do
       = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search'
       span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
-table[data-sortable=true]
+table
   thead
     tr
       th Age

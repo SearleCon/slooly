@@ -1,7 +1,7 @@
 .page-header
   h1 Users
 
-table[data-sortable=true]
+table
   tr
     th Name
     th Email
@@ -15,11 +15,11 @@ table[data-sortable=true]
     tr
       td=link_to user.name, admins_user_path(user)
       td=user.email
-      td[data-value=user.created_at]= timeago(user.created_at)
-      td[data-value=user.last_sign_in_at]= timeago(user.last_sign_in_at) unless user.sign_in_count.zero?
+      td[data-value=user.created_at]= local_time_ago(user.created_at)
+      td[data-value=user.last_sign_in_at]= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero?
       td= user.sign_in_count
       td= user.subscription.description
-      td[data-value=user.subscription.expiry_date]= timeago(user.subscription.expiry_date)
+      td[data-value=user.subscription.expiry_date]= local_time_ago(user.subscription.expiry_date)
       td= link_to impersonations_path(id: user.id), method: :post do
         = fa_icon 'sign-in', text: 'Sign in as this user'
 

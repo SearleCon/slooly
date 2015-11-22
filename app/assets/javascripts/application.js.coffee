@@ -1,17 +1,15 @@
 #= require jquery
-#= require jquery-ujs
-#= require jquery-validate
+#= require jquery_ujs
+#= require jquery.validate
 #= require bootstrap
 #= require bootstrap-datepicker
 #= require obfuscatejs
 #= require jquery.autosize
-#= require sortable
-#= require timeago
+#= require local_time
 #= require turbolinks
 #= require_tree .
 
 Turbolinks.enableProgressBar();
-jQuery.timeago.settings.allowFuture = true;
 
 
 $.rails.allowAction = (element) ->
@@ -83,8 +81,6 @@ $.validator.setDefaults
   errorClass: "help-block"
 
 pageLoad = ->
-  Sortable.init()
-  $('.timeago').timeago()
   $("form").each ->
     if $(this).data("validate")
       $(this).validate(
