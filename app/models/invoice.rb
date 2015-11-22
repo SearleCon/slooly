@@ -40,13 +40,7 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client
 
-  def self.search(query)
-    if query.present?
-      where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%")
-    else
-      none
-    end
-  end
+  scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
 
   def pre_due?
     pd_date.today?

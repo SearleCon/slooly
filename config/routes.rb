@@ -145,7 +145,6 @@ Rails.application.routes.draw do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
     collection do
       get :exists
-      get :search
     end
   end
 
@@ -157,11 +156,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: :index
 
-  resources :invoices do
-    collection do
-      get :search
-    end
-  end
+  resources :invoices
 
   resources :histories, only: :show
 

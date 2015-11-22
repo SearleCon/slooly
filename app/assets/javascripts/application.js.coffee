@@ -3,13 +3,15 @@
 #= require jquery.validate
 #= require bootstrap
 #= require bootstrap-datepicker
+#= require bootstrap-sortable
 #= require obfuscatejs
 #= require jquery.autosize
 #= require local_time
+#= require nprogress
+#= require nprogress-ajax
+#= require nprogress-turbolinks
 #= require turbolinks
 #= require_tree .
-
-Turbolinks.enableProgressBar();
 
 
 $.rails.allowAction = (element) ->
@@ -81,6 +83,7 @@ $.validator.setDefaults
   errorClass: "help-block"
 
 pageLoad = ->
+  $.bootstrapSortable(true);
   $("form").each ->
     if $(this).data("validate")
       $(this).validate(

@@ -11,6 +11,7 @@ gem 'jquery-rails'
 #Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap_sortable_rails', '~> 1.8.0'
 gem "font-awesome-rails"
 
 # Authentication
@@ -66,6 +67,8 @@ gem "jquery-validation-rails"
 # Time ago
 gem 'local_time'
 
+# Progress Bars
+gem 'nprogress-rails'
 
 # Server
 gem 'puma'

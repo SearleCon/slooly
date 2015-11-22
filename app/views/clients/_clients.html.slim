@@ -1,4 +1,4 @@
-table
+table.sortable
   thead
     tr
       th Business Name
@@ -6,8 +6,6 @@ table
       th Telephone
       th Email
       th Created
-      th
-      th
-      th
+      th[data-defaultsort='disabled']
   tbody= render @clients, cache: true
   = paginate @clients, remote: true

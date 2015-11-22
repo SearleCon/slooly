@@ -5,8 +5,8 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    if Client.any?
-      @clients = Client.search(params[:q]).page(params[:page])
+    if current_user.clients.any?
+      @clients = current_user.clients.search(params[:q]).page(params[:page])
       fresh_when @clients
     else
       render :dashboard

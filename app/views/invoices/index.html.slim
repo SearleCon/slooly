@@ -4,31 +4,18 @@
       =image_tag('invoices.png', class: 'media-object')
     .media-body
       h1 Invoices
-      .pagination-details = page_entries_info @invoices
+      .pagination-details
+        h5= page_entries_info @invoices
 
   .search-form.pull-right
     small
       em.muted Search on invoice number or description
-    = form_tag search_invoices_path, method: :get, class: 'form-search' do
-      = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search'
-      span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
-table
-  thead
-    tr
-      th Age
-      th Invoice Number
-      th Due Date
-      th Amount
-      th Description
-      th Status
-      th Client
-      th Created
-      th
-      th
-      th
-  tbody= render @invoices
-  = paginate @invoices
+    = form_tag invoices_path, method: :get, class: 'form-search', remote: true, data: { validate: true } do
+      .control-group
+        .controls
+          = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search', autocomplete: :off, data: { rule_minlength: 3 }
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
+#invoices= render 'invoices/invoices'
 hr
-.actions
-  = link_to new_invoice_path do
-    = fa_icon 'file-text', text: ' Add Invoice'
+= link_to new_invoice_path do
+  = fa_icon 'file-text', text: ' Add Invoice'

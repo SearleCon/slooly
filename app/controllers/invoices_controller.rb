@@ -4,19 +4,12 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @invoices = current_user.invoices.includes(:client).page(params[:page])
-
-    if @invoices.empty?
-      render :dashboard
-    else
+    if current_user.invoices.any?
+      @invoices = current_user.invoices.includes(:client).search(params[:q]).page(params[:page])
       fresh_when @invoices
+    else
+      render :dashboard
     end
-  end
-
-  def search
-    @invoices =  current_user.invoices.includes(:client).search(params[:q]).page(params[:page])
-    flash.now[:info]= "#{@invoices.total_entries} found containing the search string '#{params[:q]}' (In their Invoice Number or Description fields)." if params[:q]
-    render :index
   end
 
   def show
@@ -47,7 +40,6 @@ class InvoicesController < ApplicationController
   def interpolation_options
     { resource_name: @invoice.invoice_number }
   end
-
 
   def set_invoice
     @invoice = Invoice.find(params[:id])

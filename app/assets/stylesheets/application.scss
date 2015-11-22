@@ -16,8 +16,14 @@ $paginationActiveBackground: darkgray;
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "bootstrap-datepicker";
+@import "bootstrap-sortable";
 
 @import "font-awesome";
+
+
+$nprogress-height: 5px;
+@import 'nprogress';
+@import 'nprogress-bootstrap';
 
 
 html.turbolinks-progress-bar::before {

@@ -1,0 +1,14 @@
+table.sortable
+  thead
+    tr
+      th Age
+      th Invoice Number
+      th Due Date
+      th Amount
+      th Description
+      th Status
+      th Client
+      th Created
+      th[data-defaultsort='disabled']
+  tbody= render @invoices, cache: true
+  = paginate @invoices, remote: true
