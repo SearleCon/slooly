@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   around_action :with_timezone
 
-  etag { Rails.env.development? ? [Time.zone.now.to_i] : [current_user.try(:id), flash] }
+  etag { [current_user.try(:id), flash] }
 
   private
   def check_browser_version

@@ -19,6 +19,7 @@ li
         th Invoice Number
         th Due Date
         th Amount
+        th Description
         th Created
         th[data-defaultsort='disabled']
     tbody= render partial: 'clients/invoices/outstanding', collection: client.outstanding_invoices, as: :invoice, cache: true
