@@ -14,8 +14,9 @@
       .control-group
         .controls
           = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search', autocomplete: :off, data: { rule_minlength: 3, rule_required: true }
-          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path, remote: true
-#invoices= render 'invoices/invoices'
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
+#invoices= render 'invoices/invoices', invoices: @invoices
 hr
-= link_to new_invoice_path do
-  = fa_icon 'file-text', text: ' Add Invoice'
+ul.inline
+   li= link_to new_invoice_path do
+     = fa_icon 'file-text', text: ' Add Invoice'

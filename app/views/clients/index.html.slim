@@ -6,10 +6,6 @@
       h1 Clients
       .pagination-details
         h5= page_entries_info @clients
-      .actions
-        = link_to new_clients_import_path, class: 'btn btn-info' do
-          = fa_icon 'file-excel-o', text: ' Import clients from spreadsheet'
-
   .search-form.pull-right
     small
       em.muted Search on business name or contact person
@@ -17,9 +13,12 @@
       .control-group
         .controls
           = text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: { rule_minlength: 3, rule_required: true }
-          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path, remote: true
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 
-#clients= render 'clients'
+#clients=render('clients')
 hr
-= link_to new_client_path do
-  = fa_icon 'male', text: ' Add a New Client'
+ul.inline
+    li= link_to new_client_path do
+      = fa_icon 'male', text: ' Add Client'
+    li= link_to new_clients_import_path do
+      = fa_icon 'file-excel-o', text: ' Import Clients'

@@ -43,29 +43,28 @@
         a[href="#history" data-toggle="tab"] Chasing History
     .tab-content
       #chasing.tab-pane.fade.in.active
-        - if @client.invoices.any?
+        - if @client.outstanding_invoices.any?
           p
-            | You are currently chasing the following <strong>#{pluralize(@client.invoices.size, 'invoice')}</strong> for
-               <strong>#{ @client.business_name}</strong> to the value of <strong>#{@client.invoices.total}</strong> (total chasing amount).
-          table[data-sortable=true]
+            | You are currently chasing the following <strong>#{pluralize(@client.outstanding_invoices.size, 'invoice')}</strong> for
+               <strong>#{ @client.business_name}</strong> to the value of <strong>#{@client.outstanding_invoices.total}</strong> (total chasing amount).
+          table
             thead
-              tr
-                th Age
-                th Invoice Number
-                th Due date
-                th Amount
-                th Description
-                th Status
-                th Client
-                th Created
-                th
-            tbody= render @client.invoices, cache: true
+            th
+              | Age
+              '
+              i.icon-question-sign[rel='popover' data-container='body' data-trigger='hover' data-title='Invoice Age' data-content='The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. "-5" means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green']
+              th Invoice Number
+              th Due Date
+              th Amount
+              th Created
+              th
+            tbody= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice, cache: true
         - else
           p You are <strong>not</strong> chasing any invoices for #{@client.business_name}.
       #history.tab-pane.fade.in
         - if @client.histories.any?
           p  Here are the emails you have <strong>already sent</strong> to <strong>#{@client.business_name}</strong> (Newest to Oldest).
-          table[data-sortable=true]
+          table
             tr
               th Date Sent
               th Sent To

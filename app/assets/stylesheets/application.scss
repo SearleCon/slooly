@@ -41,6 +41,11 @@ body
   padding-bottom: 70px;
 }
 
+/* Page Header */
+.page-header{
+  padding-bottom: 5em;
+}
+
 /* Forms */
 input{
   @extend .input-xlarge;
@@ -49,7 +54,6 @@ textarea{
   @extend .input-xlarge;
   height: 6em;
 }
-
 
 /* tables */
 table{

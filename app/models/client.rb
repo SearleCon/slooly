@@ -23,6 +23,7 @@ class Client < ActiveRecord::Base
 
   belongs_to :user, required: true
   has_many :invoices
+  has_many :outstanding_invoices, -> { merge(Invoice.chasing) }, class_name: 'Invoice'
   has_many :histories, -> { order(date_sent: :desc) }
 
   validates :business_name, :email, presence: true
