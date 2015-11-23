@@ -88,7 +88,10 @@ pageLoad = ->
     if $(this).data("validate")
       $(this).validate(
         submitHandler: (form)->
-          form.submit()
+          if $(form).data('remote')
+            $.rails.handleRemote(form)
+          else
+            form.submit()
       )
 
     return

@@ -10,11 +10,11 @@
   .search-form.pull-right
     small
       em.muted Search on invoice number or description
-    = form_tag invoices_path, method: :get, class: 'form-search', remote: true, data: { validate: true } do
+    = form_tag invoices_path, method: :get, class: 'form-search', data: { validate: true }, remote: true do
       .control-group
         .controls
-          = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search', autocomplete: :off, data: { rule_minlength: 3 }
-          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path
+          = text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search', autocomplete: :off, data: { rule_minlength: 3, rule_required: true }
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), invoices_path, remote: true
 #invoices= render 'invoices/invoices'
 hr
 = link_to new_invoice_path do

@@ -16,8 +16,8 @@
     = form_tag clients_path, method: :get, class: 'form-search', remote: true, data: { validate: true } do
       .control-group
         .controls
-          = text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: { rule_minlength: 3 }
-          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
+          = text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: { rule_minlength: 3, rule_required: true }
+          span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path, remote: true
 
 #clients= render 'clients'
 hr
