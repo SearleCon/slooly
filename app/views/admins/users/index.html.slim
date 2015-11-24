@@ -18,8 +18,8 @@ table
       td[data-value=user.created_at]= local_time_ago(user.created_at)
       td[data-value=user.last_sign_in_at]= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero?
       td= user.sign_in_count
-      td= user.subscription.description
-      td[data-value=user.subscription.expiry_date]= local_time_ago(user.subscription.expiry_date)
+      td= user.subscription.description if user.subscribed?
+      td[data-value=user.subscription.expiry_date]= local_time_ago(user.subscription.expiry_date) if user.subscribed?
       td= link_to impersonations_path(id: user.id), method: :post do
         = fa_icon 'sign-in', text: 'Sign in as this user'
 
