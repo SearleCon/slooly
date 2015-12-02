@@ -15,17 +15,17 @@ module Slooly
 
     config.middleware.use Rack::Deflater
 
-    config.generators do |g|
-      g.test_framework :rspec,
+    config.generators do |generate|
+      generate.test_framework :rspec,
         fixtures: true,
         view_specs: false,
         helper_specs: false,
         routing_specs: false,
         controller_specs: false,
         request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
-      g.assets = false
-      g.helper = false
+      generate.fixture_replacement :factory_girl, dir: "spec/factories"
+      generate.assets = false
+      generate.helper = false
     end
 
     config.exceptions_app = routes

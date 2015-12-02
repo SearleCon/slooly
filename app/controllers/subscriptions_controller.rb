@@ -8,7 +8,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
 
-    if SubscribeUser.new(current_user, @subscription).perform.success?
+    if SubscribeUser.perform(current_user, @subscription).success?
       flash.now[:notice] = 'Thank you for supporting us!'
     else
       flash.now[:alert] = 'There has been a problem activating your subscription. Please contact support.'

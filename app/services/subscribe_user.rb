@@ -1,4 +1,6 @@
 class SubscribeUser
+  include Service
+
   def initialize(user, subscription)
     @user = user
     @subscription = subscription
@@ -8,7 +10,6 @@ class SubscribeUser
     Subscription.transaction do
      raise ActiveRecord::Rollback unless request_payment && subscription.save
     end
-    self
   end
 
   def success?
@@ -17,7 +18,7 @@ class SubscribeUser
 
   private
 
-  attr_reader :user, :subscription, :current_subscription
+  attr_reader :user, :subscription
 
   def request_payment
     response = PayPal::Recurring.new(token: subscription.paypal_customer_token, payer_id: subscription.paypal_recurring_profile_token, description: subscription.description, amount: subscription.cost, currency: 'USD').request_payment
