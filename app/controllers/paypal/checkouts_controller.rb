@@ -13,4 +13,4 @@ module Paypal
       redirect_to response.checkout_url
     end
   end
-  end
+end

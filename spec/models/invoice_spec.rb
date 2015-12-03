@@ -48,7 +48,7 @@ describe Invoice do
 
   it 'returns an instance of Invoice::Age for age' do
     invoice = build(:invoice)
-    expect(invoice.age).to be_an_instance_of(Invoice::Age)
+    expect(invoice.age).to be_an_instance_of(Invoices::Age)
   end
 
   describe '#calculate_dates' do

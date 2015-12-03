@@ -8,13 +8,19 @@ module AttributeNormalizer
   private
 
   def normalize_attributes
-    self.class.columns.select { |column| [:text, :string].include?(column.type) }.each do |column|
-      value = self[column.name]
-      if value.blank?
-        self[column.name] = nil
-      else
-        self[column.name] = ((column.type == :text) ? value.strip.squeeze(' ') : value.squish)
-      end
-    end
+    normalize_string_attributes
+    normalize_text_attributes
+  end
+
+  def normalize_string_attributes
+    attributes_for(:string).each { |name| self[name] = self[name].blank? ? nil : self[name].squish }
+  end
+
+  def normalize_text_attributes
+    attributes_for(:text).each { |name| self[name] = self[name].blank? ? nil : self[name].strip.squeeze(' ') }
+  end
+
+  def attributes_for(type)
+    self.class.columns.select { |column| column.type == type }.map(&:name)
   end
 end

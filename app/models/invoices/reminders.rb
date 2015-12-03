@@ -1,11 +1,9 @@
-module Invoice
+module Invoices
   module Reminders
     def self.new(invoice)
       case
       when invoice.pre_due?
         PreDue.new(invoice)
-      when invoice.due?
-        Due.new(invoice)
       when invoice.over_due1?
         FirstOverDue.new(invoice)
       when invoice.over_due2?
@@ -14,6 +12,8 @@ module Invoice
         ThirdOverDue.new(invoice)
       when invoice.final_demand?
         FinalDemand.new(invoice)
+      else
+        Due.new(invoice)
       end
     end
 
@@ -33,7 +33,8 @@ module Invoice
       end
 
       def text
-        %(Attention: #{client.contact_person}\r
+        %(
+          Attention: #{client.contact_person}\r
           #{client.business_name.gsub(/['"]/, '')}\r
           #{client.address}\r
           #{client.city}\r
@@ -50,7 +51,8 @@ module Invoice
           Fax  : #{company.fax}\r
           Email: #{company.email}\r\n
           Payment Options: \r
-          #{settings.payment_method_message})
+          #{settings.payment_method_message}
+        )
       end
 
       def send?

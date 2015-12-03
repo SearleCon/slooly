@@ -19,4 +19,4 @@ module Clients
       File.extname(params[:client][:file].original_filename).delete('.').to_sym
     end
   end
-  end
+end

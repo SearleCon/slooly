@@ -67,7 +67,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def age
-    @age ||= Invoice::Age.from_due_date(due_date)
+    @age ||= Invoices::Age.from_due_date(due_date)
   end
 
   def self.total

@@ -4,7 +4,7 @@ namespace :reminders do
 
     invoices = InvoicesToSend.new.invoices
 
-    reminders_to_send = invoices.map { |invoice| Invoice::Reminders.new(invoice) }.select(&:send?)
+    reminders_to_send = invoices.map { |invoice| Invoices::Reminders.new(invoice) }.select(&:send?)
 
     reminders_to_send.each do |reminder|
       history = History.create do |h|

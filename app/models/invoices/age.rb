@@ -1,4 +1,4 @@
-module Invoice
+module Invoices
   class Age
     include Comparable
 
