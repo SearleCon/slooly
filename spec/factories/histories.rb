@@ -21,19 +21,16 @@
 
 FactoryGirl.define do
   factory :history do
-    date_sent         Date.current
+    date_sent Date.current
     subject           { Faker::Lorem.sentence(3) }
     message           { Faker::Lorem.paragraph }
-    reminder_type     'PD'
-    sent              false
+    reminder_type 'PD'
+    sent false
     email_return_code '005'
     email_sent_from    { Faker::Internet.email }
     copy_email         { Faker::Internet.email }
     email_sent_to      { Faker::Internet.email }
-    invoice_number    '1'
-    email_from_name    { Faker::Name.name }
+    invoice_number '1'
+    email_from_name { Faker::Name.name }
   end
 end
-
-
-

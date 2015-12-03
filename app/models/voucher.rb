@@ -26,7 +26,7 @@ class Voucher < ActiveRecord::Base
   end
 
   def expired?
-    errors.add(:valid_until, 'date has already passed.') if  valid_until.past?
+    errors.add(:valid_until, 'date has already passed.') if valid_until.past?
   end
 
   private

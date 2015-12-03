@@ -1,6 +1,5 @@
 class HistoriesController < ApplicationController
 
-
   before_action :authenticate_user!, :authorize_user!
 
   def show

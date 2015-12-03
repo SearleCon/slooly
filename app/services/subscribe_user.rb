@@ -8,7 +8,7 @@ class SubscribeUser
 
   def perform
     Subscription.transaction do
-     raise ActiveRecord::Rollback unless request_payment && subscription.save
+      fail ActiveRecord::Rollback unless request_payment && subscription.save
     end
   end
 

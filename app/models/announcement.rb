@@ -20,7 +20,7 @@ class Announcement < ActiveRecord::Base
   validates :headline, :description, :posted_by, presence: true
 
   scope :recent, -> { where('created_at >= ?', EXPIRY_PERIOD.days.ago) }
-  scope :unread, ->(ids) { where.not(id: ids)}
+  scope :unread, ->(ids) { where.not(id: ids) }
 
   before_save do
     self.headline = headline.titleize

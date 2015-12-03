@@ -3,12 +3,12 @@ module Service
 
   module ClassMethods
     def perform(*args)
-      new(*args).tap { |object| object.perform }
+      new(*args).tap(&:perform)
     end
   end
 
   def perform
-    raise NotImplementedError
+    fail NotImplementedError
   end
 
 end

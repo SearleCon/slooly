@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :subscription do
-    expiry_date   1.month.from_now
+    expiry_date 1.month.from_now
     active true
     association :plan, factory: :free_trial
   end

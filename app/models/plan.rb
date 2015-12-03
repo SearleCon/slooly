@@ -27,7 +27,7 @@ class Plan < ActiveRecord::Base
 
   def self.free_trial
     Rails.cache.fetch('free_trial_plan', expires_in: 8.hours) do
-      Plan.where(active: true, free: true).first
+      Plan.find_by(active: true, free: true)
     end
   end
 

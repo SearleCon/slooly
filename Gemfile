@@ -8,31 +8,30 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 
-#Frontend
+# Frontend
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap_sortable_rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Authentication
 gem 'devise'
-
 
 # Pagination
 gem 'kaminari'
 
 # Background Processing
 gem 'delayed_job_active_record'
-gem "workless", "~> 1.2.3"
+gem 'workless', '~> 1.2.3'
 
 # Turbolinks
 gem 'turbolinks'
 
 # Paypal
-gem "paypal-recurring"
+gem 'paypal-recurring'
 
 # Misc
-gem "browser"
+gem 'browser'
 gem 'metamagic'
 gem 'honeypot-captcha'
 
@@ -62,7 +61,7 @@ gem 'dalli'
 gem 'multi_fetch_fragments'
 
 # Jquery validation
-gem "jquery-validation-rails"
+gem 'jquery-validation-rails'
 
 # Time ago
 gem 'local_time'
@@ -74,7 +73,7 @@ gem 'nprogress-rails'
 gem 'puma'
 
 group :production do
-  gem "rack-timeout"
+  gem 'rack-timeout'
   gem 'rails_12factor'
 end
 

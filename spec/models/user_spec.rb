@@ -21,49 +21,43 @@
 
 describe User do
 
-  it 'should have a valid factory' do
-    user = build(:user)
-    expect(user).to be_valid
+  it { should have_many(:clients) }
+  it { should have_many(:invoices) }
+  it { should have_one(:company) }
+  it { should have_one(:setting) }
+  it { should have_one(:subscription).conditions(active: true) }
+
+  it { should validate_acceptance_of(:terms_of_service) }
+
+  describe '#timeout_in' do
+    it 'should be 2 hours' do
+      user = build(:user)
+      expect(user.timeout_in).to eq(2.hours)
+    end
   end
 
- it { should have_many(:clients) }
- it { should have_many(:invoices) }
- it { should have_one(:company) }
- it { should have_one(:setting) }
- it { should have_one(:subscription).conditions(active: true) }
+  describe '#setup' do
 
+    before do
+      allow(Plan).to receive(:free_trial).and_return(build(:free_trial))
+    end
 
- it { should validate_acceptance_of(:terms_of_service) }
+    it 'should create a company' do
+      user = build(:user)
+      user.send(:setup)
+      expect(user.company).to_not be_nil
+    end
 
- describe '#timeout_in' do
-   it 'should be 2 hours' do
-     user = build(:user)
-     expect(user.timeout_in).to eq(2.hours)
-   end
- end
+    it 'should create settings' do
+      user = build(:user)
+      user.send(:setup)
+      expect(user.setting).to_not be_nil
+    end
 
- describe '#setup' do
-
-   before do
-     allow(Plan).to receive(:free_trial).and_return(build(:free_trial))
-   end
-
-   it 'should create a company' do
-     user = build(:user)
-     user.send(:setup)
-     expect(user.company).to_not be_nil
-   end
-
-   it 'should create settings' do
-     user = build(:user)
-     user.send(:setup)
-     expect(user.setting).to_not be_nil
-   end
-
-   it 'should create subscription' do
-     user = build(:user)
-     user.send(:setup)
-     expect(user.subscription).to_not be_nil
-   end
- end
+    it 'should create subscription' do
+      user = build(:user)
+      user.send(:setup)
+      expect(user.subscription).to_not be_nil
+    end
+  end
 end

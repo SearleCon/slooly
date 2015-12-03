@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :announcement do
-    headline  { Faker::Lorem.sentence(3)}
+    headline { Faker::Lorem.sentence(3) }
     description { Faker::Lorem.paragraph }
     posted_by { Faker::Name.name }
   end

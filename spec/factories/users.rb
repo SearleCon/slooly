@@ -21,12 +21,12 @@
 
 FactoryGirl.define do
   factory :user do
-    name "Test User"
+    name 'Test User'
     email { Faker::Internet.email }
-    password "please123"
+    password 'please123'
     time_zone 'Pretoria'
 
-    after(:create) do |user, evaluator|
+    after(:create) do |user, _evaluator|
       plan = create(:free_trial)
       create(:subscription, plan: plan, user: user, active: true)
       create(:company, user: user)

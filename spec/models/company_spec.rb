@@ -16,10 +16,6 @@
 #
 
 describe Company do
-  it 'should have a valid factory' do
-    company = build(:company)
-    expect(company).to be_valid
-  end
 
   it { should belong_to(:user).touch(true) }
 

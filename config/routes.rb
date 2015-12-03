@@ -108,12 +108,11 @@
 
 Rails.application.routes.draw do
 
-
   # Admin
 
   get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
 
-  devise_for :admins, controllers: {sessions: 'admins/sessions'}
+  devise_for :admins, controllers: { sessions: 'admins/sessions' }
   authenticated :admin do
     namespace :admins do
       resources :dashboard, only: :index
@@ -130,12 +129,12 @@ Rails.application.routes.draw do
       end
     end
 
-    root to: "admins/dashboard#index", as: :admin_root
+    root to: 'admins/dashboard#index', as: :admin_root
   end
 
   # Users
 
-  devise_for :users, controllers: {registrations: 'registrations', sessions: "sessions"}
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
   authenticated :user do
     root to: 'dashboard#index', as: :user_root
@@ -163,10 +162,9 @@ Rails.application.routes.draw do
   match 'redeem' => 'vouchers#redeem', as: 'redeem', via: :patch
 
   resource :settings, only: [:show, :edit, :update]
-  root to: "home#index"
+  root to: 'home#index'
 
   resources :impersonations, only: [:create, :destroy]
-
 
   resources :announcements, only: [:index] do
     get :hide, on: :member
@@ -199,5 +197,5 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create]
 
   # Errors
-  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}, via: :all
+  match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: :all
 end

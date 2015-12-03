@@ -15,17 +15,17 @@
 FactoryGirl.define do
   factory :plan do
     description 'Plan'
-    duration    1
-    cost       0
-    active     false
-    free       false
+    duration 1
+    cost 0
+    active false
+    free false
 
     factory :free_trial do
       description 'Free Trial'
-      duration    1
-      cost       0
-      active     true
-      free       true
+      duration 1
+      cost 0
+      active true
+      free true
     end
   end
 end

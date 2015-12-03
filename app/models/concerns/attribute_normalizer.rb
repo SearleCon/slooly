@@ -6,13 +6,14 @@ module AttributeNormalizer
   end
 
   private
+
   def normalize_attributes
     self.class.columns.select { |column| [:text, :string].include?(column.type) }.each do |column|
-      value = read_attribute(column.name)
+      value = self[column.name]
       if value.blank?
-        write_attribute(column.name, nil)
+        self[column.name] = nil
       else
-        write_attribute(column.name, ((column.type == :text) ? value.strip.squeeze(' ') : value.squish))
+        self[column.name] = ((column.type == :text) ? value.strip.squeeze(' ') : value.squish)
       end
     end
   end

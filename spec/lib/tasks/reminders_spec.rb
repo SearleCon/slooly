@@ -1,14 +1,10 @@
 require 'rails_helper'
 require 'rake'
 
-
-describe 'scheduler:send_reminders' do
-
+describe 'reminders:send' do
 
   before do
     Slooly::Application.load_tasks
-    @user = create(:user)
-    @client = create(:client, user: @user)
   end
 
   it 'creates a history entry for the reminder' do
@@ -27,10 +23,9 @@ describe 'scheduler:send_reminders' do
   end
 
   it 'does not send an email unless an invoice is in chasing or final_demand' do
-    invoice = create(:invoice, status: [:stop_chasing, :paid ,:write_off, :deleted].sample)
+    create(:invoice, status: [:stop_chasing, :paid, :write_off, :deleted].sample)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
-
 
   it 'sends an email for invoices which are due' do
     invoice = create(:invoice)

@@ -11,24 +11,18 @@
 #
 
 describe Announcement do
-  it 'should have a valid factory' do
-    announcement = build(:announcement)
-    expect(announcement).to be_valid
-  end
-
   describe '.recent' do
     it 'returns announcements created in the last 7 days' do
       announcement = create(:announcement)
       expected = [announcement]
-      result = Announcement.recent
+      result = described_class.recent
       expect(expected).to eq(result)
     end
 
     it 'does not return announcements older than 7 days' do
-      eight_days_ago = Time.zone.now - 8.days
-      announcement = create(:announcement, created_at: eight_days_ago)
+      create(:announcement, created_at: 8.days.ago)
       expected = []
-      result = Announcement.recent
+      result = described_class.recent
       expect(expected).to eq(result)
     end
   end

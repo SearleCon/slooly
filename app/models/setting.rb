@@ -33,6 +33,6 @@ class Setting < ActiveRecord::Base
   belongs_to :user, required: true
 
   validates :days_between_chase, :days_before_pre_due, presence: true
-  validates :days_between_chase, inclusion: {in: 1..31, message: 'can only be between 0 and 31.'}
-  validates :days_before_pre_due, inclusion: {in: 1..31, message: 'can only be between 0 and 31.'}
+  validates :days_between_chase, inclusion: { in: 1..31, message: 'can only be between 0 and 31.' }
+  validates :days_before_pre_due, inclusion: { in: 1..31, message: 'can only be between 0 and 31.' }
 end

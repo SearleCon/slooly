@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-   @subscription = Subscription.new(plan_id: params[:plan_id] ,paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID])
+    @subscription = Subscription.new(plan_id: params[:plan_id], paypal_customer_token: params[:token], paypal_recurring_profile_token: params[:PayerID])
   end
 
   def create
@@ -17,6 +17,7 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
   def subscription_params
     params.require(:subscription).permit(:plan_id, :paypal_recurring_profile_token, :paypal_customer_token).merge(user_id: current_user.id)
   end

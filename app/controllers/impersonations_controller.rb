@@ -17,7 +17,7 @@ class ImpersonationsController < ApplicationController
       sign_in(:admin, @admin)
       session.delete(:current_admin)
     end
-    redirect_to admin_root_url, notice: "Signed back in as admin"
+    redirect_to admin_root_url, notice: 'Signed back in as admin'
   end
 
   private

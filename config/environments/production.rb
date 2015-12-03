@@ -67,23 +67,22 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default charset: 'utf-8'
   #  config.action_mailer.default :from => "slooly@example.com"
 
   config.action_mailer.smtp_settings = {
-      address: Rails.application.secrets.email_smtp_address,
-      port: 587,
-      #domain: "www.payingmantis.com",
-      authentication: "plain",
-      enable_starttls_auto: true,
-      user_name: Rails.application.secrets.email_username,
-      password:  Rails.application.secrets.email_password
+    address: Rails.application.secrets.email_smtp_address,
+    port: 587,
+    # domain: "www.payingmantis.com",
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    user_name: Rails.application.secrets.email_username,
+    password:  Rails.application.secrets.email_password
   }
   # Delayed Job Scaling
   config.after_initialize do
     Delayed::Job.scaler = :heroku_cedar
   end
-
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -101,12 +100,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.cache_store = :dalli_store,
-      (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-      {username: ENV["MEMCACHIER_USERNAME"],
-       password: ENV["MEMCACHIER_PASSWORD"],
-       failover: true,
-       socket_timeout: 1.5,
-       socket_failure_delay: 0.2
-      }
+                       (ENV['MEMCACHIER_SERVERS'] || '').split(','),
+                       { username: ENV['MEMCACHIER_USERNAME'],
+                         password: ENV['MEMCACHIER_PASSWORD'],
+                         failover: true,
+                         socket_timeout: 1.5,
+                         socket_failure_delay: 0.2
+                       }
 
 end

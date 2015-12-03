@@ -22,31 +22,27 @@
 
 describe Invoice do
 
-  before do
-    User.skip_callback(:create, :after, :setup)
-  end
+  before { User.skip_callback(:create, :after, :setup) }
 
-  after do
-    User.set_callback(:create, :after, :setup)
-  end
+  after { User.set_callback(:create, :after, :setup) }
 
-  it { should belong_to(:client).touch(true) }
-  it { should belong_to(:user) }
+  it { is_expected.to belong_to(:client).touch(true) }
+  it { is_expected.to belong_to(:user) }
 
-  it { should validate_presence_of(:client) }
-  it { should validate_presence_of(:invoice_number) }
-  it { should validate_presence_of(:due_date) }
-  it { should validate_numericality_of(:amount) }
+  it { is_expected.to validate_presence_of(:client) }
+  it { is_expected.to validate_presence_of(:invoice_number) }
+  it { is_expected.to validate_presence_of(:due_date) }
+  it { is_expected.to validate_numericality_of(:amount) }
 
   describe '.search' do
     let(:invoice) { create(:invoice, description: 'Shell', invoice_number: '123456') }
 
     it 'searches on description' do
-      expect(Invoice.search('shell')).to eq [invoice]
+      expect(described_class.search('shell')).to eq [invoice]
     end
 
     it 'searches on invoice_number' do
-      expect(Invoice.search('123456')).to eq [invoice]
+      expect(described_class.search('123456')).to eq [invoice]
     end
   end
 
@@ -56,7 +52,7 @@ describe Invoice do
   end
 
   describe '#calculate_dates' do
-    let (:invoice) { build(:invoice, due_date: Date.current)  }
+    let(:invoice) { build(:invoice, due_date: Date.current) }
 
     before do
       allow(invoice).to receive(:days_before_pre_due).and_return(1)

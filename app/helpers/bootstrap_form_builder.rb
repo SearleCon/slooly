@@ -17,10 +17,10 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def collection_select(attribute, collection, value_method, text_method, options = {}, _html_options = {})
+  def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
     control_group(attribute) do
       concat(control_label(attribute, options.delete(:label)))
-      concat(controls { super(attribute, collection, value_method, text_method, options, html_options = {}) })
+      concat(controls { super(attribute, collection, value_method, text_method, options, html_options) })
     end
   end
 

@@ -1,5 +1,4 @@
-require "paypal/recurring"
-
+require 'paypal/recurring'
 
 if Rails.env.development?
   PayPal::Recurring.configure do |config|
@@ -16,5 +15,3 @@ else
     config.signature = Rails.application.secrets.paypal_signature
   end
 end
-
-

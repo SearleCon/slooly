@@ -12,11 +12,11 @@ module InvoicesHelper
 
   def age_badge(age)
     type = case
-             when age.due? then  'badge badge-important'
-             when age.current? then  'badge badge-info'
-             when age.overdue? then  'badge badge-success'
-             else 'badge'
+           when age.due? then 'badge badge-important'
+           when age.current? then  'badge badge-info'
+           when age.overdue? then  'badge badge-success'
+           else 'badge'
            end
-     content_tag(:span, age, class: type)
+    content_tag(:span, age, class: type)
   end
 end

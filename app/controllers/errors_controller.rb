@@ -15,12 +15,11 @@ class ErrorsController < ApplicationController
   end
 
   def send_error_notification
-    if internal_server_error?
-      exception_name = @exception.class.to_s
-      message = @exception.message
-      backtrace = ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
-      ErrorNotifier.delay.notify(exception_name, message, backtrace)
-    end
+    return unless internal_server_error?
+    exception_name = @exception.class.to_s
+    message = @exception.message
+    backtrace = ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
+    ErrorNotifier.delay.notify(exception_name, message, backtrace)
   end
 
   def internal_server_error?

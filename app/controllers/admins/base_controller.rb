@@ -1,8 +1,10 @@
-class Admins::BaseController < ActionController::Base
-  self.responder = ApplicationResponder
-  respond_to :html, :js, :json
+module Admins
+  class BaseController < ActionController::Base
+    self.responder = ApplicationResponder
+    respond_to :html, :js, :json
 
-  layout 'admin'
+    layout 'admin'
 
-  before_action :authenticate_admin!
+    before_action :authenticate_admin!
+  end
 end
