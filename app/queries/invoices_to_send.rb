@@ -6,7 +6,7 @@ class InvoicesToSend
   private
 
   def table
-    Invoice.arel_table
+    @table ||= Invoice.arel_table
   end
 
   def unsent
@@ -14,31 +14,12 @@ class InvoicesToSend
   end
 
   def send_today
-    pre_due.or(due).or(over_due1).or(over_due2).or(over_due3).or(final_demand)
-  end
-
-  def pre_due
-    table[:pd_date].eq(today)
-  end
-
-  def due
-    table[:due_date].eq(today)
-  end
-
-  def over_due1
-    table[:od1_date].eq(today)
-  end
-
-  def over_due2
-    table[:od2_date].eq(today)
-  end
-
-  def over_due3
-    table[:od3_date].eq(today)
-  end
-
-  def final_demand
-    table[:fd_date].eq(today)
+    table[:pd_date].eq(today).
+      or(table[:due_date].eq(today)).
+      or(table[:od1_date].eq(today)).
+      or(table[:od2_date].eq(today)).
+      or(table[:od3_date].eq(today)).
+      or(table[:fd_date].eq(today))
   end
 
   def chasing_or_final_demand
@@ -46,6 +27,6 @@ class InvoicesToSend
   end
 
   def today
-    Date.current
+    @today ||= Date.current
   end
 end

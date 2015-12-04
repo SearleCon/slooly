@@ -4,9 +4,9 @@ module Admins
     before_action :set_job, except: :index
 
     def index
-      @failed = Delayed::Job.all.where.not(last_error: nil)
-      @pending = Delayed::Job.all.where(attempts: 0, locked_at: nil)
-      @working = Delayed::Job.all.where.not(locked_at: nil)
+      @failed =  Job.failed
+      @pending = Job.pending
+      @working = Job.working
     end
 
     def queue
@@ -22,7 +22,7 @@ module Admins
     private
 
     def set_job
-      @job = Delayed::Job.find(params[:id])
+      @job = Job.find(params[:id])
     end
   end
 end
