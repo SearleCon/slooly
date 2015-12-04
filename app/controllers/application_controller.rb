@@ -19,25 +19,13 @@ class ApplicationController < ActionController::Base
   private
 
   def check_browser_version
-    return unless browser.ie6? || browser.ie7? || browser.ie8?
-    flash.now[:alert] = %(
-                           <strong>WARNING: You're running an older version of Internet Explorer that is not fully supported.
-                           For more information, please click #{view_context.link_to('here', supported_browsers_path)}</strong>
-                          ).html_safe
+    flash.now[:alert] = render_to_string(partial: 'shared/browser_warning') if browser.ie6? || browser.ie7? || browser.ie8?
   end
 
   def set_announcement
     announcement = Announcement.recent.unread(cookies.permanent.signed[:hidden_announcement_ids]).first
-    flash.now[:warning] = %{
-                              <div class='announcement'>
-                                <strong>
-                                Breaking News: #{view_context.link_to(announcement.headline, announcements_path)}
-                                (This message will disappear #{view_context.time_ago_in_words(announcement.expiry_date)} from now)
-                                </strong>
-                                #{view_context.link_to(hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true) { view_context.fa_icon 'remove', text: 'hide' }}
-                              </div>
-                            }.html_safe if announcement.present?
-
+    return unless announcement.present?
+    flash.now[:warning] = render_to_string(partial: 'shared/news', locals: { announcement: announcement })
   end
 
   def authorize_user!

@@ -4,11 +4,11 @@ class AnnouncementsController < ApplicationController
   end
 
   def hide
-    # ids = [params[:id], *cookies.permanent.signed[:hidden_announcement_ids]]
-    cookies.permanent.signed[:hidden_announcement_ids] << [params[:id]]
+    ids = [params[:id], *cookies.permanent.signed[:hidden_announcement_ids]]
+    cookies.permanent.signed[:hidden_announcement_ids] = ids
     respond_to do |format|
       format.html { redirect_to :back }
-      format.js { head :ok }
+      format.js
     end
   end
 end

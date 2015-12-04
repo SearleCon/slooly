@@ -18,5 +18,6 @@ FactoryGirl.define do
     expiry_date 1.month.from_now
     active true
     association :plan, factory: :free_trial
+    user
   end
 end

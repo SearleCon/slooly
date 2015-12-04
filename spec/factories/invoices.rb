@@ -31,5 +31,13 @@ FactoryGirl.define do
     due_date Date.current
     user
     client
+
+    trait :unsent do
+      last_date_sent nil
+    end
+
+    trait :non_chasing do
+      status [:stop_chasing, :paid, :write_off, :deleted].sample
+    end
   end
 end

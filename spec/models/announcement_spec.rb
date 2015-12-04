@@ -14,16 +14,14 @@ describe Announcement do
   describe '.recent' do
     it 'returns announcements created in the last 7 days' do
       announcement = create(:announcement)
-      expected = [announcement]
-      result = described_class.recent
-      expect(expected).to eq(result)
+      expect(described_class.recent).to include(announcement)
     end
 
     it 'does not return announcements older than 7 days' do
-      create(:announcement, created_at: 8.days.ago)
-      expected = []
-      result = described_class.recent
-      expect(expected).to eq(result)
+      create(:announcement)
+      travel_to 8.days.from_now do
+        expect(described_class.recent).to be_empty
+      end
     end
   end
 end

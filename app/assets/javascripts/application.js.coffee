@@ -109,9 +109,6 @@ pageLoad = ->
   ).on 'change', ->
     $(this).valid();
 
-  $(document).on 'ajax:success', '.announcement', ->
-    $(this).closest('.alert').remove()
-
   $('input[id=upload-clients]').change ->
      $('#upload-clients-file').val($(this).val().split('\\').pop());
 
