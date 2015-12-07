@@ -38,6 +38,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.before(:all) do
+    Rails.application.load_seed
+  end
+
   config.around(:each) do |example|
     User.skip_callback(:create, :after, :setup)
     example.run

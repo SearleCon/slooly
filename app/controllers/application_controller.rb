@@ -1,8 +1,6 @@
 require 'application_responder'
 
 class ApplicationController < ActionController::Base
-  include HttpCacheForever
-
   self.responder = ApplicationResponder
   respond_to :html, :js, :json
 
@@ -14,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   around_action :with_timezone
 
-  etag { [current_user.try(:id), flash] }
+  etag { [current_user.try(:id), flash].compact }
 
   private
 

@@ -21,19 +21,14 @@ class Plan < ActiveRecord::Base
 
   validates :description, :duration, :cost, presence: true
 
+  scope :available, -> { where(active: true, free: false) }
+
   before_save do
     self.description = description.try(:titleize)
   end
 
   def self.free_trial
-    Rails.cache.fetch('free_trial_plan', expires_in: 8.hours) do
-      Plan.find_by(active: true, free: true)
-    end
+    find_by!(active: true, free: true)
   end
 
-  def self.available
-    Rails.cache.fetch('commercial_plans', expires_in: 8.hours) do
-      Plan.where(active: true, free: false)
-    end
-  end
 end

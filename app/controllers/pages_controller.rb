@@ -1,30 +1,30 @@
 class PagesController < ApplicationController
 
   def about
-    http_cache_forever { render }
+    fresh_when('about', public: true)
   end
 
   def supported_browsers
-    http_cache_forever { render }
+    fresh_when('supported browsers', public: true)
   end
 
   def privacy
-    http_cache_forever { render }
+    fresh_when('privacy', public: true)
   end
 
   def tos
-    http_cache_forever { render }
+    fresh_when('tos', public: true)
   end
 
   def pricing
-    http_cache_forever { render }
+    fresh_when('pricing', public: true)
   end
 
   def faq
-    http_cache_forever { render }
+    fresh_when('faq', public: true)
   end
 
   def tutorial
-    http_cache_forever { render }
+    fresh_when('tutorial', public: true)
   end
 end

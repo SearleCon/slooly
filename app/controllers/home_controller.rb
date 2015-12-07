@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    http_cache_forever { render }
+    fresh_when('home', public: true)
   end
 end

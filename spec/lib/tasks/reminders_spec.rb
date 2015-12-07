@@ -5,7 +5,7 @@ describe 'reminders:send' do
   let!(:user) { create(:user) }
   let!(:setting) { create(:setting, user: user) }
   let!(:company) { create(:company, user: user) }
-  let(:invoice) { create(:invoice, user: user ) }
+  let(:invoice) { create(:invoice, user: user) }
   let(:unsent_invoice) { create(:invoice, :unsent, user: user) }
   let(:non_chasing_invoice) { create(:invoice, :non_chasing, user: user) }
 
