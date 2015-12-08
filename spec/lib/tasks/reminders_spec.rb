@@ -22,8 +22,7 @@ describe 'reminders:send' do
     allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::Due.new(unsent_invoice))
 
     Rake::Task['reminders:send'].execute
-    unsent_invoice.reload
-    expect(unsent_invoice.last_date_sent).to eq(Date.current)
+    expect(unsent_invoice.reload.last_date_sent).to eq(Date.current)
   end
 
   it 'does not send an email unless an invoice is in chasing or final_demand' do

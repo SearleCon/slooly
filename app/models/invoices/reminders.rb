@@ -1,20 +1,12 @@
 module Invoices
   module Reminders
     def self.new(invoice)
-      case
-      when invoice.pre_due?
-        PreDue.new(invoice)
-      when invoice.over_due1?
-        FirstOverDue.new(invoice)
-      when invoice.over_due2?
-        SecondOverDue.new(invoice)
-      when invoice.over_due3?
-        ThirdOverDue.new(invoice)
-      when invoice.final_demand?
-        FinalDemand.new(invoice)
-      else
-        Due.new(invoice)
-      end
+      { 'Pre' => PreDue,
+        'Due' => Due,
+        'OD1' => FirstOverDue,
+        'OD2' => SecondOverDue,
+        'OD3' => ThirdOverDue,
+        'FD' => FinalDemand }[invoice.type].new(invoice)
     end
 
     class Base
@@ -60,7 +52,7 @@ module Invoices
       end
 
       def type
-        fail NotImplementedError
+        @invoice.type
       end
 
       def sender
@@ -103,10 +95,6 @@ module Invoices
         settings.due_message
       end
 
-      def type
-        'Due'
-      end
-
       def send?
         settings.due_reminder
       end
@@ -119,10 +107,6 @@ module Invoices
 
       def message
         settings.pre_due_message
-      end
-
-      def type
-        'Pre'
       end
 
       def send?
@@ -139,10 +123,6 @@ module Invoices
         settings.overdue1_message
       end
 
-      def type
-        'OD1'
-      end
-
       def send?
         true
       end
@@ -155,10 +135,6 @@ module Invoices
 
       def message
         settings.overdue2_message
-      end
-
-      def type
-        'OD2'
       end
 
       def send?
@@ -175,10 +151,6 @@ module Invoices
         settings.overdue3_message
       end
 
-      def type
-        'OD3'
-      end
-
       def send?
         true
       end
@@ -191,10 +163,6 @@ module Invoices
 
       def message
         settings.final_demand_message
-      end
-
-      def type
-        'FD'
       end
 
       def send?

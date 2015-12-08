@@ -6,4 +6,5 @@ class SendRemindersJob < ActiveJob::Base
     history.update(sent: true)
     invoice.touch(:last_date_sent)
   end
+
 end

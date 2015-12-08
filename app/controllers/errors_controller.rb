@@ -1,28 +1,33 @@
-class ErrorsController < ApplicationController
-  before_action :set_exception, :send_error_notification
+class ErrorsController < ActionController::Base
+
+  before_action :send_error_notification, if: :internal_server_error?
+  layout 'application'
 
   def show
     respond_to do |format|
-      format.html { render action: request.path[1..-1] }
-      format.json { render json: { status: request.path[1..-1], error: @exception.message } }
+      format.html { render action: status_code }
+      format.json { render json: { status: status_code, error: exception.message } }
     end
   end
 
   private
 
-  def set_exception
-    @exception = env['action_dispatch.exception']
+  def exception
+    env['action_dispatch.exception']
+  end
+
+  def status_code
+    ActionDispatch::ExceptionWrapper.status_code_for_exception(exception.class.name)
   end
 
   def send_error_notification
-    return unless internal_server_error?
-    exception_name = @exception.class.to_s
-    message = @exception.message
-    backtrace = ActionDispatch::ExceptionWrapper.new(env, @exception).application_trace.join("\n")
-    ErrorNotifier.delay.notify(exception_name, message, backtrace)
+    exception_name = exception.class.to_s
+    message = exception.message
+    backtrace = ActionDispatch::ExceptionWrapper.new(env, exception).application_trace.join("\n")
+    ErrorNotifier.notify(exception_name, message, backtrace).deliver_now
   end
 
   def internal_server_error?
-    ActionDispatch::ExceptionWrapper.status_code_for_exception(@exception.class.name) == Rack::Utils::SYMBOL_TO_STATUS_CODE[:internal_server_error]
+    status_code == Rack::Utils::SYMBOL_TO_STATUS_CODE[:internal_server_error]
   end
 end

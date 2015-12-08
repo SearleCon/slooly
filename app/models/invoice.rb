@@ -41,6 +41,8 @@ class Invoice < ActiveRecord::Base
   delegate :business_name, to: :client
 
   scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
+  scope :due_on, -> (date) { where('due_date = :date OR pd_date = :date OR od1_date = :date OR od1_date = :date OR od1_date = :date OR fd_date = :date', date: date) }
+  scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent != :now)', now: Date.current) }
 
   def pre_due?
     pd_date.today?
@@ -63,7 +65,18 @@ class Invoice < ActiveRecord::Base
   end
 
   def final_demand?
-    fd_date.today?
+    send_final_demand? && fd_date.today?
+  end
+
+  def type
+    case
+    when pre_due? then 'Pre'
+    when due? then 'Due'
+    when over_due1? then 'OD1'
+    when over_due2? then 'OD2'
+    when over_due3? then 'OD3'
+    when final_demand? then 'FD'
+    end
   end
 
   def age

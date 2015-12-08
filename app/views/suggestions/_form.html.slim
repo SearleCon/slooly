@@ -1,5 +1,14 @@
 = form_for @suggestion do |f|
-  = f.email_field :email, placeholder: "Optional email"
-  = f.text_field :subject
-  = f.text_area :comment
-  = f.submit 'Submit'
+  .control-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.email_field :email, placeholder: "Optional email"
+  .control-group
+    = f.label :subject, class: 'control-label'
+    .controls
+      = f.text_field :subject
+  .control-group
+    = f.label :comment, class: 'control-label'
+    .controls
+      = f.text_area :comment
+  = f.submit 'Submit', class: 'btn btn-primary'

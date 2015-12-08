@@ -1,0 +1,36 @@
+p
+  ' Attention: #{@client.contact_person}
+  br
+  ' #{@client.business_name.gsub(/['"]/, '')}
+  br
+  ' #{@client.address}
+  br
+  ' #{@client.city}
+  br
+  ' #{@client.post_code}
+
+p
+  ' Reference : #{@invoice.invoice_number}
+  br
+  ' Due Date  : #{@invoice.due_date}
+  br
+  ' Amount Due: #{@invoice.amount}
+p
+  = simple_format(@reminder.message)
+
+p
+  ' #{@company.name}
+  br
+  ' #{@company.address}
+  br
+  ' #{@company.city}
+  br
+  ' #{@company.post_code}
+  br
+  ' Tel: #{@company.telephone}
+  br
+  ' Fax: #{@company.fax}
+  br
+  ' Email: #{@company.email}
+p
+  ' Payment Options: #{simple_format(@settings.payment_method_message)}

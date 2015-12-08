@@ -46,6 +46,6 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.require(:invoices).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
+    params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
   end
 end

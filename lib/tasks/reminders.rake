@@ -2,7 +2,7 @@ namespace :reminders do
   desc 'Sends reminder emails which are due'
   task send: :environment do
 
-    invoices = InvoicesToSend.new.invoices
+    invoices = Invoice.due_on(Date.current).unsent.where(status: [Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
 
     reminders_to_send = invoices.map { |invoice| Invoices::Reminders.new(invoice) }.select(&:send?)
 
