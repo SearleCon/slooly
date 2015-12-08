@@ -22,7 +22,7 @@ module Clients
     end
 
     def invoice_params
-      params.fetch(:invoices).permit(:amount, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
+      params.fetch(:invoice).permit(:amount, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
     end
   end
 end

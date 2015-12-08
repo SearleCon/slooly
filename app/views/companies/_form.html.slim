@@ -1,13 +1,34 @@
 = form_for @company, url: company_path do |f|
   .row
     .span5
-      = f.text_field :name
-      = f.text_field :address
-      = f.text_field :city
-      = f.text_field :post_code, label: 'Zip / Post Code'
-      = f.telephone_field :telephone
-      = f.telephone_field :fax
-      = f.email_field :email
+      .control-group
+        = f.label :name, class: 'control-label'
+        .controls
+          = f.text_field :name
+      .control-group
+        = f.label :address, class: 'control-label'
+        .controls
+          = f.text_field :address
+      .control-group
+        = f.label :city, class: 'control-label'
+        .controls
+          = f.text_field :city
+      .control-group
+        = f.label :post_code, 'Zip / Post Code', class: 'control-label'
+        .controls
+          = f.text_field :post_code
+      .control-group
+        = f.label :telephone, class: 'control-label'
+        .controls
+          = f.telephone_field :telephone
+      .control-group
+        = f.label :fax, class: 'control-label'
+        .controls
+          = f.telephone_field :fax
+      .control-group
+        = f.label :email, class: 'control-label'
+        .controls
+          = f.email_field :email
     .span6.well
       = image_tag('tip.png', class: 'header')
       h3 Notes:
@@ -21,4 +42,4 @@
             | Contact Info:
           |  All of the other fields on this form (apart from your company logo) will be shown on the invoice and it is important that you enter correct information here, as this is what the client will use to contact you or to send you payment confirmation etc.
   hr
-  = f.submit 'Update'
+  = f.submit 'Update', class: 'btn btn-primary'
