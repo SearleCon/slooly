@@ -28,7 +28,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     options[:data] = options.fetch(:data, {}).merge(behaviour: 'datepicker')
     value = options[:value]
     value ||= object.send(attribute) if object.respond_to? attribute
-    options[:value] = value.to_date.strftime('%d/%m/%Y') if value.present?
+    options[:value] = value.to_date.strftime('%dd/%B/%YYYY') if value.present?
     control_group(attribute) do
       concat(control_label(attribute, options.delete(:label)))
       concat(controls { ActionView::Helpers::FormBuilder.instance_method(:text_field).bind(self).call(attribute, options) })

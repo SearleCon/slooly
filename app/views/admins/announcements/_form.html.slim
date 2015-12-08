@@ -1,5 +1,14 @@
 = form_for([:admins, @announcement]) do |f|
-  = f.text_field :headline
-  = f.text_area :description
-  = f.text_field :posted_by
+  .control-group
+    = f.label :headline, class: 'control-label'
+    .controls
+      = f.text_field :headline
+  .control-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_area :description
+  .control-group
+    = f.label :posted_by, class: 'control-label'
+    .controls
+      = f.text_field :posted_by
   = f.submit 'Save'

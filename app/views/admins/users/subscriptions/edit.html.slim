@@ -23,5 +23,8 @@
 
 
 = form_for([:admins, @user, @subscription], html: { data: { validate: true }}) do |f|
-  = f.date_picker :expiry_date
+  .control-group
+    = f.label :expiry_date
+    .controls
+      = f.text_field :expiry_date, value: f.object.expiry_date.to_date.strftime('%d %B %Y'), data: { behaviour: 'datepicker'}
   = f.submit 'Extend Subscription'

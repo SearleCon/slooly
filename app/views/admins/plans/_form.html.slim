@@ -1,6 +1,17 @@
 = form_for([:admins, @plan]) do |f|
-  = f.text_field :description
-  = f.number_field :duration
-  = f.text_field :cost
-  = f.check_box :active, as: :boolean
-  = f.submit 'Save'
+  .control-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description
+  .control-group
+    = f.label :duration, class: 'control-label'
+    .controls
+      = f.number_field :duration
+  .control-group
+    = f.label :cost, class: 'control-label'
+    .controls
+      = f.text_field :cost
+  .control-group
+    = f.label :active, class: 'checkbox' do
+      = (f.check_box :active) + "Active"
+  = f.submit 'Save', class: 'btn btn-primary'
