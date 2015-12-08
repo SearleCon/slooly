@@ -8,7 +8,7 @@ h2 Sign in
   .control-group
     = f.label :password, class: 'control-label'
     .controls
-     = f.password_field :password
+      = f.password_field :password
   - if devise_mapping.rememberable?
     .control-group
       = f.label :remember_me, class: 'checkbox' do
