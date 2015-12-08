@@ -6,6 +6,11 @@
       h1 Clients
       .pagination-details
         h5= page_entries_info @clients
+      ul.inline
+        li= link_to new_client_path do
+          = fa_icon 'male', text: ' Add Client'
+        li= link_to new_clients_import_path do
+          = fa_icon 'file-excel-o', text: ' Import Clients'
   .search-form.pull-right
     small
       em.muted Search on business name or contact person
@@ -15,10 +20,19 @@
           = text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: { rule_minlength: 3, rule_required: true }
           span[rel="tooltip" title="Clear Search" ]=link_to image_tag("close.png"), clients_path
 
-#clients=render('clients')
-hr
-ul.inline
-    li= link_to new_client_path do
-      = fa_icon 'male', text: ' Add Client'
-    li= link_to new_clients_import_path do
-      = fa_icon 'file-excel-o', text: ' Import Clients'
+#clients
+  - if @clients.total_count.zero?
+    .hero-unit
+      p.lead
+        | This screen will show a listing of all your clients loaded.
+        br
+        | But at the moment, you don't have any...
+        = image_tag('sadface.png', size: '15x15')
+        |  Let's fix that right away!
+      p
+        strong Why don't we get started:
+      h2
+        = link_to new_client_path do
+          = fa_icon 'male', text: ' Add a New Client'
+  - else
+    = render 'clients', clients: @clients

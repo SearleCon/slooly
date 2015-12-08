@@ -7,5 +7,6 @@ table.sortable
       th Email
       th Created
       th[data-defaultsort='disabled']
-  tbody= render @clients, cache: true
-  = paginate @clients, remote: true
+  tbody
+    = render clients, cache: true
+  = paginate clients, remote: true

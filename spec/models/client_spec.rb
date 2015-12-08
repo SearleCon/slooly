@@ -3,8 +3,8 @@
 # Table name: clients
 #
 #  id             :integer          not null, primary key
-#  business_name  :string(255)
-#  contact_person :string(255)
+#  business_name  :string
+#  contact_person :string
 #  address        :string(255)
 #  city           :string(255)
 #  post_code      :string(255)
@@ -29,20 +29,15 @@ describe Client do
   it { is_expected.to allow_value('paul@example.com', 'ken.john@fish.com').for(:email) }
 
   describe '.search' do
+
+    let!(:client) { create(:client, business_name: 'Shell', contact_person: 'Peter') }
+
     it 'searches on business_name' do
-      client = create(:client, business_name: 'Shell')
-
-      result = described_class.search('shell')
-
-      expect(result).to eq [client]
+      expect(described_class.search('shell')).to eq [client]
     end
 
     it 'searches on contact_person' do
-      client = create(:client, contact_person: 'Peter')
-
-      result = described_class.search('peter')
-
-      expect(result).to eq [client]
+      expect(described_class.search('peter')).to eq [client]
     end
   end
 end

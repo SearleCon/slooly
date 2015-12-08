@@ -27,9 +27,7 @@
 #                               PUT    /admins/users/:user_id/subscriptions/:id(.:format)      admins/users/subscriptions#update
 #                  admins_users GET    /admins/users(.:format)                                 admins/users#index
 #                   admins_user GET    /admins/users/:id(.:format)                             admins/users#show
-#              queue_admins_job PATCH  /admins/jobs/:id/queue(.:format)                        admins/jobs#queue
-#                   admins_jobs GET    /admins/jobs(.:format)                                  admins/jobs#index
-#                    admins_job DELETE /admins/jobs/:id(.:format)                              admins/jobs#destroy
+#            admins_delayed_web        /admins/jobs                                            Delayed::Web::Engine
 #                    admin_root GET    /                                                       admins/dashboard#index
 #              new_user_session GET    /users/sign_in(.:format)                                sessions#new
 #                  user_session POST   /users/sign_in(.:format)                                sessions#create
@@ -50,7 +48,6 @@
 #               client_invoices POST   /clients/:client_id/invoices(.:format)                  clients/invoices#create
 #            new_client_invoice GET    /clients/:client_id/invoices/new(.:format)              clients/invoices#new
 #                exists_clients GET    /clients/exists(.:format)                               clients#exists
-#                search_clients GET    /clients/search(.:format)                               clients#search
 #                       clients GET    /clients(.:format)                                      clients#index
 #                               POST   /clients(.:format)                                      clients#create
 #                    new_client GET    /clients/new(.:format)                                  clients#new
@@ -66,7 +63,6 @@
 #                               PATCH  /company(.:format)                                      companies#update
 #                               PUT    /company(.:format)                                      companies#update
 #               dashboard_index GET    /dashboard(.:format)                                    dashboard#index
-#               search_invoices GET    /invoices/search(.:format)                              invoices#search
 #                      invoices GET    /invoices(.:format)                                     invoices#index
 #                               POST   /invoices(.:format)                                     invoices#create
 #                   new_invoice GET    /invoices/new(.:format)                                 invoices#new
@@ -77,10 +73,10 @@
 #                               DELETE /invoices/:id(.:format)                                 invoices#destroy
 #                       history GET    /histories/:id(.:format)                                histories#show
 #                        redeem PATCH  /redeem(.:format)                                       vouchers#redeem
-#                      settings GET    /settings(.:format)                                     settings#index
-#                  edit_setting GET    /settings/:id/edit(.:format)                            settings#edit
-#                       setting PATCH  /settings/:id(.:format)                                 settings#update
-#                               PUT    /settings/:id(.:format)                                 settings#update
+#                 edit_settings GET    /settings/edit(.:format)                                settings#edit
+#                      settings GET    /settings(.:format)                                     settings#show
+#                               PATCH  /settings(.:format)                                     settings#update
+#                               PUT    /settings(.:format)                                     settings#update
 #                          root GET    /                                                       home#index
 #                impersonations POST   /impersonations(.:format)                               impersonations#create
 #                 impersonation DELETE /impersonations/:id(.:format)                           impersonations#destroy
@@ -105,11 +101,17 @@
 #                   new_contact GET    /contacts/new(.:format)                                 contacts#new
 #                                      (/errors)/:status(.:format)                             errors#show {:status=>/\d{3}/}
 #
+# Routes for Delayed::Web::Engine:
+#      root GET    /                         delayed/web/jobs#index
+# queue_job PUT    /jobs/:id/queue(.:format) delayed/web/jobs#queue
+#      jobs GET    /jobs(.:format)           delayed/web/jobs#index
+#       job GET    /jobs/:id(.:format)       delayed/web/jobs#show
+#           DELETE /jobs/:id(.:format)       delayed/web/jobs#destroy
+#
 
 Rails.application.routes.draw do
 
   # Admin
-
   get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
 
   devise_for :admins, controllers: { sessions: 'admins/sessions' }
@@ -122,11 +124,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show] do
         resources :subscriptions, only: [:edit, :update], controller: 'users/subscriptions'
       end
-      resources :jobs, only: [:index, :destroy] do
-        member do
-          patch :queue
-        end
-      end
+
+      mount Delayed::Web::Engine, at: '/jobs'
     end
 
     root to: 'admins/dashboard#index', as: :admin_root

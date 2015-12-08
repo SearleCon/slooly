@@ -35,29 +35,4 @@ describe User do
       expect(user.timeout_in).to eq(2.hours)
     end
   end
-
-  describe '#setup' do
-
-    before do
-      allow(Plan).to receive(:free_trial).and_return(build(:free_trial))
-    end
-
-    it 'should create a company' do
-      user = build(:user)
-      user.send(:setup)
-      expect(user.company).to_not be_nil
-    end
-
-    it 'should create settings' do
-      user = build(:user)
-      user.send(:setup)
-      expect(user.setting).to_not be_nil
-    end
-
-    it 'should create subscription' do
-      user = build(:user)
-      user.send(:setup)
-      expect(user.subscription).to_not be_nil
-    end
-  end
 end

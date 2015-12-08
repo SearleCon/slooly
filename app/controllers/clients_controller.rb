@@ -4,11 +4,11 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user.clients.any?
-      @clients = current_user.clients.search(params[:q]).page(params[:page])
-      fresh_when @clients
+    if params[:q]
+      @clients = current_user.clients.search(params[:q]).limit(30).page(params[:page])
+      flash.now[:info] = "#{view_context.pluralize(@clients.total_count, 'result')} found."
     else
-      render :dashboard
+      @clients = current_user.clients.order(:business_name).page(params[:page])
     end
   end
 

@@ -6,7 +6,7 @@
 #  unique_code    :string(255)
 #  redeemed_by    :integer
 #  valid_until    :datetime
-#  number_of_days :integer
+#  number_of_days :integer          default(30)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

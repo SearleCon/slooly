@@ -4,11 +4,11 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user.invoices.any?
-      @invoices = current_user.invoices.includes(:client).search(params[:q]).page(params[:page])
-      fresh_when @invoices
+    if params[:q]
+      @invoices = current_user.invoices.includes(:client).search(params[:q]).limit(30).page(params[:page])
+      flash.now[:info] = "#{view_context.pluralize(@invoices.total_count, 'result')} found."
     else
-      render :dashboard
+      @invoices = current_user.invoices.includes(:client).page(params[:page])
     end
   end
 

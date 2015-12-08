@@ -7,7 +7,7 @@
 #  due_date       :date
 #  amount         :decimal(, )
 #  description    :text
-#  status         :integer
+#  status         :integer          default(2)
 #  client_id      :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

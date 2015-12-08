@@ -21,6 +21,7 @@ gem 'devise'
 gem 'kaminari'
 
 # Background Processing
+gem 'delayed-web'
 gem 'delayed_job_active_record'
 gem 'workless', '~> 1.2.3'
 
