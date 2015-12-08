@@ -1,10 +1,12 @@
 class InvoiceMailer < ApplicationMailer
   def reminder_email(invoice)
-    @invoice = invoice
-    @client = invoice.client
-    @settings = invoice.user.setting
-    @company = invoice.user.company
+    headers "X-Invoice-ID" => invoice.invoice_number
+
+
     @reminder = Invoices::Reminders.new(invoice)
-    mail(to: 'jim@example.com')
+    mail(from: @reminder.sender,
+         to: @reminder.recipient,
+         bcc: @reminder.cc,
+         subject: @reminder.subject)
   end
 end

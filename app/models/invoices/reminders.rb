@@ -6,7 +6,8 @@ module Invoices
         'OD1' => FirstOverDue,
         'OD2' => SecondOverDue,
         'OD3' => ThirdOverDue,
-        'FD' => FinalDemand }[invoice.type].new(invoice)
+        'FD' => FinalDemand
+      }[invoice.type].new(invoice)
     end
 
     class Base
@@ -22,29 +23,6 @@ module Invoices
 
       def message
         fail NotImplementedError
-      end
-
-      def text
-        %(
-          Attention: #{client.contact_person}\r
-          #{client.business_name.gsub(/['"]/, '')}\r
-          #{client.address}\r
-          #{client.city}\r
-          #{client.post_code}\r\n
-          Reference : #{invoice.invoice_number}\r
-          Due Date  : #{invoice.due_date}\r
-          Amount Due: #{invoice.amount}\r\n
-          #{message}\r
-          #{company.name}\r\n
-          #{company.address}\r
-          #{company.city}\r
-          #{company.post_code}\r
-          Tel  : #{company.telephone}\r
-          Fax  : #{company.fax}\r
-          Email: #{company.email}\r\n
-          Payment Options: \r
-          #{settings.payment_method_message}
-        )
       end
 
       def send?
@@ -71,18 +49,16 @@ module Invoices
         client.email
       end
 
-      private
-
-      def settings
-        @settings ||= invoice.user.setting
-      end
-
       def client
-        @client ||= invoice.client
+        invoice.client
       end
 
       def company
-        @company ||= invoice.user.company
+        invoice.user.company
+      end
+
+      def settings
+        invoice.user.setting
       end
     end
 

@@ -1,36 +1,35 @@
 p
-  ' Attention: #{@client.contact_person}
+  ' Attention: #{@reminder.client.contact_person}
   br
-  ' #{@client.business_name.gsub(/['"]/, '')}
+  ' #{@reminder.client.business_name.gsub(/['"]/, '')}
   br
-  ' #{@client.address}
+  ' #{@reminder.client.address}
   br
-  ' #{@client.city}
+  ' #{@reminder.client.city}
   br
-  ' #{@client.post_code}
+  ' #{@reminder.client.post_code}
 
 p
-  ' Reference : #{@invoice.invoice_number}
+  ' Reference : #{@reminder.invoice.invoice_number}
   br
-  ' Due Date  : #{@invoice.due_date}
+  ' Due Date  : #{@reminder.invoice.due_date}
   br
-  ' Amount Due: #{@invoice.amount}
+  ' Amount Due: #{@reminder.invoice.amount}
 p
   = simple_format(@reminder.message)
 
 p
-  ' #{@company.name}
+  ' #{@reminder.company.name}
   br
-  ' #{@company.address}
+  ' #{@reminder.company.address}
   br
-  ' #{@company.city}
+  ' #{@reminder.company.city}
   br
-  ' #{@company.post_code}
+  ' #{@reminder.company.post_code}
   br
-  ' Tel: #{@company.telephone}
+  ' Tel: #{@reminder.company.telephone}
   br
-  ' Fax: #{@company.fax}
+  ' Fax: #{@reminder.company.fax}
   br
-  ' Email: #{@company.email}
-p
-  ' Payment Options: #{simple_format(@settings.payment_method_message)}
+  ' Email: #{@reminder.company.email}
+p Payment Options: #{simple_format(@reminder.settings.payment_method_message)}

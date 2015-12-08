@@ -3,7 +3,6 @@ class InvoiceMailerPreview < ActionMailer::Preview
 
   def reminder_email
     invoice = Invoice.find_by(invoice_number: History.last.invoice_number)
-    invoice.due_date = Date.today
     InvoiceMailer.reminder_email(invoice)
   end
 end
