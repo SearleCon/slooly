@@ -6,14 +6,6 @@ class UserMailer < ActionMailer::Base
          subject: 'Paying Mantis - Registration Details')
   end
 
-  def send_it(history)
-    @message = history.message
-    mail(from: history.email_sent_from,
-         to: history.email_sent_to,
-         bcc: history.copy_email,
-         subject: history.subject)
-  end
-
   def new_message(message)
     @message = message
     mail(from: message.email,

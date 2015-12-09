@@ -21,8 +21,6 @@
 #
 
 FactoryGirl.define do
-  before(:create) { Invoice.skip_callback(:save, :before, :calculate_dates) }
-  after(:create)  { Invoice.set_callback(:save, :before, :calculate_dates) }
 
   factory :invoice do
     invoice_number { Faker::Number.number(6) }

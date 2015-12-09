@@ -25,10 +25,6 @@ module Invoices
         fail NotImplementedError
       end
 
-      def send?
-        fail NotImplementedError
-      end
-
       def type
         @invoice.type
       end
@@ -71,9 +67,6 @@ module Invoices
         settings.due_message
       end
 
-      def send?
-        settings.due_reminder
-      end
     end
 
     class PreDue < Base
@@ -85,9 +78,6 @@ module Invoices
         settings.pre_due_message
       end
 
-      def send?
-        settings.pre_due_reminder
-      end
     end
 
     class FirstOverDue < Base
@@ -99,9 +89,6 @@ module Invoices
         settings.overdue1_message
       end
 
-      def send?
-        true
-      end
     end
 
     class SecondOverDue < Base
@@ -113,9 +100,6 @@ module Invoices
         settings.overdue2_message
       end
 
-      def send?
-        true
-      end
     end
 
     class ThirdOverDue < Base
@@ -127,9 +111,6 @@ module Invoices
         settings.overdue3_message
       end
 
-      def send?
-        true
-      end
     end
 
     class FinalDemand < Base
@@ -141,9 +122,6 @@ module Invoices
         settings.final_demand_message
       end
 
-      def send?
-        true
-      end
     end
   end
 end

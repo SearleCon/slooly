@@ -36,19 +36,18 @@ describe 'reminders:send' do
   end
 
   it 'does not send an email for invoices which are due when due reminders is false' do
-    allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::Due.new(invoice))
-    allow_any_instance_of(Setting).to receive(:due_reminder).and_return(false)
+    invoice = create(:invoice)
+    allow_any_instance_of(Setting).to receive(:due_reminder?).and_return(false)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
   it 'sends an email for invoices which are pre_due' do
-    allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::PreDue.new(invoice))
+    invoice = create(:invoice)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 
   it 'does not send an email for invoices which are pre_due when pre_due_reminder is false' do
-    allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::PreDue.new(invoice))
-    allow_any_instance_of(Setting).to receive(:pre_due_reminder).and_return(false)
+    allow_any_instance_of(Setting).to receive(:pre_due_reminder?).and_return(false)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
