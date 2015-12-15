@@ -1,0 +1,26 @@
+<%= form_for [:admins, @plan] do |f| %>
+ <div class='control-group'>
+   <%= f.label :description, class: 'control-label' %>
+   <div class='controls'>
+    <%= f.text_field :description %>
+   </div>
+ </div>
+  <div class='control-group'>
+   <%= f.label :duration, class: 'control-label' %>
+   <div class='controls'>
+    <%= f.number_field :duration %>
+   </div>
+ </div>
+  <div class='control-group'>
+   <%= f.label :cost, class: 'control-label' %>
+   <div class='controls'>
+    <%= f.text_field :cost %>
+   </div>
+ </div>
+  <div class='control-group'>
+   <%= f.label :active, class: 'checkbox' do %>
+    <%= (f.check_box :active) + "Active" %>
+   <% end %>
+ </div>
+ <%= f.submit 'Save', class: 'btn btn-primary' %>
+<% end %>

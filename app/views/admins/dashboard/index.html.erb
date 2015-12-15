@@ -1,0 +1,165 @@
+<div class="page-header">
+  <div class="media">
+    <div class="pull-left">
+      <%= image_tag('home.png', class: 'media-object') %>
+    </div>
+    <div class="media-body">
+      <h2>Home</h2>
+    </div>
+  </div>
+</div>
+
+<ul class='thumbnails'>
+  <li class="span3">
+    <div class="thumbnail">
+      <h4 class="text-center">
+        <%= link_to admins_users_path do %>
+        <%= fa_icon 'users', text: 'Users' %>
+        <% end %>
+      </h4>
+    </li>
+    <li class="span2">
+      <div class="thumbnail">
+        <h4 class="text-center">
+          <%= link_to admins_delayed_web_path do %>
+          <%= fa_icon 'tasks', text: 'Jobs' %>
+          <% end %>
+        </h4>
+      </li>
+      <li class="span2">
+        <div class="thumbnail">
+          <h4 class="text-center">
+            <%= link_to admins_plans_path do %>
+            <%= fa_icon 'money', text: 'Plans' %>
+            <% end %>
+          </h4>
+        </li>
+        <li class="span2">
+          <div class="thumbnail">
+            <h4 class="text-center">
+              <%= link_to admins_announcements_path do %>
+              <%= fa_icon 'newspaper-o', text: 'News' %>
+              <% end %>
+            </h4>
+          </li>
+          <li class="span3">
+            <div class="thumbnail">
+              <h4 class="text-center">
+                <%= link_to admins_suggestions_path do %>
+                <%= fa_icon 'comments', text: 'Suggestions' %>
+                <% end %>
+              </h4>
+            </li>
+          </ul>
+          <div class="well well-small">
+            <h3>Summary</h3>
+            <h5>Total Users:
+              <%= @dashboard.total_users %></h5>
+            <h5>Total Emails Sent Today:
+              <%= @dashboard.emails_sent_today_count %></h5>
+            <h5>Total Emails Sent in the last 7 days:
+              <%= @dashboard.emails_sent_last_7_days_count %></h5>
+            <h5>Recent Suggestions:
+              <%= @dashboard.total_suggestions %>
+              (<%= @dashboard.suggestions_last_7_days_count %>
+              in the last 7 days)</h5>
+            <h5>Total Jobs:
+              <%= @dashboard.delayed_jobs_count %></h5>
+          </div>
+
+          <div class='well well-small'>
+            <h4>New Users (Since yesterday)</h4>
+            <% if @dashboard.new_users.any? %>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Last signed in
+                  </th>
+                  <th>
+                    Subscription plan
+                  </th>
+                  <th>
+                    Subscription expires
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @dashboard.new_users.each do |user| %>
+                <tr>
+                  <td>
+                    <%=link_to user.name, admins_user_path(user) %>
+                  </td>
+                  <td>
+                    <%= user.email %>
+                  </td>
+                  <td data-value="<%= user.last_sign_in_at %>">
+                    <%= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero? %>
+                  </td>
+                  <td>
+                    <%= user.subscription.description if user.subscribed? %>
+                  </td>
+                  <td data-value="<%= user.subscription.expiry_date if user.subscribed? %>">
+                    <%= local_time_ago(user.subscription.expiry_date) if user.subscribed? %>
+                  </td>
+                  <td>
+                    <%= link_to impersonations_path(id: user.id), method: :post do %>
+                    <%= fa_icon 'sign-in', text: 'Sign in as this user' %>
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="lead">
+              No users signed up since yesterday
+            </p>
+            <% end %>
+          </div>
+
+          <div class="well well-small">
+            <h4>Last 25 emails sent</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    From
+                  </th>
+                  <th>
+                    To
+                  </th>
+                  <th>
+                    Date sent
+                  </th>
+                  <th>
+                    Subject
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @dashboard.last_25_emails_sent.each do |history| %>
+                <tr>
+                  <td data-value="<%= history.email_sent_from %>">
+                    <%= history.email_sent_from %>
+                  </td>
+                  <td data-value="<%= history.email_sent_to %>">
+                    <%= history.email_sent_to %>
+                  </td>
+                  <td data-value="<%= history.date_sent %>">
+                    <%= local_time_ago(history.date_sent) %>
+                  </td>
+                  <td data-value="<%= history.subject %>">
+                    <%= history.subject %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>

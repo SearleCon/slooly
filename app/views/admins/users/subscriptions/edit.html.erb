@@ -1,0 +1,38 @@
+<div class='page-header'>
+ <div class='media'>
+  <div class='pull-left'>
+   <%= image_tag('user.png', class: 'media-object') %>
+  </div>
+  <div class='media-body'>
+    <h2><%= "Edit #{@user.name} subscription" %> </h2>
+	<%= link_to admins_user_path(@user) do %>
+	  <%= fa_icon 'arrow-left', text: 'Back' %>
+	<% end %>
+  </div>
+ </div>
+</div>
+
+<div class='well well-small'>
+ <p>
+  <strong>Plan</strong>
+  <%= @user.subscription.description %>
+ </p>
+ <p>
+  <strong>Duration</strong>
+  <%= pluralize(@user.subscription.duration, 'Month') %>
+ </p>
+ <p>
+  <strong>Cost</strong>
+  <%= number_to_currency(@user.subscription.cost) %>
+ </p>
+</div>
+
+<%= form_for [:admins, @user, @subscription], html: { data: { validate: true } } do |f| %>
+  <div class='control-group'>
+   <%= f.label :expiry_date , class: 'control-label' %>
+   <div class='controls'>
+     <%= f.text_field :expiry_date, value: f.object.expiry_date.to_date.strftime('%d %B %Y'), data: { behaviour: 'datepicker'} %>
+   </div>
+  </div>
+  <%= f.submit 'Extend Subscription', class: 'btn btn-primary' %>
+<% end %>

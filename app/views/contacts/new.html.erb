@@ -1,0 +1,50 @@
+<div class="page-header">
+  <div class="media">
+    <div class="pull-left"><%= image_tag('contact.png', class: 'media-object' %>
+    </div>
+    <div class="media-body">
+      <h1>
+        Contact and Support
+      </h1>
+    </div>
+  </div>
+</div>
+<h6>Got a question? Check these out:</h6>
+<h3><%= link_to 'Frequently Asked Questions', faq_path %>
+</h3><hr/>
+<h6>Email us at:</h6>
+<h3><%= obfuscate_email 'Support@SearleConsulting.co.za' %></h3><hr/>
+<h6>Follow or Tweet us:</h6>
+<a class="twitter-follow-button" data-show-count="false" data-size="large" href="https://twitter.com/SearleCon">Follow @SearleCon</a>
+<a class="twitter-mention-button" data-size="large" href="https://twitter.com/intent/tweet?screen_name=SearleCon">Tweet to @SearleCon</a>
+<hr/>
+<h6>Let us get back to you:
+</h6>
+<% = form_for @message, url: contacts_path, html: { honeypot: true } do |f|
+ %>
+<div class="control-group">
+  <%= f.label :name, class: 'control-label' %>
+  <div class="controls">
+    <%= f.text_field :name %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :email, class: 'control-label' %>
+  <div class="controls">
+    <%= f.email_field :email %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :subject, class: 'control-label' %>
+  <div class="controls">
+    <%= f.text_field :subject%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :body, class: 'control-label' %>
+  <div class="controls">
+    <%= f.text_area :body %>
+  </div>
+</div><hr/>
+<%= f.submit  "Send Enquiry", class: 'btn btn-primary' %>
+<% end %>

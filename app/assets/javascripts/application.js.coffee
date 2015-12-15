@@ -117,4 +117,3 @@ $(document).on 'page:load', pageLoad
 $(document).on 'page:restore', pageLoad
 
 $ -> pageLoad()
-

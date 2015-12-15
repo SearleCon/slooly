@@ -1,0 +1,36 @@
+<div class='page-header'>
+<h1>Plans</h1>
+<%= link_to new_admins_plan_path do %>
+ <%= fa_icon 'money', text: 'Add a new plan' %>
+<% end %>
+</div>
+<table>
+<thead>
+ <tr>
+ <th> Description </th>
+ <th> Duration </th>
+ <th> Cost </th>
+ <th> Active </th>
+ <th> Subscriptions </th>
+ </tr>
+</thead>
+<tbody>
+<% @plans.each do |plan| %>
+<tr>
+<td><%= plan.description %></td>
+<td data-value="<%= plan.duration %>"><%= plan.duration %></td>
+<td data-value="<%= plan.cost %>"><%= number_to_currency(plan.cost) %></td>
+<td data-value="<%= plan.active %>"><%= plan.active? ? fa_icon('toggle-on') : fa_icon('toggle-off') %>
+<td><%= plan.subscriptions.size %></td>
+<td>
+  <%= link_to edit_admins_plan_path(plan) do %>
+    <%= fa_icon 'edit', text: 'Edit' %>
+  <% end %>
+</td>
+<td>
+  <%= link_to_unless(plan.subscriptions.any?, fa_icon('trash', text: 'Destroy').html_safe, admins_plan_path(plan), method: :delete, data: { confirm: "Are you sure you wish to delete this plan?" }) {} %>
+</td>
+</tr>
+<% end %>
+</tbody>
+</table>

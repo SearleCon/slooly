@@ -20,6 +20,7 @@ class Client < ActiveRecord::Base
   include AttributeNormalizer
 
   to_param :business_name
+  
 
   belongs_to :user, required: true
   has_many :invoices
