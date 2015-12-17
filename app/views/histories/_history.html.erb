@@ -1,0 +1,22 @@
+<tr>
+  <td data-value="<%=history.date_sent %>">
+    <%= link_to local_time_ago(history.date_sent), history%>
+  </td>
+  <td>
+    <%= history.email_sent_to %>
+  </td>
+  <td>
+    <%= reminder_badge(history.reminder_type) %>
+  </td>
+  <td>
+    <%= history.invoice_number %>
+  </td>
+  <td>
+    <%= truncate(history.subject, length: 50) %>
+  </td>
+  <td rel='popover' data-title="<%="Email Message (Ref: #{history.invoice_number})"%>" data-content="<%=simple_format(history.message)%>" data-placement='left' data-trigger='hover focus'>
+    <%= truncate(history.message, length: 70) %>
+  </td>
+</tr>
+
+

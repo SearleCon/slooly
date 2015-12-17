@@ -1,0 +1,43 @@
+<% cache @invoice do
+ %><div class="page-header">
+<div class="media">
+<div class="pull-left">
+<%= ::Temple::Utils.escape_html((image_tag('invoices.png', class: 'media-object'))) %>
+</div><div class="media-body">
+<h1>Invoice Details</h1>
+<h3><%= ::Temple::Utils.escape_html((@invoice.invoice_number)) %>
+</h3><% _slim_controls1 = link_to invoices_path do
+ %><%= ::Temple::Utils.escape_html((fa_icon 'arrow-left', text: 'Back')) %>
+
+<% end %><%= ::Temple::Utils.escape_html((_slim_controls1)) %></div></div></div><p>
+Invoice For: 
+<strong><%= ::Temple::Utils.escape_html((link_to @invoice.business_name, @invoice.client)) %>
+</strong></p><p>Invoice Number: <%= ::Temple::Utils.escape_html((@invoice.invoice_number)) %></p>
+<p>
+Due Date: 
+<strong><%= ::Temple::Utils.escape_html((time_tag(@invoice.due_date))) %>
+</strong></p><p>Amount: <%= ::Temple::Utils.escape_html((number_with_precision(@invoice.amount, precision: 2))) %></p>
+<p>Status: <%= ::Temple::Utils.escape_html((status_label(@invoice.status))) %></p>
+<p>Description: <%= ::Temple::Utils.escape_html((simple_format(@invoice.description))) %>
+</p>
+<% if @invoice.chasing?
+ %><hr />
+<div class="media">
+<div class="pull-left">
+<%= ::Temple::Utils.escape_html((image_tag('calendarbig.png', class: 'media-object'))) %>
+</div><div class="media-body">
+<h4>Reminder Email Dates:</h4>
+<ol>
+<li>Pre-Due Reminder (if applicable): <strong><%= ::Temple::Utils.escape_html((time_tag(@invoice.pd_date))) %></strong></li>
+<li>First Overdue Reminder: <strong><%= ::Temple::Utils.escape_html((time_tag(@invoice.od1_date))) %></strong></li>
+<li>Second Overdue Reminder: <strong><%= ::Temple::Utils.escape_html((time_tag(@invoice.od2_date))) %></strong></li>
+<li>Third Overdue Reminder: <strong><%= ::Temple::Utils.escape_html((time_tag(@invoice.od3_date))) %></strong></li>
+</ol></div></div><% end; end %><hr />
+<ul class="inline">
+<li><% _slim_controls2 = link_to  edit_invoice_path(@invoice) do
+ %><%= ::Temple::Utils.escape_html((fa_icon 'edit', text: ' Edit this invoice')) %>
+<% end %><%= ::Temple::Utils.escape_html((_slim_controls2)) %></li><li><% _slim_controls3 = link_to @invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{@invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do
+ %><%= ::Temple::Utils.escape_html((fa_icon 'trash', text: 'Delete')) %>
+<% end %><%= ::Temple::Utils.escape_html((_slim_controls3)) %></li><li><% _slim_controls4 = link_to new_invoice_path do
+ %><%= ::Temple::Utils.escape_html((fa_icon 'file-text-o', text: ' Add another invoice')) %>
+<% end %><%= ::Temple::Utils.escape_html((_slim_controls4)) %></li></ul>

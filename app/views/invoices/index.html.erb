@@ -1,0 +1,60 @@
+<div class="page-header">
+  <div class="media">
+    <div class="pull-left">
+      <%= image_tag('invoices.png', class: 'media-object') %>
+    </div>
+    <div class="media-body">
+      <h1>Invoices</h1>
+
+      <div class="pagination-details">
+        <h5><%= page_entries_info @invoices %>
+        </h5>
+        <ul class="inline">
+          <li>
+            <%= link_to new_invoice_path do %>
+                <%= fa_icon 'file-text', text: ' Add Invoice' %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="search-form pull-right">
+    <small>
+      <em class="muted">Search on invoice number or description</em>
+    </small>
+    <%= form_tag invoices_path, method: :get, class: 'form-search', data: {validate: true}, remote: true do %>
+        <div class="control-group">
+          <div class="controls">
+            <%= text_field_tag :q, params[:q], class: 'search-query input-medium', placeholder: 'Search', autocomplete: :off, data: {rule_minlength: 3, rule_required: true} %>
+            <span rel="tooltip" title="Clear Search"><%= link_to image_tag("close.png"), invoices_path %></span>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+<div id="invoices">
+  <% if @invoices.total_count.zero? %>
+      <div class="hero-unit">
+        <p class="lead">
+          This screen will show a listing of all your invoices loaded.
+          <br/>
+          But at the moment, you don't have any...
+          <%= image_tag('sadface.png', size: '15x15') %>
+          Let's fix that right away!
+        </p>
+
+        <p>
+          <strong>Why don't we get started:</strong>
+        </p>
+
+        <h2>
+          <%= link_to new_invoice_path do %>
+              <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
+          <% end %>
+        </h2>
+      </div>
+  <% else %>
+      <%= render 'invoices/invoices', invoices: @invoices %>
+  <% end %>
+</div>

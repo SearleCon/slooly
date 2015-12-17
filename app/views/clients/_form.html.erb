@@ -1,0 +1,78 @@
+<%= form_for @client, html: {data: {validate: true}} do |f| %>
+    <div class="row">
+      <div class="span5">
+        <div class="control-group">
+          <%= f.label :business_name, class: 'control-label' %>
+          <div class="controls">
+            <% if @client.new_record? %>
+                <%= f.text_field :business_name, autofocus: true, data: {rule_required: true, rule_remote: exists_clients_url, msg_remote: 'A client with this business name already exists.'}, placeholder: 'Business name' %>
+                <% else %>
+                <%= f.text_field :business_name, autofocus: true, placeholder: 'Business name' %>
+            <% end %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :email, class: 'control-label' %>
+          <div class="controls">
+            <%= f.email_field :email, data: {rule_email: true, rule_required: true}, placeholder: 'Email' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :contact_person, class: 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :contact_person, placeholder: 'Contact person' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :address, class: 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :address, placeholder: 'Address' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :city, class: 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :city, placeholder: 'City' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :post_code, class: 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :post_code, label: 'Zip / Post Code', placeholder: 'Post code' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :telephone, class: 'control-label' %>
+          <div class="controls">
+            <%= f.telephone_field :telephone, placeholder: 'Telephone' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :fax, class: 'control-label' %>
+          <div class="controls">
+            <%= f.telephone_field :fax, placeholder: 'Fax' %>
+          </div>
+        </div>
+      </div>
+      <div class="span6 well">
+        <div class="media">
+          <div class="pull-left">
+            <%= image_tag('tip.png', class: 'media-object') %>
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">Notes:</h3>
+            <ul>
+              <li>
+                <%= simple_format("<strong>Email:</strong> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.") %>
+              </li>
+              <li>
+                <%= simple_format("<strong>Other:</strong> The Business name, Contact Person, Address, City and Post code will appear on the reminder email for the client.") %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <%= f.submit 'Save Client', class: 'btn btn-primary' %>
+<% end %>

@@ -3,7 +3,7 @@ module Admins
     self.responder = ApplicationResponder
     respond_to :html, :js, :json
 
-    layout 'admin'
+    layout 'admins/application'
 
     before_action :authenticate_admin!
   end

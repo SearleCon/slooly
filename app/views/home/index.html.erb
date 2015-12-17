@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="span6">
+    <h2>The easiest way to chase outstanding invoices!</h2>
+    <h5>Take the hassle out of chasing your debtors, and get paid on time!</h5>
+
+    <div class="carousel slide" id="home_carousel">
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= image_tag 'calendar1.png' %>
+          <div class="carousel-caption">
+            <p>Drastically increase your chances of getting paid on time, every time!</p>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag 'chasing.png' %>
+          <div class="carousel-caption">
+            <p>Stop wasting your own time chasing after Outstanding Invoices!</p>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag('unlock1.png') %>
+          <div class="carousel-caption">
+            <p>Unlock your Cash Flow and free up your Time with very little effort!</p>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" data-slide="prev" href="#home_carousel">‹</a>
+      <a class="right carousel-control" data-slide="next" href="#home_carousel">›</a>
+    </div>
+  </div>
+  <div class="span6">
+    <h3>How it works:</h3>
+    <h5>1. Do your once off setup of how you would like to chase invoices</h5>
+    <h5>2. Load your invoice(s)</h5>
+    <h5>3. Let Paying Mantis chase your customers that owe you money</h5>
+    <h5>4. Get paid!</h5>
+    <br/>
+    <br/>
+
+    <h3>Wanna give it a try and increase your cashflow?</h3>
+    <br/>
+    <%= link_to 'Sign up for a free account now!', new_user_registration_path, class: 'btn btn-large btn-primary' %>
+    <br/>
+    <br/>
+
+    <h3>Already have an account?</h3>
+    <%= link_to 'Login here', new_user_session_path %>
+    <h3>Watch the Tutorial Video</h3>
+    <a data-toggle="modal" href="#tutorial-video">View Video</a>
+
+    <h3>Need more information?</h3>
+    <%= link_to 'Click here', about_path %>
+    <p align="right">
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <%= render 'layouts/share' %>
+    </p></div>
+</div><%= render 'layouts/tutorial_video' %>

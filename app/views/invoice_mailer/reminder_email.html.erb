@@ -1,0 +1,37 @@
+<p>
+  Attention: <%= @reminder.client.contact_person %>
+  <br/>
+  <%= @reminder.client.business_name.gsub(/['"]/, '') %>
+  <br/>
+  <%= @reminder.client.address %>
+  <br/>
+  <%= @reminder.client.city %>
+  <br/>
+  <%= @reminder.client.post_code %>
+</p>
+<p>
+  Reference : <%= @reminder.invoice.invoice_number %>
+  <br/>
+  Due Date : <%= @reminder.invoice.due_date %>
+  <br/>
+  Amount Due: <%= @reminder.invoice.amount %>
+</p>
+<p>
+  <%= simple_format(@reminder.message) %>
+</p>
+<p>
+  <%= @reminder.company.name %>
+  <br/>
+  <%= @reminder.company.address %>
+  <br/>
+  <%= @reminder.company.city %>
+  <br/>
+  <%= @reminder.company.post_code %>
+  <br/>
+  Tel: <%= @reminder.company.telephone %>
+  <br/>
+  Fax: <%= @reminder.company.fax %>
+  <br/>
+  Email: <%= @reminder.company.email %>
+</p>
+<p>Payment Options: <%= simple_format(@reminder.settings.payment_method_message) %></p>

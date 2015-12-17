@@ -1,0 +1,36 @@
+<li>
+  <h4>
+    <%= link_to client.business_name, client %>
+  </h4>
+
+  <p>
+    <strong>Invoices:</strong>
+
+    <span class="badge badge-inverse"><%= client.outstanding_invoices.size %></span>
+  </p>
+
+  <p>
+    <strong>Total:</strong>
+
+    <em><%= client.outstanding_invoices.total %></em>
+  </p>
+  <table>
+    <thead>
+    <tr>
+      <th>
+        Age
+        <i class="icon-question-sign" data-container="body" data-content="The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. &quot;-5&quot; means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green" data-title="Invoice Age" data-trigger="hover" rel="popover"></i>
+      </th>
+      <th>Invoice Number</th>
+      <th>Due Date</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Created</th>
+      <th data-defaultsort="disabled">
+      </th>
+    </tr>
+    </thead>
+    <tbody><%= render partial: 'clients/invoices/outstanding', collection: client.outstanding_invoices, as: :invoice, cache: true %>
+    </tbody>
+  </table>
+</li>

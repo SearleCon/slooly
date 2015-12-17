@@ -1,0 +1,14 @@
+<div class="page-header">
+  <div class="media">
+    <div class="pull-left">
+      <%= image_tag('invoices.png', class: 'media-object') %>
+    </div>
+    <div class="media-body">
+      <h1>Edit Invoice</h1>
+      <%= link_to @invoice do %>
+          <%= fa_icon 'arrow-left', text: 'Back' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render 'form' %>

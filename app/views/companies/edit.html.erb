@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Editing Company Details</h1>
+</div>
+<%= render 'form' %>
+<hr/>
+<ul class="inline">
+  <li>
+    <%= link_to :back do %>
+        <%= fa_icon 'arrow-left', text: 'Back' %>
+    <% end %>
+  </li>
+  <li><%= link_to edit_user_registration_path do %>
+        <%= fa_icon 'user', text: 'User Profile' %>
+    <% end %>
+  </li>
+  <li><%= link_to settings_path do %>
+        <%= fa_icon 'gears', text: 'Settings' %>
+    <% end %>
+  </li>
+</ul>

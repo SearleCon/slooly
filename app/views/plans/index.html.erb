@@ -1,0 +1,45 @@
+<div class="hero-unit">
+  <%= image_tag 'expired.png', class: 'header' %>
+  <h2>Please Subscribe</h2>
+  <br/>
+
+  <div class="pull-right"><%= image_tag 'secure-paypal-logo.png' %>
+  </div>
+  <br/>
+
+  <p>Your subscription has expired. To continue using Paying Mantis you need to subscribe:</p>
+
+  <p>
+    (Note that payment is done through PayPal and is 100% secure)
+  </p>
+
+  <p>
+    <strong>Please select one of the payment plans below:</strong>
+  </p><br/>
+  <table>
+    <thead>
+    <tr>
+      <th>Package</th>
+      <th>Duration</th>
+      <th>Price</th>
+      <th>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @plans.each do |plan| %>
+        <tr>
+          <td>
+            <strong><%= plan.description %>
+            </strong></td>
+          <td><%= pluralize(plan.duration, 'Month') %>
+          </td>
+          <td><%= number_to_currency(plan.cost, precision: 2) %>
+          </td>
+          <td class="text-center"><%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), paypal_checkouts_path(plan_id: plan.id), method: :post %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

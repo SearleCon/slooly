@@ -1,6 +1,0 @@
-.announcement
-  strong
-    ' Breaking News: #{link_to(announcement.headline, announcements_path)}
-    ' This message will disappear #{time_ago_in_words(announcement.expiry_date)} from now
-  = link_to(hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true) do
-    = fa_icon 'remove', text: 'hide'

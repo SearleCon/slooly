@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h3>Reminder Email - History Details:</h3>
+
+  <p>
+    The following reminder email was sent to
+    <strong><%= @history.email_sent_to %>.</strong>
+    <br/>
+    (Reminder type: <%= reminder_badge(@history.reminder_type) %> )
+  </p><%= link_to 'Back', :back %>
+</div>
+<div class="span11 well">
+  <div class="muted">From:</div>
+  <%= @history.email_sent_from %>
+  <br/>
+
+  <div class="muted">Subject:</div>
+  <%= @history.subject %>
+  <br/>
+
+  <div class="muted">Date:</div>
+  <%= local_time_ago(@history.date_sent) %>
+  <br/>
+
+  <div class="muted">To:</div>
+  <%= @history.email_sent_to %>
+  <br/>
+
+  <div class="muted">CC:</div>
+  <%= @history.copy_email %>
+</div>
+<div class="span11 well">
+  <div class="muted">Email Message - Body:</div>
+  <br/>
+  <%= simple_format(@history.message) %>
+</div>
