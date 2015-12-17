@@ -32,9 +32,6 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
-  # Slim
-  Slim::Engine.set_options pretty: true, sort_attrs: false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

@@ -15,7 +15,7 @@ class ReminderLoggerObserver
         h.email_from_name = email.from
         h.sent = true
       end
-    end 
+    end
   end
 end
 

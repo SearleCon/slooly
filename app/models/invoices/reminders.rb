@@ -45,9 +45,7 @@ module Invoices
         client.email
       end
 
-      def client
-        invoice.client
-      end
+      delegate :client, to: :invoice
 
       def company
         invoice.user.company

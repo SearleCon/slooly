@@ -45,9 +45,6 @@ gem 'autosize-rails'
 # import from excel
 gem 'active_importer'
 
-# Templating
-gem 'slim-rails'
-
 # Email css
 gem 'premailer-rails'
 

@@ -55,6 +55,36 @@
       <br/>
       <br/>
       <br/>
-      <%= render 'layouts/share' %>
+      <% cache 'social-media' do %>
+          <script type="text/javascript">var switchTo5x = true;</script>
+          <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript"></script>
+          <script type="text/javascript">stLight.options({publisher: "ur-84d8d783-c4b3-63aa-165d-7c93ac957388"});</script>
+          <span class="st_linkedin_large" displaytext="LinkedIn"></span>
+          <span class="st_facebook_large" displaytext="Facebook"></span>
+          <span class="st_twitter_large" displaytext="Tweet"></span>
+          <span class="st_email_large" displaytext="Email"></span>
+          <br/>
+          <%= image_tag("share.png") %>
+      <% end %>
     </p></div>
-</div><%= render 'layouts/tutorial_video' %>
+</div>
+<% cache 'tutorial-video' do %>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+        <h3 id="myModalLabel">
+          Quick overview of how Paying Mantis works
+        </h3></div>
+      <div class="modal-body">
+        <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
+        </iframe>
+      </div>
+      <div class="modal-footer">
+        <button aria-hidden="true" class="btn" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+<% end %>

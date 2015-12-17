@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
   scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent != :now)', now: Date.current) }
 
   def pre_due?
-   chasing? &&  pd_date.today? && user.setting.pre_due_reminder?
+    chasing? && pd_date.today? && user.setting.pre_due_reminder?
   end
 
   def due?
