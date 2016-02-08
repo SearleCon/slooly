@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   has_one :company
   has_one :setting
-  has_one :subscription, -> { where(active: true) }
+  has_one :subscription, -> { merge(Subscription.active) }
 
   has_many :vouchers, foreign_key: :redeemed_by
 

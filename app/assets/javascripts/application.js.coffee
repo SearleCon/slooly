@@ -14,6 +14,8 @@
 #= require_tree .
 
 
+Turbolinks.ProgressBar.disable();
+
 $.rails.allowAction = (element) ->
   # The message is something like "Are you sure?"
   message = element.data('confirm')

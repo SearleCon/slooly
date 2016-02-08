@@ -18,9 +18,7 @@ $paginationActiveBackground: #a9a9a9;
 $nprogress-height: 5px;
 @import 'nprogress';
 @import 'nprogress-bootstrap';
-html.turbolinks-progress-bar::before {
-  height: 5px !important;
-}
+
 html {
   position: relative;
   min-height: 100%;
