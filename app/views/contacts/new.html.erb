@@ -23,30 +23,30 @@
 <h6>Let us get back to you:
 </h6>
 <%= form_for @message, url: contacts_path, html: {honeypot: true} do |f| %>
-    <div class="control-group">
-      <%= f.label :name, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :name %>
-      </div>
+  <div class="control-group">
+    <%= f.label :name, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name %>
     </div>
-    <div class="control-group">
-      <%= f.label :email, class: 'control-label' %>
-      <div class="controls">
-        <%= f.email_field :email %>
-      </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, class: 'control-label' %>
+    <div class="controls">
+      <%= f.email_field :email %>
     </div>
-    <div class="control-group">
-      <%= f.label :subject, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :subject %>
-      </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :subject, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :subject %>
     </div>
-    <div class="control-group">
-      <%= f.label :body, class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :body %>
-      </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :body, class: 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :body %>
     </div>
-    <hr/>
-    <%= f.submit "Send Enquiry", class: 'btn btn-primary' %>
+  </div>
+  <hr/>
+  <%= f.submit "Send Enquiry", class: 'btn btn-primary' %>
 <% end %>

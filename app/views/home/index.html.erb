@@ -2,7 +2,6 @@
   <div class="span6">
     <h2>The easiest way to chase outstanding invoices!</h2>
     <h5>Take the hassle out of chasing your debtors, and get paid on time!</h5>
-
     <div class="carousel slide" id="home_carousel">
       <div class="carousel-inner">
         <div class="item active">
@@ -36,18 +35,15 @@
     <h5>4. Get paid!</h5>
     <br/>
     <br/>
-
     <h3>Wanna give it a try and increase your cashflow?</h3>
     <br/>
     <%= link_to 'Sign up for a free account now!', new_user_registration_path, class: 'btn btn-large btn-primary' %>
     <br/>
     <br/>
-
     <h3>Already have an account?</h3>
     <%= link_to 'Login here', new_user_session_path %>
     <h3>Watch the Tutorial Video</h3>
     <a data-toggle="modal" href="#tutorial-video">View Video</a>
-
     <h3>Need more information?</h3>
     <%= link_to 'Click here', about_path %>
     <p align="right">
@@ -56,35 +52,41 @@
       <br/>
       <br/>
       <% cache 'social-media' do %>
-          <script type="text/javascript">var switchTo5x = true;</script>
-          <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript"></script>
-          <script type="text/javascript">stLight.options({publisher: "ur-84d8d783-c4b3-63aa-165d-7c93ac957388"});</script>
-          <span class="st_linkedin_large" displaytext="LinkedIn"></span>
-          <span class="st_facebook_large" displaytext="Facebook"></span>
-          <span class="st_twitter_large" displaytext="Tweet"></span>
-          <span class="st_email_large" displaytext="Email"></span>
-          <br/>
-          <%= image_tag("share.png") %>
+        <script type="text/javascript">
+          var switchTo5x = true;
+        </script>
+        <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript"></script>
+        <script type="text/javascript">
+          stLight.options({publisher: "ur-84d8d783-c4b3-63aa-165d-7c93ac957388"});
+        </script>
+        <span class="st_linkedin_large" displaytext="LinkedIn"></span>
+        <span class="st_facebook_large" displaytext="Facebook"></span>
+        <span class="st_twitter_large" displaytext="Tweet"></span>
+        <span class="st_email_large" displaytext="Email"></span>
+        <br/>
+        <%= image_tag("share.png") %>
       <% end %>
-    </p></div>
+    </p>
+  </div>
 </div>
 <% cache 'tutorial-video' do %>
-    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
-      <div class="modal-header">
-        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
-          ×
+  <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
+    <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+        ×
         </button>
-        <h3 id="myModalLabel">
-          Quick overview of how Paying Mantis works
-        </h3></div>
-      <div class="modal-body">
-        <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
-        </iframe>
-      </div>
-      <div class="modal-footer">
-        <button aria-hidden="true" class="btn" data-dismiss="modal">
-          Close
-        </button>
-      </div>
+      <h3 id="myModalLabel">
+        Quick overview of how Paying Mantis works
+        </h3>
     </div>
+    <div class="modal-body">
+      <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
+      </iframe>
+    </div>
+    <div class="modal-footer">
+      <button aria-hidden="true" class="btn" data-dismiss="modal">
+        Close
+        </button>
+    </div>
+  </div>
 <% end %>

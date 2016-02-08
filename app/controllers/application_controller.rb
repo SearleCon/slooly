@@ -14,10 +14,12 @@ class ApplicationController < ActionController::Base
 
   etag { [current_user.try(:id), flash].compact }
 
+  IE_VERSIONS = [6, 7, 8].freeze
+
   private
 
   def check_browser_version
-    flash.now[:alert] = render_to_string(partial: 'shared/browser_warning') if browser.ie6? || browser.ie7? || browser.ie8?
+    flash.now[:alert] = render_to_string(partial: 'shared/browser_warning') if IE_VERSIONS.any? { |version| browser.ie?(version) }
   end
 
   def set_announcement
@@ -32,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def with_timezone(&block)
-    timezone = current_user.try(:time_zone) || 'UTC'
+    timezone = current_user&.time_zone || 'UTC'
     Time.use_zone(timezone, &block)
   end
 end

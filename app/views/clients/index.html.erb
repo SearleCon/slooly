@@ -5,19 +5,19 @@
     </div>
     <div class="media-body">
       <h1>Clients</h1>
-
       <div class="pagination-details">
         <h5><%= page_entries_info @clients %>
-        </h5></div>
+        </h5>
+      </div>
       <ul class="inline">
         <li>
           <%= link_to new_client_path do %>
-              <%= fa_icon 'male', text: ' Add Client' %>
+            <%= fa_icon 'male', text: ' Add Client' %>
           <% end %>
         </li>
         <li>
           <%= link_to new_clients_import_path do %>
-              <%= fa_icon 'file-excel-o', text: ' Import Clients' %>
+            <%= fa_icon 'file-excel-o', text: ' Import Clients' %>
           <% end %>
         </li>
       </ul>
@@ -28,37 +28,36 @@
       <em class="muted">Search on business name or contact person</em>
     </small>
     <%= form_tag clients_path, method: :get, class: 'form-search', remote: true, data: {validate: true} do %>
-        <div class="control-group">
-          <div class="controls">
-            <%= text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: {rule_minlength: 3, rule_required: true} %>
-            <span rel="tooltip" title="Clear Search">
+      <div class="control-group">
+        <div class="controls">
+          <%= text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: {rule_minlength: 3, rule_required: true} %>
+          <span rel="tooltip" title="Clear Search">
             <%= link_to image_tag("close.png"), clients_path %>
-            </span>
-          </div>
+          </span>
         </div>
+      </div>
     <% end %>
   </div>
 </div>
 <div id="clients">
   <% if @clients.total_count.zero? %>
-      <div class="hero-unit">
-        <p class="lead">
-          This screen will show a listing of all your clients loaded.
+    <div class="hero-unit">
+      <p class="lead">
+        This screen will show a listing of all your clients loaded.
           <br/>
-          But at the moment, you don't have any...
+        But at the moment, you don't have any...
           <%= image_tag('sadface.png', size: '15x15') %>
-          Let's fix that right away!
+        Let's fix that right away!
         </p>
-
-        <p>
-          <strong>Why don't we get started:</strong>
-        </p>
-
-        <h2>
-          <%= link_to new_client_path do %>
-              <%= fa_icon 'male', text: ' Add a New Client' %>
-          <% end %></h2></div>
+      <p>
+        <strong>Why don't we get started:</strong>
+      </p>
+      <h2>
+        <%= link_to new_client_path do %>
+          <%= fa_icon 'male', text: ' Add a New Client' %>
+        <% end %></h2>
+    </div>
   <% else %>
-      <%= render 'clients', clients: @clients %>
+    <%= render 'clients', clients: @clients %>
   <% end %>
 </div>

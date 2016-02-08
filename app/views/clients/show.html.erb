@@ -1,127 +1,125 @@
 <% cache @client do %>
-    <div class="page-header">
-      <div class="media">
-        <div class="pull-left">
-          <%= image_tag('clients.png', class: 'media-object') %>
-        </div>
-        <div class="media-body">
-          <h1>Client Details</h1>
-
-          <h3><%= @client.business_name %></h3>
-          <%= link_to clients_path do %>
-              <%= fa_icon 'arrow-left', text: 'Back' %>
-          <% end %>
-        </div>
+  <div class="page-header">
+    <div class="media">
+      <div class="pull-left">
+        <%= image_tag('clients.png', class: 'media-object') %>
+      </div>
+      <div class="media-body">
+        <h1>Client Details</h1>
+        <h3><%= @client.business_name %></h3>
+        <%= link_to clients_path do %>
+          <%= fa_icon 'arrow-left', text: 'Back' %>
+        <% end %>
       </div>
     </div>
-    <p>
-      Business Name:
+  </div>
+  <p>
+    Business Name:
       <strong><%= @client.business_name %>
-      </strong>
-    </p>
-    <p>Contact Person: <%= @client.contact_person %></p>
-    <p>Telephone: <%= number_to_phone(@client.telephone, area_code: true) %></p>
-    <p>Fax:  <%= number_to_phone(@client.fax, area_code: true) %></p>
-    <p>Email: <%= obfuscate_email @client.email if @client.email.present? %></p>
-    <address>
-      <strong>Address</strong>
-      <br/>
-      <%= @client.address %>
-      <br/>
-      <%= @client.city %>
-      <br/>
-      <%= @client.post_code %>
-    </address>
-    <ul class="inline">
-      <li>
-        <%= link_to edit_client_path(@client) do %>
-            <%= fa_icon 'edit', text: ' Edit this client' %>
-        <% end %>
+    </strong>
+  </p>
+  <p>Contact Person: <%= @client.contact_person %></p>
+  <p>Telephone: <%= number_to_phone(@client.telephone, area_code: true) %></p>
+  <p>Fax:  <%= number_to_phone(@client.fax, area_code: true) %></p>
+  <p>Email: <%= obfuscate_email @client.email if @client.email.present? %></p>
+  <address>
+    <strong>Address</strong>
+    <br/>
+    <%= @client.address %>
+    <br/>
+    <%= @client.city %>
+    <br/>
+    <%= @client.post_code %>
+  </address>
+  <ul class="inline">
+    <li>
+      <%= link_to edit_client_path(@client) do %>
+        <%= fa_icon 'edit', text: ' Edit this client' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do %>
+        <%= fa_icon 'trash', text: 'Delete' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to new_client_path do %>
+        <%= fa_icon 'male', text: ' Add another Client' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to new_client_invoice_path(@client) do %>
+        <%= fa_icon 'file-text', text: ' Add invoice for this client' %>
+      <% end %>
+    </li>
+  </ul>
+  <hr/>
+  <div class="tabbable tabs-top">
+    <ul class="nav nav-tabs" id="invoices">
+      <li class="active">
+        <a data-toggle="tab" href="#chasing">Currently Chasing</a>
       </li>
       <li>
-        <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do %>
-            <%= fa_icon 'trash', text: 'Delete' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to new_client_path do %>
-            <%= fa_icon 'male', text: ' Add another Client' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to new_client_invoice_path(@client) do %>
-            <%= fa_icon 'file-text', text: ' Add invoice for this client' %>
-        <% end %>
+        <a data-toggle="tab" href="#history">Chasing History</a>
       </li>
     </ul>
-    <hr/>
-    <div class="tabbable tabs-top">
-      <ul class="nav nav-tabs" id="invoices">
-        <li class="active">
-          <a data-toggle="tab" href="#chasing">Currently Chasing</a>
-        </li>
-        <li>
-          <a data-toggle="tab" href="#history">Chasing History</a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane fade in active" id="chasing">
-          <% if @client.outstanding_invoices.any? %>
-              <p>
-                You are currently chasing the following
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="chasing">
+        <% if @client.outstanding_invoices.any? %>
+          <p>
+            You are currently chasing the following
                 <strong><%= pluralize(@client.outstanding_invoices.size, 'invoice') %></strong> for
                 <strong><%= @client.business_name %></strong> to the value of
                 <strong><%= @client.outstanding_invoices.total %></strong> (total chasingamount).
               </p>
-              <table>
-                <thead>
-                <tr>
-                  <th>
-                    Age
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Age
                     <i class="icon-question-sign" data-container="body" data-content="The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. &quot;-5&quot; means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green" data-title="Invoice Age" data-trigger="hover" rel="popover"></i>
-                  </th>
-                  <th>Invoice Number</th>
-                  <th>Due Date</th>
-                  <th>Amount</th>
-                  <th>Description</th>
-                  <th>Created</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice, cache: true %>
-                </tbody>
-              </table>
-          <% else %>
-              <p>You are <strong>not</strong> chasing any invoices for <%= @client.business_name %>.</p>
-          <% end %>
-        </div>
-        <div class="tab-pane fade in" id="history">
-          <% if @client.histories.any? %>
-              <p> Here are the emails you have <strong>already sent</strong> to
-                <strong><%= @client.business_name %></strong> (Newest to Oldest).</p>
-              <table>
-                <thead>
-                <tr>
-                  <th>Date Sent</th>
-                  <th>Sent To</th>
-                  <th>Type</th>
-                  <th>Reference</th>
-                  <th>Subject</th>
-                  <th>Message</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%= render @client.histories, cache: true %>
-                </tbody>
-              </table>
-          <% else %>
-
-              <p>You have <strong>no</strong> chasing history for <%= @client.business_name %>.</p>
-          <% end %>
-        </div>
+                </th>
+                <th>Invoice Number</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice, cache: true %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>You are <strong>not</strong> chasing any invoices for <%= @client.business_name %>.</p>
+        <% end %>
       </div>
-      <hr/>
+      <div class="tab-pane fade in" id="history">
+        <% if @client.histories.any? %>
+          <p> Here are the emails you have <strong>already sent</strong> to
+                <strong><%= @client.business_name %></strong> (Newest to Oldest).</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Date Sent</th>
+                <th>Sent To</th>
+                <th>Type</th>
+                <th>Reference</th>
+                <th>Subject</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @client.histories, cache: true %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>You have <strong>no</strong> chasing history for <%= @client.business_name %>.</p>
+        <% end %>
+      </div>
     </div>
+    <hr/>
+  </div>
 <% end %>

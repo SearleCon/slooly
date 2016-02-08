@@ -1,5 +1,4 @@
 <tr>
-
   <td data-value='<%= invoice.age %>'><%= age_badge(invoice.age) %></td>
   <td data-value='<%= invoice.invoice_number %>'><%= link_to invoice.invoice_number, invoice %></td>
   <td data-value='<%= invoice.due_date %>'><%= time_tag(invoice.due_date) %></td>
@@ -11,12 +10,12 @@
     <ul class="inline">
       <li>
         <%= link_to invoice do %>
-            <%= fa_icon 'play-circle-o', text: 'Show' %>
+          <%= fa_icon 'play-circle-o', text: 'Show' %>
         <% end %>
       </li>
       <li>
         <%= link_to edit_invoice_path(invoice) do %>
-            <%= fa_icon 'edit', text: ' Edit' %>
+          <%= fa_icon 'edit', text: ' Edit' %>
         <% end %>
       </li>
       <li><%= link_to invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do %><%= fa_icon 'trash', text: 'Delete' %>

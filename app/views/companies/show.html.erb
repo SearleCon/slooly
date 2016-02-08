@@ -1,61 +1,63 @@
 <% cache @company do %>
-    <div class="page-header">
-      <h1>Company Profile</h1>
-    </div>
-    <table>
-      <tr>
-        <td>Name:</td>
-        <td><h4><%= @company.name %></h4></td>
-      </tr>
-      <tr>
-        <td>Address:</td>
-        <td><%= @company.address %>
-        </td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td><%= @company.city %>
-        </td>
-      </tr>
-      <tr>
-        <td>Postal Code:</td>
-        <td><%= @company.post_code %>
-        </td>
-      </tr>
-      <tr>
-        <td>Telephone:</td>
-        <td><%= number_to_phone(@company.telephone, area_code: true) %>
-        </td>
-      </tr>
-      <tr>
-        <td>Fax:</td>
-        <td><%= @company.fax %>
-        </td>
-      </tr>
-      <tr>
-        <td>Email:</td>
-        <td><%= @company.email %>
-        </td>
-      </tr>
-    </table>
-    <hr/>
-    <h5>
-      <%= link_to edit_company_path do %>
-          <%= fa_icon 'edit', text: 'Edit your company details' %>
+  <div class="page-header">
+    <h1>Company Profile</h1>
+  </div>
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>
+        <h4><%= @company.name %></h4>
+      </td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td><%= @company.address %>
+      </td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= @company.city %>
+      </td>
+    </tr>
+    <tr>
+      <td>Postal Code:</td>
+      <td><%= @company.post_code %>
+      </td>
+    </tr>
+    <tr>
+      <td>Telephone:</td>
+      <td><%= number_to_phone(@company.telephone, area_code: true) %>
+      </td>
+    </tr>
+    <tr>
+      <td>Fax:</td>
+      <td><%= @company.fax %>
+      </td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><%= @company.email %>
+      </td>
+    </tr>
+  </table>
+  <hr/>
+  <h5>
+    <%= link_to edit_company_path do %>
+      <%= fa_icon 'edit', text: 'Edit your company details' %>
+    <% end %>
+  </h5>
+  <h5>(Above is how the profile will appear on your reminder emails)</h5>
+  <hr/>
+  <ul class="inline">
+    <li><%= link_to :back do %>
+        <%= fa_icon 'arrow-left', text: 'Back' %>
       <% end %>
-    </h5>
-    <h5>(Above is how the profile will appear on your reminder emails)</h5>
-    <hr/>
-    <ul class="inline">
-      <li><%= link_to :back do %>
-            <%= fa_icon 'arrow-left', text: 'Back' %>
-        <% end %>
-      </li>
-      <li><%= link_to edit_user_registration_path do
+    </li>
+    <li><%= link_to edit_user_registration_path do
       %><%= fa_icon 'user', text: 'User Profile' %>
-        <% end %></li>
-      <li><%= link_to settings_path do %>
-            <%= fa_icon 'gears', text: 'Settings' %>
-        <% end %></li>
-    </ul>
+    <% end %></li>
+  <li><%= link_to settings_path do %>
+      <%= fa_icon 'gears', text: 'Settings' %>
+    <% end %></li>
+</ul>
 <% end %>

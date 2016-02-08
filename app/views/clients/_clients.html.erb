@@ -1,17 +1,17 @@
 <table class="sortable">
   <thead>
-  <tr>
-    <th>Business Name</th>
-    <th>Contact Person</th>
-    <th>Telephone</th>
-    <th>Email</th>
-    <th>Created</th>
-    <th data-defaultsort="disabled">
-    </th>
-  </tr>
+    <tr>
+      <th>Business Name</th>
+      <th>Contact Person</th>
+      <th>Telephone</th>
+      <th>Email</th>
+      <th>Created</th>
+      <th data-defaultsort="disabled">
+      </th>
+    </tr>
   </thead>
   <tbody>
-  <%= render clients, cache: true %>
+    <%= render clients, cache: true %>
   </tbody>
 </table>
 <%= paginate clients, remote: true %>

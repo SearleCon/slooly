@@ -43,10 +43,12 @@
   <li>Review the default reminder message settings (These will probably suit most businesses, but you might want to make
     a few changes to suit your specific needs)
   </li>
-</ol><br/>
+</ol>
+<br/>
 <p>
   (The above two steps are once off, and once completed, you will never need to change them, unless you want to)
-</p><br/>
+</p>
+<br/>
 <p>Now that you are done with the settings, simply add a customer (if they do not already exist), and add an invoice you
   want the system to chase.</p>
 <br/>
@@ -58,7 +60,8 @@
   <li>Your <strong>Company profile</strong></li>
   <li>The invoice <strong>due date</strong></li>
   <li>Your <strong>customer's email</strong> address</li>
-</ol><br/>
+</ol>
+<br/>
 <hr/>
 <%= image_tag("magic.png") %>
 <h2>And then the magic happens!</h2>
@@ -80,9 +83,9 @@
 
   Keeping track of your debtors has never been so easy! We are busy working on the Paying Mantis
   <strong>Mobile App</strong>
-
   that will supplement the website, and make your life even easier! We will notify you once it is ready.
-</p><br/>
+</p>
+<br/>
 <br/>
 <%= image_tag("mobile.png") %>
 <br/>
@@ -94,7 +97,8 @@
   You have nothing to lose, and all your outstanding payments to gain! There is simply no reason not to give it a try...
 
   After all, there is a <strong>free</strong> account that allows you up to 5 customers! What are you waiting for?
-</p><br/>
+</p>
+<br/>
 <%= link_to 'Sign up for a free account now!', new_user_registration_path, class: 'btn btn-large btn-primary' %>
 <br/>
 <h3>Already have an account?</h3>
@@ -105,22 +109,23 @@
 <p> Check out the <%= link_to 'Frequently Asked Questions', faq_path %> page for more information.
 </p>
 <% cache 'tutorial-video' do %>
-    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
-      <div class="modal-header">
-        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
-          ×
+  <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
+    <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+        ×
         </button>
-        <h3 id="myModalLabel">
-          Quick overview of how Paying Mantis works
-        </h3></div>
-      <div class="modal-body">
-        <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
-        </iframe>
-      </div>
-      <div class="modal-footer">
-        <button aria-hidden="true" class="btn" data-dismiss="modal">
-          Close
-        </button>
-      </div>
+      <h3 id="myModalLabel">
+        Quick overview of how Paying Mantis works
+        </h3>
     </div>
+    <div class="modal-body">
+      <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
+      </iframe>
+    </div>
+    <div class="modal-footer">
+      <button aria-hidden="true" class="btn" data-dismiss="modal">
+        Close
+        </button>
+    </div>
+  </div>
 <% end %>

@@ -13,22 +13,21 @@
     <div class="thumbnail">
       <%= image_tag('clients.png') %>
       <h4 class="text-center"><%= link_to 'Clients', clients_path %></h4>
-
       <p class="text-center">
         <%= link_to new_client_path do %>
-            <%= fa_icon 'male', text: ' Add a New Client' %>
+          <%= fa_icon 'male', text: ' Add a New Client' %>
         <% end %>
-      </p></div>
+      </p>
+    </div>
   </li>
   <li class="span4">
     <div class="thumbnail">
       <%= image_tag('invoices.png') %>
       <h4 class="text-center"><%= link_to 'Invoices', invoices_path %>
       </h4>
-
       <p class="text-center">
         <%= link_to new_invoice_path do %>
-            <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
+          <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
         <% end %>
       </p>
     </div>
@@ -37,10 +36,9 @@
     <div class="thumbnail">
       <%= image_tag('settings.png') %>
       <h4 class="text-center"><%= link_to 'Settings', settings_path %></h4>
-
       <p class="text-center">
         <%= link_to settings_path do %>
-            <%= fa_icon 'gears', text: 'Change your settings.' %>
+          <%= fa_icon 'gears', text: 'Change your settings.' %>
         <% end %>
       </p>
     </div>
@@ -48,46 +46,43 @@
 </ul>
 <div class="well">
   <% if @clients.any? %>
-      <h3>Currently chasing <strong><%= pluralize(@clients.total_count, 'client') %></strong></h3>
-      <%= page_entries_info @clients %>
-      <p class="pull-right">
-        <strong>Note:</strong>
-        This page only shows invoices with a status of
+    <h3>Currently chasing <strong><%= pluralize(@clients.total_count, 'client') %></strong></h3>
+    <%= page_entries_info @clients %>
+    <p class="pull-right">
+      <strong>Note:</strong>
+      This page only shows invoices with a status of
 
         <span class="label label-success">Chasing</span>
-        <br/>
-        For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar
+      <br/>
+      For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar
       </p>
-      <hr/>
-      <ul class="unstyled">
-        <%= render partial: 'dashboard/client', collection: @clients, as: :client, cache: true %>
-      </ul>
-      <hr/>
-      <%= paginate @clients %>
+    <hr/>
+    <ul class="unstyled">
+      <%= render partial: 'dashboard/client', collection: @clients, as: :client, cache: true %>
+    </ul>
+    <hr/>
+    <%= paginate @clients %>
   <% else %>
-      <div class="hero-unit">
-        <p class="lead">
-          You currenly have no clients with invoices being chased at the moment...
+    <div class="hero-unit">
+      <p class="lead">
+        You currenly have no clients with invoices being chased at the moment...
           <%= image_tag('sadface.png', size: '15x15') %>
-          Let's fix that right away!
+        Let's fix that right away!
         </p>
-
-        <p>
-          <strong>Why don't we get started:</strong>
-        </p>
-
-        <h3>
-          <%= link_to new_invoice_path do %>
-              <%= fa_icon 'file-text', text: ' Add a new Invoice' %>
-          <% end %>
-        </h3>
-
-        <h3>
-          <%= link_to new_client_path do %>
-              <%= fa_icon 'male', text: ' Add a New Client' %>
-          <% end %>
-        </h3>
-      </div>
+      <p>
+        <strong>Why don't we get started:</strong>
+      </p>
+      <h3>
+        <%= link_to new_invoice_path do %>
+          <%= fa_icon 'file-text', text: ' Add a new Invoice' %>
+        <% end %>
+      </h3>
+      <h3>
+        <%= link_to new_client_path do %>
+          <%= fa_icon 'male', text: ' Add a New Client' %>
+        <% end %>
+      </h3>
+    </div>
   <% end %>
 </div>
 <div class="well">
@@ -96,22 +91,22 @@
   <ul class="inline">
     <li>
       <%= link_to tutorial_path do %>
-          <%= fa_icon 'book', text: 'Help' %>
+        <%= fa_icon 'book', text: 'Help' %>
       <% end %>
     </li>
     <li>
       <%= link_to faq_path do %>
-          <%= fa_icon 'question-circle', text: 'FAQs' %>
+        <%= fa_icon 'question-circle', text: 'FAQs' %>
       <% end %>
     </li>
     <li>
       <%= link_to about_path do %>
-          <%= fa_icon 'info-circle', text: 'About' %>
+        <%= fa_icon 'info-circle', text: 'About' %>
       <% end %>
     </li>
     <li>
       <%= link_to new_contact_path do %>
-          <%= fa_icon 'send', text: 'Contact Us' %>
+        <%= fa_icon 'send', text: 'Contact Us' %>
       <% end %>
     </li>
   </ul>

@@ -4,6 +4,6 @@
     This message will disappear <%= time_ago_in_words(announcement.expiry_date) %> from now
   </strong>
   <%= link_to(hide_announcement_path(announcement), class: 'hide-breaking-news', remote: true) do %>
-      <%= fa_icon 'remove', text: 'hide' %>
+    <%= fa_icon 'remove', text: 'hide' %>
   <% end %>
 </div>

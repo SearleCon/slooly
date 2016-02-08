@@ -3,13 +3,13 @@
   <h6>All the latest product information, offers and general business news</h6>
 </div>
 <% @announcements.each do |announcement| %>
-    <div class="span11 well">
-      <%= image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline) %>
-      <br>
-      <%= simple_format(announcement.description) %>
-      <br>
-      <p class="muted">
-        <%= "Posted by #{announcement.posted_by} #{local_time_ago(announcement.created_at)} ago".html_safe	%>
-      </p>
-    </div>
+  <div class="span11 well">
+    <%= image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline) %>
+    <br>
+    <%= simple_format(announcement.description) %>
+    <br>
+    <p class="muted">
+      <%= "Posted by #{announcement.posted_by} #{local_time_ago(announcement.created_at)} ago".html_safe	%>
+    </p>
+  </div>
 <% end %>

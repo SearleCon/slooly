@@ -45,11 +45,15 @@ class User < ActiveRecord::Base
   end
 
   after_commit on: :create do
-    UserMailer.delay.registration_confirmation(self)
+    UserMailer.registration_confirmation(self).deliver_later
+  end
+
+  def send_devise_notification(notification, *args)
+     devise_mailer.send(notification, self, *args).deliver_later
   end
 
   def subscribed?
-    subscription.try(:active?)
+    subscription&.active?
   end
 
   def timeout_in
