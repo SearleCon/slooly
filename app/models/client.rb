@@ -35,5 +35,5 @@ class Client < ActiveRecord::Base
     self.contact_person = contact_person.try(:titleize)
   end
 
-  scope :search, ->(query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
+  scope :search, -> (query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
 end
