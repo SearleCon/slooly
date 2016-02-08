@@ -2,23 +2,28 @@
   <h1>News Section</h1>
   <h6>All the latest product information, offers and general business news</h6>
   <%= link_to new_admins_announcement_path do %>
-  <%= fa_icon 'newspaper-o', text: 'Add News' %>
+    <%= fa_icon 'newspaper-o', text: 'Add News' %>
   <% end %>
 </div>
 <% @announcements.each do |announcement| %>
-<div class="span11 well">
-  <%= image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline) %>
-  <br/>
-  <%= simple_format(truncate(announcement.description, length: 600) { h.link_to 'Read full article', announcement }) %>
-  <br/>
-  <%= content_tag :div, "Posted by #{announcement.posted_by} #{local_time_ago(announcement.created_at)}".html_safe, class: 'muted' %>
-  <div class="pull-right">
-    <%= link_to edit_admins_announcement_path(announcement) do %>
-    <%= fa_icon 'edit', text: ' Edit' %>
-    <% end %>
-    <%= link_to  admins_announcement_path(announcement), method: :delete, data: { confirm: 'Are you sure?' } do %>
-    <%= fa_icon 'trash', text: 'Delete' %>
-    <% end %>
+  <div class="media">
+    <div class="media-left">
+      <%= image_tag('news.png', class: 'header') %>
+    </div>
+    <div class="media-body">
+      <h3 class="media-heading"><%= announcement.headline %></h3>
+      <%= simple_format(truncate(announcement.description, length: 600) { h.link_to 'Read full article', announcement }) %>
+      <small class='muted'>
+        Posted by <%= announcement.posted_by %> <%= local_time_ago(announcement.created_at) %>
+      </small>
+      <div class="pull-right">
+        <%= link_to edit_admins_announcement_path(announcement) do %>
+          <%= fa_icon 'edit', text: ' Edit' %>
+        <% end %>
+        <%= link_to  admins_announcement_path(announcement), method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= fa_icon 'trash', text: 'Delete' %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
 <% end %>

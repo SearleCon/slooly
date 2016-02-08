@@ -1,17 +1,22 @@
 <div class='page-header'>
-  <h1>Suggestions</h1>
+  <h2>Suggestions</h2>
 </div>
+<div class="list-group">
 <% @suggestions.each do |suggestion| %>
- <div class='span11 well'>
-  <h3><%= suggestion.subject %></h3>
-  <h6><%= obfuscate_email suggestion.email %></h6>
-  <p class='lead'>
-    <%= suggestion.comment %>
-  </p>
-  <div class='pull-right'>
-    <%= link_to admins_suggestion_path(suggestion), method: :delete, data: {confirm: 'Are you sure?'} do %>
-	   <%= fa_icon 'trash', text: 'Destroy' %>
-	  <% end %>
+  <div class="list-group-item">
+    <h4 class="list-group-item-heading">
+      <%= suggestion.subject %>
+      <small class="pull-right"><%= obfuscate_email suggestion.email %></small>
+    </h4>
+    <p class="list-group-item-text">
+      </br>
+      <%= suggestion.comment %>
+      </br>
+      </br>
+      <%= link_to admins_suggestion_path(suggestion), method: :delete, data: {confirm: 'Are you sure?'} do %>
+        <%= fa_icon 'trash', text: 'Destroy' %>
+      <% end %>
+    </p>
   </div>
- </div>
-   <% end %>
+<% end %>
+</div>

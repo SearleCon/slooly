@@ -1,94 +1,95 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left"><%= image_tag('home.png', class: 'media-object') %>
+    <div class='media-left media-top'>
+      <%= image_tag('home.png', class: 'media-object') %>
     </div>
     <div class="media-body">
-      <h2>Home
-      </h2>
+      <h2 class='media-heading'>Home</h2>
     </div>
   </div>
 </div>
-<ul class="thumbnails">
-  <li class="span4">
+<div class="row">
+  <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <%= image_tag('clients.png') %>
-      <h4 class="text-center"><%= link_to 'Clients', clients_path %></h4>
-      <p class="text-center">
-        <%= link_to new_client_path do %>
-          <%= fa_icon 'male', text: ' Add a New Client' %>
-        <% end %>
-      </p>
+      <div class="caption">
+        <h4 class="text-center"><%= link_to 'Clients', clients_path %></h4>
+        <p class="text-center">
+          <%= link_to new_client_path do %>
+            <%= fa_icon 'male', text: ' Add a New Client' %>
+          <% end %>
+        </p>
+      </div>
     </div>
-  </li>
-  <li class="span4">
+  </div>
+  <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <%= image_tag('invoices.png') %>
-      <h4 class="text-center"><%= link_to 'Invoices', invoices_path %>
-      </h4>
-      <p class="text-center">
-        <%= link_to new_invoice_path do %>
-          <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
-        <% end %>
-      </p>
+      <div class="caption">
+        <h4 class="text-center"><%= link_to 'Invoices', invoices_path %>
+        </h4>
+        <p class="text-center">
+          <%= link_to new_invoice_path do %>
+            <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
+          <% end %>
+        </p>
+      </div>
     </div>
-  </li>
-  <li class="span4">
+  </div>
+  <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <%= image_tag('settings.png') %>
-      <h4 class="text-center"><%= link_to 'Settings', settings_path %></h4>
-      <p class="text-center">
-        <%= link_to settings_path do %>
-          <%= fa_icon 'gears', text: 'Change your settings.' %>
-        <% end %>
-      </p>
-    </div>
-  </li>
-</ul>
-<div class="well">
-  <% if @clients.any? %>
-    <h3>Currently chasing <strong><%= pluralize(@clients.total_count, 'client') %></strong></h3>
-    <%= page_entries_info @clients %>
-    <p class="pull-right">
-      <strong>Note:</strong>
-      This page only shows invoices with a status of
-
-        <span class="label label-success">Chasing</span>
-      <br/>
-      For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar
-      </p>
-    <hr/>
-    <ul class="unstyled">
-      <%= render partial: 'dashboard/client', collection: @clients, as: :client, cache: true %>
-    </ul>
-    <hr/>
-    <%= paginate @clients %>
-  <% else %>
-    <div class="hero-unit">
-      <p class="lead">
-        You currenly have no clients with invoices being chased at the moment...
-          <%= image_tag('sadface.png', size: '15x15') %>
-        Let's fix that right away!
+      <div class="caption">
+        <h4 class="text-center"><%= link_to 'Settings', settings_path %></h4>
+        <p class="text-center">
+          <%= link_to settings_path do %>
+            <%= fa_icon 'gears', text: 'Change your settings.' %>
+          <% end %>
         </p>
-      <p>
-        <strong>Why don't we get started:</strong>
-      </p>
-      <h3>
-        <%= link_to new_invoice_path do %>
-          <%= fa_icon 'file-text', text: ' Add a new Invoice' %>
-        <% end %>
-      </h3>
-      <h3>
-        <%= link_to new_client_path do %>
-          <%= fa_icon 'male', text: ' Add a New Client' %>
-        <% end %>
-      </h3>
+      </div>
     </div>
-  <% end %>
+  </div>
 </div>
-<div class="well">
-  <p class="lead">Remember that you can come back to this screen at any time, by clicking the "HOME" link in the above
+<% if @clients.any? %>
+  <h4>Currently chasing <strong><%= pluralize(@clients.total_count, 'client') %></strong></h4>
+  <%= page_entries_info @clients %>
+  <p class="pull-right">
+    <strong>Note:</strong>
+    This page only shows invoices with a status of
+      <span class="label label-success">Chasing</span>
+    <br/>
+    For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar
+    </p>
+  <hr/>
+  <%= render partial: 'dashboard/client', collection: @clients, as: :client, cache: true %>
+  <hr/>
+  <%= paginate @clients %>
+<% else %>
+  <div class="jumbotron">
+    <p class="lead">
+      You currenly have no clients with invoices being chased at the moment...
+        <%= image_tag('sadface.png', size: '15x15') %>
+      Let's fix that right away!
+      </p>
+    <p>
+      <strong>Why don't we get started:</strong>
+    </p>
+    <h3>
+      <%= link_to new_invoice_path do %>
+        <%= fa_icon 'file-text', text: ' Add a new Invoice' %>
+      <% end %>
+    </h3>
+    <h3>
+      <%= link_to new_client_path do %>
+        <%= fa_icon 'male', text: ' Add a New Client' %>
+      <% end %>
+    </h3>
+  </div>
+<% end %>
+<div class="well well-sm">
+  <p class="lead">Remember that you can come back to this screen at any time, by clicking the "Home" link in the above
     navigation menu. Need help? Then check out the following:</p>
-  <ul class="inline">
+  <ul class="list-inline">
     <li>
       <%= link_to tutorial_path do %>
         <%= fa_icon 'book', text: 'Help' %>

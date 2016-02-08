@@ -9,7 +9,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 
 # Frontend
-gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap_sortable_rails'
 gem 'font-awesome-rails'
@@ -38,9 +38,6 @@ gem 'honeypot-captcha'
 
 # Obfuscate emails
 gem 'obfuscatejs'
-
-# Resize text areas
-gem 'autosize-rails'
 
 # import from excel
 gem 'active_importer'

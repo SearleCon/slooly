@@ -3,8 +3,8 @@
 # Table name: clients
 #
 #  id             :integer          not null, primary key
-#  business_name  :string
-#  contact_person :string
+#  business_name  :string(255)
+#  contact_person :string(255)
 #  address        :string(255)
 #  city           :string(255)
 #  post_code      :string(255)

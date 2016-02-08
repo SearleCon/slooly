@@ -108,24 +108,4 @@
 <hr/>
 <p> Check out the <%= link_to 'Frequently Asked Questions', faq_path %> page for more information.
 </p>
-<% cache 'tutorial-video' do %>
-  <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal hide fade" id="tutorial-video" role="dialog" tabindex="-1">
-    <div class="modal-header">
-      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
-        ×
-        </button>
-      <h3 id="myModalLabel">
-        Quick overview of how Paying Mantis works
-        </h3>
-    </div>
-    <div class="modal-body">
-      <iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/yJGI6CC9kPo" width="530">
-      </iframe>
-    </div>
-    <div class="modal-footer">
-      <button aria-hidden="true" class="btn" data-dismiss="modal">
-        Close
-        </button>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/tutorial_video' %>

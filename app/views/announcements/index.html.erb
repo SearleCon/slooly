@@ -3,7 +3,7 @@
   <h6>All the latest product information, offers and general business news</h6>
 </div>
 <% @announcements.each do |announcement| %>
-  <div class="span11 well">
+  <div class="well">
     <%= image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline) %>
     <br>
     <%= simple_format(announcement.description) %>

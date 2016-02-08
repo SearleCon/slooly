@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
 
   protected
 
-  def after_sign_out_path_for
+  def after_sign_out_path_for(resource_or_scope)
     new_suggestion_url
   end
 end

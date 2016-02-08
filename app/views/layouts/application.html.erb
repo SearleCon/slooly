@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>
       <%= content_for?(:title) ? yield(:title) : "Paying Mantis" %>
-    </title><%= metamagic :title => "Paying Mantis - Increase your Cash Flow", :author => "Searle Consulting", :description => "Automatically chase your customers that owe you money, and get paid quicker. Paying Mantis dramatically ups your chances of increasing your cash flow.", :keywords => %w(Cash Flow Cashflow Get Paid Money owed Chase Debtors Increase) %>
+    </title>
+    <%= metamagic :title => "Paying Mantis - Increase your Cash Flow", :author => "Searle Consulting", :description => "Automatically chase your customers that owe you money, and get paid quicker. Paying Mantis dramatically ups your chances of increasing your cash flow.", :keywords => %w(Cash Flow Cashflow Get Paid Money owed Chase Debtors Increase) %>
     <%= stylesheet_link_tag "application", :media => "all", 'data-turbolinks-track' => true %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true, async: Rails.env.production? %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
-      <div class="container" id="content">
-        <div class="content">
-          <div class="row">
-            <div class="span12">
-              <div class="messages">
-                <%= render 'layouts/messages' %>
-              </div>
-              <%= yield %>
-            </div>
-          </div>
-        </div>
-        <%= render 'layouts/footer' %>
+    <%= render 'layouts/navigation' %>
+    <main role="main" class='container'>
+      <div class="messages">
+        <%= render 'layouts/messages' %>
       </div>
-    </div>
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

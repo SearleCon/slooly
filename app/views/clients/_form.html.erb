@@ -1,67 +1,51 @@
 <%= form_for @client, html: {data: {validate: true}} do |f| %>
   <div class="row">
-    <div class="span5">
-      <div class="control-group">
-        <%= f.label :business_name, class: 'control-label' %>
-        <div class="controls">
-          <% if @client.new_record? %>
-            <%= f.text_field :business_name, autofocus: true, data: {rule_required: true, rule_remote: exists_clients_url, msg_remote: 'A client with this business name already exists.'}, placeholder: 'Business name' %>
-          <% else %>
-            <%= f.text_field :business_name, autofocus: true, placeholder: 'Business name' %>
-          <% end %>
-        </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :business_name %>
+        <% if @client.new_record? %>
+          <%= f.text_field :business_name, autofocus: true, data: {rule_required: true, rule_remote: exists_clients_url, msg_remote: 'A client with this business name already exists.'}, placeholder: 'Business name', class: 'form-control' %>
+        <% else %>
+          <%= f.text_field :business_name, autofocus: true, placeholder: 'Business name', class: 'form-control' %>
+        <% end %>
       </div>
-      <div class="control-group">
+      <div class="form-group">
         <%= f.label :email, class: 'control-label' %>
-        <div class="controls">
-          <%= f.email_field :email, data: {rule_email: true, rule_required: true}, placeholder: 'Email' %>
-        </div>
+        <%= f.email_field :email, data: {rule_email: true, rule_required: true}, placeholder: 'Email', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :contact_person, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :contact_person, placeholder: 'Contact person' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :contact_person %>
+        <%= f.text_field :contact_person, placeholder: 'Contact person', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :address, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :address, placeholder: 'Address' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, placeholder: 'Address', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :city, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :city, placeholder: 'City' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, placeholder: 'City', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :post_code, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :post_code, label: 'Zip / Post Code', placeholder: 'Post code' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :post_code %>
+        <%= f.text_field :post_code, label: 'Zip / Post Code', placeholder: 'Post code', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :telephone, class: 'control-label' %>
-        <div class="controls">
-          <%= f.telephone_field :telephone, placeholder: 'Telephone' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :telephone %>
+        <%= f.telephone_field :telephone, placeholder: 'Telephone', class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :fax, class: 'control-label' %>
-        <div class="controls">
-          <%= f.telephone_field :fax, placeholder: 'Fax' %>
-        </div>
+      <div class="form-group">
+        <%= f.label :fax %>
+        <%= f.telephone_field :fax, placeholder: 'Fax', class: 'form-control' %>
       </div>
     </div>
-    <div class="span6 well">
+    <div class="col-md-6 well">
       <div class="media">
-        <div class="pull-left">
+        <div class="media-left">
           <%= image_tag('tip.png', class: 'media-object') %>
         </div>
         <div class="media-body">
           <h3 class="media-heading">Notes:</h3>
-          <ul>
+          <ul class='list-unstyled'>
             <li>
               <%= simple_format("<strong>Email:</strong> The clients email address is the most important item on this page. Make sure to enter it correctly, as all the reminder emails will be sent to this address.") %>
             </li>
@@ -73,6 +57,5 @@
       </div>
     </div>
   </div>
-  <hr/>
-  <%= f.submit 'Save Client', class: 'btn btn-primary' %>
+  <%= f.submit 'Save client', class: 'btn btn-primary btn-sm' %>
 <% end %>

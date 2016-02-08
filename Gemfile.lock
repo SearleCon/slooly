@@ -43,15 +43,17 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (~> 10.4)
     arel (6.0.3)
-    autosize-rails (1.18.17)
-      rails (>= 3.1)
+    autoprefixer-rails (6.3.1)
+      execjs
+      json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
-    bootstrap-sass (2.3.2.2)
-      sass (~> 3.2)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     bootstrap_sortable_rails (1.11.2)
     browser (1.1.0)
     builder (3.2.2)
@@ -279,9 +281,8 @@ PLATFORMS
 DEPENDENCIES
   active_importer
   annotate
-  autosize-rails
   bootstrap-datepicker-rails
-  bootstrap-sass (~> 2.3.2.2)
+  bootstrap-sass
   bootstrap_sortable_rails
   browser
   bullet

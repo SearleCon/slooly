@@ -1,52 +1,49 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left"><%= image_tag 'contact.png', class: 'media-object' %>
+    <div class="media-left media-middle">
+      <%= image_tag 'contact.png', class: 'media-object' %>
     </div>
     <div class="media-body">
-      <h1>
+      <h2 class="media-heading">
         Contact and Support
-      </h1>
+      </h2>
     </div>
   </div>
 </div>
-<h6>Got a question? Check these out:</h6>
-<h3><%= link_to 'Frequently Asked Questions', faq_path %>
-</h3>
-<hr/>
-<h6>Email us at:</h6>
-<h3><%= obfuscate_email 'Support@SearleConsulting.co.za' %></h3>
-<hr/>
-<h6>Follow or Tweet us:</h6>
+<h4>Got a question? Check these out:</h4>
+<p class='lead'><%= link_to 'Frequently Asked Questions', faq_path %></p>
+<h4>Email us at:</h4>
+<p class="lead"><%= obfuscate_email 'Support@SearleConsulting.co.za' %></p>
+<h4>Follow or Tweet us:</h4>
 <a class="twitter-follow-button" data-show-count="false" data-size="large" href="https://twitter.com/SearleCon">Follow @SearleCon</a>
 <a class="twitter-mention-button" data-size="large" href="https://twitter.com/intent/tweet?screen_name=SearleCon">Tweet to @SearleCon</a>
-<hr/>
-<h6>Let us get back to you:
-</h6>
+<h4>Let us get back to you:</h4>
 <%= form_for @message, url: contacts_path, html: {honeypot: true} do |f| %>
-  <div class="control-group">
-    <%= f.label :name, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name %>
+  <div class='row'>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :subject %>
+        <%= f.text_field :subject, class: "form-control" %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :email, class: 'control-label' %>
-    <div class="controls">
-      <%= f.email_field :email %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :subject, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :subject %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :body, class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :body %>
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, class: "form-control", rows: 9 %>
+      </div>
     </div>
   </div>
   <hr/>
-  <%= f.submit "Send Enquiry", class: 'btn btn-primary' %>
+  <%= f.submit "Send Enquiry", class: 'btn btn-primary btn-sm' %>
 <% end %>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>

@@ -6,17 +6,17 @@
   <td data-value="<%= invoice.description %>"><%= content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: {content: simple_format(invoice.description), trigger: 'hover', animation: true})%></td>
   <td data-value="<%= invoice.created_at %>"><%= local_time_ago(invoice.created_at) %></td>
   <td>
-    <ul class="inline">
+    <ul class="list-inline">
       <li>
         <% link_to invoice do %>
-            <%= fa_icon 'play-circle-o', text: 'Show' %>
+          <%= fa_icon 'play-circle-o', text: 'Show' %>
         <% end %>
       </li>
       <li><%= link_to edit_invoice_path(invoice) do
       %><%= fa_icon 'edit', text: ' Edit' %>
-        <% end %></li>
-      <li><%= link_to invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do %><%= fa_icon 'trash', text: 'Delete' %>
-        <% end %></li>
-    </ul>
-  </td>
+      <% end %></li>
+    <li><%= link_to invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do %><%= fa_icon 'trash', text: 'Delete' %>
+      <% end %></li>
+  </ul>
+</td>
 </tr>

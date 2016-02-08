@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: subscriptions
+#
+#  id                             :integer          not null, primary key
+#  plan_id                        :integer
+#  expiry_date                    :date
+#  active                         :boolean          default(TRUE)
+#  user_id                        :integer
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  paypal_customer_token          :string(255)
+#  paypal_recurring_profile_token :string(255)
+#
+
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
 

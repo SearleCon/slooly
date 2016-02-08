@@ -5,7 +5,7 @@
   <td data-value="<%= client.email %>"><%= obfuscate_email client.email if client.email.present? %></td>
   <td data-value="<%= client.created_at %>"><%=local_time_ago(client.created_at) %></td>
   <td>
-    <ul class="inline">
+    <ul class="list-inline">
       <li>
         <%= link_to client do %>
           <%= fa_icon 'play-circle-o', text: 'Show' %>

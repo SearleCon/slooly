@@ -5,7 +5,6 @@
 #= require bootstrap-datepicker
 #= require bootstrap-sortable
 #= require obfuscatejs
-#= require jquery.autosize
 #= require local_time
 #= require nprogress
 #= require nprogress-ajax
@@ -13,8 +12,6 @@
 #= require turbolinks
 #= require_tree .
 
-
-Turbolinks.ProgressBar.disable();
 
 $.rails.allowAction = (element) ->
   # The message is something like "Are you sure?"
@@ -35,18 +32,22 @@ $.rails.allowAction = (element) ->
 
   # Create the modal box with the message
   modal_html = """
-               <div class="modal" id="myModal">
-                 <div class="modal-header">
-                   <a class="close" data-dismiss="modal">×</a>
-                   <h4>Paying Mantis</h4>
-                 </div>
-                 <div class="modal-body">
-                   <h5><span class='label label-important'>WARNING!</span></h5>
-                   <div>#{message}</div>
-                 </div>
-                 <div class="modal-footer">
-                   <a data-dismiss="modal" class="btn">Cancel</a>
-                 </div>
+               <div class="modal" role="dialog">
+                <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <a class="close" data-dismiss="modal">×</a>
+                     <h4>Paying Mantis</h4>
+                   </div>
+                   <div class="modal-body">
+                     <h5 class='text-danger'>WARNING!</h5>
+                     #{message}
+                   </div>
+                   <div class="modal-footer">
+                     <a data-dismiss="modal" class="btn btn-default">Cancel</a>
+                   </div>
+                  </div>
+                </div>
                </div>
                """
   $modal_html = $(modal_html)
@@ -71,15 +72,15 @@ $.validator.setDefaults
     return $(element).valid()
 
   errorPlacement: (error, element) ->
-   error.appendTo( $(element).closest('div.controls'))
+   error.appendTo( $(element).closest('.form-group'))
    return
 
   highlight: (element) ->
-    $(element).closest(".control-group").removeClass("success").addClass "error"
+    $(element).closest(".form-group").removeClass("has-success").addClass "has-error"
     return
 
   unhighlight: (element) ->
-    $(element).closest(".control-group").removeClass("error")
+    $(element).closest(".form-group").removeClass("has-error")
     return
 
   errorClass: "help-block"
@@ -97,10 +98,8 @@ pageLoad = ->
       )
 
     return
-  $('.carousel').carousel()
   $("[rel=tooltip]").tooltip()
   $("[rel=popover]").popover({html : true})
-  $('textarea').autosize()
 
   $('[data-behaviour~=datepicker]').datepicker(
     {

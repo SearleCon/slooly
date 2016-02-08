@@ -5,52 +5,52 @@
     </div>
     <div class="media-body">
       <h1>Import Clients</h1>
-      <%= link_to clients_path do
-      %><%= fa_icon 'arrow-left', text: 'Back' %>
-
+      <%= link_to clients_path do%>
+        <%= fa_icon 'arrow-left', text: 'Back' %>
       <% end %>
     </div>
   </div>
 </div>
 <%= form_tag clients_imports_path, multipart: true do |f| %>
-    <div class="row">
-      <div class="span5">
-        <%= file_field_tag :file, style: 'display:none;', id: 'upload-clients' %>
-        <div class="input-append">
-          <%= text_field_tag nil, nil, class: 'input-large', id: 'upload-clients-file' %>
-          <a class="btn" onclick="$('input[id=upload-clients]').click();">Browse</a>
-        </div>
-        <br>
-        <%= submit_tag 'Import Clients', class: 'btn btn-primary' %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= file_field_tag :file, style: 'display:none;', id: 'upload-clients' %>
+      <div class="input-group">
+        <%= text_field_tag nil, nil, class: 'input-sm form-control', id: 'upload-clients-file' %>
+        <a class="btn input-group-addon" onclick="$('input[id=upload-clients]').click();">Browse</a>
       </div>
-      <div class="span6 well">
-        <div class="media">
-          <div class="pull-left">
-            <%= image_tag 'tip.png', class: 'media-object' %>
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">Notes:</h3>
-          </div>
+      <br>
+      <%= submit_tag 'Import', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-6 well well-sm">
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag 'tip.png', class: 'media-object' %>
         </div>
-        <ul class="form-notes">
-          <li><strong>File:</strong> Use the browse button to select the spreadsheet you wish to import.</li>
-          <li>
-            <strong>Format:</strong> The first row of the spreadsheet needs to contain the following headers:
-            <ul>
-              <li><strong>BusinessName:</strong> The business name of the client. (This field is not optional)</li>
-              <li><strong>Email:</strong> The email of the client. (This field is not optional)</li>
-              <li><strong>ContactPerson:</strong> The email of the client. (This field is optional)</li>
-              <li><strong>Address:</strong> The address of the client. (This field is optional)</li>
-              <li><strong>City:</strong> The city of the client. (This field is optional)</li>
-              <li><strong>PostCode:</strong> The post code of the client. (This field is optional)</li>
-              <li><strong>Telephone:</strong> The telephone number of the client. (This field is optional)</li>
-              <li><strong>Fax:</strong> The fax number of the client. (This field is optional)</li>
-            </ul>
-          </li>
-          <li>When the records are imported, the system will check whether the business name exists and if so update the
-            existing client.
-          </li>
-        </ul>
+        <div class="media-body">
+          <h3 class="media-heading">Notes</h3>
+          <ul class="list-unstyled">
+            <li><strong>File:</strong> Use the browse button to select the spreadsheet you wish to import.</li>
+            <li>
+              <strong>Format:</strong> The first row of the spreadsheet needs to contain the following headers:
+                
+              <ul>
+                <li><strong>BusinessName:</strong> The business name of the client. (This field is not optional)</li>
+                <li><strong>Email:</strong> The email of the client. (This field is not optional)</li>
+                <li><strong>ContactPerson:</strong> The email of the client. (This field is optional)</li>
+                <li><strong>Address:</strong> The address of the client. (This field is optional)</li>
+                <li><strong>City:</strong> The city of the client. (This field is optional)</li>
+                <li><strong>PostCode:</strong> The post code of the client. (This field is optional)</li>
+                <li><strong>Telephone:</strong> The telephone number of the client. (This field is optional)</li>
+                <li><strong>Fax:</strong> The fax number of the client. (This field is optional)</li>
+              </ul>
+            </li>
+            <li>When the records are imported, the system will check whether the business name exists and if so update the
+                existing client.
+              </li>
+          </ul>
+        </div>
       </div>
     </div>
+  </div>
 <% end %>

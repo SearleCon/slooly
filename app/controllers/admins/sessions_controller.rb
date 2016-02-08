@@ -1,6 +1,6 @@
 module Admins
   class SessionsController < Devise::SessionsController
-    layout 'admin'
+    layout 'admins/application'
 
     skip_before_action :authenticate_admin!
 

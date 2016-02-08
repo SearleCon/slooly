@@ -1,15 +1,14 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left">
+    <div class='media-left media-top'>
       <%= image_tag('clients.png', class: 'media-object') %>
     </div>
     <div class="media-body">
-      <h1>Clients</h1>
+      <h2 class='media-heading'>Clients</h2>
       <div class="pagination-details">
-        <h5><%= page_entries_info @clients %>
-        </h5>
+        <h5><%= page_entries_info @clients %></h5>
       </div>
-      <ul class="inline">
+      <ul class="list-inline">
         <li>
           <%= link_to new_client_path do %>
             <%= fa_icon 'male', text: ' Add Client' %>
@@ -27,21 +26,19 @@
     <small>
       <em class="muted">Search on business name or contact person</em>
     </small>
-    <%= form_tag clients_path, method: :get, class: 'form-search', remote: true, data: {validate: true} do %>
-      <div class="control-group">
-        <div class="controls">
-          <%= text_field_tag :q, params[:q], class: 'search-query input-medium', autocomplete: :off, placeholder: 'Search', data: {rule_minlength: 3, rule_required: true} %>
-          <span rel="tooltip" title="Clear Search">
-            <%= link_to image_tag("close.png"), clients_path %>
-          </span>
-        </div>
+    <%= form_tag clients_path, method: :get, class: 'form-inline', remote: true, data: {validate: true} do %>
+      <div class="form-group">
+        <%= text_field_tag :q, params[:q], class: 'form-control input-sm', autocomplete: :off, placeholder: 'Search',  data: {rule_minlength: 3, rule_required: true} %>
+        <span rel="tooltip" title="Clear Search">
+          <%= link_to image_tag("close.png"), clients_path %>
+        </span>
       </div>
     <% end %>
   </div>
 </div>
 <div id="clients">
   <% if @clients.total_count.zero? %>
-    <div class="hero-unit">
+    <div class="jumbotron">
       <p class="lead">
         This screen will show a listing of all your clients loaded.
           <br/>

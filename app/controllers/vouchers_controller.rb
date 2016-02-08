@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: vouchers
+#
+#  id             :integer          not null, primary key
+#  unique_code    :string(255)
+#  redeemed_by    :integer
+#  valid_until    :datetime
+#  number_of_days :integer          default(30)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class VouchersController < ApplicationController
   before_action :authenticate_user!, :authorize_user!
 

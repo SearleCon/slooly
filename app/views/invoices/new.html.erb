@@ -1,10 +1,12 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left">
+    <div class="media-left">
       <%= image_tag('invoices.png', class: 'media-object') %>
     </div>
     <div class="media-body">
-      <h1>Add Invoice</h1>
+      <div class="media-heading">
+        <h1>Add Invoice</h1>
+      </div>
       <%= link_to invoices_path do %>
         <%= fa_icon 'arrow-left', text: 'Back' %>
       <% end %>
