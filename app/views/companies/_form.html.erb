@@ -1,69 +1,62 @@
 <%= form_for @company, url: company_path do |f| %>
   <div class="row">
-    <div class="span5">
-      <div class="control-group">
-        <%= f.label :name, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :name %>
-        </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :address, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :address %>
-        </div>
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :city, class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :city %>
-        </div>
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :post_code, 'Zip / Post Code', class: 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :post_code %>
-        </div>
+      <div class="form-group">
+        <%= f.label :post_code, 'Zip / Post Code' %>
+        <%= f.text_field :post_code, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :telephone, class: 'control-label' %>
-        <div class="controls">
-          <%= f.telephone_field :telephone %>
-        </div>
+      <div class="form-group">
+        <%= f.label :telephone %>
+        <%= f.telephone_field :telephone, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :fax, class: 'control-label' %>
-        <div class="controls">
-          <%= f.telephone_field :fax %>
-        </div>
+      <div class="form-group">
+        <%= f.label :fax %>
+        <%= f.telephone_field :fax, class: 'form-control' %>
       </div>
-      <div class="control-group">
-        <%= f.label :email, class: 'control-label' %>
-        <div class="controls">
-          <%= f.email_field :email %>
-        </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
       </div>
+      <%= f.submit 'Update', class: 'btn btn-primary btn-sm' %>
     </div>
-    <div class="span6 well">
-      <%= image_tag('tip.png', class: 'header') %>
-      <h3>Notes:</h3>
-      <br/>
-      <ul>
-        <li>
-          <b>Email:</b>
-          This email address is the most important item on this page. Make sure to enter it correctly, as all the
-            reminder emails will be shown as sent FROM this address.
-          </li>
-        <li>
-          <b>
-            Contact Info:
-            </b> All of the other fields on this form (apart from your company logo) will be shown on the invoice and it
-            is important that you enter correct information here, as this is what the client will use to contact you or
-            to send you payment confirmation etc.
-          </li>
-      </ul>
+    <div class="col-md-6 well">
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag('tip.png', class: 'header') %>
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading">Notes</h3>
+          <ul class="list-unstyled">
+            <li>
+              <p>
+                <strong>Email:</strong>
+                This email address is the most important item on this page. Make sure to enter it correctly, as all the
+                  reminder emails will be shown as sent <em>FROM</em> this address.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Contact Info:</strong>
+                All of the other fields on this form (apart from your company logo) will be shown on the invoice and it
+                is important that you enter correct information here, as this is what the client will use to contact you or
+                to send you payment confirmation etc.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-  <hr/>
-  <%= f.submit 'Update', class: 'btn btn-primary' %>
 <% end %>

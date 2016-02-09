@@ -5,19 +5,19 @@
   <div class="panel-body">
     <p class="pull-left">
       <strong>Invoices:</strong>
-      <span class="badge badge-inverse"><%= client.outstanding_invoices.size %></span>
+      <span class="badge"><%= client.outstanding_invoices.size %></span>
     </p>
     <p class='pull-right'>
       <strong>Total:</strong>
       <em><%= client.outstanding_invoices.total %></em>
     </p>
   </div>
-  <table>
+  <table class='table table-bordered table-condensed'>
     <thead>
       <tr>
         <th>
           Age
-        <i class="fa fa-question" data-container="body" data-content="The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. &quot;-5&quot; means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green" data-title="Invoice Age" data-trigger="hover" rel="popover"></i>
+        <i class="fa fa-question-circle" data-container="body" data-content="The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. &quot;-5&quot; means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green" data-title="Invoice Age" data-trigger="hover" rel="popover"></i>
         </th>
         <th>Invoice Number</th>
         <th>Due Date</th>

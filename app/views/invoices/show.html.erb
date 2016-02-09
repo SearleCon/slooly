@@ -5,17 +5,36 @@
         <%= image_tag('invoices.png', class: 'media-object') %>
       </div>
       <div class="media-body">
-        <div class="media-heading">
-          <h1>Invoice Details</h1>
-          <h3><%= @invoice.invoice_number %></h3>
-        </div>
-        <%= link_to invoices_path do %>
-          <%= fa_icon 'arrow-left', text: 'Back' %>
-        <% end %>
+        <h1 class="media-heading">Invoice Details</h1>
+        <h3 class="media-heading"><%= @invoice.invoice_number %></h3>
+        <ul class="list-inline">
+          <li>
+            <%= link_to invoices_path do %>
+              <%= fa_icon 'arrow-left', text: 'Back' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_invoice_path(@invoice) do %>
+              <%= fa_icon 'edit', text: ' Edit invoice' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to @invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{@invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do %>
+              <%= fa_icon 'trash', text: 'Delete' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_invoice_path do %>
+              <%= fa_icon 'file-text-o', text: ' New invoice' %>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
   <dl class="dl-horizontal">
+    <dt>Age:</dt>
+    <dd><%= age_badge(@invoice.age) %></dd>
     <dt>Invoice For:</dt>
     <dd><%= link_to @invoice.business_name, @invoice.client %></dd>
     <dt>Invoice Number:</dt>
@@ -56,19 +75,4 @@
       </div>
     </div>
   <% end %>
-  <hr/>
-  <ul class="list-inline">
-    <li><%= link_to edit_invoice_path(@invoice) do %>
-        <%= fa_icon 'edit', text: ' Edit this invoice' %>
-      <% end %>
-    </li>
-    <li><%= link_to @invoice, method: :delete, data: {confirm: "<p>You are about to delete the invoice <strong>#{@invoice.invoice_number}!</strong></p><p><strong>NOTE:</strong> This cannot be undone!</p><p>Are you sure you want to continue?</p>"} do %>
-        <%= fa_icon 'trash', text: 'Delete' %>
-      <% end %>
-    </li>
-    <li><%= link_to new_invoice_path do %>
-        <%= fa_icon 'file-text-o', text: ' Add another invoice' %>
-      <% end %>
-    </li>
-  </ul>
 <% end %>

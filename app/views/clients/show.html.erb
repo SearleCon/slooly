@@ -5,11 +5,34 @@
         <%= image_tag('clients.png', class: 'media-object') %>
       </div>
       <div class="media-body">
-        <h2 class='media-heading'>Client Details</h2>
-        <h3><%= @client.business_name %></h3>
-        <%= link_to clients_path do %>
-          <%= fa_icon 'arrow-left', text: 'Back' %>
-        <% end %>
+        <h2 class='media-heading'>Client Details <small><%= @client.business_name %></small></h2>
+          <ul class="list-inline">
+            <li>
+              <%= link_to clients_path do %>
+                <%= fa_icon 'arrow-left', text: 'Back' %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_client_path(@client) do %>
+                <%= fa_icon 'edit', text: ' Edit client' %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do %>
+                <%= fa_icon 'trash', text: 'Delete' %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_client_path do %>
+                <%= fa_icon 'male', text: ' New client' %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_client_invoice_path(@client) do %>
+                <%= fa_icon 'file-text', text: ' New client invoice' %>
+              <% end %>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -32,38 +55,14 @@
       <address>
         <strong>Address</strong>
         <br/>
-        <%= @client.address.presence || 'Street' %>
+        <%= @client.address.presence || content_tag(:em, 'Street', class: 'text-muted')  %>
         <br/>
-        <%= @client.city.presence || 'City' %>
+        <%= @client.city.presence || content_tag(:em, 'City', class: 'text-muted') %>
         <br/>
-        <%= @client.post_code.presence || 'Postal code' %>
+        <%= @client.post_code.presence || content_tag(:em, 'Postal code', class: 'text-muted') %>
       </address>
     </div>
   </div>
-  <hr/>
-  <ul class="list-inline">
-    <li>
-      <%= link_to edit_client_path(@client) do %>
-        <%= fa_icon 'edit', text: ' Edit this client' %>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure
-    you want to continue?</p>"}, class: 'delete-client' do %>
-        <%= fa_icon 'trash', text: 'Delete' %>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to new_client_path do %>
-        <%= fa_icon 'male', text: ' Add another Client' %>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to new_client_invoice_path(@client) do %>
-        <%= fa_icon 'file-text', text: ' Add invoice for this client' %>
-      <% end %>
-    </li>
-  </ul>
   <hr/>
   <ul class="nav nav-tabs" id="invoices">
     <li class="active">
@@ -87,13 +86,13 @@
             (total chasing amount).
         </p>
         </div>
-        <table>
+        <table class='table table-bordered table-condensed'>
           <thead>
             <tr>
               <th>
                 Age
               <i
-                class="fa fa-question"
+                class="fa fa-question-circle"
                 data-container="body"
                 data-content="The number of days that have passed since the invoice became due. If the number is negative(-), it means that the invoice is not yet due (i.e. &quot;-5&quot; means the payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green"
                 data-title="Invoice Age"
@@ -125,7 +124,7 @@
           <strong><%= @client.business_name %></strong>
             (Newest to Oldest).</p>
         </div>
-        <table>
+        <table class='table table-bordered table-condensed'>
           <thead>
             <tr>
               <th>Date Sent</th>

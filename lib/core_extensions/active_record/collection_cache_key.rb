@@ -5,7 +5,7 @@ module CoreExtensions
     module CollectionCacheKey
       def cache_key
         model_signature = model_name.cache_key
-        if self.loaded?
+        if loaded?
           unique_signature = pluck(primary_key, :updated_at).flatten.join('-')
         else
           unique_signature = unscope(:order).pluck(primary_key, :updated_at).flatten.join('-')

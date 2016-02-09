@@ -21,7 +21,6 @@
 #
 
 describe Invoice do
-
   before { User.skip_callback(:create, :after, :setup) }
 
   after { User.set_callback(:create, :after, :setup) }

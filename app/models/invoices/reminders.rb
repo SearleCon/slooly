@@ -18,11 +18,11 @@ module Invoices
       end
 
       def subject
-        fail NotImplementedError
+        raise NotImplementedError
       end
 
       def message
-        fail NotImplementedError
+        raise NotImplementedError
       end
 
       def type
@@ -64,7 +64,6 @@ module Invoices
       def message
         settings.due_message
       end
-
     end
 
     class PreDue < Base
@@ -75,7 +74,6 @@ module Invoices
       def message
         settings.pre_due_message
       end
-
     end
 
     class FirstOverDue < Base
@@ -86,7 +84,6 @@ module Invoices
       def message
         settings.overdue1_message
       end
-
     end
 
     class SecondOverDue < Base
@@ -97,7 +94,6 @@ module Invoices
       def message
         settings.overdue2_message
       end
-
     end
 
     class ThirdOverDue < Base
@@ -108,7 +104,6 @@ module Invoices
       def message
         settings.overdue3_message
       end
-
     end
 
     class FinalDemand < Base
@@ -119,7 +114,6 @@ module Invoices
       def message
         settings.final_demand_message
       end
-
     end
   end
 end

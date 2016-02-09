@@ -8,7 +8,6 @@ module Service
   end
 
   def perform
-    fail NotImplementedError
+    raise NotImplementedError
   end
-
 end

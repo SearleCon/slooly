@@ -1,318 +1,293 @@
 <%= form_for @settings, url: settings_path do |f| %>
-  <br/>
-  <br/>
-  <div class="tabbable tabs-left">
-    <ul class="nav nav-tabs" id="myTab">
-      <li class="active">
-        <a data-toggle="tab" href="#general">General</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#predue">Pre-Due Reminder</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#due">Due Reminder</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#od1">Overdue Reminder 1</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#od2">Overdue Reminder 2</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#od3">Overdue Reminder 3</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#fd">Final Demand</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade in active" id="general">
-        <h3>General Settings</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :send_from_name, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :send_from_name %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :email_copy_to, class: 'control-label' %>
-              <div class="controls">
-                <%= f.email_field :email_copy_to %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :days_between_chase, class: 'control-label' %>
-              <div class="controls">
-                <%= f.number_field :days_between_chase %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :days_before_pre_due, class: 'control-label' %>
-              <div class="controls">
-                <%= f.number_field :days_before_pre_due %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :payment_method_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :payment_method_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Send From Name:</strong> This name will be used at the end of the reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Email Copy To:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will not see this email address") %>
-                  </li>
-                  <li><%= simple_format("<strong>Days Between Chase:</strong> The number of days between the reminder emails (Default starts 7 days from the due date)") %>
-                  </li>
-                  <li><%= simple_format("<strong>Days Before Pre-Due:</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)") %>
-                  </li>
-                  <li><%= simple_format("<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+<ul class="nav nav-pills nav-stacked col-md-2">
+  <li class="active">
+    <a data-toggle="tab" href="#general">General</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#predue">Pre-Due Reminder</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#due">Due Reminder</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#od1">Overdue Reminder 1</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#od2">Overdue Reminder 2</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#od3">Overdue Reminder 3</a>
+  </li>
+  <li>
+    <a data-toggle="tab" href="#fd">Final Demand</a>
+  </li>
+</ul>
+<div class="tab-content col-md-10">
+  <div class="tab-pane fade in active" id="general">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :send_from_name %>
+          <%= f.text_field :send_from_name, class: 'form-control' %>
         </div>
-      </div>
-      <div class="tab-pane fade" id="predue">
-        <h3>Pre-Due Reminder</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :pre_due_reminder, class: 'checkbox' do %>
-                <%= (f.check_box :pre_due_reminder) + 'Send pre due reminder' %>
-              <% end %>
-            </div>
-            <div class="control-group">
-              <%= f.label :pre_due_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :pre_due_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :pre_due_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :pre_due_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Pre-Due Reminder Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).") %>
-                  </li>
-                  <li><%= simple_format("<strong>Pre-Due Subject:</strong> This will be used as the subject line of the pre-due reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Pre-Due Message:</strong> This will be used as the message body for the pre-due reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <%= f.label :email_copy_to %>
+          <%= f.email_field :email_copy_to, class: 'form-control' %>
         </div>
-      </div>
-      <div class="tab-pane fade" id="due">
-        <h3>Due Reminder</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :due_reminder, class: 'checkbox' do %>
-                <%= (f.check_box :due_reminder) + 'Send due reminder' %>
-              <% end %>
-            </div>
-            <div class="control-group">
-              <%= f.label :due_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :due_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :due_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :due_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Due Reminder Checkbox:</strong> Uncheck this to NOT send a due reminder message (Default is on).") %>
-                  </li>
-                  <li><%= simple_format("<strong>Due Subject:</strong> This will be used as the subject line of the due reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Due Message:</strong> This will be used as the message body for the due reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <%= f.label :days_between_chase %>
+          <%= f.number_field :days_between_chase, class: 'form-control' %>
         </div>
-      </div>
-      <div class="tab-pane fade" id="od1">
-        <h3>First Overdue Reminder</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :overdue1_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :overdue1_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :overdue1_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :overdue1_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Overdue 1 Subject</strong> This will be used as the subject line of the first overdue reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Overdue 1 Message:</strong> This will be used as the message body for the first overdue reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <%= f.label :days_before_pre_due %>
+          <%= f.number_field :days_before_pre_due, class: 'form-control' %>
         </div>
-      </div>
-      <div class="tab-pane fade" id="od2">
-        <h3>Second Overdue Reminder</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :overdue2_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :overdue2_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :overdue2_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :overdue2_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Overdue 2 Subject</strong> This will be used as the subject line of the second overdue reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Overdue 2 Message:</strong> This will be used as the message body for the second overdue reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <%= f.label :payment_method_message %>
+          <%= f.text_area :payment_method_message, class: 'form-control', rows: 20 %>
         </div>
+        <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
       </div>
-      <div class="tab-pane fade" id="od3">
-        <h3>Third Overdue Reminder</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :overdue3_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :overdue3_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :overdue3_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :overdue3_message %>
-              </div>
-            </div>
+      <div class="col-md-5">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= image_tag('tip.png') %>
+              Notes
+            </h3>
           </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Overdue 3 Subject</strong> This will be used as the subject line of the third overdue reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="fd">
-        <h3>Final Demand</h3>
-        <div class="row">
-          <div class="span5">
-            <div class="control-group">
-              <%= f.label :final_demand_subject, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_field :final_demand_subject %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :final_demand_message, class: 'control-label' %>
-              <div class="controls">
-                <%= f.text_area :final_demand_message %>
-              </div>
-            </div>
-          </div>
-          <div class="span4 well">
-            <div class="media">
-              <div class="pull-left">
-                <%= image_tag('tip.png', class: 'media-object') %>
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">Notes:</h3>
-                <ul>
-                  <li><%= simple_format("<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.") %>
-                  </li>
-                  <li><%= simple_format("<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.") %>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li><%= simple_format("<strong>Send From Name:</strong> This name will be used at the end of the reminder email.") %>
+              </li>
+              <li><%= simple_format("<strong>Email Copy To:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will
+
+                               not see this email address") %>
+              </li>
+              <li><%= simple_format("<strong>Days Between Chase:</strong> The number of days between the reminder emails (Default starts 7 days from the due date)") %>
+              </li>
+              <li><%= simple_format("<strong>Days Before Pre-Due:</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)") %>
+              </li>
+              <li><%= simple_format("<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what
+                the
+                client will use to make the payment.") %>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <hr/>
-  <div class="actions">
-    <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+  <div class="tab-pane fade" id="predue">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="checkbox">
+          <%= f.label :pre_due_reminder, class: 'checkbox' do %>
+          <%= (f.check_box :pre_due_reminder) + 'Send pre due reminder' %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.label :pre_due_subject %>
+          <%= f.text_field :pre_due_subject, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :pre_due_message %>
+          <%= f.text_area :pre_due_message, class: 'form-control', rows: 20 %>
+        </div>
+        <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= image_tag('tip.png') %>
+              Notes
+            </h3>
+          </div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li><%= simple_format("<strong>Pre-Due Reminder Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).") %>
+              </li>
+              <li><%= simple_format("<strong>Pre-Due Subject:</strong> This will be used as the subject line of the pre-due reminder email.") %>
+              </li>
+              <li><%= simple_format("<strong>Pre-Due Message:</strong> This will be used as the message body for the pre-due reminder email.") %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="tab-pane fade" id="due">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="checkbox">
+          <%= f.label :due_reminder, class: 'checkbox' do %>
+          <%= (f.check_box :due_reminder) + 'Send due reminder' %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.label :due_subject %>
+          <%= f.text_field :due_subject, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :due_message %>
+          <%= f.text_area :due_message, class: 'form-control', rows: 20 %>
+        </div>
+        <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= image_tag('tip.png') %>
+              Notes
+            </h3>
+          </div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li><%= simple_format("<strong>Due Reminder Checkbox:</strong> Uncheck this to NOT send a due reminder message (Default is on).") %>
+              </li>
+              <li><%= simple_format("<strong>Due Subject:</strong> This will be used as the subject line of the due reminder email.") %>
+              </li>
+              <li><%= simple_format("<strong>Due Message:</strong> This will be used as the message body for the due reminder email.") %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="tab-pane fade" id="od1">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :overdue1_subject %>
+        <%= f.text_field :overdue1_subject, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :overdue1_message %>
+        <%= f.text_area :overdue1_message, class: 'form-control', rows: 20 %>
+      </div>
+      <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><%= simple_format("<strong>Overdue 1 Subject</strong> This will be used as the subject line of the first overdue reminder email.") %>
+            </li>
+            <li><%= simple_format("<strong>Overdue 1 Message:</strong> This will be used as the message body for the first overdue reminder email.") %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-pane fade" id="od2">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :overdue2_subject %>
+        <%= f.text_field :overdue2_subject, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :overdue2_message %>
+        <%= f.text_area :overdue2_message, class: 'form-control', rows: 20 %>
+      </div>
+      <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><%= simple_format("<strong>Overdue 2 Subject</strong> This will be used as the subject line of the second overdue reminder email.") %>
+            </li>
+            <li><%= simple_format("<strong>Overdue 2 Message:</strong> This will be used as the message body for the second overdue reminder email.") %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-pane fade" id="od3">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :overdue3_subject %>
+        <%= f.text_field :overdue3_subject, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :overdue3_message %>
+        <%= f.text_area :overdue3_message, class: 'form-control', rows: 20 %>
+      </div>
+      <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><%= simple_format("<strong>Overdue 3 Subject</strong> This will be used as the subject line of the third overdue reminder email.") %>
+            </li>
+            <li><%= simple_format("<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.") %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-pane fade" id="fd">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :final_demand_subject %>
+        <%= f.text_field :final_demand_subject, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :final_demand_message %>
+        <%= f.text_area :final_demand_message, class: 'form-control', rows: 20 %>
+      </div>
+      <%= f.submit 'Save your Settings', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list-unstyled">
+            <li><%= simple_format("<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.") %>
+            </li>
+            <li><%= simple_format("<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.") %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>

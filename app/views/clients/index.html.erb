@@ -5,18 +5,16 @@
     </div>
     <div class="media-body">
       <h2 class='media-heading'>Clients</h2>
-      <div class="pagination-details">
-        <h5><%= page_entries_info @clients %></h5>
-      </div>
+      <h5 class='media-heading'><%= page_entries_info @clients %></h5>
       <ul class="list-inline">
         <li>
           <%= link_to new_client_path do %>
-            <%= fa_icon 'male', text: ' Add Client' %>
+            <%= fa_icon 'male', text: ' New client' %>
           <% end %>
         </li>
         <li>
           <%= link_to new_clients_import_path do %>
-            <%= fa_icon 'file-excel-o', text: ' Import Clients' %>
+            <%= fa_icon 'file-excel-o', text: ' Import clients' %>
           <% end %>
         </li>
       </ul>
@@ -24,7 +22,7 @@
   </div>
   <div class="search-form pull-right">
     <small>
-      <em class="muted">Search on business name or contact person</em>
+      <em class="text-muted">Search on business name or contact person</em>
     </small>
     <%= form_tag clients_path, method: :get, class: 'form-inline', remote: true, data: {validate: true} do %>
       <div class="form-group">
@@ -41,18 +39,19 @@
     <div class="jumbotron">
       <p class="lead">
         This screen will show a listing of all your clients loaded.
-          <br/>
+        <br/>
         But at the moment, you don't have any...
           <%= image_tag('sadface.png', size: '15x15') %>
         Let's fix that right away!
-        </p>
+      </p>
       <p>
         <strong>Why don't we get started:</strong>
       </p>
       <h2>
         <%= link_to new_client_path do %>
-          <%= fa_icon 'male', text: ' Add a New Client' %>
-        <% end %></h2>
+          <%= fa_icon 'male', text: ' New Client' %>
+        <% end %>
+      </h2>
     </div>
   <% else %>
     <%= render 'clients', clients: @clients %>

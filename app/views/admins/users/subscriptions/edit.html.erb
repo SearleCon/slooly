@@ -1,20 +1,20 @@
 <div class='page-header'>
- <div class='media'>
-  <div class='media-left'>
-   <%= image_tag('user.png', class: 'media-object') %>
+  <div class='media'>
+    <div class='media-left'>
+      <%= image_tag('user.png', class: 'media-object') %>
+    </div>
+    <div class='media-body'>
+      <h2 class="media-heading"><%= "Edit #{@user.name} subscription" %> </h2>
+      <%= link_to admins_user_path(@user) do %>
+        <%= fa_icon 'arrow-left', text: 'Back' %>
+      <% end %>
+    </div>
   </div>
-  <div class='media-body'>
-    <h2 class="media-heading"><%= "Edit #{@user.name} subscription" %> </h2>
-	<%= link_to admins_user_path(@user) do %>
-	  <%= fa_icon 'arrow-left', text: 'Back' %>
-	<% end %>
-  </div>
- </div>
 </div>
 <%= form_for [:admins, @user, @subscription], html: { data: { validate: true } } do |f| %>
   <div class='form-group'>
-   <%= f.label :expiry_date %>
-   <%= f.text_field :expiry_date, value: f.object.expiry_date.to_date.strftime('%d %B %Y'), class: 'form-control', data: { behaviour: 'datepicker'} %>
+    <%= f.label :expiry_date %>
+    <%= f.text_field :expiry_date, value: f.object.expiry_date.to_date.strftime('%d %B %Y'), class: 'form-control', data: { behaviour: 'datepicker'} %>
   </div>
   <%= f.submit 'Extend Subscription', class: 'btn btn-primary' %>
 <% end %>

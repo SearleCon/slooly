@@ -1,55 +1,24 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left"><%= image_tag('reports.png', class: 'media-object') %>
+    <div class="media-left"><%= image_tag('reports.png', class: 'media-object') %>
     </div>
     <div class="media-body">
-      <h1>Reports</h1>
+      <h1 class="media-heading">Reports</h1>
+      <h3 class="media-heading">Summary report (Invoices with Chasing Status)</h3>
     </div>
   </div>
 </div>
-<h3>Summary report (Invoices with Chasing Status)</h3>
-<br/>
-<table>
-  <tr>
-    <td>More than 90 days:</td>
-    <td align="right">
-      <h4><%= @summary_report.over_ninety_days %>
-      </h4>
-    </td>
-  </tr>
-  <tr>
-    <td>60 - 90 days:</td>
-    <td align="right">
-      <h4><%= @summary_report.sixty_to_ninety_days %>
-      </h4>
-    </td>
-  </tr>
-  <tr>
-    <td>30 - 60 days:</td>
-    <td align="right">
-      <h4><%= @summary_report.thirty_to_sixty_days %>
-      </h4>
-    </td>
-  </tr>
-  <tr>
-    <td>0 - 30 days:</td>
-    <td align="right">
-      <h4><%= @summary_report.zero_to_thirty_days %>
-      </h4>
-    </td>
-  </tr>
-  <tr>
-    <td>Not yet due:</td>
-    <td align="right">
-      <h4><%= @summary_report.not_due %>
-      </h4>
-    </td>
-  </tr>
-  <tr>
-    <td>Total due to you:</td>
-    <td align="right">
-      <h4><%= @summary_report.total %>
-      </h4>
-    </td>
-  </tr>
-</table>
+<dl class="dl-horizontal">
+  <dt>More than 90 days:</dt>
+  <dd><%= @summary_report.over_ninety_days %></dd>
+  <dt>60 - 90 days:</dt>
+  <dd><%= @summary_report.sixty_to_ninety_days %></dd>
+  <dt>30 - 60 days:</dt>
+  <dd><%= @summary_report.thirty_to_sixty_days %></dd>
+  <dt>0 - 30 days:</dt>
+  <dd><%= @summary_report.zero_to_thirty_days %></dd>
+  <dt>Not yet due:</dt>
+  <dd><%= @summary_report.not_due %></dd>
+  <dt>Total due to you:</dt>
+  <dd><%= @summary_report.total %></dd>
+</dl>

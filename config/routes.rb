@@ -110,7 +110,6 @@
 #
 
 Rails.application.routes.draw do
-
   # Admin
   get '/admins', to: redirect('/admins/sign_in'), as: :admins_home
 

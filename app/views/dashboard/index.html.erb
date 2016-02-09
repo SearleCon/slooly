@@ -1,13 +1,3 @@
-<div class="page-header">
-  <div class="media">
-    <div class='media-left media-top'>
-      <%= image_tag('home.png', class: 'media-object') %>
-    </div>
-    <div class="media-body">
-      <h2 class='media-heading'>Home</h2>
-    </div>
-  </div>
-</div>
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
@@ -16,7 +6,7 @@
         <h4 class="text-center"><%= link_to 'Clients', clients_path %></h4>
         <p class="text-center">
           <%= link_to new_client_path do %>
-            <%= fa_icon 'male', text: ' Add a New Client' %>
+            <%= fa_icon 'male', text: ' New client' %>
           <% end %>
         </p>
       </div>
@@ -30,7 +20,7 @@
         </h4>
         <p class="text-center">
           <%= link_to new_invoice_path do %>
-            <%= fa_icon 'file-text', text: ' Add a New Invoice' %>
+            <%= fa_icon 'file-text', text: ' New invoice' %>
           <% end %>
         </p>
       </div>
@@ -43,7 +33,7 @@
         <h4 class="text-center"><%= link_to 'Settings', settings_path %></h4>
         <p class="text-center">
           <%= link_to settings_path do %>
-            <%= fa_icon 'gears', text: 'Change your settings.' %>
+            <%= fa_icon 'gears', text: 'Change settings.' %>
           <% end %>
         </p>
       </div>

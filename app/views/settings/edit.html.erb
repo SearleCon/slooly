@@ -1,17 +1,28 @@
 <div class="page-header">
   <div class="media">
-    <div class="pull-left">
+    <div class="media-left">
       <%= image_tag('settings.png', class: 'media-object') %>
     </div>
     <div class="media-body">
-      <h1>Edit Settings</h1>
+      <h1 class="media-heading">Edit Settings</h1>
+      <ul class="list-inline">
+        <li>
+          <%= link_to :back do %>
+            <%= fa_icon 'arrow-left', text: 'Back' %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_registration_path do %>
+            <%= fa_icon 'user', text: 'User Profile' %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to company_path do %>
+            <%= fa_icon 'institution', text: 'Company Profile' %>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
 <%= render 'form' %>
-<hr/>
-<ul class="inline">
-  <li><%= link_to "Back", :back %></li>
-  <li><%= link_to "User Profile", edit_user_registration_path %></li>
-  <li><%= link_to "Company Profile", company_path %></li>
-</ul>

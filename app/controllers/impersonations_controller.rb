@@ -1,5 +1,4 @@
 class ImpersonationsController < ApplicationController
-
   before_action :authenticate_admin!, only: :create
   before_action :set_user, only: :create
   before_action :set_admin, only: :destroy

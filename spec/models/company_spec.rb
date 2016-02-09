@@ -16,7 +16,6 @@
 #
 
 describe Company do
-
   it { should belong_to(:user).touch(true) }
 
   it { should validate_presence_of(:email) }
@@ -27,5 +26,4 @@ describe Company do
     expected = 'jim@example.com'
     expect(company.email).to eq(expected)
   end
-
 end

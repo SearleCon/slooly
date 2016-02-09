@@ -17,7 +17,6 @@
 #
 
 describe Client do
-
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:invoices) }
   it { is_expected.to have_many(:histories) }
@@ -29,7 +28,6 @@ describe Client do
   it { is_expected.to allow_value('paul@example.com', 'ken.john@fish.com').for(:email) }
 
   describe '.search' do
-
     let!(:client) { create(:client, business_name: 'Shell', contact_person: 'Peter') }
 
     it 'searches on business_name' do

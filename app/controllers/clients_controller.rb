@@ -17,7 +17,6 @@
 #
 
 class ClientsController < ApplicationController
-
   before_action :authenticate_user!, :authorize_user!
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
@@ -70,5 +69,4 @@ class ClientsController < ApplicationController
   def interpolation_options
     { resource_name: @client.business_name }
   end
-
 end

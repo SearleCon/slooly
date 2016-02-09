@@ -38,5 +38,4 @@ Rails.application.configure do
   Delayed::Worker.delay_jobs = false
 
   config.active_support.test_order = :random
-
 end

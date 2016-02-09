@@ -34,5 +34,4 @@ class Subscription < ActiveRecord::Base
   def set_expiry_date
     self.expiry_date = duration.months.from_now
   end
-
 end

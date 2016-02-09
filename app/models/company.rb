@@ -26,5 +26,4 @@ class Company < ActiveRecord::Base
   before_save do
     self.name = name.try(:titleize)
   end
-
 end

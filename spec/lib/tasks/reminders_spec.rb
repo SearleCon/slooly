@@ -70,5 +70,4 @@ describe 'reminders:send' do
     allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::FinalDemand.new(invoice))
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
-
 end

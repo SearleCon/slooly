@@ -1,5 +1,4 @@
 class ErrorsController < ActionController::Base
-
   before_action :send_error_notification, if: :internal_server_error?
   layout 'application'
 

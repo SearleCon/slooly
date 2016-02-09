@@ -21,7 +21,6 @@
 #
 
 FactoryGirl.define do
-
   factory :invoice do
     invoice_number { Faker::Number.number(6) }
     amount { Faker::Commerce.price }

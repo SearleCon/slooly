@@ -30,5 +30,4 @@ class Plan < ActiveRecord::Base
   def self.free_trial
     find_by!(active: true, free: true)
   end
-
 end

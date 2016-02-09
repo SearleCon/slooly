@@ -2,14 +2,22 @@
   <h1>News Section</h1>
   <h6>All the latest product information, offers and general business news</h6>
 </div>
-<% @announcements.each do |announcement| %>
-  <div class="well">
-    <%= image_tag('news.png', class: 'header').concat(content_tag :h3, announcement.headline) %>
-    <br>
-    <%= simple_format(announcement.description) %>
-    <br>
-    <p class="muted">
-      <%= "Posted by #{announcement.posted_by} #{local_time_ago(announcement.created_at)} ago".html_safe	%>
-    </p>
-  </div>
+<% if @announcements.any? %>
+  <% @announcements.each do |announcement| %>
+    <div class="media">
+      <div class="media-left">
+        <%= image_tag('news.png', class: 'header') %>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><%= announcement.headline %></h3>
+        <%= simple_format(truncate(announcement.description, length: 600) { h.link_to 'Read full article', announcement }) %>
+        <small class='text-muted'>
+          <em>Posted by <%= announcement.posted_by %> <%= local_time_ago(announcement.created_at) %></em>
+        </small>
+      </div>
+    </div>
+  <% end %>
+
+<% else %>
+    <p class='lead'>Unfortunately there is no news at the moment.</p>
 <% end %>

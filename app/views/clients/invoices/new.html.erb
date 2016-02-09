@@ -4,7 +4,7 @@
       <%= image_tag 'invoices.png', class: 'media-object' %>
     </div>
     <div class="media-body">
-      <h1>Add an Invoice for <%= @client.business_name %></h1>
+      <h1 class="media-heading">Add an Invoice for <%= @client.business_name %></h1>
       <%= link_to @client do %>
         <%= fa_icon 'arrow-left', text: 'Back' %>
       <% end %>

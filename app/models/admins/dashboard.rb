@@ -1,6 +1,5 @@
 module Admins
   class Dashboard
-
     def delayed_jobs_count
       jobs.count
     end

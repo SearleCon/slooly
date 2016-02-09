@@ -20,7 +20,6 @@
 #
 
 describe User do
-
   it { should have_many(:clients) }
   it { should have_many(:invoices) }
   it { should have_one(:company) }
