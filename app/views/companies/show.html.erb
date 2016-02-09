@@ -18,22 +18,22 @@
         <%= fa_icon 'gears', text: 'Settings' %>
       <% end %></li>
   </ul>
-  </div>
-  <dl class="dl-horizontal">
-    <dt>Name:</dt>
-    <dd><%= @company.name %></dd>
-    <dt>Address:</dt>
-    <dd><%= @company.address %></dd>
-    <dt>City:</dt>
-    <dd><%= @company.city %></dd>
-    <dt>Postal Code:</dt>
-    <dd><%= @company.post_code %></dd>
-    <dt>Telephone:</dt>
-    <dd><%= number_to_phone(@company.telephone, area_code: true) %></dd>
-    <dt>Fax:</dt>
-    <dd><%= @company.fax %></dd>
-    <dt>Email:</dt>
-    <dd><%= @company.email %></dd>
-  </dl>
-  <h5>(Above is how the profile will appear on your reminder emails)</h5>
+</div>
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @company.name %></dd>
+  <dt>Address:</dt>
+  <dd><%= @company.address %></dd>
+  <dt>City:</dt>
+  <dd><%= @company.city %></dd>
+  <dt>Postal Code:</dt>
+  <dd><%= @company.post_code %></dd>
+  <dt>Telephone:</dt>
+  <dd><%= number_to_phone(@company.telephone, area_code: true) %></dd>
+  <dt>Fax:</dt>
+  <dd><%= @company.fax %></dd>
+  <dt>Email:</dt>
+  <dd><%= @company.email %></dd>
+</dl>
+<h5>(Above is how the profile will appear on your reminder emails)</h5>
 <% end %>

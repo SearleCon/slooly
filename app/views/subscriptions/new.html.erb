@@ -1,4 +1,4 @@
-<div class="hero-unit">
+<div class="jumbotron">
   <h2>Welcome back!</h2>
   <h3>And finally, to unlock Paying Mantis, please confirm and complete your order:</h3>
   <h4>Grant me full access to the site for the next <%= pluralize(@subscription.duration, 'month') %>
@@ -7,6 +7,6 @@
     <%= f.hidden_field :plan_id %>
     <%= f.hidden_field :paypal_customer_token %>
     <%= f.hidden_field :paypal_recurring_profile_token %>
-    <%= f.submit 'Complete', class: 'btn btn-large btn-primary' %>
+    <%= f.submit 'Complete', class: 'btn btn-lg btn-primary' %>
   <% end %>
 </div>

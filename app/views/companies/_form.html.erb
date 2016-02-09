@@ -31,13 +31,15 @@
       </div>
       <%= f.submit 'Update', class: 'btn btn-primary btn-sm' %>
     </div>
-    <div class="col-md-6 well">
-      <div class="media">
-        <div class="media-left">
-          <%= image_tag('tip.png', class: 'header') %>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
         </div>
-        <div class="media-body">
-          <h3 class="media-heading">Notes</h3>
+        <div class="panel-body">
           <ul class="list-unstyled">
             <li>
               <p>

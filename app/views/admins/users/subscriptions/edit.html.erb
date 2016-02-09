@@ -16,5 +16,5 @@
     <%= f.label :expiry_date %>
     <%= f.text_field :expiry_date, value: f.object.expiry_date.to_date.strftime('%d %B %Y'), class: 'form-control', data: { behaviour: 'datepicker'} %>
   </div>
-  <%= f.submit 'Extend Subscription', class: 'btn btn-primary' %>
+  <%= f.submit 'Extend Subscription', class: 'btn btn-primary btn-sm' %>
 <% end %>

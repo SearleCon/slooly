@@ -6,33 +6,33 @@
       </div>
       <div class="media-body">
         <h2 class='media-heading'>Client Details <small><%= @client.business_name %></small></h2>
-          <ul class="list-inline">
-            <li>
-              <%= link_to clients_path do %>
-                <%= fa_icon 'arrow-left', text: 'Back' %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to edit_client_path(@client) do %>
-                <%= fa_icon 'edit', text: ' Edit client' %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do %>
-                <%= fa_icon 'trash', text: 'Delete' %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_client_path do %>
-                <%= fa_icon 'male', text: ' New client' %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to new_client_invoice_path(@client) do %>
-                <%= fa_icon 'file-text', text: ' New client invoice' %>
-              <% end %>
-            </li>
-          </ul>
+        <ul class="list-inline">
+          <li>
+            <%= link_to clients_path do %>
+              <%= fa_icon 'arrow-left', text: 'Back' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_client_path(@client) do %>
+              <%= fa_icon 'edit', text: ' Edit client' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to @client, method: :delete, data: {confirm: "<p>You are about to delete the client <strong>#{@client.business_name}!</strong></p><p><strong>NOTE:</strong> All related invoices will also be deleted! This cannot be undone!</p><p>Are you sure you want to continue?</p>"}, class: 'delete-client' do %>
+              <%= fa_icon 'trash', text: 'Delete' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_client_path do %>
+              <%= fa_icon 'male', text: ' New client' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_client_invoice_path(@client) do %>
+              <%= fa_icon 'file-text', text: ' New client invoice' %>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

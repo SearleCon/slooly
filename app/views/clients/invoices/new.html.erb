@@ -35,14 +35,16 @@
         <%= f.select :status, options_for_select(Invoice.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: f.object.status), {include_blank: false}, class: 'form-control' %>
       </div>
     </div>
-    <div class="col-md-6 well">
-      <div class="media">
-        <div class="media-left">
-          <%= image_tag('tip.png', class: 'media-object') %>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
         </div>
-        <div class="media-body">
-          <h3 class="media-heading">Notes</h3>
-          <ul>
+        <div class="panel-body">
+          <ul class="list-unstyled">
             <li>
               <%= simple_format("<strong>Due Date:</strong> The due date is important. It is what drives the reminder emails. The <em>DAYS FOR PRE-DUE REMINDER</em> and <em>DAYS BETWEEN REMINDER EMAILS</em> in your settings will be subtracted or added respectively to the Due Date. <strong><em>Example:</em></strong> If your due date is <strong>today</strong>, the first overdue reminder will be <strong>today plus 7 days</strong>(Default in settings is 7 - You can change this if you want). In this case, the Pre-Due reminder date will be set to <strong>today less 2</strong>(Default in Settings is 2 - You can also change this to suit your needs).") %>
             </li>

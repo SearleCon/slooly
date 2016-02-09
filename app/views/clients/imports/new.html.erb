@@ -22,19 +22,23 @@
       <br>
       <%= submit_tag 'Import', class: 'btn btn-primary' %>
     </div>
-    <div class="col-md-6 well well-sm">
-      <div class="media">
-        <div class="media-left">
-          <%= image_tag 'tip.png', class: 'media-object' %>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+            </h3>
         </div>
-        <div class="media-body">
-          <h3 class="media-heading">Notes</h3>
+        <div class="panel-body">
           <ul class="list-unstyled">
             <li><strong>File:</strong> Use the browse button to select the spreadsheet you wish to import.</li>
             <li>
               <strong>Format:</strong> The first row of the spreadsheet needs to contain the following headers:
 
 
+                
+              
               <ul>
                 <li><strong>BusinessName:</strong> The business name of the client. (This field is not optional)</li>
                 <li><strong>Email:</strong> The email of the client. (This field is not optional)</li>
@@ -47,11 +51,12 @@
               </ul>
             </li>
             <li>When the records are imported, the system will check whether the business name exists and if so update the
-                existing client.
-              </li>
+                  existing client.
+                </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
 <% end %>

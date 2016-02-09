@@ -26,14 +26,16 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 well">
-      <div class="media">
-        <div class="media-left">
-          <%= image_tag('tip.png', class: 'media-object') %>
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= image_tag('tip.png') %>
+            Notes
+          </h3>
         </div>
-        <div class="media-body">
-          <h3 class="media-heading">Notes</h3>
-          <ul>
+        <div class="panel-body">
+          <ul class="list-unstyled">
             <li><%= simple_format("<strong>Due Date:</strong> The due date is important. It is what drives the reminder emails. The <em>DAYS FOR PRE-DUE REMINDER</em> and <em>DAYS BETWEEN REMINDER EMAILS</em> in your settings will be subtracted or added respectively to the Due Date. <strong><em>Example:</em></strong> If your due date is <strong>today</strong>, the first overdue reminder will be <strong>today plus 7 days</strong>(Default in settings is 7 - You can change this if you want). In this case, the Pre-Due reminder date will be set to <strong>today less 2</strong>(Default in Settings is 2 - You can also change this to suit your needs).") %>
             </li>
             <li><%= simple_format("<strong>Status:</strong> The default status is <em>Chasing</em>. Leave it as this in order to set this newly added invoice to be chased. If you are editing an invoice, changing it to anything other than <em>Chasing</em>, will STOP the reminder emails from being sent for this invoice. <em>Delete</em> will mark it as deleted, but will not in fact delete it from the database. To delete the invoice permanently, click the delete link for that invoice on the invoice listing screen. Selecting <em>Send Final Demand</em> will set this to send the final demand letter to the client. Please note that it will send it the NEXT day, along with the daily reminder email run, in order to give you the chance to stop it from being sent, if need be.") %>
