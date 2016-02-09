@@ -21,6 +21,8 @@
 #
 
 class Invoice < ActiveRecord::Base
+  include PgSearch
+
   to_param :invoice_number
 
   OVERDUE2_MODIFIER = 2
@@ -40,7 +42,8 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client
 
-  scope :search, ->(query) { where('description ILIKE :query or invoice_number ILIKE :query', query: "#{query}%") }
+  pg_search_scope :search, against: [:invoice_number], associated_against: { client: :business_name }
+
   scope :due_on, -> (date) { where('due_date = :date OR pd_date = :date OR od1_date = :date OR od1_date = :date OR od1_date = :date OR fd_date = :date', date: date) }
   scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent != :now)', now: Date.current) }
 

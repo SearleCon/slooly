@@ -32,7 +32,7 @@ class CompaniesController < ApplicationController
   end
 
   def set_company
-    @company = Company.find_by(user_id: current_user.id)
+    @company = current_user.company
   end
 
   def company_params

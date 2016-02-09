@@ -18,6 +18,7 @@
 
 class Client < ActiveRecord::Base
   include AttributeNormalizer
+  include PgSearch
 
   to_param :business_name
 
@@ -32,8 +33,9 @@ class Client < ActiveRecord::Base
 
   before_save do
     self.business_name = business_name.titleize
-    self.contact_person = contact_person.try(:titleize)
+    self.contact_person = contact_person&.titleize
   end
 
-  scope :search, -> (query) { where('business_name ILIKE :query or contact_person ILIKE :query', query: "#{query}%") }
+  pg_search_scope :search, against: [:business_name, :contact_person]
+
 end

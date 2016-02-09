@@ -47,6 +47,7 @@ gem 'premailer-rails'
 
 # Postgres
 gem 'pg'
+gem 'pg_search'
 
 # Coupon Codes
 gem 'coupon_code'
