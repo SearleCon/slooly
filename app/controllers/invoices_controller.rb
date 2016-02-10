@@ -25,12 +25,8 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:q]
-      @invoices = current_user.invoices.includes(:client).search(params[:q]).limit(30).page(params[:page])
-      flash.now[:info] = "#{view_context.pluralize(@invoices.total_count, 'result')} found."
-    else
-      @invoices = current_user.invoices.includes(:client).page(params[:page])
-    end
+    @q = current_user.invoices.ransack(params[:q])
+    @invoices = @q.result.includes(:client).page(params[:page])
   end
 
   def show
@@ -38,11 +34,11 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.new
+    @invoice = current_user.invoices.new
   end
 
   def create
-    @invoice = Invoice.create(invoice_params)
+    @invoice = current_user.invoices.create(invoice_params)
     respond_with @invoice
   end
 
@@ -67,6 +63,6 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent).merge(user_id: current_user.id)
+    params.require(:invoice).permit(:amount, :client_id, :description, :due_date, :invoice_number, :status, :last_date_sent)
   end
 end

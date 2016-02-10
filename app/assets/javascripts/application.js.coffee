@@ -98,7 +98,7 @@ pageLoad = ->
       )
 
     return
-  $("[rel=tooltip]").tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
   $("[rel=popover]").popover({html : true})
 
   $('[data-behaviour~=datepicker]').datepicker(

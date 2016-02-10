@@ -24,7 +24,7 @@ class Plan < ActiveRecord::Base
   scope :available, -> { where(active: true, free: false) }
 
   before_save do
-    self.description = description.try(:titleize)
+    self.description = description.titleize
   end
 
   def self.free_trial

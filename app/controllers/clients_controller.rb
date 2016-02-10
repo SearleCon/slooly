@@ -21,12 +21,9 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:q]
-      @clients = current_user.clients.search(params[:q]).limit(30).page(params[:page])
-      flash.now[:info] = "#{view_context.pluralize(@clients.total_count, 'result')} found."
-    else
-      @clients = current_user.clients.order(:business_name).page(params[:page])
-    end
+    @q = current_user.clients.ransack(params[:q])
+    @q.sorts = 'business_name desc' if @q.sorts.empty?
+    @clients = @q.result.page(params[:page])
   end
 
   def show
@@ -34,11 +31,11 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = Client.new
+    @client = current_user.clients.new
   end
 
   def create
-    @client = Client.create(client_params)
+    @client = current_user.clients.create(client_params)
     respond_with @client
   end
 
@@ -63,7 +60,7 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone).merge(user_id: current_user.id)
+    params.require(:client).permit(:address, :business_name, :city, :contact_person, :email, :fax, :post_code, :telephone)
   end
 
   def interpolation_options

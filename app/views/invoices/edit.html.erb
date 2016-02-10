@@ -1,14 +1,8 @@
 <div class="page-header">
+  <h1><%= image_tag('invoices.png') %> Edit Invoice</h1>
   <div class="media">
-    <div class="media-left">
-      <%= image_tag('invoices.png', class: 'media-object') %>
-    </div>
-    <div class="media-body">
-      <h1 class="media-heading">Edit Invoice</h1>
-      <%= link_to @invoice do %>
-        <%= fa_icon 'arrow-left', text: 'Back' %>
-      <% end %>
-    </div>
-  </div>
+  <%= link_to @invoice do %>
+    <%= fa_icon 'arrow-left', text: 'Back' %>
+  <% end %>
 </div>
 <%= render 'form' %>

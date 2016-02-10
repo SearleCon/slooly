@@ -1,15 +1,8 @@
 <div class='page-header'>
-  <div class='media'>
-    <div class='media-left'>
-      <%= image_tag('user.png', class: 'media-object') %>
-    </div>
-    <div class='media-body'>
-      <h2 class='media-heading'>User</h2>
-      <%= link_to admins_users_path do %>
-        <%= fa_icon 'arrow-left', text: 'Back' %>
-      <% end %>
-    </div>
-  </div>
+  <h1><%= image_tag('user.png') %> User</h1>
+  <%= link_to admins_users_path do %>
+    <%= fa_icon 'arrow-left', text: 'Back' %>
+  <% end %>
 </div>
 <div class='row'>
   <div class='col-md-6'>

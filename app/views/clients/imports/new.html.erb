@@ -1,15 +1,8 @@
 <div class="page-header">
-  <div class="media">
-    <div class="media-left">
-      <%= image_tag 'clients.png', class: 'media-object' %>
-    </div>
-    <div class="media-body">
-      <h1 class="media-heading">Import Clients</h1>
-      <%= link_to clients_path do%>
-        <%= fa_icon 'arrow-left', text: 'Back' %>
-      <% end %>
-    </div>
-  </div>
+  <h1><%= image_tag 'clients.png'%> Import Clients</h1>
+  <%= link_to clients_path do%>
+    <%= fa_icon 'arrow-left', text: 'Back' %>
+  <% end %>
 </div>
 <%= form_tag clients_imports_path, multipart: true do |f| %>
   <div class="row">
@@ -37,8 +30,8 @@
               <strong>Format:</strong> The first row of the spreadsheet needs to contain the following headers:
 
 
-                
-              
+
+
               <ul>
                 <li><strong>BusinessName:</strong> The business name of the client. (This field is not optional)</li>
                 <li><strong>Email:</strong> The email of the client. (This field is not optional)</li>

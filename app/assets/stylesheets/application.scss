@@ -20,6 +20,7 @@ $navbar-height: 30px;
 $nprogress-height: 5px;
 @import 'nprogress';
 @import 'nprogress-bootstrap';
+
 body {
   background-image: image_url('background_wood.jpg');
   padding-top: 60px;
@@ -47,6 +48,12 @@ main {
   -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 }
+
+section{
+  @extend .row;
+  margin: 5px;
+}
+
 .pricing-table .plan {
   border-radius: 5px;
   text-align: center;

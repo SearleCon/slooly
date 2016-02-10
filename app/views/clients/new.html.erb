@@ -1,14 +1,4 @@
 <div class="page-header">
-  <div class="media">
-    <div class="media-left">
-      <%= image_tag('clients.png', class: 'media-object') %>
-    </div>
-    <div class="media-body">
-      <h1 class="media-heading">Add a Client</h1>
-      <%= link_to clients_path do %>
-        <%= fa_icon 'arrow-left', text: 'Back' %>
-      <% end %>
-    </div>
-  </div>
+  <h1><%= image_tag('clients.png') %> Add a client</h1>
 </div>
 <%= render 'form' %>

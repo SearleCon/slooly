@@ -26,7 +26,6 @@ describe 'reminders:send' do
   end
 
   it 'does not send an email unless an invoice is in chasing or final_demand' do
-    create(:invoice, :non_chasing, user: user)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
@@ -36,13 +35,11 @@ describe 'reminders:send' do
   end
 
   it 'does not send an email for invoices which are due when due reminders is false' do
-    invoice = create(:invoice)
     allow_any_instance_of(Setting).to receive(:due_reminder?).and_return(false)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(0)
   end
 
   it 'sends an email for invoices which are pre_due' do
-    invoice = create(:invoice)
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 

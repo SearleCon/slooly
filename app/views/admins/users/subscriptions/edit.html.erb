@@ -1,15 +1,8 @@
 <div class='page-header'>
-  <div class='media'>
-    <div class='media-left'>
-      <%= image_tag('user.png', class: 'media-object') %>
-    </div>
-    <div class='media-body'>
-      <h2 class="media-heading"><%= "Edit #{@user.name} subscription" %> </h2>
-      <%= link_to admins_user_path(@user) do %>
-        <%= fa_icon 'arrow-left', text: 'Back' %>
-      <% end %>
-    </div>
-  </div>
+  <h1><%= image_tag('user.png') %> <%= "Edit #{@user.name} subscription" %></h1>
+  <%= link_to admins_user_path(@user) do %>
+    <%= fa_icon 'arrow-left', text: 'Back' %>
+  <% end %>
 </div>
 <%= form_for [:admins, @user, @subscription], html: { data: { validate: true } } do |f| %>
   <div class='form-group'>

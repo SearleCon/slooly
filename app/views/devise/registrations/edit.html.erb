@@ -1,28 +1,21 @@
 <div class="page-header">
-  <div class="media">
-    <div class="media-left">
-      <%= image_tag 'user.png', class: 'media-object' %>
-    </div>
-    <div class="media-body">
-      <h2>User Profile</h2>
-      <ul class="list-inline">
-        <li><%= link_to :back do %>
-            <%= fa_icon 'arrow-left', text: 'Back' %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to company_path do %>
-            <%= fa_icon 'institution', text: 'Company Profile' %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to settings_path do %>
-            <%= fa_icon 'gears', text: 'Settings' %>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <h1><%= image_tag 'user.png' %> User Profile</h1>
+  <ul class="list-inline">
+    <li><%= link_to :back do %>
+        <%= fa_icon 'arrow-left', text: 'Back' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to company_path do %>
+        <%= fa_icon 'institution', text: 'Company Profile' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to settings_path do %>
+        <%= fa_icon 'gears', text: 'Settings' %>
+      <% end %>
+    </li>
+  </ul>
 </div>
 <div class='row'>
   <div class='col-md-7'>

@@ -1,59 +1,60 @@
 <div class="page-header">
-  <div class="media">
-    <div class='media-left media-top'>
-      <%= image_tag('clients.png', class: 'media-object') %>
-    </div>
-    <div class="media-body">
-      <h2 class='media-heading'>Clients</h2>
-      <h5 class='media-heading'><%= page_entries_info @clients %></h5>
-      <ul class="list-inline">
-        <li>
-          <%= link_to new_client_path do %>
-            <%= fa_icon 'male', text: ' New client' %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_clients_import_path do %>
-            <%= fa_icon 'file-excel-o', text: ' Import clients' %>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="search-form pull-right">
-    <small>
-      <em class="text-muted">Search on business name or contact person</em>
-    </small>
-    <%= form_tag clients_path, method: :get, class: 'form-inline', remote: true, data: {validate: true} do %>
-      <div class="form-group">
-        <%= text_field_tag :q, params[:q], class: 'form-control input-sm', autocomplete: :off, placeholder: 'Search',  data: {rule_minlength: 3, rule_required: true} %>
-        <span rel="tooltip" title="Clear Search">
-          <%= link_to image_tag("close.png"), clients_path %>
-        </span>
+  <h1><%= image_tag('clients.png') %> Clients</h1>
+  <h5><%= page_entries_info @clients %></h5>
+  <ul class="list-inline">
+    <li>
+      <%= link_to new_client_path do %>
+        <%= fa_icon 'male', text: ' New client' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to new_clients_import_path do %>
+        <%= fa_icon 'file-excel-o', text: ' Import clients' %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+<section>
+<%= search_form_for @q, class: 'form-inline pull-right col-md-3' do |f| %>
+ <div class="form-group">
+   <div class="input-group">
+     <%= f.search_field :business_name_or_contact_person_cont, class: 'form-control', placeholder: 'Search', autocomplete: :off %>
+      <div class="input-group-btn">
+         <%= link_to clients_path, class: 'btn btn-warning', data: { toggle: :tooltip }, title: 'Clear' do %>
+           <%= fa_icon 'times' %>
+         <% end %>
       </div>
-    <% end %>
+   </div>
+   <span class="help-block"><small>on business name or contact person</small></span>
+ </div>
+<% end %>
+</section>
+<% if @clients.any? %>
+  <table id='clients' class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :business_name, 'Business Name',  { hide_indicator: true }, { data:  { toggle: 'tooltip'}, title: 'Click here to sort' }) %></th>
+        <th>Contact Person</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= render @clients, cache: true %>
+    </tbody>
+  </table>
+  <div class='text-center'>
+    <%= paginate @clients %>
   </div>
+<% else %>
+  <div class="jumbotron">
+  <p class="lead text-center">
+   <%= image_tag('sadface.png', size: '15x15') %>
+   There don't seem to be any client records available.
+   Click <%= link_to 'here', new_client_path %> to add a new client.
+   If you performed a search, click <%= link_to 'here', clients_path %> to refresh the page.
+  </p>
 </div>
-<div id="clients">
-  <% if @clients.total_count.zero? %>
-    <div class="jumbotron">
-      <p class="lead">
-        This screen will show a listing of all your clients loaded.
-        <br/>
-        But at the moment, you don't have any...
-          <%= image_tag('sadface.png', size: '15x15') %>
-        Let's fix that right away!
-      </p>
-      <p>
-        <strong>Why don't we get started:</strong>
-      </p>
-      <h2>
-        <%= link_to new_client_path do %>
-          <%= fa_icon 'male', text: ' New Client' %>
-        <% end %>
-      </h2>
-    </div>
-  <% else %>
-    <%= render 'clients', clients: @clients %>
-  <% end %>
-</div>
+<% end %>

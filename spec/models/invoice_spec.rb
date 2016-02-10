@@ -34,9 +34,10 @@ describe Invoice do
   it { is_expected.to validate_numericality_of(:amount) }
 
   describe '.search' do
-    let(:invoice) { create(:invoice, description: 'Shell', invoice_number: '123456') }
+    let(:client) { create(:client, business_name: 'Shell', email: 'shell@example.com')}
+    let(:invoice) { create(:invoice, description: 'Shell', invoice_number: '123456', client: client) }
 
-    it 'searches on description' do
+    it 'searches on client' do
       expect(described_class.search('shell')).to eq [invoice]
     end
 

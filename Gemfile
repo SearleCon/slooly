@@ -47,7 +47,6 @@ gem 'premailer-rails'
 
 # Postgres
 gem 'pg'
-gem 'pg_search'
 
 # Coupon Codes
 gem 'coupon_code'
@@ -67,6 +66,9 @@ gem 'nprogress-rails'
 
 # Server
 gem 'puma'
+
+# Searching
+gem 'ransack'
 
 group :production do
   gem 'rack-timeout'
