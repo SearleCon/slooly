@@ -3,15 +3,14 @@
 #= require jquery.validate
 #= require bootstrap
 #= require bootstrap-datepicker
-#= require bootstrap-sortable
+#= require bootstrap-filestyle
 #= require obfuscatejs
 #= require local_time
 #= require nprogress
 #= require nprogress-ajax
 #= require nprogress-turbolinks
 #= require turbolinks
-#= require_tree .
-
+#= require validations
 
 $.rails.allowAction = (element) ->
   # The message is something like "Are you sure?"
@@ -59,62 +58,14 @@ $.rails.allowAction = (element) ->
   return false
 
 
-$.validator.setDefaults
-  debug: true
+$(document).on "page:change", ->
 
-  errorElement: 'span'
-
-  onkeyup: false
-
-  onfocusin: false
-
-  onfocusout: (element) ->
-    return $(element).valid()
-
-  errorPlacement: (error, element) ->
-   error.appendTo( $(element).closest('.form-group'))
-   return
-
-  highlight: (element) ->
-    $(element).closest(".form-group").removeClass("has-success").addClass "has-error"
-    return
-
-  unhighlight: (element) ->
-    $(element).closest(".form-group").removeClass("has-error")
-    return
-
-  errorClass: "help-block"
-
-pageLoad = ->
-  $.bootstrapSortable(true);
-  $("form").each ->
-    if $(this).data("validate")
-      $(this).validate(
-        submitHandler: (form)->
-          if $(form).data('remote')
-            $.rails.handleRemote($(form))
-          else
-            form.submit()
-      )
-
-    return
   $('[data-toggle="tooltip"]').tooltip();
-  $("[rel=popover]").popover({html : true})
-
-  $('[data-behaviour~=datepicker]').datepicker(
-    {
-      autoclose: true,
-      format: 'dd MM yyyy',
-      orientation: 'bottom'
-    }
+  $('.datepicker').datepicker(
+    autoclose: true
+    format: 'dd MM yyyy'
+    orientation: 'bottom'
   ).on 'change', ->
-    $(this).valid();
+     $(this).valid();  
 
-  $('input[id=upload-clients]').change ->
-     $('#upload-clients-file').val($(this).val().split('\\').pop());
-
-
-$(document).on 'page:load', pageLoad
-$(document).on 'page:restore', pageLoad
-
-$ -> pageLoad()
+  $(":file").filestyle({buttonName: 'btn-info'});

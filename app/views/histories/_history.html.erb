@@ -1,5 +1,5 @@
 <tr>
-  <td data-value="<%=history.date_sent %>">
+  <td>
     <%= link_to local_time_ago(history.date_sent), history%>
   </td>
   <td>
@@ -14,7 +14,7 @@
   <td>
     <%= truncate(history.subject, length: 50) %>
   </td>
-  <td rel='popover' data-title="<%="Email Message (Ref: #{history.invoice_number})"%>" data-content="<%=simple_format(history.message)%>" data-placement='left' data-trigger='hover focus'>
+  <td>
     <%= truncate(history.message, length: 70) %>
   </td>
 </tr>

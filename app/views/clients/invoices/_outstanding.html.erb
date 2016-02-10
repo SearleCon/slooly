@@ -1,10 +1,10 @@
 <tr>
-  <td data-value="<%= invoice.age %>"><%= age_badge(invoice.age) %></td>
-  <td data-value="<%= invoice.invoice_number %>"><%=  link_to invoice.invoice_number, invoice %></td>
-  <td data-value="<%= invoice.due_date %>"><%= time_tag(invoice.due_date) %></td>
-  <td data-value="<%= invoice.amount %>"><%= number_with_precision(invoice.amount, precision: 2) %></td>
-  <td data-value="<%= invoice.description %>"><%= content_tag(:a, truncate(invoice.description, length: 20), rel: 'popover', title: 'Invoice Description', data: {content: simple_format(invoice.description), trigger: 'hover', animation: true})%></td>
-  <td data-value="<%= invoice.created_at %>"><%= local_time_ago(invoice.created_at) %></td>
+  <td><%= age_badge(invoice.age) %></td>
+  <td><%=  link_to invoice.invoice_number, invoice %></td>
+  <td><%= time_tag(invoice.due_date) %></td>
+  <td><%= number_with_precision(invoice.amount, precision: 2) %></td>
+  <td><%= truncate(invoice.description, length: 20) %></td>
+  <td><%= local_time_ago(invoice.created_at) %></td>
   <td>
     <ul class="list-inline">
       <li>

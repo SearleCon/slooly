@@ -11,7 +11,6 @@ gem 'jquery-rails'
 # Frontend
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
-gem 'bootstrap_sortable_rails'
 gem 'font-awesome-rails'
 
 # Authentication

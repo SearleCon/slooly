@@ -7,12 +7,9 @@
 <%= form_tag clients_imports_path, multipart: true do |f| %>
   <div class="row">
     <div class="col-md-5">
-      <%= file_field_tag :file, style: 'display:none;', id: 'upload-clients' %>
-      <div class="input-group">
-        <%= text_field_tag nil, nil, class: 'input-sm form-control', id: 'upload-clients-file' %>
-        <a class="btn input-group-addon" onclick="$('input[id=upload-clients]').click();">Browse</a>
+      <div class="form-group">
+         <%= file_field_tag :file %>
       </div>
-      <br>
       <%= submit_tag 'Import', class: 'btn btn-primary' %>
     </div>
     <div class="col-md-6">
@@ -28,10 +25,6 @@
             <li><strong>File:</strong> Use the browse button to select the spreadsheet you wish to import.</li>
             <li>
               <strong>Format:</strong> The first row of the spreadsheet needs to contain the following headers:
-
-
-
-
               <ul>
                 <li><strong>BusinessName:</strong> The business name of the client. (This field is not optional)</li>
                 <li><strong>Email:</strong> The email of the client. (This field is not optional)</li>

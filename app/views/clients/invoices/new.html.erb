@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         <%= f.label :due_date %>
-        <%= f.text_field :due_date, placeholder: 'Due date', data: {behaviour: 'datepicker', rule_required: true, msg_required: 'Please choose a due date for the invoice.'}, class: 'form-control' %>
+        <%= f.text_field :due_date, placeholder: 'Due date', data: { rule_required: true, msg_required: 'Please choose a due date for the invoice.'}, class: 'form-control datepicker' %>
       </div>
       <div class="form-group">
         <%= f.label :amount %>
