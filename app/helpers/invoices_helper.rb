@@ -34,9 +34,9 @@ module InvoicesHelper
 
   def age_badge(age)
     type = case
-           when age.due? then 'label label-danger'
-           when age.current? then  'label label-info'
-           when age.overdue? then  'label label-success'
+           when age.positive? then 'label label-danger'
+           when age.zero? then 'label label-info'
+           when age.negative? then 'label label-success'
            else 'badge'
            end
     content_tag(:span, age, class: type)

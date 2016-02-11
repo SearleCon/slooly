@@ -41,8 +41,8 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client
 
-  scope :due_on, -> (date) { where('due_date = :date OR pd_date = :date OR od1_date = :date OR od1_date = :date OR od1_date = :date OR fd_date = :date', date: date) }
-  scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent != :now)', now: Date.current) }
+  scope :due_on, -> (date) { where('due_date = :date OR pd_date = :date OR od1_date = :date OR od2_date = :date OR od3_date = :date OR fd_date = :date', date: date) }
+  scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent < :now)', now: Date.current) }
 
   def pre_due?
     chasing? && pd_date.today? && user.setting.pre_due_reminder?
@@ -80,7 +80,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def age
-    @age ||= Invoices::Age.from_due_date(due_date)
+    @age ||= (Date.current - due_date.to_date).to_i
   end
 
   def self.total
@@ -101,10 +101,14 @@ class Invoice < ActiveRecord::Base
   end
 
   def days_between_chase
-    user.setting.days_between_chase
+    settings.days_between_chase
   end
 
   def days_before_pre_due
-    user.setting.days_before_pre_due
+    settings.days_before_pre_due
+  end
+
+  def settings
+    @settings ||= user.setting
   end
 end

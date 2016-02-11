@@ -28,4 +28,9 @@ class SummaryReport
   def total
     @invoices.sum(:amount)
   end
+
+  private
+  def age(invoice)
+    (Date.current - due_date.to_date).to_i
+  end
 end

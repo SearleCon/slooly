@@ -1,18 +1,37 @@
 <div class="page-header">
   <h1><%= image_tag('reports.png') %> Reports</h1>
-  <h3>Summary report (Invoices with Chasing Status)</h3>
+  <h5>Summary report (Invoices with Chasing Status)</h5>
 </div>
-<dl class="dl-horizontal">
-  <dt>More than 90 days:</dt>
-  <dd><%= @summary_report.over_ninety_days %></dd>
-  <dt>60 - 90 days:</dt>
-  <dd><%= @summary_report.sixty_to_ninety_days %></dd>
-  <dt>30 - 60 days:</dt>
-  <dd><%= @summary_report.thirty_to_sixty_days %></dd>
-  <dt>0 - 30 days:</dt>
-  <dd><%= @summary_report.zero_to_thirty_days %></dd>
-  <dt>Not yet due:</dt>
-  <dd><%= @summary_report.not_due %></dd>
-  <dt>Total due to you:</dt>
-  <dd><%= @summary_report.total %></dd>
-</dl>
+
+<table class='table table-bordered table-hover table-striped'>
+  <thead>
+    <tr>
+      <td>Client</td>
+      <td>0 - 30 days</td>
+      <td>30 - 60 days</td>
+      <td>60 - 90 days</td>
+      <td>Over 90 days</td>
+      <td>Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @per_client_summary.each do |client, summary| %>
+    <tr>
+      <td><%= client.business_name %></td>
+      <td><%= summary.zero_to_thirty_days %></td>
+      <td><%= summary.thirty_to_sixty_days %></td>
+      <td><%= summary.sixty_to_ninety_days %></td>
+      <td><%= summary.over_ninety_days %></td>
+      <td><%= summary.total %></td>
+    </tr>
+    <% end %>
+    <tr class="info">
+      <td>Total</td>
+      <td><%= @overall_summary.zero_to_thirty_days %></td>
+      <td><%= @overall_summary.thirty_to_sixty_days %></td>
+      <td><%= @overall_summary.sixty_to_ninety_days %></td>
+      <td><%= @overall_summary.over_ninety_days %></td>
+      <td><%= @overall_summary.total %></td>
+    </tr>
+  </tbody>
+</table>
