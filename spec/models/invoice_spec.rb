@@ -38,18 +38,15 @@ describe Invoice do
     let(:invoice) { create(:invoice, description: 'Shell', invoice_number: '123456', client: client) }
 
     it 'searches on client' do
-      expect(described_class.search('shell')).to eq [invoice]
+      expect(described_class.search('shell').result).to eq [invoice]
     end
 
     it 'searches on invoice_number' do
-      expect(described_class.search('123456')).to eq [invoice]
+      expect(described_class.search('123456').result).to eq [invoice]
     end
   end
 
-  it 'returns an instance of Invoice::Age for age' do
-    invoice = build(:invoice)
-    expect(invoice.age).to be_an_instance_of(Invoices::Age)
-  end
+
 
   describe '#calculate_dates' do
     let(:invoice) { build(:invoice, due_date: Date.current) }

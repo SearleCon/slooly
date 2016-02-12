@@ -31,11 +31,11 @@ describe Client do
     let!(:client) { create(:client, business_name: 'Shell', contact_person: 'Peter') }
 
     it 'searches on business_name' do
-      expect(described_class.search('shell')).to eq [client]
+      expect(described_class.search('shell').result).to eq [client]
     end
 
     it 'searches on contact_person' do
-      expect(described_class.search('peter')).to eq [client]
+      expect(described_class.search('peter').result).to eq [client]
     end
   end
 end
