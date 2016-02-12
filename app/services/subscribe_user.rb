@@ -2,8 +2,7 @@ class SubscribeUser
   include Service
 
   def initialize(user, subscription)
-    @user = user
-    @subscription = subscription
+    @user, @subscription = user, subscription
   end
 
   def perform
