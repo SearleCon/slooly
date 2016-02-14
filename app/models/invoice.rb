@@ -24,10 +24,6 @@ class Invoice < ActiveRecord::Base
 
   to_param :invoice_number
 
-  OVERDUE2_MODIFIER = 2
-  OVERDUE3_MODIFIER = 3
-  FINAL_DEMAND_PERIOD = 1
-
   enum status: { chasing: 2, stop_chasing: 3, paid: 4, send_final_demand: 5, write_off: 6, deleted: 7 }
 
   belongs_to :client, touch: true
@@ -41,7 +37,7 @@ class Invoice < ActiveRecord::Base
 
   delegate :business_name, to: :client
 
-  scope :due, -> { where('due_date = :date OR pd_date = :date OR od1_date = :date OR od2_date = :date OR od3_date = :date OR fd_date = :date', date: Date.current) }
+  scope :due, -> { where('? = ANY(ARRAY[due_date, pd_date, od1_date, od2_date, od3_date, fd_date])', Date.current) }
   scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent < :now)', now: Date.current) }
 
   def pre_due?
@@ -90,22 +86,14 @@ class Invoice < ActiveRecord::Base
   protected
 
   def calculate_dates
-    self.pd_date = days_before_pre_due.days.ago
-    self.od1_date = days_between_chase.days.from_now
-    self.od2_date = (days_between_chase * OVERDUE2_MODIFIER).days.from_now
-    self.od3_date = (days_between_chase * OVERDUE3_MODIFIER).days.from_now
+    self.pd_date = due_date.days_ago(settings.days_before_pre_due)
+    self.od1_date = due_date.days_since(settings.days_between_chase)
+    self.od2_date = od1_date.days_since(settings.days_between_chase)
+    self.od3_date = od2_date.days_since(settings.days_between_chase)
   end
 
   def set_final_demand
-    self.fd_date = FINAL_DEMAND_PERIOD.days.from_now if send_final_demand?
-  end
-
-  def days_between_chase
-    settings.days_between_chase
-  end
-
-  def days_before_pre_due
-    settings.days_before_pre_due
+    self.fd_date = Date.current.tomorrow if send_final_demand?
   end
 
   def settings

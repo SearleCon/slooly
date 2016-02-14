@@ -52,26 +52,26 @@ describe Invoice do
     let(:invoice) { build(:invoice, due_date: Date.current) }
 
     before do
-      allow(invoice).to receive(:days_before_pre_due).and_return(1)
-      allow(invoice).to receive(:days_between_chase).and_return(1)
-      stub_const('Invoice::OVERDUE2_MODIFIER', 2)
-      stub_const('Invoice::OVERDUE3_MODIFIER', 3)
+      allow_any_instance_of(Setting).to receive(:days_before_pre_due).and_return(1)
+      allow_any_instance_of(Setting).to receive(:days_between_chase).and_return(1)
+
+      invoice.send(:calculate_dates)
     end
 
     it 'sets the predue date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :pd_date).to(1.day.ago.to_date)
+      expect(invoice.pd_date).to eq(invoice.due_date.days_ago(1))
     end
 
     it 'sets the overdue1 date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :od1_date).to(1.day.from_now.to_date)
+      expect(invoice.od1_date).to eq(invoice.due_date.days_since(1))
     end
 
     it 'sets the overdue2 date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :od2_date).to(2.days.from_now.to_date)
+      expect(invoice.od2_date).to eq(invoice.od1_date.days_since(1))
     end
 
     it 'sets the overdue3 date' do
-      expect { invoice.send(:calculate_dates) }.to change(invoice, :od3_date).to(3.days.from_now.to_date)
+      expect(invoice.od3_date).to eq(invoice.od2_date.days_since(1))
     end
   end
 
@@ -80,7 +80,7 @@ describe Invoice do
       it 'sets a final demand date to the next day' do
         invoice = build(:invoice, status: :send_final_demand)
         invoice.send(:set_final_demand)
-        expect(invoice.fd_date).to eql(Date.tomorrow)
+        expect(invoice.fd_date).to eql(Date.current.tomorrow)
       end
     end
 

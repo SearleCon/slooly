@@ -40,6 +40,7 @@ describe 'reminders:send' do
   end
 
   it 'sends an email for invoices which are pre_due' do
+    allow(Invoices::Reminders).to receive(:new).and_return(Invoices::Reminders::PreDue.new(invoice))
     expect { Rake::Task['reminders:send'].execute }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 
