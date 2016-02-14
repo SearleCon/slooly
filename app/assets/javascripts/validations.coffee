@@ -25,7 +25,7 @@ $.validator.setDefaults
   errorClass: "help-block"
 
 
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
   $("form").each ->
     if $(this).data("validate")
       $(this).validate(

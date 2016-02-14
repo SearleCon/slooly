@@ -16,9 +16,11 @@ $navbar-height: 30px;
 @import "bootstrap/theme";
 @import "bootstrap-datepicker";
 @import "font-awesome";
-$nprogress-height: 5px;
-@import 'nprogress';
-@import 'nprogress-bootstrap';
+
+.turbolinks-progress-bar {
+  height: 5px;
+}
+
 
 body {
   background-image: image_url('background_wood.jpg');

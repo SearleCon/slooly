@@ -25,7 +25,7 @@ gem 'delayed_job_active_record'
 gem 'workless', '~> 1.2.3'
 
 # Turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0.0.beta'
 
 # Paypal
 gem 'paypal-recurring'
@@ -59,9 +59,6 @@ gem 'jquery-validation-rails'
 
 # Time ago
 gem 'local_time'
-
-# Progress Bars
-gem 'nprogress-rails'
 
 # Server
 gem 'puma'

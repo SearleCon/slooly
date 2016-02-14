@@ -6,9 +6,6 @@
 #= require bootstrap-filestyle
 #= require obfuscatejs
 #= require local_time
-#= require nprogress
-#= require nprogress-ajax
-#= require nprogress-turbolinks
 #= require turbolinks
 #= require validations
 
@@ -58,7 +55,7 @@ $.rails.allowAction = (element) ->
   return false
 
 
-$(document).on "page:change", ->
+$(document).on "turbolinks:load", ->
 
   $('[data-toggle="tooltip"]').tooltip();
   $('.datepicker').datepicker(
@@ -66,6 +63,6 @@ $(document).on "page:change", ->
     format: 'dd MM yyyy'
     orientation: 'bottom'
   ).on 'change', ->
-     $(this).valid();  
+     $(this).valid();
 
   $(":file").filestyle({buttonName: 'btn-info'});
