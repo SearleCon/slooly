@@ -32,7 +32,7 @@ class Invoice < ActiveRecord::Base
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
 
-  before_save :calculate_dates, if: :due_date_changed?
+  before_save :set_dates, if: :due_date_changed?
   before_save :set_final_demand, if: :status_changed?
 
   delegate :business_name, to: :client
@@ -85,7 +85,7 @@ class Invoice < ActiveRecord::Base
 
   protected
 
-  def calculate_dates
+  def set_dates
     self.pd_date = due_date.days_ago(settings.days_before_pre_due)
     self.od1_date = due_date.days_since(settings.days_between_chase)
     self.od2_date = od1_date.days_since(settings.days_between_chase)

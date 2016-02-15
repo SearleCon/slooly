@@ -48,14 +48,14 @@ describe Invoice do
 
 
 
-  describe '#calculate_dates' do
+  describe '#set_dates' do
     let(:invoice) { build(:invoice, due_date: Date.current) }
 
     before do
       allow_any_instance_of(Setting).to receive(:days_before_pre_due).and_return(1)
       allow_any_instance_of(Setting).to receive(:days_between_chase).and_return(1)
 
-      invoice.send(:calculate_dates)
+      invoice.send(:set_dates)
     end
 
     it 'sets the predue date' do
