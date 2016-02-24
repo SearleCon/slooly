@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
 
-  store_accessor :settings, :chasing_interval,
+  store_accessor :settings, [:chasing_interval,
                             :reminder_email_sender_address,
                             :reminder_email_cc_address,
                             :send_due_reminder_email,
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
                             :third_overdue_reminder_email_subject,
                             :third_overdue_reminder_email_message,
                             :final_demand_reminder_email_subject,
-                            :final_demand_reminder_email_message
+                            :final_demand_reminder_email_message]
 
   after_create do
     create_subscription!(plan: Plan.free_trial)

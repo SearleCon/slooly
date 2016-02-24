@@ -52,8 +52,8 @@ describe Invoice do
     let(:invoice) { build(:invoice, due_date: Date.current) }
 
     before do
-      allow_any_instance_of(Setting).to receive(:days_before_pre_due).and_return(1)
-      allow_any_instance_of(Setting).to receive(:days_between_chase).and_return(1)
+      allow_any_instance_of(User).to receive(:pre_due_interval).and_return(1)
+      allow_any_instance_of(User).to receive(:chasing_interval).and_return(1)
 
       invoice.send(:set_dates)
     end
