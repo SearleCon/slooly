@@ -15,20 +15,24 @@
       <%= f.form_group :name %>
         <%= f.label :name %>
         <%= f.text_field :name, required: true, class: "form-control" %>
+        <%= f.errors_for :name %>
       <% end %>
       <%= f.form_group :email %>
         <%= f.label :email %>
         <%= f.email_field :email, required: true, class: "form-control" %>
+        <%= f.errors_for :email %>
       <% end %>
       <%= f.form_group :subject %>
         <%= f.label :subject %>
         <%= f.text_field :subject, required: true, class: "form-control" %>
+        <%= f.errors_for :subject %>
       <% end %>
     </div>
     <div class="col-md-8">
       <%= f.form_group :body %>
         <%= f.label :body %>
         <%= f.text_area :body, required: true, class: "form-control", rows: 9 %>
+        <%= f.errors_for :body %>
       <% end %>
     </div>
   </div>
