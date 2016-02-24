@@ -1,34 +1,35 @@
 <%= form_for @company, url: company_path do |f| %>
   <div class="row">
     <div class="col-md-5">
-      <div class="form-group">
+      <%= f.form_group :name do %>
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
-      </div>
-      <div class="form-group">
+      <% end %>
+      <%= f.form_group :email do %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', required: true %>
+        <%= f.errors_for :email %>
+      <% end %>
+      <%= f.form_group :address do %>
         <%= f.label :address %>
         <%= f.text_field :address, class: 'form-control' %>
-      </div>
-      <div class="form-group">
+      <% end %>
+      <%= f.form_group :city do %>
         <%= f.label :city %>
         <%= f.text_field :city, class: 'form-control' %>
-      </div>
-      <div class="form-group">
+      <% end %>
+      <%= f.form_group :post_code do %>
         <%= f.label :post_code, 'Zip / Post Code' %>
         <%= f.text_field :post_code, class: 'form-control' %>
-      </div>
-      <div class="form-group">
+      <% end %>
+      <%= f.form_group :telephone do %>
         <%= f.label :telephone %>
         <%= f.telephone_field :telephone, class: 'form-control' %>
-      </div>
-      <div class="form-group">
+      <% end %>
+      <%= f.form_group :fax do %>
         <%= f.label :fax %>
         <%= f.telephone_field :fax, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
+      <% end %>
       <%= f.submit 'Update', class: 'btn btn-primary btn-sm' %>
     </div>
     <div class="col-md-6">

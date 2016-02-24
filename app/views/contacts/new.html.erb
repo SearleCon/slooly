@@ -12,24 +12,24 @@
 <%= form_for @message, url: contacts_path, html: {honeypot: true} do |f| %>
   <div class='row'>
     <div class="col-md-4">
-      <div class="form-group">
+      <%= f.form_group :name %>
         <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
-      <div class="form-group">
+        <%= f.text_field :name, required: true, class: "form-control" %>
+      <% end %>
+      <%= f.form_group :email %>
         <%= f.label :email %>
-        <%= f.email_field :email, class: "form-control" %>
-      </div>
-      <div class="form-group">
+        <%= f.email_field :email, required: true, class: "form-control" %>
+      <% end %>
+      <%= f.form_group :subject %>
         <%= f.label :subject %>
-        <%= f.text_field :subject, class: "form-control" %>
-      </div>
+        <%= f.text_field :subject, required: true, class: "form-control" %>
+      <% end %>
     </div>
     <div class="col-md-8">
-      <div class="form-group">
+      <%= f.form_group :body %>
         <%= f.label :body %>
-        <%= f.text_area :body, class: "form-control", rows: 9 %>
-      </div>
+        <%= f.text_area :body, required: true, class: "form-control", rows: 9 %>
+      <% end %>
     </div>
   </div>
   <hr/>

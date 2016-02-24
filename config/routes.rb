@@ -140,9 +140,6 @@ Rails.application.routes.draw do
 
   resources :clients do
     resources :invoices, only: [:new, :create], controller: 'clients/invoices'
-    collection do
-      get :exists
-    end
   end
 
   namespace :clients do

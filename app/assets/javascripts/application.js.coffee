@@ -1,13 +1,11 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery.validate
 #= require bootstrap
 #= require bootstrap-datepicker
 #= require bootstrap-filestyle
 #= require obfuscatejs
 #= require local_time
 #= require turbolinks
-#= require validations
 
 $.rails.allowAction = (element) ->
   # The message is something like "Are you sure?"

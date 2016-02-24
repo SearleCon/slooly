@@ -3,8 +3,8 @@ class SendReminders
 
   def perform
     invoices.find_each do  |invoice|
-      if invoice.pre_due? || invoice.due? || invoice.over_due1? || invoice.over_due2? || invoice.over_due3? || invoice.final_demand?
-        InvoiceMailer.reminder_email(invoice).deliver_later 
+      if send?(invoice)
+        InvoiceMailer.reminder_email(invoice).deliver_later
       end
     end
   end
@@ -15,5 +15,8 @@ class SendReminders
     @invoices ||= Invoice.due.unsent.where(status: [Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
   end
 
+  def send?(invoice)
+    invoice.pre_due? || invoice.due? || invoice.over_due1? || invoice.over_due2? || invoice.over_due3? || invoice.final_demand?
+  end
 
 end

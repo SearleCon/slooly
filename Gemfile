@@ -54,9 +54,6 @@ gem 'coupon_code'
 gem 'dalli'
 gem 'multi_fetch_fragments'
 
-# Jquery validation
-gem 'jquery-validation-rails'
-
 # Time ago
 gem 'local_time'
 

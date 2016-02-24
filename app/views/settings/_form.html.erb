@@ -26,26 +26,26 @@
     <div class="tab-pane fade in active" id="general">
       <div class="row">
         <div class="col-md-5">
-          <div class="form-group">
+          <%= f.form_group :send_from_name do %>
             <%= f.label :send_from_name %>
             <%= f.text_field :send_from_name, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :email_copy_to %>
             <%= f.label :email_copy_to %>
             <%= f.email_field :email_copy_to, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :days_between_chase do %>
             <%= f.label :days_between_chase %>
             <%= f.number_field :days_between_chase, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :days_before_pre_due do %>
             <%= f.label :days_before_pre_due %>
             <%= f.number_field :days_before_pre_due, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :payment_method_message do %>
             <%= f.label :payment_method_message %>
             <%= f.text_area :payment_method_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -86,14 +86,14 @@
               <%= (f.check_box :pre_due_reminder) + 'Send pre due reminder' %>
             <% end %>
           </div>
-          <div class="form-group">
+          <%= f.form_group :pre_due_subject do %>
             <%= f.label :pre_due_subject %>
             <%= f.text_field :pre_due_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :pre_due_message do %>
             <%= f.label :pre_due_message %>
             <%= f.text_area :pre_due_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -126,14 +126,14 @@
               <%= (f.check_box :due_reminder) + 'Send due reminder' %>
             <% end %>
           </div>
-          <div class="form-group">
+          <%= f.form_group :due_subject do %>
             <%= f.label :due_subject %>
             <%= f.text_field :due_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :due_message do %>
             <%= f.label :due_message %>
             <%= f.text_area :due_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -161,14 +161,14 @@
     <div class="tab-pane fade" id="od1">
       <div class="row">
         <div class="col-md-5">
-          <div class="form-group">
+          <%= f.form_group :overdue1_subject do %>
             <%= f.label :overdue1_subject %>
             <%= f.text_field :overdue1_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :overdue1_message do %>
             <%= f.label :overdue1_message %>
             <%= f.text_area :overdue1_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -194,14 +194,14 @@
     <div class="tab-pane fade" id="od2">
       <div class="row">
         <div class="col-md-5">
-          <div class="form-group">
+          <%= f.form_group :overdue2_subject do %>
             <%= f.label :overdue2_subject %>
             <%= f.text_field :overdue2_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :overdue2_message %>
             <%= f.label :overdue2_message %>
             <%= f.text_area :overdue2_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -227,14 +227,14 @@
     <div class="tab-pane fade" id="od3">
       <div class="row">
         <div class="col-md-5">
-          <div class="form-group">
+          <%= f.form_group :overdue3_subject do %>
             <%= f.label :overdue3_subject %>
             <%= f.text_field :overdue3_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :overdue3_message do %>
             <%= f.label :overdue3_message %>
             <%= f.text_area :overdue3_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">
@@ -260,14 +260,14 @@
     <div class="tab-pane fade" id="fd">
       <div class="row">
         <div class="col-md-5">
-          <div class="form-group">
+          <%= f.form_group :final_demand_subject do %>
             <%= f.label :final_demand_subject %>
             <%= f.text_field :final_demand_subject, class: 'form-control' %>
-          </div>
-          <div class="form-group">
+          <% end %>
+          <%= f.form_group :final_demand_message do %>
             <%= f.label :final_demand_message %>
             <%= f.text_area :final_demand_message, class: 'form-control', rows: 20 %>
-          </div>
+          <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
         <div class="col-md-5">

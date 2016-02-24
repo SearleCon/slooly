@@ -27,6 +27,7 @@ body {
   padding-top: 60px;
   padding-bottom: 70px;
 }
+
 textarea {
   display: block;
   width: 100%;
@@ -54,6 +55,15 @@ section{
   @extend .row;
   margin: 5px;
 }
+
+.alert-notice {
+  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+
+.alert-alert {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+
 
 .pricing-table .plan {
   border-radius: 5px;

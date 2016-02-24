@@ -1,15 +1,15 @@
 <%= form_for @suggestion do |f| %>
-  <div class="form-group">
+  <%= f.form_group :email do %>
     <%= f.label :email %>
     <%= f.email_field :email, placeholder: "Optional email", class: 'form-control' %>
-  </div>
-  <div class="form-group">
+  <% end %>
+  <%= f.form_group :subject do %>
     <%= f.label :subject %>
     <%= f.text_field :subject, class: 'form-control' %>
-  </div>
-  <div class="form-group">
+  <% end %>
+  <%= f.form_group :comment do %>
     <%= f.label :comment %>
     <%= f.text_area :comment, class: 'form-control' %>
-  </div>
+  <% end %>
   <%= f.submit 'Submit', class: 'btn btn-primary btn-sm' %>
 <% end %>

@@ -1,30 +1,35 @@
-<%= form_for @invoice, html: {data: {validate: true}} do |f| %>
+<%= form_for @invoice do |f| %>
   <div class="row">
     <div class="col-md-5">
-      <div class="form-group">
+      <%= f.form_group :client do %>
         <%= f.label :client, "#{link_to 'Add New Client', new_client_path}".html_safe %>
-        <%= f.select :client_id, options_from_collection_for_select(current_user.clients.order(:business_name), :id, :business_name, @invoice.client_id.to_s), {prompt: "Choose a Client"}, class: 'form-control', data: {rule_required: true} %>
-      </div>
-        <div class="form-group">
-          <%= f.label :invoice_number %>
-          <%= f.text_field :invoice_number, placeholder: 'Invoice number', class: 'form-control', data: { rule_required: true } %>
-        </div>
-        <div class="form-group">
-          <%= f.label :due_date %>
-          <%= f.text_field :due_date, placeholder: 'Due date', class: 'form-control datepicker', data: { rule_required: true, msg_required: 'Please choose a due date for the invoice.' } %>
-        </div>
-        <div class="form-group">
-          <%= f.label :amount %>
-          <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control', data: { rule_number: true } %>
-        </div>
-        <div class="form-group">
-          <%= f.label :description %>
-          <%= f.text_area :description, placeholder: 'Description', class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.label :status %>
-          <%= f.select :status, options_for_select(Invoice.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: f.object.status), {include_blank: false}, class: 'form-control' %>
-        </div>
+        <%= f.select :client_id, options_from_collection_for_select(current_user.clients.order(:business_name), :id, :business_name, @invoice.client_id.to_s), {prompt: "Choose a Client"}, class: 'form-control', required: true  %>
+      <% end %>
+      <%= f.form_group :invoice_number do %>
+        <%= f.label :invoice_number %>
+        <%= f.text_field :invoice_number, placeholder: 'Invoice number', required: true,  class: 'form-control' %>
+        <%= f.errors_for :invoice_number %>
+      <% end %>
+      <%= f.form_group :due_date do %>
+        <%= f.label :due_date %>
+        <%= f.text_field :due_date, placeholder: 'Due date', required: true, class: 'form-control datepicker' %>
+        <%= f.errors_for :due_date %>
+      <% end %>
+      <%= f.form_group :amount do %>
+        <%= f.label :amount %>
+        <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control' %>
+        <%= f.errors_for :amount %>
+      <% end %>
+      <%= f.form_group :description do %>
+        <%= f.label :description %>
+        <%= f.text_area :description, placeholder: 'Description', class: 'form-control' %>
+        <%= f.errors_for :description %>
+      <% end %>
+      <%= f.form_group :status do %>
+        <%= f.label :status %>
+        <%= f.select :status, options_for_select(Invoice.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: f.object.status), { include_blank: false }, class: 'form-control' %>
+        <%= f.errors_for :status %>
+      <% end %>
     </div>
     <div class="col-md-6">
       <div class="panel panel-info">

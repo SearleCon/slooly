@@ -18,6 +18,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :user, touch: true
 
   validates :plan, :user, presence: true
+  validates :expiry_date, presence: true, on: :update 
 
   scope :active, -> { where(active: true) }
 
