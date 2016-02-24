@@ -1,4 +1,4 @@
-<%= form_for @settings, url: settings_path do |f| %>
+<%= form_for current_user, url: settings_path do |f| %>
   <ul class="nav nav-pills nav-stacked col-md-2">
     <li class="active">
       <a data-toggle="tab" href="#general">General</a>
@@ -10,37 +10,37 @@
       <a data-toggle="tab" href="#due">Due Reminder</a>
     </li>
     <li>
-      <a data-toggle="tab" href="#od1">Overdue Reminder 1</a>
+      <a data-toggle="tab" href="#od1">First Overdue Reminder</a>
     </li>
     <li>
-      <a data-toggle="tab" href="#od2">Overdue Reminder 2</a>
+      <a data-toggle="tab" href="#od2">Second Overdue Reminder</a>
     </li>
     <li>
-      <a data-toggle="tab" href="#od3">Overdue Reminder 3</a>
+      <a data-toggle="tab" href="#od3">Third Overdue Reminder</a>
     </li>
     <li>
-      <a data-toggle="tab" href="#fd">Final Demand</a>
+      <a data-toggle="tab" href="#fd">Final Demand Reminder</a>
     </li>
   </ul>
   <div class="tab-content col-md-10">
     <div class="tab-pane fade in active" id="general">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :send_from_name do %>
-            <%= f.label :send_from_name %>
-            <%= f.text_field :send_from_name, class: 'form-control' %>
+          <%= f.form_group :reminder_email_sender_address do %>
+            <%= f.label :reminder_email_sender_address %>
+            <%= f.text_field :reminder_email_sender_address, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :email_copy_to %>
-            <%= f.label :email_copy_to %>
-            <%= f.email_field :email_copy_to, class: 'form-control' %>
+          <%= f.form_group :reminder_email_cc_address do %>
+            <%= f.label :reminder_email_cc_address %>
+            <%= f.email_field :reminder_email_cc_address, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :days_between_chase do %>
-            <%= f.label :days_between_chase %>
-            <%= f.number_field :days_between_chase, class: 'form-control' %>
+          <%= f.form_group :chasing_interval do %>
+            <%= f.label :chasing_interval, 'Chasing interval (no days between chase)' %>
+            <%= f.number_field :chasing_interval, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :days_before_pre_due do %>
-            <%= f.label :days_before_pre_due %>
-            <%= f.number_field :days_before_pre_due, class: 'form-control' %>
+          <%= f.form_group :pre_due_interval do %>
+            <%= f.label :pre_due_interval, 'Pre-due interval (no days before pre-due)' %>
+            <%= f.number_field :pre_due_interval, class: 'form-control' %>
           <% end %>
           <%= f.form_group :payment_method_message do %>
             <%= f.label :payment_method_message %>
@@ -58,19 +58,15 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Send From Name:</strong> This name will be used at the end of the reminder email.") %>
+                <li><%= simple_format("<strong>Reminder Email Sender Address:</strong> This name will be used at the end of the reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Email Copy To:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will
-
-                               not see this email address") %>
+                <li><%= simple_format("<strong>Reminder Email CC Address:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will  not see this email address") %>
                 </li>
-                <li><%= simple_format("<strong>Days Between Chase:</strong> The number of days between the reminder emails (Default starts 7 days from the due date)") %>
+                <li><%= simple_format("<strong>Chasing Interval (days between chase):</strong> The number of days between the reminder emails (Default starts 7 days from the due date)") %>
                 </li>
-                <li><%= simple_format("<strong>Days Before Pre-Due:</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)") %>
+                <li><%= simple_format("<strong>Pre-Due Interval (days before pre-due):</strong> The number of days before the due date that the pre-due reminder email will be sent (Default is 2 days before the due date)") %>
                 </li>
-                <li><%= simple_format("<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what
-                the
-                client will use to make the payment.") %>
+                <li><%= simple_format("<strong>Payment Method Message:</strong> This will appear on the bottom of your reminder emails, and it is very important to make sure your correct banking details and other payment methods are displayed here, as it is what the client will use to make the payment.") %>
                 </li>
               </ul>
             </div>
@@ -82,17 +78,17 @@
       <div class="row">
         <div class="col-md-5">
           <div class="checkbox">
-            <%= f.label :pre_due_reminder, class: 'checkbox' do %>
-              <%= (f.check_box :pre_due_reminder) + 'Send pre due reminder' %>
+            <%= f.label :send_pre_due_reminder_email, class: 'checkbox' do %>
+              <%= (f.check_box :send_pre_due_reminder_email) + 'Send pre due reminder email' %>
             <% end %>
           </div>
-          <%= f.form_group :pre_due_subject do %>
-            <%= f.label :pre_due_subject %>
-            <%= f.text_field :pre_due_subject, class: 'form-control' %>
+          <%= f.form_group :pre_due_reminder_email_subject do %>
+            <%= f.label :pre_due_reminder_email_subject %>
+            <%= f.text_field :pre_due_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :pre_due_message do %>
-            <%= f.label :pre_due_message %>
-            <%= f.text_area :pre_due_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :pre_due_reminder_email_message do %>
+            <%= f.label :pre_due_reminder_email_message %>
+            <%= f.text_area :pre_due_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -106,11 +102,11 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Pre-Due Reminder Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).") %>
+                <li><%= simple_format("<strong>Send Pre-Due Reminder Email Checkbox:</strong> Uncheck this to NOT send a pre-due reminder message (Default is on).") %>
                 </li>
-                <li><%= simple_format("<strong>Pre-Due Subject:</strong> This will be used as the subject line of the pre-due reminder email.") %>
+                <li><%= simple_format("<strong>Pre-Due Reminder Email Subject:</strong> This will be used as the subject line of the pre-due reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Pre-Due Message:</strong> This will be used as the message body for the pre-due reminder email.") %>
+                <li><%= simple_format("<strong>Pre-Due Reminder Email Message:</strong> This will be used as the message body for the pre-due reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -122,17 +118,17 @@
       <div class="row">
         <div class="col-md-5">
           <div class="checkbox">
-            <%= f.label :due_reminder, class: 'checkbox' do %>
-              <%= (f.check_box :due_reminder) + 'Send due reminder' %>
+            <%= f.label :send_due_reminder_email, class: 'checkbox' do %>
+              <%= (f.check_box :send_due_reminder_email) + 'Send due reminder email' %>
             <% end %>
           </div>
-          <%= f.form_group :due_subject do %>
-            <%= f.label :due_subject %>
-            <%= f.text_field :due_subject, class: 'form-control' %>
+          <%= f.form_group :due_reminder_email_subject do %>
+            <%= f.label :due_reminder_email_subject %>
+            <%= f.text_field :due_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :due_message do %>
-            <%= f.label :due_message %>
-            <%= f.text_area :due_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :due_reminder_email_message do %>
+            <%= f.label :due_reminder_email_message %>
+            <%= f.text_area :due_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -148,9 +144,9 @@
               <ul class="list-unstyled">
                 <li><%= simple_format("<strong>Due Reminder Checkbox:</strong> Uncheck this to NOT send a due reminder message (Default is on).") %>
                 </li>
-                <li><%= simple_format("<strong>Due Subject:</strong> This will be used as the subject line of the due reminder email.") %>
+                <li><%= simple_format("<strong>Due Reminder Email Subject:</strong> This will be used as the subject line of the due reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Due Message:</strong> This will be used as the message body for the due reminder email.") %>
+                <li><%= simple_format("<strong>Due Reminder Email Message:</strong> This will be used as the message body for the due reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -161,13 +157,13 @@
     <div class="tab-pane fade" id="od1">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :overdue1_subject do %>
-            <%= f.label :overdue1_subject %>
-            <%= f.text_field :overdue1_subject, class: 'form-control' %>
+          <%= f.form_group :first_overdue_reminder_email_subject do %>
+            <%= f.label :first_overdue_reminder_email_subject %>
+            <%= f.text_field :first_overdue_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :overdue1_message do %>
-            <%= f.label :overdue1_message %>
-            <%= f.text_area :overdue1_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :first_overdue_reminder_email_message do %>
+            <%= f.label :first_overdue_reminder_email_message %>
+            <%= f.text_area :first_overdue_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -181,9 +177,9 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Overdue 1 Subject</strong> This will be used as the subject line of the first overdue reminder email.") %>
+                <li><%= simple_format("<strong>First Overdue Reminder Email Subject</strong> This will be used as the subject line of the first overdue reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Overdue 1 Message:</strong> This will be used as the message body for the first overdue reminder email.") %>
+                <li><%= simple_format("<strong>First Overdue Reminder Email Message:</strong> This will be used as the message body for the first overdue reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -194,13 +190,13 @@
     <div class="tab-pane fade" id="od2">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :overdue2_subject do %>
-            <%= f.label :overdue2_subject %>
-            <%= f.text_field :overdue2_subject, class: 'form-control' %>
+          <%= f.form_group :second_overdue_reminder_email_subject do %>
+            <%= f.label :second_overdue_reminder_email_subject %>
+            <%= f.text_field :second_overdue_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :overdue2_message %>
-            <%= f.label :overdue2_message %>
-            <%= f.text_area :overdue2_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :second_overdue_reminder_email_message do %>
+            <%= f.label :second_overdue_reminder_email_message %>
+            <%= f.text_area :second_overdue_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -214,9 +210,9 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Overdue 2 Subject</strong> This will be used as the subject line of the second overdue reminder email.") %>
+                <li><%= simple_format("<strong>Second Overdue Reminder Email Subject</strong> This will be used as the subject line of the second overdue reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Overdue 2 Message:</strong> This will be used as the message body for the second overdue reminder email.") %>
+                <li><%= simple_format("<strong>Second Overdue Reminder Email Message:</strong> This will be used as the message body for the second overdue reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -227,13 +223,13 @@
     <div class="tab-pane fade" id="od3">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :overdue3_subject do %>
-            <%= f.label :overdue3_subject %>
-            <%= f.text_field :overdue3_subject, class: 'form-control' %>
+          <%= f.form_group :third_overdue_reminder_email_subject do %>
+            <%= f.label :third_overdue_reminder_email_subject %>
+            <%= f.text_field :third_overdue_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :overdue3_message do %>
-            <%= f.label :overdue3_message %>
-            <%= f.text_area :overdue3_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :third_overdue_reminder_email_message do %>
+            <%= f.label :third_overdue_reminder_email_message %>
+            <%= f.text_area :third_overdue_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -247,9 +243,9 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Overdue 3 Subject</strong> This will be used as the subject line of the third overdue reminder email.") %>
+                <li><%= simple_format("<strong>Third Overdue Reminder Email Subject</strong> This will be used as the subject line of the third overdue reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Overdue 3 Message:</strong> This will be used as the message body for the third overdue reminder email.") %>
+                <li><%= simple_format("<strong>Third Overdue Reminder Email Message:</strong> This will be used as the message body for the third overdue reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -260,13 +256,13 @@
     <div class="tab-pane fade" id="fd">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :final_demand_subject do %>
-            <%= f.label :final_demand_subject %>
-            <%= f.text_field :final_demand_subject, class: 'form-control' %>
+          <%= f.form_group :final_demand_reminder_email_subject do %>
+            <%= f.label :final_demand_reminder_email_subject %>
+            <%= f.text_field :final_demand_reminder_email_subject, class: 'form-control' %>
           <% end %>
-          <%= f.form_group :final_demand_message do %>
-            <%= f.label :final_demand_message %>
-            <%= f.text_area :final_demand_message, class: 'form-control', rows: 20 %>
+          <%= f.form_group :final_demand_reminder_email_message do %>
+            <%= f.label :final_demand_reminder_email_message %>
+            <%= f.text_area :final_demand_reminder_email_message, class: 'form-control', rows: 20 %>
           <% end %>
           <%= f.submit 'Save your Settings', class: 'btn btn-primary btn-sm' %>
         </div>
@@ -280,9 +276,9 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Final Demand Subject</strong> This will be used as the subject line of the final demand reminder email.") %>
+                <li><%= simple_format("<strong>Final Demand Reminder Email Subject</strong> This will be used as the subject line of the final demand reminder email.") %>
                 </li>
-                <li><%= simple_format("<strong>Final Demand Message:</strong> This will be used as the message body for the final demand reminder email.") %>
+                <li><%= simple_format("<strong>Final Demand Reminder Email Message:</strong> This will be used as the message body for the final demand reminder email.") %>
                 </li>
               </ul>
             </div>
@@ -290,4 +286,4 @@
         </div>
       </div>
     </div>
-  <% end %>
+<% end %>

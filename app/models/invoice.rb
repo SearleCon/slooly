@@ -86,17 +86,14 @@ class Invoice < ActiveRecord::Base
   protected
 
   def set_dates
-    self.pd_date = due_date.days_ago(settings.days_before_pre_due)
-    self.od1_date = due_date.days_since(settings.days_between_chase)
-    self.od2_date = od1_date.days_since(settings.days_between_chase)
-    self.od3_date = od2_date.days_since(settings.days_between_chase)
+    self.pd_date = due_date.days_ago(user.pre_due_interval)
+    self.od1_date = due_date.days_since(user.chasing_interval)
+    self.od2_date = od1_date.days_since(user.chasing_interval)
+    self.od3_date = od2_date.days_since(user.chasing_interval)
   end
 
   def set_final_demand
     self.fd_date = Date.current.tomorrow if send_final_demand?
   end
 
-  def settings
-    @settings ||= user.setting
-  end
 end

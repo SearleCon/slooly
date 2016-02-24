@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  name                   :string(255)
 #  time_zone              :string
+#  settings               :jsonb
 #
 
 class User < ActiveRecord::Base
@@ -37,6 +38,26 @@ class User < ActiveRecord::Base
 
   validates :terms_of_service, acceptance: true
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
+
+  store_accessor :settings, :chasing_interval,
+                            :reminder_email_sender_address,
+                            :reminder_email_cc_address,
+                            :send_due_reminder_email,
+                            :send_pre_due_reminder_email,
+                            :pre_due_interval,
+                            :payment_method_message,
+                            :pre_due_reminder_email_subject,
+                            :pre_due_reminder_email_message,
+                            :due_reminder_email_subject,
+                            :due_reminder_email_message,
+                            :first_overdue_reminder_email_subject,
+                            :first_overdue_reminder_email_message,
+                            :second_overdue_reminder_email_subject,
+                            :second_overdue_reminder_email_message,
+                            :third_overdue_reminder_email_subject,
+                            :third_overdue_reminder_email_message,
+                            :final_demand_reminder_email_subject,
+                            :final_demand_reminder_email_message
 
   after_create do
     create_subscription!(plan: Plan.free_trial)

@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  name                   :string(255)
 #  time_zone              :string
+#  settings               :jsonb
 #
 
 FactoryGirl.define do

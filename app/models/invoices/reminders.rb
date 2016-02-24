@@ -25,8 +25,12 @@ module Invoices
         raise NotImplementedError
       end
 
+      def payment_method_message
+        user.payment_method_message
+      end
+
       def type
-        @invoice.type
+        invoice.type
       end
 
       def sender
@@ -34,11 +38,11 @@ module Invoices
       end
 
       def sender_name
-        settings.send_from_name
+        user.reminder_email_sender_address
       end
 
       def cc
-        settings.email_copy_to
+        user.reminder_email_cc_address
       end
 
       def recipient
@@ -51,68 +55,68 @@ module Invoices
         invoice.user.company
       end
 
-      def settings
-        invoice.user.setting
+      def user
+        invoice.user
       end
     end
 
     class Due < Base
       def subject
-        settings.due_subject
+        user.due_reminder_email_subject
       end
 
       def message
-        settings.due_message
+        user.due_reminder_email_message
       end
     end
 
     class PreDue < Base
       def subject
-        settings.pre_due_subject
+        user.pre_due_reminder_email_subject
       end
 
       def message
-        settings.pre_due_message
+        user.pre_due_reminder_email_message
       end
     end
 
     class FirstOverDue < Base
       def subject
-        settings.overdue1_subject
+        user.first_overdue_reminder_email_subject
       end
 
       def message
-        settings.overdue1_message
+        user.first_overdue_reminder_email_message
       end
     end
 
     class SecondOverDue < Base
       def subject
-        settings.overdue2_subject
+        user.second_overdue_reminder_email_subject
       end
 
       def message
-        settings.overdue2_message
+        user.second_overdue_reminder_email_message
       end
     end
 
     class ThirdOverDue < Base
       def subject
-        settings.overdue3_subject
+        user.third_overdue_reminder_email_subject
       end
 
       def message
-        settings.overdue3_message
+        user.third_overdue_reminder_email_message
       end
     end
 
     class FinalDemand < Base
       def subject
-        settings.final_demand_subject
+        user.final_demand_reminder_email_subject
       end
 
       def message
-        settings.final_demand_message
+        user.final_demand_reminder_email_message
       end
     end
   end

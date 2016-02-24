@@ -30,25 +30,34 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!, :authorize_user!
 
-  before_action :set_settings
-
   def update
-    @settings.update(settings_params)
-    respond_with @settings, location: settings_url
+    current_user.update(settings_params)
+    respond_with current_user, location: settings_url
   end
 
   private
 
-  def set_settings
-    @settings = Setting.find_by(user_id: current_user.id)
-  end
-
   def settings_params
-    params.require(:setting).permit(:days_before_pre_due, :days_between_chase, :due_message,
-                                    :due_reminder, :due_subject, :email_copy_to,
-                                    :final_demand_message, :final_demand_subject, :overdue1_message,
-                                    :overdue1_subject, :overdue2_message, :overdue2_subject, :overdue3_message,
-                                    :overdue3_subject, :payment_method_message, :pre_due_message,
-                                    :pre_due_reminder, :pre_due_subject, :send_from_name)
+    return params.require(:user).permit(:chasing_interval,
+                                        :reminder_email_sender_address,
+                                        :reminder_email_cc_address,
+                                        :send_due_reminder_email,
+                                        :send_pre_due_reminder_email,
+                                        :pre_due_interval,
+                                        :payment_method_message,
+                                        :pre_due_reminder_email_subject,
+                                        :pre_due_reminder_email_message,
+                                        :due_reminder_email_subject,
+                                        :due_reminder_email_message,
+                                        :first_overdue_reminder_email_subject,
+                                        :first_overdue_reminder_email_message,
+                                        :second_overdue_reminder_email_subject,
+                                        :second_overdue_reminder_email_message,
+                                        :third_overdue_reminder_email_subject,
+                                        :third_overdue_reminder_email_message,
+                                        :final_demand_reminder_email_subject,
+                                        :final_demand_reminder_email_message
+
+      )
   end
 end

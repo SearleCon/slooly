@@ -47,7 +47,6 @@
 #                     user_root GET    /                                                       dashboard#index
 #               client_invoices POST   /clients/:client_id/invoices(.:format)                  clients/invoices#create
 #            new_client_invoice GET    /clients/:client_id/invoices/new(.:format)              clients/invoices#new
-#                exists_clients GET    /clients/exists(.:format)                               clients#exists
 #                       clients GET    /clients(.:format)                                      clients#index
 #                               POST   /clients(.:format)                                      clients#create
 #                    new_client GET    /clients/new(.:format)                                  clients#new

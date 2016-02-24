@@ -34,83 +34,83 @@
     <a data-toggle="tab" href="#due">Due Reminder</a>
   </li>
   <li>
-    <a data-toggle="tab" href="#od1">Overdue Reminder 1</a>
+    <a data-toggle="tab" href="#od1">First Overdue Reminder</a>
   </li>
   <li>
-    <a data-toggle="tab" href="#od2">Overdue Reminder 2</a>
+    <a data-toggle="tab" href="#od2">Second Overdue Reminder</a>
   </li>
   <li>
-    <a data-toggle="tab" href="#od3">Overdue Reminder 3</a>
+    <a data-toggle="tab" href="#od3">Third Overdue Reminder</a>
   </li>
   <li>
-    <a data-toggle="tab" href="#fd">Final Demand</a>
+    <a data-toggle="tab" href="#fd">Final Demand Reminder</a>
   </li>
 </ul>
 <div class="tab-content col-md-10">
   <div class="tab-pane fade in active" id="general">
     <dl>
       <dt>Sent From</dt>
-      <dd><%= @settings.send_from_name %></dd>
+      <dd><%= current_user.reminder_email_sender_address %></dd>
       <dt>Send copy of all email to</dt>
-      <dd><%= @settings.email_copy_to %></dd>
+      <dd><%= current_user.reminder_email_cc_address %></dd>
       <dt>Days for Pre-due reminder</dt>
-      <dd><%= pluralize(@settings.days_before_pre_due, 'day') %></dd>
+      <dd><%= pluralize(current_user.pre_due_interval, 'day') %></dd>
       <dt>Days between reminder emails</dt>
-      <dd><%= pluralize(@settings.days_between_chase, 'day') %></dd>
+      <dd><%= pluralize(current_user.chasing_interval, 'day') %></dd>
       <dt>Payment Method Message:</dt>
-      <dd><%= simple_format(@settings.payment_method_message) %></dd>
+      <dd><%= simple_format(current_user.payment_method_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="predue">
     <dl>
       <dt>Send Pre-Due reminder</dt>
-      <dd><%= @settings.pre_due_reminder? ? "YES" : "NO" %></dd>
+      <dd><%= current_user.send_pre_due_reminder_email ? "YES" : "NO" %></dd>
       <dt>Pre-Due Email Subject line</dt>
-      <dd><%= @settings.pre_due_subject %></dd>
+      <dd><%= current_user.pre_due_reminder_email_subject %></dd>
       <dt>Pre-Due Email Message Content</dt>
-      <dd><%= simple_format(@settings.pre_due_message) %></dd>
+      <dd><%= simple_format(current_user.pre_due_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="due">
     <dl>
       <dt>Send Due reminder</dt>
-      <dd><%= @settings.due_reminder? ? "YES" : "NO" %></dd>
+      <dd><%= current_user.send_due_reminder_email ? "YES" : "NO" %></dd>
       <dt>Email Subject line</dt>
-      <dd><%= @settings.due_subject %></dd>
+      <dd><%= current_user.due_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(@settings.due_message) %></dd>
+      <dd><%= simple_format(current_user.due_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od1">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= @settings.overdue1_subject %></dd>
+      <dd><%= current_user.first_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(@settings.overdue1_message) %></dd>
+      <dd><%= simple_format(current_user.first_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od2">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= @settings.overdue2_subject %></dd>
+      <dd><%= current_user.second_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(@settings.overdue2_message) %></dd>
+      <dd><%= simple_format(current_user.second_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od3">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= @settings.overdue3_subject %></dd>
+      <dd><%= current_user.third_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(@settings.overdue3_message) %></dd>
+      <dd><%= simple_format(current_user.third_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="fd">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= @settings.final_demand_subject %></dd>
+      <dd><%= current_user.final_demand_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(@settings.final_demand_message) %></dd>
+      <dd><%= simple_format(current_user.final_demand_reminder_email_message) %></dd>
     </dl>
   </div>
 </div>

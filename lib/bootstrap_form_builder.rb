@@ -16,7 +16,7 @@ end
 private
 
  def has_error?(attribute)
-  object.errors[attribute].any?
+  object && object.respond_to?(:errors) && object.errors[attribute].any?
  end
 
 end
