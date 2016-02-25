@@ -17,8 +17,9 @@
 #  updated_at        :datetime         not null
 #  invoice_number    :string(255)
 #  email_from_name   :string(255)
+#  invoice_id        :integer
 #
 
 class History < ActiveRecord::Base
-  belongs_to :client, inverse_of: :histories, touch: true
+  belongs_to :invoice, touch: true 
 end

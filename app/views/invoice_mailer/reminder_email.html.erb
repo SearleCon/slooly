@@ -1,37 +1,37 @@
 <p>
-  Attention: <%= @reminder.client.contact_person %>
+  Attention: <%= @client.contact_person %>
   <br/>
-  <%= @reminder.client.business_name.gsub(/['"]/, '') %>
+  <%= @client.business_name.gsub(/['"]/, '') %>
   <br/>
-  <%= @reminder.client.address %>
+  <%= @client.address %>
   <br/>
-  <%= @reminder.client.city %>
+  <%= @client.city %>
   <br/>
-  <%= @reminder.client.post_code %>
+  <%= @client.post_code %>
 </p>
 <p>
-  Reference : <%= @reminder.invoice.invoice_number %>
+  Reference : <%= @invoice.invoice_number %>
   <br/>
-  Due Date : <%= @reminder.invoice.due_date %>
+  Due Date : <%= @invoice.due_date %>
   <br/>
-  Amount Due: <%= @reminder.invoice.amount %>
+  Amount Due: <%= @invoice.amount %>
 </p>
 <p>
   <%= simple_format(@reminder.message) %>
 </p>
 <p>
-  <%= @reminder.company.name %>
+  <%= @company.name %>
   <br/>
-  <%= @reminder.company.address %>
+  <%= @company.address %>
   <br/>
-  <%= @reminder.company.city %>
+  <%= @company.city %>
   <br/>
-  <%= @reminder.company.post_code %>
+  <%= @company.post_code %>
   <br/>
-  Tel: <%= @reminder.company.telephone %>
+  Tel: <%= @company.telephone %>
   <br/>
-  Fax: <%= @reminder.company.fax %>
+  Fax: <%= @company.fax %>
   <br/>
-  Email: <%= @reminder.company.email %>
+  Email: <%= @company.email %>
 </p>
-<p>Payment Options: <%= simple_format(@reminder.payment_method_message) %></p>
+<p>Payment Options: <%= simple_format(@user.payment_method_message) %></p>

@@ -28,6 +28,7 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :client, touch: true
   belongs_to :user
+  has_many :histories 
 
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
@@ -40,30 +41,6 @@ class Invoice < ActiveRecord::Base
   scope :due, -> { where('? = ANY(ARRAY[due_date, pd_date, od1_date, od2_date, od3_date, fd_date])', Date.current) }
   scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent < :now)', now: Date.current) }
 
-  def pre_due?
-    chasing? && (Date.current..pd_date).cover?(last_date_sent) && user.send_pre_due_reminder_email
-  end
-
-  def due?
-    chasing? && (pd_date.next..due_date).cover?(Date.current) && user.send_due_reminder_email
-  end
-
-  def over_due1?
-    chasing? && (due_date.next..od1_date).cover?(last_date_sent)
-  end
-
-  def over_due2?
-    chasing? && (od1_date.next..od2_date).cover?(last_date_sent)
-  end
-
-  def over_due3?
-    chasing? && (od2_date.next..od3_date).cover?(last_date_sent)
-  end
-
-  def final_demand?
-    send_final_demand? && (od3_date.next..fd_date)
-  end
-
   def type
     case
     when (Date.current <= pd_date) then 'Pre'
@@ -71,7 +48,7 @@ class Invoice < ActiveRecord::Base
     when (due_date.next..od1_date).cover?(Date.current) then 'OD1'
     when (od1_date.next..od2_date).cover?(Date.current) then 'OD2'
     when (od2_date.next..od3_date).cover?(Date.current) then 'OD3'
-    when (od3_date.next..fd_date).cover?(Date.current) then 'FD'
+    when (Date.current > od3_date) then 'FD'
     end
   end
 

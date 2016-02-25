@@ -17,6 +17,7 @@
 #  updated_at        :datetime         not null
 #  invoice_number    :string(255)
 #  email_from_name   :string(255)
+#  invoice_id        :integer
 #
 
 module HistoriesHelper

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224153421) do
+ActiveRecord::Schema.define(version: 20160225100127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,9 +98,12 @@ ActiveRecord::Schema.define(version: 20160224153421) do
     t.datetime "updated_at",                                             null: false
     t.string   "invoice_number",    limit: 255
     t.string   "email_from_name",   limit: 255
+    t.integer  "invoice_id"
+    t.date     "send_on"
   end
 
   add_index "histories", ["client_id"], name: "index_histories_on_client_id", using: :btree
+  add_index "histories", ["invoice_id"], name: "index_histories_on_invoice_id", using: :btree
 
   create_table "invoices", force: :cascade do |t|
     t.string   "invoice_number", limit: 255
@@ -221,6 +224,7 @@ ActiveRecord::Schema.define(version: 20160224153421) do
   add_foreign_key "clients", "users", on_delete: :cascade
   add_foreign_key "companies", "users", on_delete: :cascade
   add_foreign_key "histories", "clients", on_delete: :cascade
+  add_foreign_key "histories", "invoices"
   add_foreign_key "invoices", "clients", on_delete: :cascade
   add_foreign_key "settings", "users", on_delete: :cascade
   add_foreign_key "subscriptions", "plans", name: "subscriptions_plan_id_fk"

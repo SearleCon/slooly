@@ -17,8 +17,9 @@
 #  updated_at        :datetime         not null
 #  invoice_number    :string(255)
 #  email_from_name   :string(255)
+#  invoice_id        :integer
 #
 
 describe History do
-  it { should belong_to(:client).touch(:true) }
+  it { should belong_to(:invoice).touch(:true) }
 end
