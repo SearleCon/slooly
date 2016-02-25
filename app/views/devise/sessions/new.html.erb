@@ -1,11 +1,11 @@
 <h2>Sign in</h2>
 <%= render "devise/shared/links" %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <%= f.form_group :email %>
+  <%= f.form_group :email do %>
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
   <% end %>
-  <%= f.form_group :password %>
+  <%= f.form_group :password do %>
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
   <% end %>

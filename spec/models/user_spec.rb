@@ -17,14 +17,13 @@
 #  updated_at             :datetime         not null
 #  name                   :string(255)
 #  time_zone              :string
-#  settings               :jsonb
 #
 
 describe User do
   it { should have_many(:clients) }
   it { should have_many(:invoices) }
   it { should have_one(:company) }
-  it { should have_one(:setting) }
+  it { should have_one(:settings).class_name('Setting') }
   it { should have_one(:subscription).conditions(active: true) }
 
   it { should validate_acceptance_of(:terms_of_service) }

@@ -41,37 +41,37 @@ class Invoice < ActiveRecord::Base
   scope :unsent, -> { where('(last_date_sent is NULL OR last_date_sent < :now)', now: Date.current) }
 
   def pre_due?
-    chasing? && pd_date.today? && user.setting.pre_due_reminder?
+    chasing? && (Date.current..pd_date).cover?(last_date_sent) && user.send_pre_due_reminder_email
   end
 
   def due?
-    chasing? && due_date.today? && user.setting.due_reminder?
+    chasing? && (pd_date.next..due_date).cover?(Date.current) && user.send_due_reminder_email
   end
 
   def over_due1?
-    chasing? && od1_date.today?
+    chasing? && (due_date.next..od1_date).cover?(last_date_sent)
   end
 
   def over_due2?
-    chasing? && od2_date.today?
+    chasing? && (od1_date.next..od2_date).cover?(last_date_sent)
   end
 
   def over_due3?
-    chasing? && od3_date.today?
+    chasing? && (od2_date.next..od3_date).cover?(last_date_sent)
   end
 
   def final_demand?
-    send_final_demand? && fd_date.today?
+    send_final_demand? && (od3_date.next..fd_date)
   end
 
   def type
     case
-    when pre_due? then 'Pre'
-    when due? then 'Due'
-    when over_due1? then 'OD1'
-    when over_due2? then 'OD2'
-    when over_due3? then 'OD3'
-    when final_demand? then 'FD'
+    when (Date.current <= pd_date) then 'Pre'
+    when (pd_date..due_date).cover?(Date.current) then 'Due'
+    when (due_date.next..od1_date).cover?(Date.current) then 'OD1'
+    when (od1_date.next..od2_date).cover?(Date.current) then 'OD2'
+    when (od2_date.next..od3_date).cover?(Date.current) then 'OD3'
+    when (od3_date.next..fd_date).cover?(Date.current) then 'FD'
     end
   end
 

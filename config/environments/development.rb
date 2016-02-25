@@ -22,6 +22,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: 'utf-8'
 
+
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
   config.after_initialize do

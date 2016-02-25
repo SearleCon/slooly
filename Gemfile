@@ -63,6 +63,9 @@ gem 'puma'
 # Searching
 gem 'ransack'
 
+# Typed Attributes
+gem 'virtus'
+
 group :production do
   gem 'rack-timeout'
   gem 'rails_12factor'

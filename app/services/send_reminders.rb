@@ -12,7 +12,7 @@ class SendReminders
   private
 
   def invoices
-    @invoices ||= Invoice.due.unsent.where(status: [Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
+    @invoices ||= Invoice.includes(user: [:company, :settings]).due.unsent.where(status: [Invoice.statuses[:chasing], Invoice.statuses[:send_final_demand]])
   end
 
   def send?(invoice)

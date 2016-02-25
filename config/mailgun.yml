@@ -1,0 +1,5 @@
+production:
+  mailgun_smtp_server: <%= ENV['MAILGUN_SMTP_SERVER'] %>
+  mailgun_smtp_port: <%= ENV['MAILGUN_SMTP_PORT'] %>
+  mailgun_smtp_login: <%= ENV['MAILGUN_SMTP_LOGIN'] %>
+  mailgun_smtp_password: <%= ENV['MAILGUN_SMTP_PASSWORD'] %>

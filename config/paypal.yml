@@ -1,0 +1,11 @@
+development:
+  sandbox: true
+  username: pauljansevan-facilitator_api1.gmail.com
+  password: 1397550977
+  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AbfomKHlXmSj.I4y4rVRJfeorgjG
+
+production:
+  sandbox: false
+  username: <%=  ENV["PAYPAL_USERNAME"] %>
+  password: <%= ENV["PAYPAL_PASSWORD"] %>
+  signature: <%= ENV["PAYPAL_SIGNATURE"] %>

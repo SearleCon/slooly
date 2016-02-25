@@ -68,16 +68,15 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default charset: 'utf-8'
-  #  config.action_mailer.default :from => "slooly@example.com"
 
   config.action_mailer.smtp_settings = {
-    address: Rails.application.secrets.email_smtp_address,
-    port: 587,
-    # domain: "www.payingmantis.com",
+    address: config_for(:mailgun)['mailgun_smtp_server'],
+    port: config_for(:mailgun)['mailgun_smtp_port'],
+    domain: "www.payingmantis.com",
     authentication: 'plain',
     enable_starttls_auto: true,
-    user_name: Rails.application.secrets.email_username,
-    password:  Rails.application.secrets.email_password
+    user_name: config_for(:mailgun)['mailgun_smtp_login'],
+    password:  config_for(:mailgun)['mailgun_smtp_password']
   }
   # Delayed Job Scaling
   config.after_initialize do

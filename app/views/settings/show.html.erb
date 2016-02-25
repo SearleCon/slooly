@@ -50,67 +50,67 @@
   <div class="tab-pane fade in active" id="general">
     <dl>
       <dt>Sent From</dt>
-      <dd><%= current_user.reminder_email_sender_address %></dd>
+      <dd><%= @settings.reminder_email_sender_address %></dd>
       <dt>Send copy of all email to</dt>
-      <dd><%= current_user.reminder_email_cc_address %></dd>
+      <dd><%= @settings.reminder_email_cc_address %></dd>
       <dt>Days for Pre-due reminder</dt>
-      <dd><%= pluralize(current_user.pre_due_interval, 'day') %></dd>
+      <dd><%= pluralize(@settings.pre_due_interval, 'day') %></dd>
       <dt>Days between reminder emails</dt>
-      <dd><%= pluralize(current_user.chasing_interval, 'day') %></dd>
+      <dd><%= pluralize(@settings.chasing_interval, 'day') %></dd>
       <dt>Payment Method Message:</dt>
-      <dd><%= simple_format(current_user.payment_method_message) %></dd>
+      <dd><%= simple_format(@settings.payment_method_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="predue">
     <dl>
       <dt>Send Pre-Due reminder</dt>
-      <dd><%= current_user.send_pre_due_reminder_email ? "YES" : "NO" %></dd>
+      <dd><%= @settings.send_pre_due_reminder_email ? "YES" : "NO" %></dd>
       <dt>Pre-Due Email Subject line</dt>
-      <dd><%= current_user.pre_due_reminder_email_subject %></dd>
+      <dd><%= @settings.pre_due_reminder_email_subject %></dd>
       <dt>Pre-Due Email Message Content</dt>
-      <dd><%= simple_format(current_user.pre_due_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.pre_due_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="due">
     <dl>
       <dt>Send Due reminder</dt>
-      <dd><%= current_user.send_due_reminder_email ? "YES" : "NO" %></dd>
+      <dd><%= @settings.send_due_reminder_email ? "YES" : "NO" %></dd>
       <dt>Email Subject line</dt>
-      <dd><%= current_user.due_reminder_email_subject %></dd>
+      <dd><%= @settings.due_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(current_user.due_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.due_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od1">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= current_user.first_overdue_reminder_email_subject %></dd>
+      <dd><%= @settings.first_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(current_user.first_overdue_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.first_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od2">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= current_user.second_overdue_reminder_email_subject %></dd>
+      <dd><%= @settings.second_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(current_user.second_overdue_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.second_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="od3">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= current_user.third_overdue_reminder_email_subject %></dd>
+      <dd><%= @settings.third_overdue_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(current_user.third_overdue_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.third_overdue_reminder_email_message) %></dd>
     </dl>
   </div>
   <div class="tab-pane fade" id="fd">
     <dl>
       <dt>Email Subject line</dt>
-      <dd><%= current_user.final_demand_reminder_email_subject %></dd>
+      <dd><%= @settings.final_demand_reminder_email_subject %></dd>
       <dt>Email Message Content</dt>
-      <dd><%= simple_format(current_user.final_demand_reminder_email_message) %></dd>
+      <dd><%= simple_format(@settings.final_demand_reminder_email_message) %></dd>
     </dl>
   </div>
 </div>
