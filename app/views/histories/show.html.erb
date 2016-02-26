@@ -4,7 +4,7 @@
     The following reminder email was sent to
     <strong><%= @history.email_sent_to %>.</strong>
     <br/>
-    (Reminder type: <%= reminder_badge(@history.reminder_type) %> )
+    (Reminder type: <span class='badge'><%= @history.reminder_type %></span> )
   </p>
   <%= link_to 'Back', :back %>
 </div>
