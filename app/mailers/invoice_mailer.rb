@@ -7,26 +7,27 @@ class InvoiceMailer < ApplicationMailer
     @user = invoice.user
     @company = @user.company
     @reminder = Invoices::Reminders.new(invoice)
-    mail(from: @reminder.sender,
-         to: @reminder.recipient,
-         bcc: @reminder.cc,
+    mail(from: @company.email,
+         to: @client.email,
+         bcc: @user.reminder_email_cc_address,
          subject: @reminder.subject)
   end
-end
 
-private
-def log_reminder
-    @invoice.last_date_sent = Date.current
-    @invoice.histories.build do |history|
-      history.invoice_number = @invoice.invoice_number
-      history.reminder_type = @invoice.type
-      history.subject = mail.subject
-      history.message = mail.body.encoded
-      history.email_sent_from = mail.from
-      history.copy_email = mail.bcc
-      history.email_sent_to = mail.to
-      history.email_from_name = mail.from
-      history.sent = true
-    end
-    @invoice.save
+  private
+  
+  def log_reminder
+      @invoice.last_date_sent = Date.current
+      @invoice.histories.build do |history|
+        history.invoice_number = @invoice.invoice_number
+        history.reminder_type = @invoice.type
+        history.subject = mail.subject
+        history.message = mail.body.encoded
+        history.email_sent_from = mail.from
+        history.copy_email = mail.bcc
+        history.email_sent_to = mail.to
+        history.email_from_name = mail.from
+        history.sent = true
+      end
+      @invoice.save
+  end
 end

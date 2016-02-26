@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   validates :time_zone, inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }, allow_blank: true
 
   delegate  :chasing_interval,
-            :reminder_email_sender_address,
+            :reminder_email_sender_name,
             :reminder_email_cc_address,
             :send_due_reminder_email,
             :send_pre_due_reminder_email,

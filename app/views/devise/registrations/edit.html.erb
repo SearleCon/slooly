@@ -67,11 +67,10 @@
     </div>
     <%= link_to "Have a Voucher? Click here to redeem it", "#vouchers", data: {toggle: "collapse"} %>
     <div class="collapse" id="vouchers" style="margin-top: 5px;">
-      <%= form_tag redeem_path, method: :patch do |f| %>
-        <%= f.form_group :unique_code do %>
+      <%= form_tag redeem_path, method: :patch do %>
+        <div class="form-group">
           <%= text_field_tag :unique_code, nil, placeholder: 'Enter voucher number', required: true, class: 'form-control' %>
-          <%= f.errors_for :unique_code %>
-        <% end %>
+        </div>
         <%= submit_tag 'Redeem', class: 'btn btn-primary' %>
       <% end %></div>
     <hr/>

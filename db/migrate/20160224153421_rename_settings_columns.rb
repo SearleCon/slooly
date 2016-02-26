@@ -1,6 +1,6 @@
 class RenameSettingsColumns < ActiveRecord::Migration
   def change
-    rename_column :settings, :send_from_name, :reminder_email_sender_address
+    rename_column :settings, :send_from_name, :reminder_email_sender_name
     rename_column :settings, :email_copy_to, :reminder_email_cc_address
     rename_column :settings, :days_between_chase, :chasing_interval
     rename_column :settings, :days_before_pre_due, :pre_due_interval

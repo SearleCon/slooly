@@ -3,7 +3,7 @@
 # Table name: settings
 #
 #  id                                    :integer          not null, primary key
-#  reminder_email_sender_address         :string(255)      default("Your Business")
+#  reminder_email_sender_name            :string(255)      default("Your Business")
 #  reminder_email_cc_address             :string(255)      default("copy@example.com")
 #  chasing_interval                      :integer          default(7)
 #  pre_due_interval                      :integer          default(2)

@@ -26,9 +26,9 @@
     <div class="tab-pane fade in active" id="general">
       <div class="row">
         <div class="col-md-5">
-          <%= f.form_group :reminder_email_sender_address do %>
-            <%= f.label :reminder_email_sender_address %>
-            <%= f.text_field :reminder_email_sender_address, class: 'form-control' %>
+          <%= f.form_group :reminder_email_sender_name do %>
+            <%= f.label :reminder_email_sender_name %>
+            <%= f.text_field :reminder_email_sender_name, class: 'form-control' %>
           <% end %>
           <%= f.form_group :reminder_email_cc_address do %>
             <%= f.label :reminder_email_cc_address %>
@@ -58,7 +58,7 @@
             </div>
             <div class="panel-body">
               <ul class="list-unstyled">
-                <li><%= simple_format("<strong>Reminder Email Sender Address:</strong> This name will be used at the end of the reminder email.") %>
+                <li><%= simple_format("<strong>Reminder Email Sender Name:</strong> This name will be used at the end of the reminder email.") %>
                 </li>
                 <li><%= simple_format("<strong>Reminder Email CC Address:</strong> A copy of the reminder emails will be sent to this email address as well as the clients (For example, send a copy to yourself, or your credit control clerk for your records etc. (The client will  not see this email address") %>
                 </li>

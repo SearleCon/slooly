@@ -13,7 +13,7 @@
 </div>
 <section>
 <%= search_form_for @q, class: 'form-inline pull-right col-md-3' do |f| %>
- <%= f.form_group :invoice_number_or_client_business_name_cont do  %>
+ <div class="form-group">
    <div class="input-group">
      <%= f.search_field :invoice_number_or_client_business_name_cont, class: 'form-control', placeholder: 'Search', autocomplete: :off %>
       <div class="input-group-btn">
@@ -23,7 +23,7 @@
       </div>
    </div>
    <span class="help-block"><small>on invoice number or client business name</small></span>
- <% end %>
+ </div>
 <% end %>
 </section>
 <% if @invoices.any? %>

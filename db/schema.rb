@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225100127) do
+ActiveRecord::Schema.define(version: 20160225095134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20160225100127) do
     t.string   "invoice_number",    limit: 255
     t.string   "email_from_name",   limit: 255
     t.integer  "invoice_id"
-    t.date     "send_on"
   end
 
   add_index "histories", ["client_id"], name: "index_histories_on_client_id", using: :btree
@@ -138,7 +137,7 @@ ActiveRecord::Schema.define(version: 20160225100127) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string   "reminder_email_sender_address",         limit: 255, default: "Your Business"
+    t.string   "reminder_email_sender_name",            limit: 255, default: "Your Business"
     t.string   "reminder_email_cc_address",             limit: 255, default: "copy@example.com"
     t.integer  "chasing_interval",                                  default: 7
     t.integer  "pre_due_interval",                                  default: 2
