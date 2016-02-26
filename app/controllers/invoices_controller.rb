@@ -26,7 +26,7 @@ class InvoicesController < ApplicationController
 
   def index
     @q = current_user.invoices.ransack(params[:q])
-    @invoices = @q.result.includes(:client).page(params[:page])
+    @invoices = @q.result.page(params[:page])
   end
 
   def show

@@ -1,3 +1,4 @@
+<% cache client do %>
 <tr data-client-id="<%= client.id %>">
   <td data-value="<%= client.business_name %>"><%=link_to client.business_name, client %></td>
   <td data-value="<%= client.contact_person %>"><%= client.contact_person %></td>
@@ -24,3 +25,4 @@
     </ul>
   </td>
 </tr>
+<% end %>

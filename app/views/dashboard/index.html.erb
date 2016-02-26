@@ -51,7 +51,7 @@
     For all invoices, click <%= link_to 'here', invoices_path %> or on the Invoices menu item in the Navigation bar
     </p>
   <hr/>
-  <%= render partial: 'dashboard/client', collection: @clients, as: :client, cache: true %>
+  <%= render partial: 'dashboard/client', collection: @clients, as: :client %>
   <hr/>
   <%= paginate @clients %>
 <% else %>

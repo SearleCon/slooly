@@ -1,3 +1,4 @@
+<% cache history do %>
 <tr>
   <td>
     <%= link_to local_time_ago(history.date_sent), history%>
@@ -18,3 +19,4 @@
     <%= truncate(history.message, length: 70) %>
   </td>
 </tr>
+<% end %>

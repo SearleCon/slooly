@@ -51,7 +51,6 @@ gem 'coupon_code'
 
 # Caching
 gem 'dalli'
-gem 'multi_fetch_fragments'
 
 # Time ago
 gem 'local_time'

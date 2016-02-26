@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   around_action :with_timezone
 
-  etag { [current_user.try(:id), flash, SecureRandom.hex].compact }
+  etag { [current_user.try(:id)].compact }
 
   IE_VERSIONS = [6, 7, 8].freeze
 

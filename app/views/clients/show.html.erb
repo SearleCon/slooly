@@ -95,7 +95,7 @@
             </tr>
           </thead>
           <tbody>
-            <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice, cache: true %>
+            <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice %>
           </tbody>
         </table>
       </div>
@@ -122,7 +122,7 @@
             </tr>
           </thead>
           <tbody>
-            <%= render @client.histories, cache: true %>
+            <%= render @client.histories %>
           </tbody>
         </table>
       </div>

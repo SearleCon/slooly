@@ -1,3 +1,4 @@
+<% cache invoice do %>
 <tr>
   <td><%= age_badge(invoice.age) %></td>
   <td><%= link_to invoice.invoice_number, invoice %></td>
@@ -27,3 +28,4 @@
     </ul>
   </td>
 </tr>
+<% end %>
