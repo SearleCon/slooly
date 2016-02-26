@@ -9,7 +9,7 @@
 <a class="twitter-follow-button" data-show-count="false" data-size="large" href="https://twitter.com/SearleCon">Follow @SearleCon</a>
 <a class="twitter-mention-button" data-size="large" href="https://twitter.com/intent/tweet?screen_name=SearleCon">Tweet to @SearleCon</a>
 <h4>Let us get back to you:</h4>
-<%= form_for @message, url: contacts_path, html: {honeypot: true} do |f| %>
+<%= form_for @message, url: contacts_path do |f| %>
   <div class='row'>
     <div class="col-md-4">
       <%= f.form_group :name do %>
@@ -35,6 +35,11 @@
         <%= f.errors_for :body %>
       <% end %>
     </div>
+    <%= f.form_group :content, class: 'honeypot' do %>
+      <%= f.label :content %>
+      <%= f.text_field :content, tabindex: '-1' %>
+      <span class="help">Do not fill in this field. It is an anti-spam measure.</span>
+    <% end %>
   </div>
   <hr/>
   <%= f.submit "Send Enquiry", class: 'btn btn-primary btn-sm' %>

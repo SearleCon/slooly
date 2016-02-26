@@ -56,6 +56,13 @@ section{
   margin: 5px;
 }
 
+.form-group {
+  &.honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+}
+
 .alert-notice {
   @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
 }
