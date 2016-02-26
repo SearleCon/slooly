@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_browser_version
-    puts ENV['RAILS_CACHE_ID']
+    puts "Cache ID: #{ENV['RAILS_CACHE_ID']}"
     flash.now[:alert] = render_to_string(partial: 'shared/browser_warning') if IE_VERSIONS.any? { |version| browser.ie?(version) }
   end
 
