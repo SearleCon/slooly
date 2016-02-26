@@ -1,27 +1,27 @@
 <h2>Sign up</h2>
 <%= render "devise/shared/links" %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {honeypot: true}) do |f| %>
-  <%= f.form_group :name %>
+  <%= f.form_group :name do %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
     <%= f.errors_for :name %>
   <% end %>
-  <%= f.form_group %>
+  <%= f.form_group :email do %>
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
     <%= f.errors_for :email %>
   <% end %>
-  <%= f.form_group %>
-    <%= f.label :password %>
+  <%= f.form_group :password do %>
+    <%= f.label :password  %>
     <%= f.password_field :password, autocomplete: :off, class: 'form-control' %>
     <%= f.errors_for :password %>
   <% end %>
-  <%= f.form_group %>
+  <%= f.form_group :password_confirmation do %>
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: :off, class: 'form-control' %>
     <%= f.errors_for :password_confirmation %>
   <% end %>
-  <%= f.form_group %>
+  <%= f.form_group :time_zone do %>
     <%= f.time_zone_select :time_zone, nil, { include_blank: true, prompt: 'Select your time zone'}, {class: 'form-control'} %>
   <% end %>
   <div class="checkbox">

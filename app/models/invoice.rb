@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :client, touch: true
   belongs_to :user
-  has_many :histories 
+  has_many :histories
 
   validates :client, :due_date, :invoice_number, presence: true
   validates :amount, numericality: true
@@ -70,7 +70,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_final_demand
-    self.fd_date = Date.current.tomorrow if send_final_demand?
+    self.fd_date = Date.current.next if send_final_demand?
   end
 
 end

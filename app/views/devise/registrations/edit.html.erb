@@ -20,32 +20,32 @@
 <div class='row'>
   <div class='col-md-7'>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
-      <%= f.form_group :name %>
+      <%= f.form_group :name do %>
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
         <%= f.errors_for :name %>
       <% end %>
-      <%= f.form_group :email %>
+      <%= f.form_group :email do %>
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
         <%= f.errors_for :email %>
       <% end %>
-      <%= f.form_group :password %>
+      <%= f.form_group :password do %>
         <%= f.label :password, "Password (leave blank if you don't want to change it)" %>
         <%= f.password_field :password, autocomplete: :off, class: 'form-control' %>
         <%= f.errors_for :password %>
       <% end %>
-      <%= f.form_group :password_confirmation %>
+      <%= f.form_group :password_confirmation do %>
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, autocomplete: :off, class: 'form-control' %>
         <%= f.errors_for :password_confirmation %>
       <% end %>
-      <%= f.form_group :current_password %>
+      <%= f.form_group :current_password do %>
         <%= f.label :password, "Current Password (we need your current password to confirm your changes)" %>
         <%= f.password_field :current_password, autocomplete: :off, class: 'form-control' %>
         <%= f.errors_for :current_password %>
       <% end %>
-      <%= f.form_group :time_zone %>
+      <%= f.form_group :time_zone do %>
         <%= f.label :time_zone %>
         <%= f.time_zone_select :time_zone, nil, {}, class: 'form-control' %>
         <%= f.errors_for :time_zone %>
@@ -68,7 +68,7 @@
     <%= link_to "Have a Voucher? Click here to redeem it", "#vouchers", data: {toggle: "collapse"} %>
     <div class="collapse" id="vouchers" style="margin-top: 5px;">
       <%= form_tag redeem_path, method: :patch do |f| %>
-        <%= f.form_group :unique_code %>
+        <%= f.form_group :unique_code do %>
           <%= text_field_tag :unique_code, nil, placeholder: 'Enter voucher number', required: true, class: 'form-control' %>
           <%= f.errors_for :unique_code %>
         <% end %>
