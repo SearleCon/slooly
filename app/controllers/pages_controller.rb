@@ -1,29 +1,43 @@
 class PagesController < ApplicationController
   def about
-    fresh_when('about', public: true)
-  end
-
-  def supported_browsers
-    fresh_when('supported browsers', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'about',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 
   def privacy
-    fresh_when('privacy', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'privacy',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 
   def tos
-    fresh_when('tos', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'terms_of_service',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 
   def pricing
-    fresh_when('pricing', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'pricing',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 
   def faq
-    fresh_when('faq', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'faq',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 
   def tutorial
-    fresh_when('tutorial', public: true)
+    expires_in 100.years, public: true
+    if stale?(etag: 'tutorial',  last_modified: Time.parse('2011-01-01').utc, public: true)
+      render
+    end
   end
 end
