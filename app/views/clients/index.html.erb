@@ -30,6 +30,7 @@
 <% end %>
 </section>
 <% if @clients.any? %>
+ 
   <table id='clients' class="table table-bordered table-condensed">
     <thead>
       <tr>
@@ -42,6 +43,7 @@
       </tr>
     </thead>
     <tbody>
+
         <%= render @clients %>
     </tbody>
   </table>

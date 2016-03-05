@@ -20,6 +20,10 @@ class CompaniesController < ApplicationController
 
   before_action :set_company
 
+  def show
+    fresh_when @company 
+  end
+
   def update
     @company.update(company_params)
     respond_with @company, location: company_url

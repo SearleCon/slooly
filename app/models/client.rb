@@ -17,7 +17,7 @@
 #
 
 class Client < ActiveRecord::Base
-  include AttributeNormalizer
+  include AttributeNormalizer, CollectionCacheable
 
   to_param :business_name
 
@@ -30,5 +30,14 @@ class Client < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :business_name, uniqueness: { scope: :user_id }
 
+  def self.cache_key
+    model_signature = model_name.cache_key
+    unique_signature = if current_scope.loaded?
+                         pluck(collection.primary_key, :updated_at).flatten.join('-')
+                       else
+                         unscope(:order).pluck(primary_key, :updated_at).flatten.join('-')
+                       end
+    "#{model_signature}/collection-digest-#{Digest::SHA256.hexdigest(unique_signature)}"
 
+  end
 end

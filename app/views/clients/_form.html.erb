@@ -35,6 +35,7 @@
         <%= f.label :fax %>
         <%= f.telephone_field :fax, placeholder: 'Fax', class: 'form-control' %>
       <% end %>
+      <%= f.submit 'Save Client', class: 'btn btn-primary btn-sm' %>
     </div>
     <div class="col-md-6">
       <div class="panel panel-info">
@@ -57,5 +58,4 @@
       </div>
     </div>
   </div>
-  <%= f.submit 'Save client', class: 'btn btn-primary btn-sm' %>
 <% end %>

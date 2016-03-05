@@ -24,6 +24,7 @@ class ClientsController < ApplicationController
     @q = current_user.clients.ransack(params[:q])
     @q.sorts = 'business_name desc' if @q.sorts.empty?
     @clients = @q.result.page(params[:page])
+    fresh_when @clients 
   end
 
   def show

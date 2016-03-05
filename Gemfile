@@ -1,8 +1,8 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby '2.3.0'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 4.2.6.rc1'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
@@ -33,9 +33,6 @@ gem 'paypal-recurring'
 # Misc
 gem 'browser'
 gem 'metamagic'
-
-# Obfuscate emails
-gem 'obfuscatejs'
 
 # import from excel
 gem 'active_importer'

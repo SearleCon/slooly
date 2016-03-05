@@ -30,10 +30,9 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!, :authorize_user!
 
-
   def show
     @settings = current_user.settings
-
+    fresh_when @settings 
   end
 
   def edit

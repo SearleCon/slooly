@@ -41,7 +41,7 @@
         <dt>Fax:</dt>
         <dd><%= number_to_phone(@client.fax, area_code: true) %></dd>
         <dt>Email:</dt>
-        <dd><%= obfuscate_email @client.email if @client.email.present? %></dd>
+        <dd><%= mail_to @client.email  %></dd>
       </dl>
     </div>
     <div class='col-md-4'>
@@ -66,67 +66,71 @@
     </li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane fade in active" id="chasing">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>
-            You are currently chasing
-          <strong><%= pluralize(@client.outstanding_invoices.size, 'invoice') %></strong>
-            for
-          <strong><%= @client.business_name %></strong>
-            to the value of
-          <strong><%= @client.outstanding_invoices.total %></strong>
-            (total chasing amount).
-        </p>
+    <% cache @client.outstanding_invoices do %>
+      <div class="tab-pane fade in active" id="chasing">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              You are currently chasing
+            <strong><%= pluralize(@client.outstanding_invoices.size, 'invoice') %></strong>
+              for
+            <strong><%= @client.business_name %></strong>
+              to the value of
+            <strong><%= @client.outstanding_invoices.total %></strong>
+              (total chasing amount).
+          </p>
+          </div>
+          <table class='table table-bordered table-condensed'>
+            <thead>
+              <tr>
+                <th>
+                  <%= fa_icon 'question-circle', text: 'Age', data: { toggle: 'tooltip' }, title: "Days passed since the invoice became due. A negative(-) number means the invoice is not yet due (i.e. '-5' means payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green."  %>
+                </th>
+                <th>Invoice Number</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice %>
+            </tbody>
+          </table>
         </div>
-        <table class='table table-bordered table-condensed'>
-          <thead>
-            <tr>
-              <th>
-                <%= fa_icon 'question-circle', text: 'Age', data: { toggle: 'tooltip' }, title: "Days passed since the invoice became due. A negative(-) number means the invoice is not yet due (i.e. '-5' means payment is only due in 5 days time). Overdue invoices are Red, Invoices due today are Blue, and upcoming invoices are Green."  %>
-              </th>
-              <th>Invoice Number</th>
-              <th>Due Date</th>
-              <th>Amount</th>
-              <th>Description</th>
-              <th>Created</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render partial: 'clients/invoices/outstanding', collection: @client.outstanding_invoices, as: :invoice %>
-          </tbody>
-        </table>
       </div>
-    </div>
-    <div class="tab-pane fade" id="history">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>
-            Here are the emails you have
-          <strong>already sent</strong>
-            to
-          <strong><%= @client.business_name %></strong>
-            (Newest to Oldest).</p>
+    <% end %>
+    <% cache @client.histories do %>
+      <div class="tab-pane fade" id="history">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>
+              Here are the emails you have
+            <strong>already sent</strong>
+              to
+            <strong><%= @client.business_name %></strong>
+              (Newest to Oldest).</p>
+          </div>
+          <table class='table table-bordered table-condensed'>
+            <thead>
+              <tr>
+                <th>Date Sent</th>
+                <th>Sent To</th>
+                <th>Type</th>
+                <th>Reference</th>
+                <th>Subject</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @client.histories %>
+            </tbody>
+          </table>
         </div>
-        <table class='table table-bordered table-condensed'>
-          <thead>
-            <tr>
-              <th>Date Sent</th>
-              <th>Sent To</th>
-              <th>Type</th>
-              <th>Reference</th>
-              <th>Subject</th>
-              <th>Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render @client.histories %>
-          </tbody>
-        </table>
       </div>
-    </div>
+    <% end %>
   </div>
 </section>
 <% end %>

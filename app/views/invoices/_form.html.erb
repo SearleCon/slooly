@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5">
       <%= f.form_group :client do %>
-        <%= f.label :client, "#{link_to 'Add New Client', new_client_path}".html_safe %>
+        <%= f.label :client, "#{link_to 'Add New Client', new_client_path, data: { toggle: :tooltip }, title: 'Add a new client'}".html_safe %>
         <%= f.select :client_id, options_from_collection_for_select(current_user.clients.order(:business_name), :id, :business_name, @invoice.client_id.to_s), {prompt: "Choose a Client"}, class: 'form-control', required: true  %>
       <% end %>
       <%= f.form_group :invoice_number do %>
@@ -17,7 +17,7 @@
       <% end %>
       <%= f.form_group :amount do %>
         <%= f.label :amount %>
-        <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control' %>
+        <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control', step: '0.01' %>
         <%= f.errors_for :amount %>
       <% end %>
       <%= f.form_group :description do %>
@@ -30,6 +30,7 @@
         <%= f.select :status, options_for_select(Invoice.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: f.object.status), { include_blank: false }, class: 'form-control' %>
         <%= f.errors_for :status %>
       <% end %>
+      <%= f.submit 'Save Invoice', class: 'btn btn-primary btn-sm' %>
     </div>
     <div class="col-md-6">
       <div class="panel panel-info">
@@ -56,5 +57,4 @@
       </div>
     </div>
   </div>
-  <%= f.submit 'Save Invoice', class: 'btn btn-primary btn-sm' %>
 <% end %>

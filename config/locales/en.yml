@@ -23,7 +23,7 @@ en:
   date:
     formats:
          default: ! '%Y-%m-%d'
-         long: ! '%B %d, %Y'
+         long: ! '%b %d, %Y'
          short: ! '%b %d'
   time:
       am: am

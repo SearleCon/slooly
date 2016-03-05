@@ -21,5 +21,8 @@
 #
 
 class History < ActiveRecord::Base
-  belongs_to :invoice, touch: true 
+  include CollectionCacheable
+
+  belongs_to :invoice, touch: true
+
 end

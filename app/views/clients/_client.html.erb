@@ -1,10 +1,10 @@
 <% cache client do %>
-<tr data-client-id="<%= client.id %>">
-  <td data-value="<%= client.business_name %>"><%=link_to client.business_name, client %></td>
-  <td data-value="<%= client.contact_person %>"><%= client.contact_person %></td>
-  <td data-value="<%= client.telephone %>"><%= number_to_phone(client.telephone, area_code: true) %> </td>
-  <td data-value="<%= client.email %>"><%= obfuscate_email client.email if client.email.present? %></td>
-  <td data-value="<%= client.created_at %>"><%= local_time_ago(client.created_at) %></td>
+<tr>
+  <td><%=link_to client.business_name, client %></td>
+  <td><%= client.contact_person %></td>
+  <td><%= number_to_phone(client.telephone, area_code: true) %> </td>
+  <td><%= mail_to client.email %></td>
+  <td><%= local_time_ago(client.created_at) %></td>
   <td>
     <ul class="list-inline">
       <li>

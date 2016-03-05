@@ -3,7 +3,6 @@
 #= require bootstrap
 #= require bootstrap-datepicker
 #= require bootstrap-filestyle
-#= require obfuscatejs
 #= require local_time
 #= require turbolinks
 

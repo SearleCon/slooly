@@ -25,8 +25,9 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q = current_user.invoices.ransack(params[:q])
+    @q = current_user.invoices.includes(:client).ransack(params[:q])
     @invoices = @q.result.page(params[:page])
+    fresh_when @invoices 
   end
 
   def show
