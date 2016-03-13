@@ -80,13 +80,13 @@
           <td>
             <%= user.email %>
           </td>
-          <td data-value="<%= user.last_sign_in_at %>">
+          <td>
             <%= local_time_ago(user.last_sign_in_at) unless user.sign_in_count.zero? %>
           </td>
           <td>
             <%= user.subscription.description if user.subscribed? %>
           </td>
-          <td data-value="<%= user.subscription.expiry_date if user.subscribed? %>">
+          <td>
             <%= local_time_ago(user.subscription.expiry_date) if user.subscribed? %>
           </td>
           <td>
@@ -123,16 +123,16 @@
     <tbody>
       <% @dashboard.last_25_emails_sent.each do |history| %>
         <tr>
-          <td data-value="<%= history.email_sent_from %>">
+          <td>
             <%= history.email_sent_from %>
           </td>
-          <td data-value="<%= history.email_sent_to %>">
+          <td>
             <%= history.email_sent_to %>
           </td>
-          <td data-value="<%= history.date_sent %>">
-            <%= local_time_ago(history.date_sent) %>
+          <td>
+            <%= time_tag(history.date_sent) %>
           </td>
-          <td data-value="<%= history.subject %>">
+          <td>
             <%= history.subject %>
           </td>
         </tr>
