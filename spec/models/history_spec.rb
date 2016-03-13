@@ -3,7 +3,7 @@
 # Table name: histories
 #
 #  id                :integer          not null, primary key
-#  date_sent         :date             default(Sat, 21 Nov 2015)
+#  date_sent         :date
 #  client_id         :integer
 #  subject           :string(255)
 #  message           :text

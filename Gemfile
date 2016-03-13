@@ -53,7 +53,7 @@ gem 'dalli'
 gem 'local_time'
 
 # Server
-gem 'puma'
+gem 'puma', '~> 3.1'
 
 # Searching
 gem 'ransack'

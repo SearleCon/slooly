@@ -14,10 +14,11 @@ class InvoiceMailer < ApplicationMailer
   end
 
   private
-  
+
   def log_reminder
       @invoice.last_date_sent = Date.current
       @invoice.histories.build do |history|
+        history.date_sent = Date.current 
         history.invoice_number = @invoice.invoice_number
         history.reminder_type = @invoice.type
         history.subject = mail.subject

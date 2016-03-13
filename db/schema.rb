@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225095134) do
+ActiveRecord::Schema.define(version: 20160313071254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20160225095134) do
   add_index "delayed_jobs", ["queue"], name: "index_delayed_jobs_on_queue", using: :btree
 
   create_table "histories", force: :cascade do |t|
-    t.date     "date_sent",                     default: '2015-11-21'
+    t.date     "date_sent"
     t.integer  "client_id"
     t.string   "subject",           limit: 255
     t.text     "message"
