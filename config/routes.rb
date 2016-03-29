@@ -138,7 +138,7 @@ Rails.application.routes.draw do
   end
 
   resources :clients do
-    resources :invoices, only: [:new, :create], controller: 'clients/invoices'
+    resources :invoices, only: [:new, :create, :destroy], controller: 'clients/invoices'
   end
 
   namespace :clients do

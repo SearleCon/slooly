@@ -11,6 +11,12 @@ module Clients
       respond_with([@client, @invoice], location: client_url(@client))
     end
 
+    def destroy
+      @invoice = @client.invoices.find(params[:id])
+      @invoice.destroy
+      respond_with([@client, @invoice], location: -> { request.referrer })
+    end
+
     private
 
     def interpolation_options

@@ -28,7 +28,7 @@
         </th>
       </tr>
     </thead>
-    <tbody><%= render partial: 'clients/invoices/outstanding', collection: client.outstanding_invoices, as: :invoice %></tbody>
+    <tbody><%= render partial: 'clients/invoices/outstanding', collection: client.outstanding_invoices, as: :invoice, locals: { client: client } %></tbody>
   </table>
 </div>
 <% end %>
