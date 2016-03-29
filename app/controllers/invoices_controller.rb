@@ -27,7 +27,7 @@ class InvoicesController < ApplicationController
   def index
     @q = current_user.invoices.includes(:client).ransack(params[:q])
     @invoices = @q.result.page(params[:page])
-    fresh_when @invoices 
+    fresh_when @invoices
   end
 
   def show
@@ -50,7 +50,7 @@ class InvoicesController < ApplicationController
 
   def destroy
     @invoice.destroy
-    respond_with(@invoice, location: -> { request.referer })
+    respond_with @invoice
   end
 
   private

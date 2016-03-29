@@ -19,7 +19,7 @@
       <% end %>
       <%= f.form_group :amount do %>
         <%= f.label :amount %>
-        <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control', step: '0.01' %>
+        <%= f.number_field :amount, placeholder: 'Amount', class: 'form-control', step: 'any' %>
         <%= f.errors_for :amount %>
       <% end %>
       <%= f.form_group :description do %>
