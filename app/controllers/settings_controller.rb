@@ -32,7 +32,7 @@ class SettingsController < ApplicationController
 
   def show
     @settings = current_user.settings
-    fresh_when @settings 
+    fresh_when @settings
   end
 
   def edit
@@ -40,14 +40,15 @@ class SettingsController < ApplicationController
   end
 
   def update
-    current_user.update(settings: settings_params)
+    @settings = current_user.settings
+    @settings.update(settings_params)
     respond_with current_user, location: settings_url
   end
 
   private
 
   def settings_params
-    return params.require(:settings).permit(:chasing_interval,
+    return params.require(:setting).permit(:chasing_interval,
                                         :reminder_email_sender_address,
                                         :reminder_email_cc_address,
                                         :send_due_reminder_email,

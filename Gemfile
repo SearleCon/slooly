@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'rails', '~> 4.2.6'
 gem 'sass-rails'
@@ -25,7 +25,7 @@ gem 'delayed_job_active_record'
 gem 'workless', '~> 1.2.3'
 
 # Turbolinks
-gem 'turbolinks', '~> 5.0.0.beta'
+gem 'turbolinks', '~> 5.0.0'
 
 # Paypal
 gem 'paypal-recurring'
